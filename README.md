@@ -6,6 +6,7 @@ This is a product of the Center for Public Integrity's data team. It was created
 
 ## What's here?
 
+* [Basics](basics.ipynb) — A review of basic information.
 * [Donors](donors.ipynb) — A profile of ActBlue's donors.
 
 ## Why did we do this?
