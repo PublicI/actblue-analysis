@@ -1,0 +1,7 @@
+{
+    dbname: "politics"
+    user: "postgres"
+    host: "<redacted>"
+    port: "5432"
+    password: "<redacted>"
+}
