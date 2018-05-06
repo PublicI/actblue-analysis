@@ -7,3 +7,4 @@ pip-selfcheck.json
 config.json
 .Python
 .ipynb_checkpoints
+*.fec

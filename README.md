@@ -2,7 +2,7 @@
 
 ## Who did this?
 
-This is a product of the Center for Public Integrity's data team. It was created by Chris Zubak-Skees with portions based on work by Joe Yerardi. The analysis was informed by questions posed by political reporter Carrie Levine.
+This is a product of the Center for Public Integrity's data team. It was created by Chris Zubak-Skees with portions based on work by Joe Yerardi and Rosie Cima. The analysis was informed by questions posed by political reporter Carrie Levine.
 
 ## What's here?
 
