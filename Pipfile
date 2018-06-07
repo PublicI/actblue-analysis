@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyterlab = "==0.32.1"
+numpy = "==1.14.3"
+pandas = "==0.22.0"
+tornado = "==4.5.3"
+matplotlib = "==2.2.2"
+requests = "==2.18.4"
+psycopg2 = "==2.7.4"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
