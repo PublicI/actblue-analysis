@@ -6,12 +6,11 @@ This is a product of the Center for Public Integrity's data team. It was created
 
 ## What's here?
 
-* [Basics](basics.ipynb) — A review of basic information.
-* [Donors](donors.ipynb) — A profile of ActBlue's donors.
+* [Analysis](analysis.ipynb) - An analysis of ActBlue and other FEC filings.
 
 ## Why did we do this?
 
-What does it mean when one organization raises $2 billion for democrats? The Center set out to answer that question.
+What does it mean when one organization raises more than $2 billion for democrats? The Center set out to answer that question.
 
 ## How did we do it?
 
