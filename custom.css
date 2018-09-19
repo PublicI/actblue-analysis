@@ -1,0 +1,16 @@
+.output_stderr {
+	display: none;
+}
+
+.input {
+	display: none !important;
+}
+
+.code_cell {
+	padding: 0 !important;
+	padding-left: 6px !important;
+}
+
+.output_prompt {
+	visibility: hidden;
+}
