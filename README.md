@@ -16,7 +16,7 @@ What does it mean when one organization raises more than $2 billion for democrat
 
 This analysis relied on a PostgreSQL database of more than 289,500 campaign finance filings loaded by the Center using [fec-loader](https://github.com/PublicI/fec-loader). These were analyzed using SQL, Pandas and Jupyter notebook software.
 
-The notebook was developed on MacOS 10.13.3 with `git`, `virtualenv` and Python 3 installed. These instructions are specific to that environment, but should be adaptable to others:
+The notebook was developed on MacOS 10.13.3 with `git`, `pipenv` and Python 3 installed. These instructions are specific to that environment, but should be adaptable to others:
 
 ```sh
 git clone https://github.com/PublicI/actblue-analysis.git
