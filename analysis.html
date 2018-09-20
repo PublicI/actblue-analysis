@@ -11781,7 +11781,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
@@ -11800,10 +11800,29 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/chriszs/.local/share/virtualenvs/actblue-analysis-AfcA3U3w/lib/python3.6/site-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use &#34;pip install psycopg2-binary&#34; instead. For details see: &lt;http://initd.org/psycopg/docs/install.html#binary-install-from-pypi&gt;.
+  &#34;&#34;&#34;)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -11820,7 +11839,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_or_save</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
@@ -11841,7 +11860,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">committee_id</span> <span class="o">=</span> <span class="s2">&quot;C00401224&quot;</span>
@@ -11855,7 +11874,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -11884,7 +11903,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">filings_count</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -11911,7 +11930,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[67]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -11963,7 +11982,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">transfer_committees</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -11982,8 +12001,8 @@ div#notebook {
 <span class="s2">        WHERE </span>
 <span class="s2">        -- filer_committee_id_number != &#39;&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">committee_id</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&#39; AND </span>
 <span class="s2">         extract(YEAR</span>
-<span class="s2">                      FROM expenditure _date) &gt;= 2017</span>
-<span class="s2">          AND beneficiary_committee_fec_id IS NOT NULL</span>
+<span class="s2">                      FROM expenditure_date) &gt;= 2017</span>
+<span class="s2">          -- AND beneficiary_committee_fec_id IS NOT NULL</span>
 <span class="s2">          AND form_type = &#39;SB23&#39;</span>
 <span class="s2">        GROUP BY filer_committee_id_number</span>
 <span class="s2">        ORDER BY COUNT DESC</span>
@@ -12006,7 +12025,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[68]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -12040,71 +12059,71 @@ div#notebook {
       <th>0</th>
       <td>C00401224</td>
       <td>ACTBLUE</td>
-      <td>24728794</td>
-      <td>689,493,693.07</td>
+      <td>24739883</td>
+      <td>690,173,810.44</td>
     </tr>
     <tr>
       <th>1</th>
       <td>C00632133</td>
       <td>SWING LEFT</td>
-      <td>1181420</td>
-      <td>3,152,628.51</td>
+      <td>1189886</td>
+      <td>3,170,075.19</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>C00193433</td>
+      <td>EMILY'S LIST</td>
+      <td>100290</td>
+      <td>8,648,527.34</td>
+    </tr>
+    <tr>
+      <th>3</th>
       <td>C00341396</td>
       <td>MOVEON.ORG POLITICAL ACTION</td>
       <td>54605</td>
       <td>1,918,649.46</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>C00252940</td>
-      <td>LEAGUE OF CONSERVATION VOTERS ACTION FUND</td>
-      <td>15418</td>
-      <td>2,636,712.18</td>
-    </tr>
-    <tr>
       <th>4</th>
-      <td>C00432260</td>
-      <td>CLUB FOR GROWTH PAC</td>
-      <td>12542</td>
-      <td>3,587,125.87</td>
+      <td>C00448696</td>
+      <td>SENATE CONSERVATIVES FUND</td>
+      <td>37934</td>
+      <td>4,484,108.98</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>C00608489</td>
-      <td>GREAT AMERICA PAC</td>
-      <td>11463</td>
-      <td>132,394.46</td>
+      <td>C00252940</td>
+      <td>LEAGUE OF CONSERVATION VOTERS ACTION FUND</td>
+      <td>15636</td>
+      <td>2,938,622.93</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>C00441949</td>
-      <td>JSTREETPAC</td>
-      <td>6750</td>
-      <td>2,937,913.21</td>
+      <td>C00432260</td>
+      <td>CLUB FOR GROWTH PAC</td>
+      <td>13594</td>
+      <td>3,767,677.10</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>C00484535</td>
-      <td>VOTESANE PAC</td>
-      <td>5486</td>
-      <td>3,076,859.16</td>
+      <td>C00468314</td>
+      <td>DEMOCRACY ENGINE, INC., PAC</td>
+      <td>11754</td>
+      <td>2,567,934.56</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>C00544767</td>
-      <td>THE COMMITTEE TO DEFEND THE PRESIDENT</td>
-      <td>5422</td>
-      <td>121,234.46</td>
+      <td>C00608489</td>
+      <td>GREAT AMERICA PAC</td>
+      <td>11464</td>
+      <td>132,399.46</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>C00552851</td>
-      <td>HOUSE FREEDOM FUND</td>
-      <td>4280</td>
-      <td>3,660,084.00</td>
+      <td>C00441949</td>
+      <td>JSTREETPAC</td>
+      <td>8431</td>
+      <td>3,461,657.88</td>
     </tr>
   </tbody>
 </table>
@@ -12127,71 +12146,75 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">candidate_unitemized_by_party_14</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;candidate_unitemized_by_party_14&#39;</span><span class="p">,</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT CASE</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;DEM&#39; THEN &#39;Democrat&#39;</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;DFL&#39; THEN &#39;Democrat&#39;</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;REP&#39; THEN &#39;Republican&#39;</span>
-<span class="s2">               ELSE &#39;other&#39;</span>
-<span class="s2">           END AS party,</span>
-<span class="s2">           -- cand_office,</span>
-<span class="s2">           count(DISTINCT cand_id),</span>
-<span class="s2">           sum(col_a_individual_contributions_itemized) AS itemized,</span>
-<span class="s2">           sum(col_a_individual_contributions_unitemized) AS unitemized,</span>
-<span class="s2">           sum(col_a_total_individual_contributions) AS indivs</span>
-<span class="s2">    FROM</span>
-<span class="s2">      (SELECT DISTINCT ON (cand_id,</span>
-<span class="s2">                           cand_pcc) *</span>
-<span class="s2">       FROM fec_candidates</span>
-<span class="s2">       WHERE</span>
-<span class="s2">       cand_election_yr = &#39;2014&#39; AND</span>
-<span class="s2">     cand_pcc IS NOT NULL</span>
-<span class="s2">       ORDER BY cand_id,</span>
-<span class="s2">                cand_pcc) AS cands</span>
-<span class="s2">    JOIN</span>
-<span class="s2">      (SELECT filing_id,</span>
-<span class="s2">              filer_committee_id_number,</span>
-<span class="s2">              col_a_individual_contributions_itemized,</span>
-<span class="s2">              col_a_individual_contributions_unitemized,</span>
-<span class="s2">              col_a_total_individual_contributions,</span>
-<span class="s2">              col_a_total_receipts,</span>
-<span class="s2">              col_a_total_disbursements,</span>
-<span class="s2">              coverage_from_date,</span>
-<span class="s2">              coverage_through_date</span>
-<span class="s2">       FROM fec_campaign_summaries</span>
-<span class="s2">       JOIN fec_amended_filings USING (filing_id)</span>
-<span class="s2">       UNION SELECT DISTINCT ON (filer_committee_id_number,</span>
-<span class="s2">                                 coverage_from_date,</span>
-<span class="s2">                                 coverage_through_date) filing_id,</span>
-<span class="s2">                                filer_committee_id_number,</span>
-<span class="s2">                                col_a_individual_contributions_itemized,</span>
-<span class="s2">                                col_a_individual_contributions_unitemized,</span>
-<span class="s2">                                col_a_total_individual_contributions,</span>
-<span class="s2">                                col_a_total_receipts,</span>
-<span class="s2">                                col_a_total_disbursements,</span>
-<span class="s2">                                coverage_from_date,</span>
-<span class="s2">                                coverage_through_date</span>
-<span class="s2">       FROM fec_paper_campaign_summaries</span>
-<span class="s2">       WHERE col_a_total_individual_contributions IS NOT NULL</span>
-<span class="s2">       ORDER BY filer_committee_id_number,</span>
-<span class="s2">                coverage_through_date,</span>
-<span class="s2">                coverage_from_date,</span>
-<span class="s2">                filing_id DESC) AS summaries ON cand_pcc = filer_committee_id_number</span>
-<span class="s2">    WHERE extract(YEAR</span>
-<span class="s2">                  FROM coverage_through_date) &gt;= 2013</span>
-<span class="s2">      AND coverage_through_date &lt;= &#39;2014-06-30&#39;::date</span>
-<span class="s2">      -- AND (col_a_total_receipts &gt; 0</span>
-<span class="s2">    --       OR col_a_total_disbursements &gt; 0)</span>
-<span class="s2">    GROUP BY -- cand_office,</span>
-<span class="s2">             party</span>
-<span class="s2">    ORDER BY indivs DESC</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
-<span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_candidate_unitemized_by_party</span><span class="p">(</span><span class="n">cycle</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">read_or_save</span><span class="p">(</span>
+            <span class="s1">&#39;candidate_unitemized_by_party_14&#39;</span><span class="p">,</span>
+            <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT CASE</span>
+<span class="s2">                       WHEN cand_pty_affiliation = &#39;DEM&#39; THEN &#39;Democrat&#39;</span>
+<span class="s2">                       WHEN cand_pty_affiliation = &#39;DFL&#39; THEN &#39;Democrat&#39;</span>
+<span class="s2">                       WHEN cand_pty_affiliation = &#39;REP&#39; THEN &#39;Republican&#39;</span>
+<span class="s2">                       ELSE &#39;other&#39;</span>
+<span class="s2">                   END AS party,</span>
+<span class="s2">                   -- cand_office,</span>
+<span class="s2">                   count(DISTINCT cand_id),</span>
+<span class="s2">                   sum(col_a_individual_contributions_itemized) AS itemized,</span>
+<span class="s2">                   sum(col_a_individual_contributions_unitemized) AS unitemized,</span>
+<span class="s2">                   sum(col_a_total_individual_contributions) AS indivs</span>
+<span class="s2">            FROM</span>
+<span class="s2">              (SELECT DISTINCT ON (cand_id,</span>
+<span class="s2">                                   cand_pcc) *</span>
+<span class="s2">               FROM fec_candidates</span>
+<span class="s2">               WHERE</span>
+<span class="s2">               cand_election_yr = &#39;&quot; + cycle + &quot;&#39; AND</span>
+<span class="s2">             cand_pcc IS NOT NULL</span>
+<span class="s2">               ORDER BY cand_id,</span>
+<span class="s2">                        cand_pcc) AS cands</span>
+<span class="s2">            JOIN</span>
+<span class="s2">              (SELECT filing_id,</span>
+<span class="s2">                      filer_committee_id_number,</span>
+<span class="s2">                      col_a_individual_contributions_itemized,</span>
+<span class="s2">                  col_a_individual_contributions_unitemized,</span>
+<span class="s2">                  col_a_total_individual_contributions,</span>
+<span class="s2">                  col_a_total_receipts,</span>
+<span class="s2">                  col_a_total_disbursements,</span>
+<span class="s2">                  coverage_from_date,</span>
+<span class="s2">                  coverage_through_date</span>
+<span class="s2">           FROM fec_campaign_summaries</span>
+<span class="s2">           JOIN fec_amended_filings USING (filing_id)</span>
+<span class="s2">           UNION SELECT DISTINCT ON (filer_committee_id_number,</span>
+<span class="s2">                                     coverage_from_date,</span>
+<span class="s2">                                     coverage_through_date) filing_id,</span>
+<span class="s2">                                    filer_committee_id_number,</span>
+<span class="s2">                                    col_a_individual_contributions_itemized,</span>
+<span class="s2">                                    col_a_individual_contributions_unitemized,</span>
+<span class="s2">                                    col_a_total_individual_contributions,</span>
+<span class="s2">                                    col_a_total_receipts,</span>
+<span class="s2">                                    col_a_total_disbursements,</span>
+<span class="s2">                                    coverage_from_date,</span>
+<span class="s2">                                    coverage_through_date</span>
+<span class="s2">           FROM fec_paper_campaign_summaries</span>
+<span class="s2">           WHERE col_a_total_individual_contributions IS NOT NULL</span>
+<span class="s2">           ORDER BY filer_committee_id_number,</span>
+<span class="s2">                    coverage_through_date,</span>
+<span class="s2">                    coverage_from_date,</span>
+<span class="s2">                    filing_id DESC) AS summaries ON cand_pcc = filer_committee_id_number</span>
+<span class="s2">        WHERE extract(YEAR</span>
+<span class="s2">                      FROM coverage_through_date) &gt;= &quot; + (cycle-1) + &quot;</span>
+<span class="s2">          AND coverage_through_date &lt;= &#39;&quot; + cycle + &quot;-06-30&#39;::date</span>
+<span class="s2">          -- AND (col_a_total_receipts &gt; 0</span>
+<span class="s2">        --       OR col_a_total_disbursements &gt; 0)</span>
+<span class="s2">        GROUP BY -- cand_office,</span>
+<span class="s2">                 party</span>
+<span class="s2">        ORDER BY indivs DESC</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+    <span class="p">)</span>
+    
+<span class="n">candidate_unitemized_by_party_14</span> <span class="o">=</span> <span class="n">calc_candidate_unitemized_by_party</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span>
+
 <span class="n">candidate_unitemized_by_party_14</span>
 </pre></div>
 
@@ -12205,7 +12228,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[69]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 
@@ -12273,71 +12296,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">candidate_unitemized_by_party_18</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;candidate_unitemized_by_party_18&#39;</span><span class="p">,</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT CASE</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;DEM&#39; THEN &#39;Democrat&#39;</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;DFL&#39; THEN &#39;Democrat&#39;</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;REP&#39; THEN &#39;Republican&#39;</span>
-<span class="s2">               ELSE &#39;other&#39;</span>
-<span class="s2">           END AS party,</span>
-<span class="s2">           -- cand_office,</span>
-<span class="s2">           count(DISTINCT cand_id),</span>
-<span class="s2">           sum(col_a_individual_contributions_itemized) AS itemized,</span>
-<span class="s2">           sum(col_a_individual_contributions_unitemized) AS unitemized,</span>
-<span class="s2">           sum(col_a_total_individual_contributions) AS indivs</span>
-<span class="s2">    FROM</span>
-<span class="s2">      (SELECT DISTINCT ON (cand_id,</span>
-<span class="s2">                           cand_pcc) *</span>
-<span class="s2">       FROM fec_candidates</span>
-<span class="s2">       WHERE</span>
-<span class="s2">       cand_election_yr = &#39;2018&#39; AND</span>
-<span class="s2">     cand_pcc IS NOT NULL</span>
-<span class="s2">       ORDER BY cand_id,</span>
-<span class="s2">                cand_pcc) AS cands</span>
-<span class="s2">    JOIN</span>
-<span class="s2">      (SELECT filing_id,</span>
-<span class="s2">              filer_committee_id_number,</span>
-<span class="s2">              col_a_individual_contributions_itemized,</span>
-<span class="s2">              col_a_individual_contributions_unitemized,</span>
-<span class="s2">              col_a_total_individual_contributions,</span>
-<span class="s2">              col_a_total_receipts,</span>
-<span class="s2">              col_a_total_disbursements,</span>
-<span class="s2">              coverage_from_date,</span>
-<span class="s2">              coverage_through_date</span>
-<span class="s2">       FROM fec_campaign_summaries</span>
-<span class="s2">       JOIN fec_amended_filings USING (filing_id)</span>
-<span class="s2">       UNION SELECT DISTINCT ON (filer_committee_id_number,</span>
-<span class="s2">                                 coverage_from_date,</span>
-<span class="s2">                                 coverage_through_date) filing_id,</span>
-<span class="s2">                                filer_committee_id_number,</span>
-<span class="s2">                                col_a_individual_contributions_itemized,</span>
-<span class="s2">                                col_a_individual_contributions_unitemized,</span>
-<span class="s2">                                col_a_total_individual_contributions,</span>
-<span class="s2">                                col_a_total_receipts,</span>
-<span class="s2">                                col_a_total_disbursements,</span>
-<span class="s2">                                coverage_from_date,</span>
-<span class="s2">                                coverage_through_date</span>
-<span class="s2">       FROM fec_paper_campaign_summaries</span>
-<span class="s2">       WHERE col_a_total_individual_contributions IS NOT NULL</span>
-<span class="s2">       ORDER BY filer_committee_id_number,</span>
-<span class="s2">                coverage_through_date,</span>
-<span class="s2">                coverage_from_date,</span>
-<span class="s2">                filing_id DESC) AS summaries ON cand_pcc = filer_committee_id_number</span>
-<span class="s2">    WHERE extract(YEAR</span>
-<span class="s2">                  FROM coverage_through_date) &gt;= 2017</span>
-<span class="s2">      AND coverage_through_date &lt;= &#39;2018-06-30&#39;::date</span>
-<span class="s2">      -- AND (col_a_total_receipts &gt; 0</span>
-<span class="s2">    --       OR col_a_total_disbursements &gt; 0)</span>
-<span class="s2">    GROUP BY -- cand_office,</span>
-<span class="s2">             party</span>
-<span class="s2">    ORDER BY indivs DESC</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
-<span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">candidate_unitemized_by_party_18</span> <span class="o">=</span> <span class="n">calc_candidate_unitemized_by_party</span><span class="p">(</span><span class="mi">2018</span><span class="p">)</span>
+
 <span class="n">candidate_unitemized_by_party_18</span>
 </pre></div>
 
@@ -12351,7 +12314,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[70]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -12384,27 +12347,27 @@ div#notebook {
   <tbody>
     <tr>
       <th>0</th>
-      <td>Democrat</td>
-      <td>1287</td>
-      <td>493,920,027.53</td>
-      <td>179,692,020.49</td>
-      <td>675,492,335.17</td>
+      <td>Republican</td>
+      <td>849</td>
+      <td>319,873,352.63</td>
+      <td>53,296,471.38</td>
+      <td>373,167,891.91</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Republican</td>
-      <td>929</td>
-      <td>301,799,698.88</td>
-      <td>59,671,848.62</td>
-      <td>361,227,378.50</td>
+      <td>Democrat</td>
+      <td>640</td>
+      <td>283,647,027.55</td>
+      <td>62,509,524.09</td>
+      <td>346,161,686.64</td>
     </tr>
     <tr>
       <th>2</th>
       <td>other</td>
-      <td>138</td>
-      <td>7,469,548.68</td>
-      <td>7,097,598.75</td>
-      <td>14,619,006.43</td>
+      <td>85</td>
+      <td>2,176,185.10</td>
+      <td>675,662.02</td>
+      <td>2,854,043.12</td>
     </tr>
   </tbody>
 </table>
@@ -12427,7 +12390,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_summaries</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -13029,7 +12992,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_reports</span><span class="p">(</span><span class="n">committee_id</span><span class="p">):</span>
@@ -13057,7 +13020,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[72]:</div>
+<div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -13105,11 +13068,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contribs_count</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;actblue_contribs_count&#39;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contrib_count_by_year</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
+    <span class="s1">&#39;actblue_contrib_count_by_year&#39;</span><span class="p">,</span>
     <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    -- DROP MATERIALIZED VIEW actblue_contribs;</span>
 
@@ -13176,18 +13139,26 @@ div#notebook {
 <span class="s2">                          cand_office</span>
 <span class="s2">       FROM fec_candidates</span>
 <span class="s2">       ORDER BY cand_pcc,</span>
-<span class="s2">                cand_election_yr::int DESC) AS cand_comms ON cand_comms.cand_pcc = beneficiary_committee_fec_id; -- CREATE INDEX ON actblue_contribs ()</span>
+<span class="s2">                cand_election_yr::int DESC) AS cand_comms</span>
+<span class="s2">    ON cand_comms.cand_pcc = beneficiary_committee_fec_id;</span>
+<span class="s2">                </span>
+<span class="s2">    -- CREATE INDEX ON actblue_contribs ()</span>
 
 <span class="s2">    GRANT ALL ON TABLE actblue_contribs TO redash_default;</span>
 <span class="s2">    GRANT ALL ON TABLE actblue_contribs TO politics;</span>
 
 <span class="s2">    ANALYZE actblue_contribs;</span>
 
-<span class="s2">    SELECT count(*)</span>
-<span class="s2">    FROM actblue_contribs;</span>
+<span class="s2">    SELECT extract(YEAR</span>
+<span class="s2">                   FROM contribution_date) AS YEAR,</span>
+<span class="s2">           count(*),</span>
+<span class="s2">           sum(contribution_amount)</span>
+<span class="s2">    FROM actblue_contribs</span>
+<span class="s2">    GROUP BY extract(YEAR</span>
+<span class="s2">                     FROM contribution_date);</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
-<span class="n">actblue_contribs_count</span>
+<span class="n">actblue_contrib_count_by_year</span>
 </pre></div>
 
 </div>
@@ -13200,7 +13171,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[73]:</div>
+<div class="prompt output_prompt">Out[12]:</div>
 
 
 
@@ -13223,13 +13194,53 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>year</th>
       <th>count</th>
+      <th>sum</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>73813481</td>
+      <td>2,013.00</td>
+      <td>3039585</td>
+      <td>72,982,794.21</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2,014.00</td>
+      <td>8793957</td>
+      <td>203,718,367.99</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2,015.00</td>
+      <td>8034866</td>
+      <td>174,547,680.96</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2,016.00</td>
+      <td>22543237</td>
+      <td>505,359,517.22</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2,017.00</td>
+      <td>18887696</td>
+      <td>383,829,588.73</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2,018.00</td>
+      <td>12514064</td>
+      <td>338,193,448.71</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>nan</td>
+      <td>76</td>
+      <td>nan</td>
     </tr>
   </tbody>
 </table>
@@ -13252,7 +13263,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">contribs_over_time</span> <span class="o">=</span> <span class="n">actblue_summaries</span><span class="p">[[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">,</span><span class="s1">&#39;col_a_total_contributions&#39;</span><span class="p">]]</span>
@@ -13283,7 +13294,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[74]:</div>
+<div class="prompt output_prompt">Out[13]:</div>
 
 
 
@@ -13323,7 +13334,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cycle</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
@@ -13344,7 +13355,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;cycle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_summaries</span><span class="o">.</span><span class="n">coverage_through_date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
@@ -13365,7 +13376,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[76]:</div>
+<div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -13421,7 +13432,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://scentellegher.github.io/programming/2017/05/24/pandas-bar-plot-with-formatted-dates.html</span>
@@ -13450,7 +13461,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[77]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -13490,7 +13501,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_transfers</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -13520,7 +13531,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[78]:</div>
+<div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -13999,7 +14010,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -14054,7 +14065,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[79]:</div>
+<div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -14116,7 +14127,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_actblue_proportion_amount</span><span class="p">(</span><span class="n">cycle</span><span class="p">):</span>
@@ -14211,7 +14222,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2018 cycle&quot;</span>
@@ -14228,7 +14239,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[81]:</div>
+<div class="prompt output_prompt">Out[20]:</div>
 
 
 
@@ -14245,7 +14256,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_proportion.csv&#39;</span><span class="p">)</span>
@@ -14258,7 +14269,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount_14</span> <span class="o">=</span> <span class="n">calc_actblue_proportion_amount</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span>
@@ -14276,7 +14287,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[83]:</div>
+<div class="prompt output_prompt">Out[22]:</div>
 
 
 
@@ -14301,7 +14312,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">redtoblue</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00572859&#39;</span><span class="p">,</span>
@@ -14370,7 +14381,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns in the Red to Blue program came through ActBlue in the 2018 cycle&quot;</span>
@@ -14387,7 +14398,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[85]:</div>
+<div class="prompt output_prompt">Out[24]:</div>
 
 
 
@@ -14412,7 +14423,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">endcu</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00413914&#39;</span><span class="p">,</span>
@@ -14564,7 +14575,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns endorsed by End CU came through ActBlue in the 2018 cycle&quot;</span>
@@ -14580,7 +14591,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[87]:</div>
+<div class="prompt output_prompt">Out[26]:</div>
 
 
 
@@ -14607,69 +14618,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Is-money-from-blue-states-propping-up-Dems-in-red-states?">Is money from blue states propping up Dems in red states?<a class="anchor-link" href="#Is-money-from-blue-states-propping-up-Dems-in-red-states?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Where-is-the-money-going?-Are-people-giving-to-local-candidates-or-are-they-giving-to-candidates-around-the-country?">Where is the money going? Are people giving to local candidates or are they giving to candidates around the country?<a class="anchor-link" href="#Where-is-the-money-going?-Are-people-giving-to-local-candidates-or-are-they-giving-to-candidates-around-the-country?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Geographic-distribution:-Which-states-gave-to-which?">Geographic distribution: Which states gave to which?<a class="anchor-link" href="#Geographic-distribution:-Which-states-gave-to-which?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="What-percentage-of-the-contributions-came-from-each-state?">What percentage of the contributions came from each state?<a class="anchor-link" href="#What-percentage-of-the-contributions-came-from-each-state?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-percentage-came-from-out-of-state-in-each-state?">What percentage came from out of state in each state?<a class="anchor-link" href="#What-percentage-came-from-out-of-state-in-each-state?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Which-campaigns-have-done-the-best-job-tapping-into-this-network?">Which campaigns have done the best job tapping into this network?<a class="anchor-link" href="#Which-campaigns-have-done-the-best-job-tapping-into-this-network?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What&#8217;s-the-state-by-state-breakdown-for-Ocasio-Cortez?">What&#8217;s the state by state breakdown for Ocasio-Cortez?<a class="anchor-link" href="#What&#8217;s-the-state-by-state-breakdown-for-Ocasio-Cortez?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What&#8217;s-the-state-by-state-breakdown-for-McGrath?">What&#8217;s the state by state breakdown for McGrath?<a class="anchor-link" href="#What&#8217;s-the-state-by-state-breakdown-for-McGrath?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -14682,6 +14637,9 @@ div#notebook {
 <span class="s2">    GROUP BY contributor_state</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
+
+<span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+
 <span class="n">actblue_states</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
@@ -14695,7 +14653,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[88]:</div>
+<div class="prompt output_prompt">Out[27]:</div>
 
 
 
@@ -14721,6 +14679,7 @@ div#notebook {
       <th>contributor_state</th>
       <th>count</th>
       <th>sum</th>
+      <th>percent</th>
     </tr>
   </thead>
   <tbody>
@@ -14729,183 +14688,214 @@ div#notebook {
       <td>CA</td>
       <td>13929247</td>
       <td>335,612,874.58</td>
+      <td>19.99</td>
     </tr>
     <tr>
       <th>64</th>
       <td>NY</td>
       <td>6454081</td>
       <td>186,707,526.03</td>
+      <td>11.12</td>
     </tr>
     <tr>
       <th>40</th>
       <td>MA</td>
       <td>3187355</td>
       <td>87,279,278.03</td>
+      <td>5.20</td>
     </tr>
     <tr>
       <th>88</th>
       <td>TX</td>
       <td>3732662</td>
       <td>81,421,346.63</td>
+      <td>4.85</td>
     </tr>
     <tr>
       <th>24</th>
       <td>FL</td>
       <td>3660635</td>
       <td>76,552,531.25</td>
+      <td>4.56</td>
     </tr>
     <tr>
       <th>34</th>
       <td>IL</td>
       <td>2820449</td>
       <td>64,434,206.45</td>
+      <td>3.84</td>
     </tr>
     <tr>
       <th>95</th>
       <td>WA</td>
       <td>3152336</td>
       <td>59,701,863.43</td>
+      <td>3.56</td>
     </tr>
     <tr>
       <th>91</th>
       <td>VA</td>
       <td>1903070</td>
       <td>53,151,404.77</td>
+      <td>3.17</td>
     </tr>
     <tr>
       <th>70</th>
       <td>PA</td>
       <td>2476800</td>
       <td>51,711,270.50</td>
+      <td>3.08</td>
     </tr>
     <tr>
       <th>42</th>
       <td>MD</td>
       <td>1692652</td>
       <td>46,873,506.68</td>
+      <td>2.79</td>
     </tr>
     <tr>
       <th>19</th>
       <td>CO</td>
       <td>1986844</td>
       <td>42,909,056.49</td>
+      <td>2.56</td>
     </tr>
     <tr>
       <th>57</th>
       <td>NJ</td>
       <td>1915870</td>
       <td>41,909,996.44</td>
+      <td>2.50</td>
     </tr>
     <tr>
       <th>45</th>
       <td>MI</td>
       <td>1867948</td>
       <td>35,805,453.92</td>
+      <td>2.13</td>
     </tr>
     <tr>
       <th>21</th>
       <td>DC</td>
       <td>549492</td>
       <td>35,476,385.41</td>
+      <td>2.11</td>
     </tr>
     <tr>
       <th>53</th>
       <td>NC</td>
       <td>1672806</td>
       <td>33,955,708.43</td>
+      <td>2.02</td>
     </tr>
     <tr>
       <th>69</th>
       <td>OR</td>
       <td>2187875</td>
       <td>33,864,200.42</td>
+      <td>2.02</td>
     </tr>
     <tr>
       <th>10</th>
       <td>AZ</td>
       <td>1737472</td>
       <td>33,434,668.45</td>
+      <td>1.99</td>
     </tr>
     <tr>
       <th>20</th>
       <td>CT</td>
       <td>1252673</td>
       <td>31,506,128.67</td>
+      <td>1.88</td>
     </tr>
     <tr>
       <th>65</th>
       <td>OH</td>
       <td>1644253</td>
       <td>30,478,929.77</td>
+      <td>1.82</td>
     </tr>
     <tr>
       <th>46</th>
       <td>MN</td>
       <td>1369767</td>
       <td>26,926,886.86</td>
+      <td>1.60</td>
     </tr>
     <tr>
       <th>97</th>
       <td>WI</td>
       <td>1338463</td>
       <td>25,556,929.17</td>
+      <td>1.52</td>
     </tr>
     <tr>
       <th>25</th>
       <td>GA</td>
       <td>1240432</td>
       <td>23,870,756.41</td>
+      <td>1.42</td>
     </tr>
     <tr>
       <th>47</th>
       <td>MO</td>
       <td>958106</td>
       <td>19,797,882.16</td>
+      <td>1.18</td>
     </tr>
     <tr>
       <th>59</th>
       <td>NM</td>
       <td>902815</td>
       <td>16,747,585.64</td>
+      <td>1.00</td>
     </tr>
     <tr>
       <th>35</th>
       <td>IN</td>
       <td>773177</td>
       <td>13,966,086.82</td>
+      <td>0.83</td>
     </tr>
     <tr>
       <th>56</th>
       <td>NH</td>
       <td>548011</td>
       <td>12,749,122.15</td>
+      <td>0.76</td>
     </tr>
     <tr>
       <th>85</th>
       <td>TN</td>
       <td>726877</td>
       <td>12,717,195.93</td>
+      <td>0.76</td>
     </tr>
     <tr>
       <th>63</th>
       <td>NV</td>
       <td>572545</td>
       <td>12,700,833.17</td>
+      <td>0.76</td>
     </tr>
     <tr>
       <th>32</th>
       <td>IA</td>
       <td>540586</td>
       <td>11,005,059.16</td>
+      <td>0.66</td>
     </tr>
     <tr>
       <th>94</th>
       <td>VT</td>
       <td>551998</td>
       <td>10,521,946.09</td>
+      <td>0.63</td>
     </tr>
     <tr>
       <th>...</th>
+      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -14915,184 +14905,214 @@ div#notebook {
       <td>ZH</td>
       <td>15</td>
       <td>685.50</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>15</th>
       <td>BY</td>
       <td>48</td>
       <td>366.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>96</th>
       <td>WC</td>
       <td>241</td>
       <td>279.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>29</th>
       <td>HE</td>
       <td>104</td>
       <td>272.90</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>87</th>
       <td>TV</td>
       <td>19</td>
       <td>203.50</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>0</th>
       <td>92</td>
       <td>1</td>
       <td>200.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>67</th>
       <td>OM</td>
       <td>20</td>
       <td>179.02</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>78</th>
       <td>RM</td>
       <td>5</td>
       <td>120.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>14</th>
       <td>BW</td>
       <td>19</td>
       <td>119.80</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>81</th>
       <td>SH</td>
       <td>5</td>
       <td>106.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>86</th>
       <td>TR</td>
       <td>1</td>
       <td>100.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>83</th>
       <td>SP</td>
       <td>6</td>
       <td>81.50</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>100</th>
       <td>XX</td>
       <td>4</td>
       <td>55.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>89</th>
       <td>UK</td>
       <td>3</td>
       <td>52.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>44</th>
       <td>MH</td>
       <td>2</td>
       <td>50.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>30</th>
       <td>HH</td>
       <td>5</td>
       <td>46.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>27</th>
       <td>GP</td>
       <td>29</td>
       <td>29.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>13</th>
       <td>BS</td>
       <td>1</td>
       <td>25.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>84</th>
       <td>TI</td>
       <td>4</td>
       <td>22.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>11</th>
       <td>BA</td>
       <td>2</td>
       <td>20.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>26</th>
       <td>GE</td>
       <td>5</td>
       <td>15.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>51</th>
       <td>NA</td>
       <td>1</td>
       <td>15.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>72</th>
       <td>PG</td>
       <td>4</td>
       <td>10.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>4</th>
       <td>AG</td>
       <td>1</td>
       <td>10.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>75</th>
       <td>QO</td>
       <td>2</td>
       <td>10.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>18</th>
       <td>CL</td>
       <td>2</td>
       <td>10.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>77</th>
       <td>RJ</td>
       <td>1</td>
       <td>10.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>16</th>
       <td>C0</td>
       <td>1</td>
       <td>10.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>39</th>
       <td>LI</td>
       <td>1</td>
       <td>5.00</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>102</th>
       <td>YW</td>
       <td>1</td>
       <td>5.00</td>
+      <td>0.00</td>
     </tr>
   </tbody>
 </table>
-<p>106 rows × 3 columns</p>
+<p>106 rows × 4 columns</p>
 </div>
 </div>
 
@@ -15104,7 +15124,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/states.csv&#39;</span><span class="p">)</span>
@@ -15115,9 +15135,17 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-money-from-blue-states-propping-up-Dems-in-red-states?-(WIP)">Is money from blue states propping up Dems in red states? (WIP)<a class="anchor-link" href="#Is-money-from-blue-states-propping-up-Dems-in-red-states?-(WIP)">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">clinton_votes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/clintonvotes.csv&#39;</span><span class="p">)</span>
@@ -15141,7 +15169,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[90]:</div>
+<div class="prompt output_prompt">Out[29]:</div>
 
 
 
@@ -15167,6 +15195,7 @@ div#notebook {
       <th>contributor_state</th>
       <th>count</th>
       <th>sum</th>
+      <th>percent</th>
       <th>state</th>
       <th>postal</th>
       <th>votes</th>
@@ -15179,6 +15208,7 @@ div#notebook {
       <td>DC</td>
       <td>549492</td>
       <td>35,476,385.41</td>
+      <td>2.11</td>
       <td>District of Columbia</td>
       <td>DC</td>
       <td>282830</td>
@@ -15189,6 +15219,7 @@ div#notebook {
       <td>VT</td>
       <td>551998</td>
       <td>10,521,946.09</td>
+      <td>0.63</td>
       <td>Vermont</td>
       <td>VT</td>
       <td>178573</td>
@@ -15199,6 +15230,7 @@ div#notebook {
       <td>MT</td>
       <td>363475</td>
       <td>8,862,784.24</td>
+      <td>0.53</td>
       <td>Montana</td>
       <td>MT</td>
       <td>177709</td>
@@ -15209,6 +15241,7 @@ div#notebook {
       <td>MA</td>
       <td>3187355</td>
       <td>87,279,278.03</td>
+      <td>5.20</td>
       <td>Massachusetts</td>
       <td>MA</td>
       <td>1995196</td>
@@ -15219,6 +15252,7 @@ div#notebook {
       <td>NM</td>
       <td>902815</td>
       <td>16,747,585.64</td>
+      <td>1.00</td>
       <td>New Mexico</td>
       <td>NM</td>
       <td>385234</td>
@@ -15229,6 +15263,7 @@ div#notebook {
       <td>NY</td>
       <td>6454081</td>
       <td>186,707,526.03</td>
+      <td>11.12</td>
       <td>New York</td>
       <td>NY</td>
       <td>4556142</td>
@@ -15239,6 +15274,7 @@ div#notebook {
       <td>AK</td>
       <td>227983</td>
       <td>4,492,464.77</td>
+      <td>0.27</td>
       <td>Alaska</td>
       <td>AK</td>
       <td>116454</td>
@@ -15249,6 +15285,7 @@ div#notebook {
       <td>CA</td>
       <td>13929247</td>
       <td>335,612,874.58</td>
+      <td>19.99</td>
       <td>California</td>
       <td>CA</td>
       <td>8753792</td>
@@ -15259,6 +15296,7 @@ div#notebook {
       <td>NH</td>
       <td>548011</td>
       <td>12,749,122.15</td>
+      <td>0.76</td>
       <td>New Hampshire</td>
       <td>NH</td>
       <td>348526</td>
@@ -15269,6 +15307,7 @@ div#notebook {
       <td>WY</td>
       <td>86714</td>
       <td>2,033,999.29</td>
+      <td>0.12</td>
       <td>Wyoming</td>
       <td>WY</td>
       <td>55973</td>
@@ -15279,6 +15318,7 @@ div#notebook {
       <td>CT</td>
       <td>1252673</td>
       <td>31,506,128.67</td>
+      <td>1.88</td>
       <td>Connecticut</td>
       <td>CT</td>
       <td>897572</td>
@@ -15289,6 +15329,7 @@ div#notebook {
       <td>WA</td>
       <td>3152336</td>
       <td>59,701,863.43</td>
+      <td>3.56</td>
       <td>Washington</td>
       <td>WA</td>
       <td>1742718</td>
@@ -15299,6 +15340,7 @@ div#notebook {
       <td>OR</td>
       <td>2187875</td>
       <td>33,864,200.42</td>
+      <td>2.02</td>
       <td>Oregon</td>
       <td>OR</td>
       <td>1002106</td>
@@ -15309,6 +15351,7 @@ div#notebook {
       <td>CO</td>
       <td>1986844</td>
       <td>42,909,056.49</td>
+      <td>2.56</td>
       <td>Colorado</td>
       <td>CO</td>
       <td>1338870</td>
@@ -15319,6 +15362,7 @@ div#notebook {
       <td>HI</td>
       <td>411890</td>
       <td>8,493,263.19</td>
+      <td>0.51</td>
       <td>Hawaii</td>
       <td>HI</td>
       <td>266891</td>
@@ -15329,6 +15373,7 @@ div#notebook {
       <td>ME</td>
       <td>534145</td>
       <td>10,386,040.60</td>
+      <td>0.62</td>
       <td>Maine</td>
       <td>ME</td>
       <td>357735</td>
@@ -15339,6 +15384,7 @@ div#notebook {
       <td>AZ</td>
       <td>1737472</td>
       <td>33,434,668.45</td>
+      <td>1.99</td>
       <td>Arizona</td>
       <td>AZ</td>
       <td>1161167</td>
@@ -15349,6 +15395,7 @@ div#notebook {
       <td>MD</td>
       <td>1692652</td>
       <td>46,873,506.68</td>
+      <td>2.79</td>
       <td>Maryland</td>
       <td>MD</td>
       <td>1677928</td>
@@ -15359,6 +15406,7 @@ div#notebook {
       <td>VA</td>
       <td>1903070</td>
       <td>53,151,404.77</td>
+      <td>3.17</td>
       <td>Virginia</td>
       <td>VA</td>
       <td>1981473</td>
@@ -15369,6 +15417,7 @@ div#notebook {
       <td>UT</td>
       <td>380214</td>
       <td>7,772,760.55</td>
+      <td>0.46</td>
       <td>Utah</td>
       <td>UT</td>
       <td>310676</td>
@@ -15379,6 +15428,7 @@ div#notebook {
       <td>RI</td>
       <td>274944</td>
       <td>6,189,622.70</td>
+      <td>0.37</td>
       <td>Rhode Island</td>
       <td>RI</td>
       <td>252525</td>
@@ -15389,6 +15439,7 @@ div#notebook {
       <td>NV</td>
       <td>572545</td>
       <td>12,700,833.17</td>
+      <td>0.76</td>
       <td>Nevada</td>
       <td>NV</td>
       <td>539260</td>
@@ -15399,6 +15450,7 @@ div#notebook {
       <td>ND</td>
       <td>78448</td>
       <td>2,006,417.10</td>
+      <td>0.12</td>
       <td>North Dakota</td>
       <td>ND</td>
       <td>93758</td>
@@ -15409,6 +15461,7 @@ div#notebook {
       <td>TX</td>
       <td>3732662</td>
       <td>81,421,346.63</td>
+      <td>4.85</td>
       <td>Texas</td>
       <td>TX</td>
       <td>3877868</td>
@@ -15419,6 +15472,7 @@ div#notebook {
       <td>IL</td>
       <td>2820449</td>
       <td>64,434,206.45</td>
+      <td>3.84</td>
       <td>Illinois</td>
       <td>IL</td>
       <td>3090729</td>
@@ -15429,6 +15483,7 @@ div#notebook {
       <td>ID</td>
       <td>256537</td>
       <td>3,810,779.00</td>
+      <td>0.23</td>
       <td>Idaho</td>
       <td>ID</td>
       <td>189765</td>
@@ -15439,6 +15494,7 @@ div#notebook {
       <td>MN</td>
       <td>1369767</td>
       <td>26,926,886.86</td>
+      <td>1.60</td>
       <td>Minnesota</td>
       <td>MN</td>
       <td>1367825</td>
@@ -15449,6 +15505,7 @@ div#notebook {
       <td>NJ</td>
       <td>1915870</td>
       <td>41,909,996.44</td>
+      <td>2.50</td>
       <td>New Jersey</td>
       <td>NJ</td>
       <td>2148278</td>
@@ -15459,6 +15516,7 @@ div#notebook {
       <td>NE</td>
       <td>267990</td>
       <td>5,362,619.21</td>
+      <td>0.32</td>
       <td>Nebraska</td>
       <td>NE</td>
       <td>284494</td>
@@ -15469,6 +15527,7 @@ div#notebook {
       <td>WV</td>
       <td>187672</td>
       <td>3,507,640.90</td>
+      <td>0.21</td>
       <td>West Virginia</td>
       <td>WV</td>
       <td>188794</td>
@@ -15479,6 +15538,7 @@ div#notebook {
       <td>WI</td>
       <td>1338463</td>
       <td>25,556,929.17</td>
+      <td>1.52</td>
       <td>Wisconsin</td>
       <td>WI</td>
       <td>1382536</td>
@@ -15489,6 +15549,7 @@ div#notebook {
       <td>MO</td>
       <td>958106</td>
       <td>19,797,882.16</td>
+      <td>1.18</td>
       <td>Missouri</td>
       <td>MO</td>
       <td>1071068</td>
@@ -15499,6 +15560,7 @@ div#notebook {
       <td>PA</td>
       <td>2476800</td>
       <td>51,711,270.50</td>
+      <td>3.08</td>
       <td>Pennsylvania</td>
       <td>PA</td>
       <td>2926441</td>
@@ -15509,6 +15571,7 @@ div#notebook {
       <td>KS</td>
       <td>423556</td>
       <td>7,517,002.02</td>
+      <td>0.45</td>
       <td>Kansas</td>
       <td>KS</td>
       <td>427005</td>
@@ -15519,6 +15582,7 @@ div#notebook {
       <td>FL</td>
       <td>3660635</td>
       <td>76,552,531.25</td>
+      <td>4.56</td>
       <td>Florida</td>
       <td>FL</td>
       <td>4504975</td>
@@ -15529,6 +15593,7 @@ div#notebook {
       <td>IA</td>
       <td>540586</td>
       <td>11,005,059.16</td>
+      <td>0.66</td>
       <td>Iowa</td>
       <td>IA</td>
       <td>653669</td>
@@ -15539,6 +15604,7 @@ div#notebook {
       <td>DE</td>
       <td>196078</td>
       <td>3,949,280.65</td>
+      <td>0.24</td>
       <td>Delaware</td>
       <td>DE</td>
       <td>235603</td>
@@ -15549,6 +15615,7 @@ div#notebook {
       <td>MI</td>
       <td>1867948</td>
       <td>35,805,453.92</td>
+      <td>2.13</td>
       <td>Michigan</td>
       <td>MI</td>
       <td>2268839</td>
@@ -15559,6 +15626,7 @@ div#notebook {
       <td>SD</td>
       <td>83757</td>
       <td>1,852,162.19</td>
+      <td>0.11</td>
       <td>South Dakota</td>
       <td>SD</td>
       <td>117458</td>
@@ -15569,6 +15637,7 @@ div#notebook {
       <td>NC</td>
       <td>1672806</td>
       <td>33,955,708.43</td>
+      <td>2.02</td>
       <td>North Carolina</td>
       <td>NC</td>
       <td>2189316</td>
@@ -15579,6 +15648,7 @@ div#notebook {
       <td>AR</td>
       <td>284379</td>
       <td>5,853,691.21</td>
+      <td>0.35</td>
       <td>Arkansas</td>
       <td>AR</td>
       <td>380494</td>
@@ -15589,6 +15659,7 @@ div#notebook {
       <td>KY</td>
       <td>449002</td>
       <td>9,469,944.06</td>
+      <td>0.56</td>
       <td>Kentucky</td>
       <td>KY</td>
       <td>628854</td>
@@ -15599,6 +15670,7 @@ div#notebook {
       <td>TN</td>
       <td>726877</td>
       <td>12,717,195.93</td>
+      <td>0.76</td>
       <td>Tennessee</td>
       <td>TN</td>
       <td>870695</td>
@@ -15609,6 +15681,7 @@ div#notebook {
       <td>IN</td>
       <td>773177</td>
       <td>13,966,086.82</td>
+      <td>0.83</td>
       <td>Indiana</td>
       <td>IN</td>
       <td>1033126</td>
@@ -15619,6 +15692,7 @@ div#notebook {
       <td>OK</td>
       <td>350677</td>
       <td>5,609,294.32</td>
+      <td>0.33</td>
       <td>Oklahoma</td>
       <td>OK</td>
       <td>420375</td>
@@ -15629,6 +15703,7 @@ div#notebook {
       <td>OH</td>
       <td>1644253</td>
       <td>30,478,929.77</td>
+      <td>1.82</td>
       <td>Ohio</td>
       <td>OH</td>
       <td>2394169</td>
@@ -15639,6 +15714,7 @@ div#notebook {
       <td>GA</td>
       <td>1240432</td>
       <td>23,870,756.41</td>
+      <td>1.42</td>
       <td>Georgia</td>
       <td>GA</td>
       <td>1877963</td>
@@ -15649,6 +15725,7 @@ div#notebook {
       <td>LA</td>
       <td>361944</td>
       <td>7,490,044.82</td>
+      <td>0.45</td>
       <td>Louisiana</td>
       <td>LA</td>
       <td>780154</td>
@@ -15659,6 +15736,7 @@ div#notebook {
       <td>SC</td>
       <td>453878</td>
       <td>8,088,048.19</td>
+      <td>0.48</td>
       <td>South Carolina</td>
       <td>SC</td>
       <td>855373</td>
@@ -15669,6 +15747,7 @@ div#notebook {
       <td>AL</td>
       <td>356756</td>
       <td>6,730,050.42</td>
+      <td>0.40</td>
       <td>Alabama</td>
       <td>AL</td>
       <td>729547</td>
@@ -15679,6 +15758,7 @@ div#notebook {
       <td>MS</td>
       <td>125235</td>
       <td>2,300,204.20</td>
+      <td>0.14</td>
       <td>Mississippi</td>
       <td>MS</td>
       <td>485131</td>
@@ -15697,7 +15777,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;contribs_per&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;votes&#39;</span><span class="p">]</span>
@@ -15715,7 +15795,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[91]:</div>
+<div class="prompt output_prompt">Out[30]:</div>
 
 
 
@@ -15741,6 +15821,7 @@ div#notebook {
       <th>contributor_state</th>
       <th>count</th>
       <th>sum</th>
+      <th>percent</th>
       <th>state</th>
       <th>postal</th>
       <th>votes</th>
@@ -15754,6 +15835,7 @@ div#notebook {
       <td>VT</td>
       <td>551998</td>
       <td>10,521,946.09</td>
+      <td>0.63</td>
       <td>Vermont</td>
       <td>VT</td>
       <td>178573</td>
@@ -15765,6 +15847,7 @@ div#notebook {
       <td>NM</td>
       <td>902815</td>
       <td>16,747,585.64</td>
+      <td>1.00</td>
       <td>New Mexico</td>
       <td>NM</td>
       <td>385234</td>
@@ -15776,6 +15859,7 @@ div#notebook {
       <td>OR</td>
       <td>2187875</td>
       <td>33,864,200.42</td>
+      <td>2.02</td>
       <td>Oregon</td>
       <td>OR</td>
       <td>1002106</td>
@@ -15787,6 +15871,7 @@ div#notebook {
       <td>MT</td>
       <td>363475</td>
       <td>8,862,784.24</td>
+      <td>0.53</td>
       <td>Montana</td>
       <td>MT</td>
       <td>177709</td>
@@ -15798,6 +15883,7 @@ div#notebook {
       <td>AK</td>
       <td>227983</td>
       <td>4,492,464.77</td>
+      <td>0.27</td>
       <td>Alaska</td>
       <td>AK</td>
       <td>116454</td>
@@ -15809,6 +15895,7 @@ div#notebook {
       <td>DC</td>
       <td>549492</td>
       <td>35,476,385.41</td>
+      <td>2.11</td>
       <td>District of Columbia</td>
       <td>DC</td>
       <td>282830</td>
@@ -15820,6 +15907,7 @@ div#notebook {
       <td>WA</td>
       <td>3152336</td>
       <td>59,701,863.43</td>
+      <td>3.56</td>
       <td>Washington</td>
       <td>WA</td>
       <td>1742718</td>
@@ -15831,6 +15919,7 @@ div#notebook {
       <td>MA</td>
       <td>3187355</td>
       <td>87,279,278.03</td>
+      <td>5.20</td>
       <td>Massachusetts</td>
       <td>MA</td>
       <td>1995196</td>
@@ -15842,6 +15931,7 @@ div#notebook {
       <td>CA</td>
       <td>13929247</td>
       <td>335,612,874.58</td>
+      <td>19.99</td>
       <td>California</td>
       <td>CA</td>
       <td>8753792</td>
@@ -15853,6 +15943,7 @@ div#notebook {
       <td>NH</td>
       <td>548011</td>
       <td>12,749,122.15</td>
+      <td>0.76</td>
       <td>New Hampshire</td>
       <td>NH</td>
       <td>348526</td>
@@ -15864,6 +15955,7 @@ div#notebook {
       <td>WY</td>
       <td>86714</td>
       <td>2,033,999.29</td>
+      <td>0.12</td>
       <td>Wyoming</td>
       <td>WY</td>
       <td>55973</td>
@@ -15875,6 +15967,7 @@ div#notebook {
       <td>HI</td>
       <td>411890</td>
       <td>8,493,263.19</td>
+      <td>0.51</td>
       <td>Hawaii</td>
       <td>HI</td>
       <td>266891</td>
@@ -15886,6 +15979,7 @@ div#notebook {
       <td>AZ</td>
       <td>1737472</td>
       <td>33,434,668.45</td>
+      <td>1.99</td>
       <td>Arizona</td>
       <td>AZ</td>
       <td>1161167</td>
@@ -15897,6 +15991,7 @@ div#notebook {
       <td>ME</td>
       <td>534145</td>
       <td>10,386,040.60</td>
+      <td>0.62</td>
       <td>Maine</td>
       <td>ME</td>
       <td>357735</td>
@@ -15908,6 +16003,7 @@ div#notebook {
       <td>CO</td>
       <td>1986844</td>
       <td>42,909,056.49</td>
+      <td>2.56</td>
       <td>Colorado</td>
       <td>CO</td>
       <td>1338870</td>
@@ -15919,6 +16015,7 @@ div#notebook {
       <td>NY</td>
       <td>6454081</td>
       <td>186,707,526.03</td>
+      <td>11.12</td>
       <td>New York</td>
       <td>NY</td>
       <td>4556142</td>
@@ -15930,6 +16027,7 @@ div#notebook {
       <td>CT</td>
       <td>1252673</td>
       <td>31,506,128.67</td>
+      <td>1.88</td>
       <td>Connecticut</td>
       <td>CT</td>
       <td>897572</td>
@@ -15941,6 +16039,7 @@ div#notebook {
       <td>ID</td>
       <td>256537</td>
       <td>3,810,779.00</td>
+      <td>0.23</td>
       <td>Idaho</td>
       <td>ID</td>
       <td>189765</td>
@@ -15952,6 +16051,7 @@ div#notebook {
       <td>UT</td>
       <td>380214</td>
       <td>7,772,760.55</td>
+      <td>0.46</td>
       <td>Utah</td>
       <td>UT</td>
       <td>310676</td>
@@ -15963,6 +16063,7 @@ div#notebook {
       <td>RI</td>
       <td>274944</td>
       <td>6,189,622.70</td>
+      <td>0.37</td>
       <td>Rhode Island</td>
       <td>RI</td>
       <td>252525</td>
@@ -15974,6 +16075,7 @@ div#notebook {
       <td>NV</td>
       <td>572545</td>
       <td>12,700,833.17</td>
+      <td>0.76</td>
       <td>Nevada</td>
       <td>NV</td>
       <td>539260</td>
@@ -15985,6 +16087,7 @@ div#notebook {
       <td>MD</td>
       <td>1692652</td>
       <td>46,873,506.68</td>
+      <td>2.79</td>
       <td>Maryland</td>
       <td>MD</td>
       <td>1677928</td>
@@ -15996,6 +16099,7 @@ div#notebook {
       <td>MN</td>
       <td>1369767</td>
       <td>26,926,886.86</td>
+      <td>1.60</td>
       <td>Minnesota</td>
       <td>MN</td>
       <td>1367825</td>
@@ -16007,6 +16111,7 @@ div#notebook {
       <td>WV</td>
       <td>187672</td>
       <td>3,507,640.90</td>
+      <td>0.21</td>
       <td>West Virginia</td>
       <td>WV</td>
       <td>188794</td>
@@ -16018,6 +16123,7 @@ div#notebook {
       <td>KS</td>
       <td>423556</td>
       <td>7,517,002.02</td>
+      <td>0.45</td>
       <td>Kansas</td>
       <td>KS</td>
       <td>427005</td>
@@ -16029,6 +16135,7 @@ div#notebook {
       <td>WI</td>
       <td>1338463</td>
       <td>25,556,929.17</td>
+      <td>1.52</td>
       <td>Wisconsin</td>
       <td>WI</td>
       <td>1382536</td>
@@ -16040,6 +16147,7 @@ div#notebook {
       <td>TX</td>
       <td>3732662</td>
       <td>81,421,346.63</td>
+      <td>4.85</td>
       <td>Texas</td>
       <td>TX</td>
       <td>3877868</td>
@@ -16051,6 +16159,7 @@ div#notebook {
       <td>VA</td>
       <td>1903070</td>
       <td>53,151,404.77</td>
+      <td>3.17</td>
       <td>Virginia</td>
       <td>VA</td>
       <td>1981473</td>
@@ -16062,6 +16171,7 @@ div#notebook {
       <td>NE</td>
       <td>267990</td>
       <td>5,362,619.21</td>
+      <td>0.32</td>
       <td>Nebraska</td>
       <td>NE</td>
       <td>284494</td>
@@ -16073,6 +16183,7 @@ div#notebook {
       <td>IL</td>
       <td>2820449</td>
       <td>64,434,206.45</td>
+      <td>3.84</td>
       <td>Illinois</td>
       <td>IL</td>
       <td>3090729</td>
@@ -16084,6 +16195,7 @@ div#notebook {
       <td>MO</td>
       <td>958106</td>
       <td>19,797,882.16</td>
+      <td>1.18</td>
       <td>Missouri</td>
       <td>MO</td>
       <td>1071068</td>
@@ -16095,6 +16207,7 @@ div#notebook {
       <td>NJ</td>
       <td>1915870</td>
       <td>41,909,996.44</td>
+      <td>2.50</td>
       <td>New Jersey</td>
       <td>NJ</td>
       <td>2148278</td>
@@ -16106,6 +16219,7 @@ div#notebook {
       <td>PA</td>
       <td>2476800</td>
       <td>51,711,270.50</td>
+      <td>3.08</td>
       <td>Pennsylvania</td>
       <td>PA</td>
       <td>2926441</td>
@@ -16117,6 +16231,7 @@ div#notebook {
       <td>ND</td>
       <td>78448</td>
       <td>2,006,417.10</td>
+      <td>0.12</td>
       <td>North Dakota</td>
       <td>ND</td>
       <td>93758</td>
@@ -16128,6 +16243,7 @@ div#notebook {
       <td>TN</td>
       <td>726877</td>
       <td>12,717,195.93</td>
+      <td>0.76</td>
       <td>Tennessee</td>
       <td>TN</td>
       <td>870695</td>
@@ -16139,6 +16255,7 @@ div#notebook {
       <td>OK</td>
       <td>350677</td>
       <td>5,609,294.32</td>
+      <td>0.33</td>
       <td>Oklahoma</td>
       <td>OK</td>
       <td>420375</td>
@@ -16150,6 +16267,7 @@ div#notebook {
       <td>DE</td>
       <td>196078</td>
       <td>3,949,280.65</td>
+      <td>0.24</td>
       <td>Delaware</td>
       <td>DE</td>
       <td>235603</td>
@@ -16161,6 +16279,7 @@ div#notebook {
       <td>IA</td>
       <td>540586</td>
       <td>11,005,059.16</td>
+      <td>0.66</td>
       <td>Iowa</td>
       <td>IA</td>
       <td>653669</td>
@@ -16172,6 +16291,7 @@ div#notebook {
       <td>MI</td>
       <td>1867948</td>
       <td>35,805,453.92</td>
+      <td>2.13</td>
       <td>Michigan</td>
       <td>MI</td>
       <td>2268839</td>
@@ -16183,6 +16303,7 @@ div#notebook {
       <td>FL</td>
       <td>3660635</td>
       <td>76,552,531.25</td>
+      <td>4.56</td>
       <td>Florida</td>
       <td>FL</td>
       <td>4504975</td>
@@ -16194,6 +16315,7 @@ div#notebook {
       <td>NC</td>
       <td>1672806</td>
       <td>33,955,708.43</td>
+      <td>2.02</td>
       <td>North Carolina</td>
       <td>NC</td>
       <td>2189316</td>
@@ -16205,6 +16327,7 @@ div#notebook {
       <td>IN</td>
       <td>773177</td>
       <td>13,966,086.82</td>
+      <td>0.83</td>
       <td>Indiana</td>
       <td>IN</td>
       <td>1033126</td>
@@ -16216,6 +16339,7 @@ div#notebook {
       <td>AR</td>
       <td>284379</td>
       <td>5,853,691.21</td>
+      <td>0.35</td>
       <td>Arkansas</td>
       <td>AR</td>
       <td>380494</td>
@@ -16227,6 +16351,7 @@ div#notebook {
       <td>KY</td>
       <td>449002</td>
       <td>9,469,944.06</td>
+      <td>0.56</td>
       <td>Kentucky</td>
       <td>KY</td>
       <td>628854</td>
@@ -16238,6 +16363,7 @@ div#notebook {
       <td>SD</td>
       <td>83757</td>
       <td>1,852,162.19</td>
+      <td>0.11</td>
       <td>South Dakota</td>
       <td>SD</td>
       <td>117458</td>
@@ -16249,6 +16375,7 @@ div#notebook {
       <td>OH</td>
       <td>1644253</td>
       <td>30,478,929.77</td>
+      <td>1.82</td>
       <td>Ohio</td>
       <td>OH</td>
       <td>2394169</td>
@@ -16260,6 +16387,7 @@ div#notebook {
       <td>GA</td>
       <td>1240432</td>
       <td>23,870,756.41</td>
+      <td>1.42</td>
       <td>Georgia</td>
       <td>GA</td>
       <td>1877963</td>
@@ -16271,6 +16399,7 @@ div#notebook {
       <td>SC</td>
       <td>453878</td>
       <td>8,088,048.19</td>
+      <td>0.48</td>
       <td>South Carolina</td>
       <td>SC</td>
       <td>855373</td>
@@ -16282,6 +16411,7 @@ div#notebook {
       <td>AL</td>
       <td>356756</td>
       <td>6,730,050.42</td>
+      <td>0.40</td>
       <td>Alabama</td>
       <td>AL</td>
       <td>729547</td>
@@ -16293,6 +16423,7 @@ div#notebook {
       <td>LA</td>
       <td>361944</td>
       <td>7,490,044.82</td>
+      <td>0.45</td>
       <td>Louisiana</td>
       <td>LA</td>
       <td>780154</td>
@@ -16304,6 +16435,7 @@ div#notebook {
       <td>MS</td>
       <td>125235</td>
       <td>2,300,204.20</td>
+      <td>0.14</td>
       <td>Mississippi</td>
       <td>MS</td>
       <td>485131</td>
@@ -16321,9 +16453,17 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Where-is-the-money-going?-Are-people-giving-to-local-candidates-or-are-they-giving-to-candidates-around-the-country?">Where is the money going? Are people giving to local candidates or are they giving to candidates around the country?<a class="anchor-link" href="#Where-is-the-money-going?-Are-people-giving-to-local-candidates-or-are-they-giving-to-candidates-around-the-country?">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_in_state</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -16354,7 +16494,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[92]:</div>
+<div class="prompt output_prompt">Out[31]:</div>
 
 
 
@@ -16410,6 +16550,59 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="To-answer:">To answer:<a class="anchor-link" href="#To-answer:">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Geographic distribution: Which states gave to which?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What percentage came from out of state in each state?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Which campaigns have done the best job tapping into this network?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What’s the state by state breakdown for Ocasio-Cortez?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What’s the state by state breakdown for McGrath?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Do-the-majority-of-these-donors-give-repeatedly-or-are-they-one-and-done?-How-&#8220;sticky&#8221;-is-this?-What-percentage-of-donors-gave-how-many-times?">Do the majority of these donors give repeatedly or are they one and done? How &#8220;sticky&#8221; is this? What percentage of donors gave how many times?<a class="anchor-link" href="#Do-the-majority-of-these-donors-give-repeatedly-or-are-they-one-and-done?-How-&#8220;sticky&#8221;-is-this?-What-percentage-of-donors-gave-how-many-times?">&#182;</a></h3>
 </div>
 </div>
@@ -16425,7 +16618,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_freq</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -16461,7 +16654,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[93]:</div>
+<div class="prompt output_prompt">Out[32]:</div>
 
 
 
@@ -16541,7 +16734,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -16582,7 +16775,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[94]:</div>
+<div class="prompt output_prompt">Out[33]:</div>
 
 
 
@@ -17487,7 +17680,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_addicts.csv&#39;</span><span class="p">)</span>
@@ -17502,7 +17695,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Spreadsheet of all of them: <a href="data/actblue_addicts.csv">actblue_addicts.csv</a></p>
+<p>Spreadsheet: <a href="data/actblue_addicts.csv">actblue_addicts.csv</a></p>
 
 </div>
 </div>
@@ -17511,15 +17704,6 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Where-do-contributors-give-from?">Where do contributors give from?<a class="anchor-link" href="#Where-do-contributors-give-from?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Spreadsheet of the 1,307 candidate committees that got at least some money through ActBlue this cycle.</p>
 <h3 id="Questions-to-answer">Questions to answer<a class="anchor-link" href="#Questions-to-answer">&#182;</a></h3><blockquote><ul>
 <li>Is this fueling primary fights?</li>
 <li>Where do the donors giving through ActBlue come from geographically? Any striking or interesting patterns, or zip codes that typically don’t contribute?</li>
@@ -17536,7 +17720,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
@@ -17544,25 +17728,6 @@ jupyter nbconvert analysis.ipynb
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[NbConvertApp] Converting notebook analysis.ipynb to html
-[NbConvertApp] Writing 525420 bytes to analysis.html
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
