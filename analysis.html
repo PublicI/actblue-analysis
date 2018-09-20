@@ -11781,7 +11781,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
@@ -11800,29 +11800,10 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/chriszs/.local/share/virtualenvs/actblue-analysis-AfcA3U3w/lib/python3.6/site-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use &#34;pip install psycopg2-binary&#34; instead. For details see: &lt;http://initd.org/psycopg/docs/install.html#binary-install-from-pypi&gt;.
-  &#34;&#34;&#34;)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -11839,7 +11820,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_or_save</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
@@ -11860,7 +11841,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">committee_id</span> <span class="o">=</span> <span class="s2">&quot;C00401224&quot;</span>
@@ -11874,7 +11855,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -11903,16 +11884,21 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">read_or_save</span><span class="p">(</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">filings_count</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
     <span class="s1">&#39;filings_count&#39;</span><span class="p">,</span>
     <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    SELECT count(*)</span>
-<span class="s2">    FROM fec_filings;</span>
+<span class="s2">    FROM</span>
+<span class="s2">      (SELECT filing_id</span>
+<span class="s2">       FROM fec_filings</span>
+<span class="s2">       UNION SELECT filing_id</span>
+<span class="s2">       FROM fec_paper_filings) AS filings;</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
+<span class="n">filings_count</span>
 </pre></div>
 
 </div>
@@ -11925,7 +11911,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[67]:</div>
 
 
 
@@ -11954,7 +11940,7 @@ div#notebook {
   <tbody>
     <tr>
       <th>0</th>
-      <td>363169</td>
+      <td>417005</td>
     </tr>
   </tbody>
 </table>
@@ -11971,39 +11957,43 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Which-ActBlue-reports-do-we-have?">Which ActBlue reports do we have?<a class="anchor-link" href="#Which-ActBlue-reports-do-we-have?">&#182;</a></h3>
+<h3 id="Are-there-other-committees-itemizing-a-large-number-of-transfers?">Are there other committees itemizing a large number of transfers?<a class="anchor-link" href="#Are-there-other-committees-itemizing-a-large-number-of-transfers?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_summaries</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;actblue_summaries&#39;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">transfer_committees</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
+    <span class="s1">&#39;transfer_committees&#39;</span><span class="p">,</span>
     <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT *</span>
-<span class="s2">    FROM fec_pac_summaries</span>
-<span class="s2">    JOIN fec_amended_filings USING (filing_id)</span>
-<span class="s2">    WHERE filer_committee_id_number = &#39;&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">committee_id</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&#39;</span>
-<span class="s2">    AND extract(year from coverage_through_date) &gt;= &quot;&quot;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year_since</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    ORDER BY coverage_through_date DESC;</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;coverage_from_date&#39;</span><span class="p">:</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;coverage_through_date&#39;</span><span class="p">:</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span>
-    <span class="p">})</span>
+<span class="s2">    SELECT filer_committee_id_number,</span>
+<span class="s2">           fec_committees.name,</span>
+<span class="s2">           count,</span>
+<span class="s2">           sum</span>
+<span class="s2">    FROM</span>
+<span class="s2">        (SELECT filer_committee_id_number,</span>
+<span class="s2">               count(*) AS count,</span>
+<span class="s2">               sum(expenditure_amount) as sum</span>
+<span class="s2">        FROM fec_expenditures</span>
+<span class="s2">        JOIN fec_amended_filings using (filing_id)</span>
+<span class="s2">        WHERE </span>
+<span class="s2">        -- filer_committee_id_number != &#39;&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">committee_id</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&#39; AND </span>
+<span class="s2">         extract(YEAR</span>
+<span class="s2">                      FROM expenditure _date) &gt;= 2017</span>
+<span class="s2">          AND beneficiary_committee_fec_id IS NOT NULL</span>
+<span class="s2">          AND form_type = &#39;SB23&#39;</span>
+<span class="s2">        GROUP BY filer_committee_id_number</span>
+<span class="s2">        ORDER BY COUNT DESC</span>
+<span class="s2">        LIMIT 10) as counts</span>
+<span class="s2">    LEFT JOIN fec_committees</span>
+<span class="s2">    ON fec_committees.id = filer_committee_id_number</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
 
-<span class="n">actblue_summaries</span><span class="p">[[</span>
-    <span class="s1">&#39;filing_id&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;form_type&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;committee_name&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;coverage_from_date&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;coverage_through_date&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;report_code&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;col_a_total_contributions&#39;</span>
-<span class="p">]]</span>
+<span class="n">transfer_committees</span>
 </pre></div>
 
 </div>
@@ -12016,7 +12006,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[68]:</div>
 
 
 
@@ -12039,9 +12029,466 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>filer_committee_id_number</th>
+      <th>name</th>
+      <th>count</th>
+      <th>sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>C00401224</td>
+      <td>ACTBLUE</td>
+      <td>24728794</td>
+      <td>689,493,693.07</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>C00632133</td>
+      <td>SWING LEFT</td>
+      <td>1181420</td>
+      <td>3,152,628.51</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C00341396</td>
+      <td>MOVEON.ORG POLITICAL ACTION</td>
+      <td>54605</td>
+      <td>1,918,649.46</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>C00252940</td>
+      <td>LEAGUE OF CONSERVATION VOTERS ACTION FUND</td>
+      <td>15418</td>
+      <td>2,636,712.18</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>C00432260</td>
+      <td>CLUB FOR GROWTH PAC</td>
+      <td>12542</td>
+      <td>3,587,125.87</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>C00608489</td>
+      <td>GREAT AMERICA PAC</td>
+      <td>11463</td>
+      <td>132,394.46</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>C00441949</td>
+      <td>JSTREETPAC</td>
+      <td>6750</td>
+      <td>2,937,913.21</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>C00484535</td>
+      <td>VOTESANE PAC</td>
+      <td>5486</td>
+      <td>3,076,859.16</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>C00544767</td>
+      <td>THE COMMITTEE TO DEFEND THE PRESIDENT</td>
+      <td>5422</td>
+      <td>121,234.46</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>C00552851</td>
+      <td>HOUSE FREEDOM FUND</td>
+      <td>4280</td>
+      <td>3,660,084.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Unitemized-contributions-versus-itemized-for-this-point-in-the-cycle-for-both-the-2018-and-2014-cycle,-and-break-it-down-by-Republican-versus-Democrat?">Unitemized contributions versus itemized for this point in the cycle for both the 2018 and 2014 cycle, and break it down by Republican versus Democrat?<a class="anchor-link" href="#Unitemized-contributions-versus-itemized-for-this-point-in-the-cycle-for-both-the-2018-and-2014-cycle,-and-break-it-down-by-Republican-versus-Democrat?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">candidate_unitemized_by_party_14</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
+    <span class="s1">&#39;candidate_unitemized_by_party_14&#39;</span><span class="p">,</span>
+    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT CASE</span>
+<span class="s2">               WHEN cand_pty_affiliation = &#39;DEM&#39; THEN &#39;Democrat&#39;</span>
+<span class="s2">               WHEN cand_pty_affiliation = &#39;DFL&#39; THEN &#39;Democrat&#39;</span>
+<span class="s2">               WHEN cand_pty_affiliation = &#39;REP&#39; THEN &#39;Republican&#39;</span>
+<span class="s2">               ELSE &#39;other&#39;</span>
+<span class="s2">           END AS party,</span>
+<span class="s2">           -- cand_office,</span>
+<span class="s2">           count(DISTINCT cand_id),</span>
+<span class="s2">           sum(col_a_individual_contributions_itemized) AS itemized,</span>
+<span class="s2">           sum(col_a_individual_contributions_unitemized) AS unitemized,</span>
+<span class="s2">           sum(col_a_total_individual_contributions) AS indivs</span>
+<span class="s2">    FROM</span>
+<span class="s2">      (SELECT DISTINCT ON (cand_id,</span>
+<span class="s2">                           cand_pcc) *</span>
+<span class="s2">       FROM fec_candidates</span>
+<span class="s2">       WHERE</span>
+<span class="s2">       cand_election_yr = &#39;2014&#39; AND</span>
+<span class="s2">     cand_pcc IS NOT NULL</span>
+<span class="s2">       ORDER BY cand_id,</span>
+<span class="s2">                cand_pcc) AS cands</span>
+<span class="s2">    JOIN</span>
+<span class="s2">      (SELECT filing_id,</span>
+<span class="s2">              filer_committee_id_number,</span>
+<span class="s2">              col_a_individual_contributions_itemized,</span>
+<span class="s2">              col_a_individual_contributions_unitemized,</span>
+<span class="s2">              col_a_total_individual_contributions,</span>
+<span class="s2">              col_a_total_receipts,</span>
+<span class="s2">              col_a_total_disbursements,</span>
+<span class="s2">              coverage_from_date,</span>
+<span class="s2">              coverage_through_date</span>
+<span class="s2">       FROM fec_campaign_summaries</span>
+<span class="s2">       JOIN fec_amended_filings USING (filing_id)</span>
+<span class="s2">       UNION SELECT DISTINCT ON (filer_committee_id_number,</span>
+<span class="s2">                                 coverage_from_date,</span>
+<span class="s2">                                 coverage_through_date) filing_id,</span>
+<span class="s2">                                filer_committee_id_number,</span>
+<span class="s2">                                col_a_individual_contributions_itemized,</span>
+<span class="s2">                                col_a_individual_contributions_unitemized,</span>
+<span class="s2">                                col_a_total_individual_contributions,</span>
+<span class="s2">                                col_a_total_receipts,</span>
+<span class="s2">                                col_a_total_disbursements,</span>
+<span class="s2">                                coverage_from_date,</span>
+<span class="s2">                                coverage_through_date</span>
+<span class="s2">       FROM fec_paper_campaign_summaries</span>
+<span class="s2">       WHERE col_a_total_individual_contributions IS NOT NULL</span>
+<span class="s2">       ORDER BY filer_committee_id_number,</span>
+<span class="s2">                coverage_through_date,</span>
+<span class="s2">                coverage_from_date,</span>
+<span class="s2">                filing_id DESC) AS summaries ON cand_pcc = filer_committee_id_number</span>
+<span class="s2">    WHERE extract(YEAR</span>
+<span class="s2">                  FROM coverage_through_date) &gt;= 2013</span>
+<span class="s2">      AND coverage_through_date &lt;= &#39;2014-06-30&#39;::date</span>
+<span class="s2">      -- AND (col_a_total_receipts &gt; 0</span>
+<span class="s2">    --       OR col_a_total_disbursements &gt; 0)</span>
+<span class="s2">    GROUP BY -- cand_office,</span>
+<span class="s2">             party</span>
+<span class="s2">    ORDER BY indivs DESC</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">candidate_unitemized_by_party_14</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[69]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>party</th>
+      <th>count</th>
+      <th>itemized</th>
+      <th>unitemized</th>
+      <th>indivs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Republican</td>
+      <td>849</td>
+      <td>319,873,352.63</td>
+      <td>53,296,471.38</td>
+      <td>373,167,891.91</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Democrat</td>
+      <td>640</td>
+      <td>283,647,027.55</td>
+      <td>62,509,524.09</td>
+      <td>346,161,686.64</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>other</td>
+      <td>85</td>
+      <td>2,176,185.10</td>
+      <td>675,662.02</td>
+      <td>2,854,043.12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">candidate_unitemized_by_party_18</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
+    <span class="s1">&#39;candidate_unitemized_by_party_18&#39;</span><span class="p">,</span>
+    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT CASE</span>
+<span class="s2">               WHEN cand_pty_affiliation = &#39;DEM&#39; THEN &#39;Democrat&#39;</span>
+<span class="s2">               WHEN cand_pty_affiliation = &#39;DFL&#39; THEN &#39;Democrat&#39;</span>
+<span class="s2">               WHEN cand_pty_affiliation = &#39;REP&#39; THEN &#39;Republican&#39;</span>
+<span class="s2">               ELSE &#39;other&#39;</span>
+<span class="s2">           END AS party,</span>
+<span class="s2">           -- cand_office,</span>
+<span class="s2">           count(DISTINCT cand_id),</span>
+<span class="s2">           sum(col_a_individual_contributions_itemized) AS itemized,</span>
+<span class="s2">           sum(col_a_individual_contributions_unitemized) AS unitemized,</span>
+<span class="s2">           sum(col_a_total_individual_contributions) AS indivs</span>
+<span class="s2">    FROM</span>
+<span class="s2">      (SELECT DISTINCT ON (cand_id,</span>
+<span class="s2">                           cand_pcc) *</span>
+<span class="s2">       FROM fec_candidates</span>
+<span class="s2">       WHERE</span>
+<span class="s2">       cand_election_yr = &#39;2018&#39; AND</span>
+<span class="s2">     cand_pcc IS NOT NULL</span>
+<span class="s2">       ORDER BY cand_id,</span>
+<span class="s2">                cand_pcc) AS cands</span>
+<span class="s2">    JOIN</span>
+<span class="s2">      (SELECT filing_id,</span>
+<span class="s2">              filer_committee_id_number,</span>
+<span class="s2">              col_a_individual_contributions_itemized,</span>
+<span class="s2">              col_a_individual_contributions_unitemized,</span>
+<span class="s2">              col_a_total_individual_contributions,</span>
+<span class="s2">              col_a_total_receipts,</span>
+<span class="s2">              col_a_total_disbursements,</span>
+<span class="s2">              coverage_from_date,</span>
+<span class="s2">              coverage_through_date</span>
+<span class="s2">       FROM fec_campaign_summaries</span>
+<span class="s2">       JOIN fec_amended_filings USING (filing_id)</span>
+<span class="s2">       UNION SELECT DISTINCT ON (filer_committee_id_number,</span>
+<span class="s2">                                 coverage_from_date,</span>
+<span class="s2">                                 coverage_through_date) filing_id,</span>
+<span class="s2">                                filer_committee_id_number,</span>
+<span class="s2">                                col_a_individual_contributions_itemized,</span>
+<span class="s2">                                col_a_individual_contributions_unitemized,</span>
+<span class="s2">                                col_a_total_individual_contributions,</span>
+<span class="s2">                                col_a_total_receipts,</span>
+<span class="s2">                                col_a_total_disbursements,</span>
+<span class="s2">                                coverage_from_date,</span>
+<span class="s2">                                coverage_through_date</span>
+<span class="s2">       FROM fec_paper_campaign_summaries</span>
+<span class="s2">       WHERE col_a_total_individual_contributions IS NOT NULL</span>
+<span class="s2">       ORDER BY filer_committee_id_number,</span>
+<span class="s2">                coverage_through_date,</span>
+<span class="s2">                coverage_from_date,</span>
+<span class="s2">                filing_id DESC) AS summaries ON cand_pcc = filer_committee_id_number</span>
+<span class="s2">    WHERE extract(YEAR</span>
+<span class="s2">                  FROM coverage_through_date) &gt;= 2017</span>
+<span class="s2">      AND coverage_through_date &lt;= &#39;2018-06-30&#39;::date</span>
+<span class="s2">      -- AND (col_a_total_receipts &gt; 0</span>
+<span class="s2">    --       OR col_a_total_disbursements &gt; 0)</span>
+<span class="s2">    GROUP BY -- cand_office,</span>
+<span class="s2">             party</span>
+<span class="s2">    ORDER BY indivs DESC</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">candidate_unitemized_by_party_18</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[70]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>party</th>
+      <th>count</th>
+      <th>itemized</th>
+      <th>unitemized</th>
+      <th>indivs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Democrat</td>
+      <td>1287</td>
+      <td>493,920,027.53</td>
+      <td>179,692,020.49</td>
+      <td>675,492,335.17</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Republican</td>
+      <td>929</td>
+      <td>301,799,698.88</td>
+      <td>59,671,848.62</td>
+      <td>361,227,378.50</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>other</td>
+      <td>138</td>
+      <td>7,469,548.68</td>
+      <td>7,097,598.75</td>
+      <td>14,619,006.43</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Which-ActBlue-reports-do-we-have?">Which ActBlue reports do we have?<a class="anchor-link" href="#Which-ActBlue-reports-do-we-have?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_summaries</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
+    <span class="s1">&#39;actblue_summaries&#39;</span><span class="p">,</span>
+    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT *</span>
+<span class="s2">    FROM fec_pac_summaries</span>
+<span class="s2">    JOIN fec_amended_filings USING (filing_id)</span>
+<span class="s2">    WHERE filer_committee_id_number = &#39;&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">committee_id</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&#39;</span>
+<span class="s2">    AND extract(year from coverage_through_date) &gt;= &quot;&quot;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year_since</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ORDER BY coverage_through_date DESC;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;coverage_from_date&#39;</span><span class="p">:</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;coverage_through_date&#39;</span><span class="p">:</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span>
+    <span class="p">})</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">actblue_summaries</span><span class="p">[[</span>
+        <span class="s1">&#39;filing_id&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;coverage_from_date&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;coverage_through_date&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;report_code&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;col_a_total_contributions&#39;</span>
+    <span class="p">]])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
       <th>filing_id</th>
-      <th>form_type</th>
-      <th>committee_name</th>
       <th>coverage_from_date</th>
       <th>coverage_through_date</th>
       <th>report_code</th>
@@ -12052,8 +12499,6 @@ div#notebook {
     <tr>
       <th>0</th>
       <td>1258193</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2018-07-01</td>
       <td>2018-07-31</td>
       <td>M8</td>
@@ -12062,8 +12507,6 @@ div#notebook {
     <tr>
       <th>1</th>
       <td>1251343</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2018-06-01</td>
       <td>2018-06-30</td>
       <td>M7</td>
@@ -12072,8 +12515,6 @@ div#notebook {
     <tr>
       <th>2</th>
       <td>1240253</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2018-05-01</td>
       <td>2018-05-31</td>
       <td>M6</td>
@@ -12082,8 +12523,6 @@ div#notebook {
     <tr>
       <th>3</th>
       <td>1233520</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2018-04-01</td>
       <td>2018-04-30</td>
       <td>M5</td>
@@ -12092,8 +12531,6 @@ div#notebook {
     <tr>
       <th>4</th>
       <td>1225971</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2018-03-01</td>
       <td>2018-03-31</td>
       <td>M4</td>
@@ -12102,8 +12539,6 @@ div#notebook {
     <tr>
       <th>5</th>
       <td>1215697</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2018-02-01</td>
       <td>2018-02-28</td>
       <td>M3</td>
@@ -12112,8 +12547,6 @@ div#notebook {
     <tr>
       <th>6</th>
       <td>1224404</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2018-01-01</td>
       <td>2018-01-31</td>
       <td>M2</td>
@@ -12122,8 +12555,6 @@ div#notebook {
     <tr>
       <th>7</th>
       <td>1224416</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-12-01</td>
       <td>2017-12-31</td>
       <td>YE</td>
@@ -12132,8 +12563,6 @@ div#notebook {
     <tr>
       <th>8</th>
       <td>1219434</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-11-01</td>
       <td>2017-11-30</td>
       <td>M12</td>
@@ -12142,8 +12571,6 @@ div#notebook {
     <tr>
       <th>9</th>
       <td>1219420</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-10-01</td>
       <td>2017-10-31</td>
       <td>M11</td>
@@ -12152,8 +12579,6 @@ div#notebook {
     <tr>
       <th>10</th>
       <td>1218757</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-09-01</td>
       <td>2017-09-30</td>
       <td>M10</td>
@@ -12162,8 +12587,6 @@ div#notebook {
     <tr>
       <th>11</th>
       <td>1217404</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-08-01</td>
       <td>2017-08-31</td>
       <td>M9</td>
@@ -12172,8 +12595,6 @@ div#notebook {
     <tr>
       <th>12</th>
       <td>1217370</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-07-01</td>
       <td>2017-07-31</td>
       <td>M8</td>
@@ -12182,8 +12603,6 @@ div#notebook {
     <tr>
       <th>13</th>
       <td>1217173</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-06-01</td>
       <td>2017-06-30</td>
       <td>M7</td>
@@ -12192,8 +12611,6 @@ div#notebook {
     <tr>
       <th>14</th>
       <td>1217152</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-05-01</td>
       <td>2017-05-31</td>
       <td>M6</td>
@@ -12202,8 +12619,6 @@ div#notebook {
     <tr>
       <th>15</th>
       <td>1216926</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-04-01</td>
       <td>2017-04-30</td>
       <td>M5</td>
@@ -12212,8 +12627,6 @@ div#notebook {
     <tr>
       <th>16</th>
       <td>1216920</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-03-01</td>
       <td>2017-03-31</td>
       <td>M4</td>
@@ -12222,8 +12635,6 @@ div#notebook {
     <tr>
       <th>17</th>
       <td>1216764</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-02-01</td>
       <td>2017-02-28</td>
       <td>M3</td>
@@ -12232,8 +12643,6 @@ div#notebook {
     <tr>
       <th>18</th>
       <td>1189990</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2017-01-01</td>
       <td>2017-01-31</td>
       <td>M2</td>
@@ -12242,8 +12651,6 @@ div#notebook {
     <tr>
       <th>19</th>
       <td>1189983</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2016-11-29</td>
       <td>2016-12-31</td>
       <td>YE</td>
@@ -12252,8 +12659,6 @@ div#notebook {
     <tr>
       <th>20</th>
       <td>1190211</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2016-10-20</td>
       <td>2016-11-28</td>
       <td>30G</td>
@@ -12262,8 +12667,6 @@ div#notebook {
     <tr>
       <th>21</th>
       <td>1167570</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2016-10-01</td>
       <td>2016-10-19</td>
       <td>12G</td>
@@ -12272,8 +12675,6 @@ div#notebook {
     <tr>
       <th>22</th>
       <td>1111238</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2016-09-01</td>
       <td>2016-09-30</td>
       <td>M10</td>
@@ -12282,8 +12683,6 @@ div#notebook {
     <tr>
       <th>23</th>
       <td>1100745</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2016-08-01</td>
       <td>2016-08-31</td>
       <td>M9</td>
@@ -12292,8 +12691,6 @@ div#notebook {
     <tr>
       <th>24</th>
       <td>1148387</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2016-07-01</td>
       <td>2016-07-31</td>
       <td>M8</td>
@@ -12302,8 +12699,6 @@ div#notebook {
     <tr>
       <th>25</th>
       <td>1148378</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2016-06-01</td>
       <td>2016-06-30</td>
       <td>M7</td>
@@ -12312,8 +12707,6 @@ div#notebook {
     <tr>
       <th>26</th>
       <td>1148219</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2016-05-01</td>
       <td>2016-05-31</td>
       <td>M6</td>
@@ -12322,8 +12715,6 @@ div#notebook {
     <tr>
       <th>27</th>
       <td>1148088</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2016-04-01</td>
       <td>2016-04-30</td>
       <td>M5</td>
@@ -12332,8 +12723,6 @@ div#notebook {
     <tr>
       <th>28</th>
       <td>1147747</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2016-03-01</td>
       <td>2016-03-31</td>
       <td>M4</td>
@@ -12342,28 +12731,46 @@ div#notebook {
     <tr>
       <th>29</th>
       <td>1056917</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2016-02-01</td>
       <td>2016-02-29</td>
       <td>M3</td>
       <td>55,899,769.67</td>
     </tr>
     <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
+      <th>30</th>
+      <td>1051660</td>
+      <td>2016-01-01</td>
+      <td>2016-01-31</td>
+      <td>M2</td>
+      <td>30,906,698.66</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>1047732</td>
+      <td>2015-07-01</td>
+      <td>2015-12-31</td>
+      <td>YE</td>
+      <td>111,428,188.85</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>1034155</td>
+      <td>2015-06-23</td>
+      <td>2015-06-30</td>
+      <td>MY</td>
+      <td>10,048,788.95</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>1034148</td>
+      <td>2015-06-18</td>
+      <td>2015-06-22</td>
+      <td>30R</td>
+      <td>1,918,585.61</td>
     </tr>
     <tr>
       <th>34</th>
       <td>1034000</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2015-05-26</td>
       <td>2015-06-17</td>
       <td>12P</td>
@@ -12372,8 +12779,6 @@ div#notebook {
     <tr>
       <th>35</th>
       <td>1033935</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2015-05-14</td>
       <td>2015-05-25</td>
       <td>30S</td>
@@ -12382,8 +12787,6 @@ div#notebook {
     <tr>
       <th>36</th>
       <td>1024737</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2015-04-01</td>
       <td>2015-05-13</td>
       <td>12R</td>
@@ -12392,8 +12795,6 @@ div#notebook {
     <tr>
       <th>37</th>
       <td>1024649</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2015-03-01</td>
       <td>2015-03-31</td>
       <td>M4</td>
@@ -12402,8 +12803,6 @@ div#notebook {
     <tr>
       <th>38</th>
       <td>1024632</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2015-02-01</td>
       <td>2015-02-28</td>
       <td>M3</td>
@@ -12412,8 +12811,6 @@ div#notebook {
     <tr>
       <th>39</th>
       <td>1024608</td>
-      <td>F3XA</td>
-      <td>ActBlue</td>
       <td>2015-01-01</td>
       <td>2015-01-31</td>
       <td>M2</td>
@@ -12422,8 +12819,6 @@ div#notebook {
     <tr>
       <th>40</th>
       <td>989398</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-11-25</td>
       <td>2014-12-31</td>
       <td>YE</td>
@@ -12432,8 +12827,6 @@ div#notebook {
     <tr>
       <th>41</th>
       <td>980316</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-10-16</td>
       <td>2014-11-24</td>
       <td>30G</td>
@@ -12442,8 +12835,6 @@ div#notebook {
     <tr>
       <th>42</th>
       <td>964963</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-10-01</td>
       <td>2014-10-15</td>
       <td>12G</td>
@@ -12452,8 +12843,6 @@ div#notebook {
     <tr>
       <th>43</th>
       <td>961472</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-09-01</td>
       <td>2014-09-30</td>
       <td>M10</td>
@@ -12462,8 +12851,6 @@ div#notebook {
     <tr>
       <th>44</th>
       <td>952738</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-08-01</td>
       <td>2014-08-31</td>
       <td>M9</td>
@@ -12472,8 +12859,6 @@ div#notebook {
     <tr>
       <th>45</th>
       <td>946367</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-07-01</td>
       <td>2014-07-31</td>
       <td>M8</td>
@@ -12482,8 +12867,6 @@ div#notebook {
     <tr>
       <th>46</th>
       <td>942637</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-06-01</td>
       <td>2014-06-30</td>
       <td>M7</td>
@@ -12492,8 +12875,6 @@ div#notebook {
     <tr>
       <th>47</th>
       <td>932286</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-05-01</td>
       <td>2014-05-31</td>
       <td>M6</td>
@@ -12502,8 +12883,6 @@ div#notebook {
     <tr>
       <th>48</th>
       <td>926005</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-04-01</td>
       <td>2014-04-30</td>
       <td>M5</td>
@@ -12512,8 +12891,6 @@ div#notebook {
     <tr>
       <th>49</th>
       <td>921401</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-03-01</td>
       <td>2014-03-31</td>
       <td>M4</td>
@@ -12522,8 +12899,6 @@ div#notebook {
     <tr>
       <th>50</th>
       <td>912211</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-02-01</td>
       <td>2014-02-28</td>
       <td>M3</td>
@@ -12532,8 +12907,6 @@ div#notebook {
     <tr>
       <th>51</th>
       <td>907993</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2014-01-01</td>
       <td>2014-01-31</td>
       <td>M2</td>
@@ -12542,8 +12915,6 @@ div#notebook {
     <tr>
       <th>52</th>
       <td>903093</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-12-01</td>
       <td>2013-12-31</td>
       <td>YE</td>
@@ -12552,8 +12923,6 @@ div#notebook {
     <tr>
       <th>53</th>
       <td>897812</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-11-01</td>
       <td>2013-11-30</td>
       <td>M12</td>
@@ -12562,8 +12931,6 @@ div#notebook {
     <tr>
       <th>54</th>
       <td>895380</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-10-01</td>
       <td>2013-10-31</td>
       <td>M11</td>
@@ -12572,8 +12939,6 @@ div#notebook {
     <tr>
       <th>55</th>
       <td>892784</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-09-01</td>
       <td>2013-09-30</td>
       <td>M10</td>
@@ -12582,8 +12947,6 @@ div#notebook {
     <tr>
       <th>56</th>
       <td>888139</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-08-01</td>
       <td>2013-08-31</td>
       <td>M9</td>
@@ -12592,8 +12955,6 @@ div#notebook {
     <tr>
       <th>57</th>
       <td>884895</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-07-01</td>
       <td>2013-07-31</td>
       <td>M8</td>
@@ -12602,8 +12963,6 @@ div#notebook {
     <tr>
       <th>58</th>
       <td>880507</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-06-01</td>
       <td>2013-06-30</td>
       <td>M7</td>
@@ -12612,8 +12971,6 @@ div#notebook {
     <tr>
       <th>59</th>
       <td>874134</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-05-01</td>
       <td>2013-05-31</td>
       <td>M6</td>
@@ -12622,8 +12979,6 @@ div#notebook {
     <tr>
       <th>60</th>
       <td>871793</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-04-01</td>
       <td>2013-04-30</td>
       <td>M5</td>
@@ -12632,8 +12987,6 @@ div#notebook {
     <tr>
       <th>61</th>
       <td>868286</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-03-01</td>
       <td>2013-03-31</td>
       <td>M4</td>
@@ -12642,8 +12995,6 @@ div#notebook {
     <tr>
       <th>62</th>
       <td>861246</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-02-01</td>
       <td>2013-02-28</td>
       <td>M3</td>
@@ -12652,8 +13003,6 @@ div#notebook {
     <tr>
       <th>63</th>
       <td>857384</td>
-      <td>F3XN</td>
-      <td>ActBlue</td>
       <td>2013-01-01</td>
       <td>2013-01-31</td>
       <td>M2</td>
@@ -12661,7 +13010,6 @@ div#notebook {
     </tr>
   </tbody>
 </table>
-<p>64 rows × 7 columns</p>
 </div>
 </div>
 
@@ -12681,7 +13029,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_reports</span><span class="p">(</span><span class="n">committee_id</span><span class="p">):</span>
@@ -12709,7 +13057,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[72]:</div>
 
 
 
@@ -12757,7 +13105,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contribs_count</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -12852,7 +13200,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[73]:</div>
 
 
 
@@ -12904,7 +13252,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">contribs_over_time</span> <span class="o">=</span> <span class="n">actblue_summaries</span><span class="p">[[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">,</span><span class="s1">&#39;col_a_total_contributions&#39;</span><span class="p">]]</span>
@@ -12935,7 +13283,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[74]:</div>
 
 
 
@@ -12975,7 +13323,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cycle</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
@@ -12996,7 +13344,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;cycle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_summaries</span><span class="o">.</span><span class="n">coverage_through_date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
@@ -13017,7 +13365,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[12]:</div>
+<div class="prompt output_prompt">Out[76]:</div>
 
 
 
@@ -13073,7 +13421,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://scentellegher.github.io/programming/2017/05/24/pandas-bar-plot-with-formatted-dates.html</span>
@@ -13102,7 +13450,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[13]:</div>
+<div class="prompt output_prompt">Out[77]:</div>
 
 
 
@@ -13136,13 +13484,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-many-Democratic-campaigns-use-ActBlue?">How many Democratic campaigns use ActBlue?<a class="anchor-link" href="#How-many-Democratic-campaigns-use-ActBlue?">&#182;</a></h3>
+<h3 id="Which-committees-receive-contributions-through-ActBlue?">Which committees receive contributions through ActBlue?<a class="anchor-link" href="#Which-committees-receive-contributions-through-ActBlue?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_transfers</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -13172,7 +13520,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[78]:</div>
 
 
 
@@ -13641,9 +13989,17 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="How-many-Democratic-campaigns-received-contributions-through-ActBlue?-What-percentage-of-Democratic-campaigns-is-that?">How many Democratic campaigns received contributions through ActBlue? What percentage of Democratic campaigns is that?<a class="anchor-link" href="#How-many-Democratic-campaigns-received-contributions-through-ActBlue?-What-percentage-of-Democratic-campaigns-is-that?">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -13683,6 +14039,8 @@ div#notebook {
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
 
+<span class="n">actblue_proportion</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">actblue_proportion</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_proportion</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+
 <span class="n">actblue_proportion</span>
 </pre></div>
 
@@ -13696,7 +14054,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[15]:</div>
+<div class="prompt output_prompt">Out[79]:</div>
 
 
 
@@ -13721,6 +14079,7 @@ div#notebook {
       <th></th>
       <th>actblue</th>
       <th>count</th>
+      <th>percent</th>
     </tr>
   </thead>
   <tbody>
@@ -13728,11 +14087,13 @@ div#notebook {
       <th>0</th>
       <td>False</td>
       <td>233</td>
+      <td>15.23</td>
     </tr>
     <tr>
       <th>1</th>
       <td>True</td>
       <td>1297</td>
+      <td>84.77</td>
     </tr>
   </tbody>
 </table>
@@ -13745,9 +14106,17 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rise-of-ActBlue:-What-percent-of-Democratic-campaign-cash-from-individuals-was-raised-through-ActBlue-by-cycle?-How-about-2014?">Rise of ActBlue: What percent of Democratic campaign cash from individuals was raised through ActBlue by cycle? How about 2014?<a class="anchor-link" href="#Rise-of-ActBlue:-What-percent-of-Democratic-campaign-cash-from-individuals-was-raised-through-ActBlue-by-cycle?-How-about-2014?">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_actblue_proportion_amount</span><span class="p">(</span><span class="n">cycle</span><span class="p">):</span>
@@ -13833,557 +14202,20 @@ div#notebook {
     <span class="p">)</span>
 
 <span class="n">actblue_proportion_amount</span> <span class="o">=</span> <span class="n">calc_actblue_proportion_amount</span><span class="p">(</span><span class="mi">2018</span><span class="p">)</span>
-
-<span class="n">actblue_proportion_amount</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[16]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cand_pcc</th>
-      <th>from_dates</th>
-      <th>through_dates</th>
-      <th>committee_total</th>
-      <th>actblue_total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>C00140715</td>
-      <td>[2017-04-01, 2018-01-01, 2017-01-01, 2017-10-0...</td>
-      <td>[2017-06-30, 2018-03-31, 2017-03-31, 2017-12-3...</td>
-      <td>833,046.34</td>
-      <td>6,566.66</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>C00154625</td>
-      <td>[2018-04-19, 2017-04-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2018-06-30, 2017-06-30, 2017-12-31, 2018-03-3...</td>
-      <td>130,641.98</td>
-      <td>15,336.74</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>C00156612</td>
-      <td>[2017-07-01, 2018-04-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2017-09-30, 2018-06-30, 2017-12-31, 2018-03-3...</td>
-      <td>14,537.54</td>
-      <td>5,412.54</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>C00166504</td>
-      <td>[2017-01-01, 2017-04-01, 2018-04-19, 2018-01-0...</td>
-      <td>[2017-03-31, 2017-06-30, 2018-06-30, 2018-03-3...</td>
-      <td>307,848.35</td>
-      <td>17,901.00</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>C00167585</td>
-      <td>[2018-05-17, 2017-10-01, 2017-01-01, 2017-04-0...</td>
-      <td>[2018-06-30, 2017-12-31, 2017-03-31, 2017-06-3...</td>
-      <td>438,618.26</td>
-      <td>188,207.51</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>C00172619</td>
-      <td>[2017-04-01, 2017-10-01, 2018-04-01, 2017-07-0...</td>
-      <td>[2017-06-30, 2017-12-31, 2018-06-30, 2017-09-3...</td>
-      <td>31,768.35</td>
-      <td>6,133.97</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>C00195628</td>
-      <td>[2018-01-01, 2018-04-01, 2017-01-01, 2017-07-0...</td>
-      <td>[2018-03-31, 2018-04-18, 2017-03-31, 2017-09-3...</td>
-      <td>273,330.00</td>
-      <td>446.80</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>C00202416</td>
-      <td>[2017-04-01, 2017-10-01, 2018-01-01, 2017-01-0...</td>
-      <td>[2017-06-30, 2017-12-31, 2018-03-31, 2017-03-3...</td>
-      <td>2,255,642.66</td>
-      <td>1,552,231.91</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>C00213512</td>
-      <td>[2018-01-01, 2018-05-17, 2017-07-01, 2017-10-0...</td>
-      <td>[2018-03-31, 2018-06-30, 2017-09-30, 2017-12-3...</td>
-      <td>2,176,410.60</td>
-      <td>3,601,026.08</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>C00213611</td>
-      <td>[2017-04-01, 2017-01-01, 2017-07-01, 2018-01-0...</td>
-      <td>[2017-06-30, 2017-03-31, 2017-09-30, 2018-03-3...</td>
-      <td>271,648.26</td>
-      <td>133,061.26</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>C00215905</td>
-      <td>[2017-04-01, 2018-04-26, 2017-01-01, 2017-07-0...</td>
-      <td>[2017-06-30, 2018-06-30, 2017-03-31, 2017-09-3...</td>
-      <td>456,934.10</td>
-      <td>273,356.73</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>C00219881</td>
-      <td>[2018-01-01, 2018-06-07, 2017-01-01, 2017-10-0...</td>
-      <td>[2018-03-31, 2018-06-30, 2017-03-31, 2017-12-3...</td>
-      <td>840,102.60</td>
-      <td>104,667.75</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>C00226522</td>
-      <td>[2017-07-01, 2017-10-01, 2017-04-01, 2018-04-0...</td>
-      <td>[2017-09-30, 2017-12-31, 2017-06-30, 2018-06-3...</td>
-      <td>583,277.09</td>
-      <td>124,832.09</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>C00226928</td>
-      <td>[2017-01-01, 2017-04-01, 2018-05-17, 2018-04-0...</td>
-      <td>[2017-03-31, 2017-06-30, 2018-06-30, 2018-05-1...</td>
-      <td>608,974.98</td>
-      <td>162,081.96</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>C00236513</td>
-      <td>[2017-07-01, 2017-01-01, 2017-04-01, 2018-01-0...</td>
-      <td>[2017-09-30, 2017-03-31, 2017-06-30, 2018-03-3...</td>
-      <td>966,555.90</td>
-      <td>1,406.90</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>C00238865</td>
-      <td>[2018-01-01, 2017-07-01, 2017-10-01, 2018-04-2...</td>
-      <td>[2018-03-31, 2017-09-30, 2017-12-31, 2018-06-3...</td>
-      <td>504,355.16</td>
-      <td>174,758.00</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>C00240986</td>
-      <td>[2017-10-01, 2017-04-01, 2017-07-01, 2018-04-0...</td>
-      <td>[2017-12-31, 2017-06-30, 2017-09-30, 2018-06-0...</td>
-      <td>62,713.42</td>
-      <td>18,788.07</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>C00244335</td>
-      <td>[2017-07-01, 2017-10-01, 2017-01-01, 2017-04-0...</td>
-      <td>[2017-09-30, 2017-12-31, 2017-03-31, 2017-06-3...</td>
-      <td>80,439.91</td>
-      <td>32,482.41</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>C00253187</td>
-      <td>[2018-04-01, 2017-10-01, 2017-01-01, 2018-01-0...</td>
-      <td>[2018-06-30, 2017-12-31, 2017-03-31, 2018-03-3...</td>
-      <td>181,651.21</td>
-      <td>10,101.62</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>C00254185</td>
-      <td>[2017-07-01, 2017-01-01, 2018-01-01, 2018-04-0...</td>
-      <td>[2017-09-30, 2017-03-31, 2018-03-31, 2018-06-3...</td>
-      <td>89,729.30</td>
-      <td>7,517.03</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>C00254573</td>
-      <td>[2017-07-01, 2018-04-01, 2017-01-01, 2017-10-0...</td>
-      <td>[2017-09-30, 2018-06-30, 2017-03-31, 2017-12-3...</td>
-      <td>107,310.00</td>
-      <td>535.09</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>C00254581</td>
-      <td>[2017-04-01, 2017-07-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2017-06-30, 2017-09-30, 2017-12-31, 2018-03-3...</td>
-      <td>3,569.36</td>
-      <td>3,579.62</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>C00255562</td>
-      <td>[2017-07-01, 2018-04-01, 2017-10-01, 2017-04-0...</td>
-      <td>[2017-09-30, 2018-05-23, 2017-12-31, 2017-06-3...</td>
-      <td>155,531.81</td>
-      <td>78,346.22</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>C00256925</td>
-      <td>[2018-01-01, 2018-04-09, 2018-05-24, 2017-10-0...</td>
-      <td>[2018-03-31, 2018-05-23, 2018-06-30, 2017-12-3...</td>
-      <td>114,716.70</td>
-      <td>829.71</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>C00257121</td>
-      <td>[2017-10-01, 2018-04-01, 2018-01-01, 2017-07-0...</td>
-      <td>[2017-12-31, 2018-06-30, 2018-02-28, 2017-09-3...</td>
-      <td>17,975.00</td>
-      <td>875.93</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>C00258475</td>
-      <td>[2017-04-01, 2018-05-17, 2017-07-01, 2018-04-0...</td>
-      <td>[2017-06-30, 2018-06-30, 2017-09-30, 2018-05-1...</td>
-      <td>622,837.33</td>
-      <td>326,052.77</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>C00259143</td>
-      <td>[2017-01-01, 2017-04-01, 2018-04-01, 2017-10-0...</td>
-      <td>[2017-03-31, 2017-06-30, 2018-05-16, 2017-12-3...</td>
-      <td>161,002.70</td>
-      <td>4,300.13</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>C00264101</td>
-      <td>[2017-01-01, 2018-04-01, 2018-01-01, 2017-10-0...</td>
-      <td>[2017-03-31, 2018-06-30, 2018-03-31, 2017-12-3...</td>
-      <td>226.28</td>
-      <td>107.94</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>C00264564</td>
-      <td>[2017-04-01, 2017-07-01, 2017-10-01, 2018-04-0...</td>
-      <td>[2017-06-30, 2017-09-30, 2017-12-31, 2018-05-1...</td>
-      <td>4,413,724.18</td>
-      <td>1,378,825.16</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>C00264697</td>
-      <td>[2017-07-01, 2018-01-01, 2018-04-19, 2017-10-0...</td>
-      <td>[2017-09-30, 2018-03-31, 2018-06-30, 2017-12-3...</td>
-      <td>13,269,011.53</td>
-      <td>5,317,997.75</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>1249</th>
-      <td>C00676569</td>
-      <td>[2018-03-27]</td>
-      <td>[2018-06-30]</td>
-      <td>7,214.98</td>
-      <td>4,892.00</td>
-    </tr>
-    <tr>
-      <th>1250</th>
-      <td>C00676650</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>0.00</td>
-      <td>2.07</td>
-    </tr>
-    <tr>
-      <th>1251</th>
-      <td>C00676916</td>
-      <td>[2018-05-01]</td>
-      <td>[2018-05-31]</td>
-      <td>385.50</td>
-      <td>237.00</td>
-    </tr>
-    <tr>
-      <th>1252</th>
-      <td>C00677062</td>
-      <td>[2018-05-24, 2018-06-07, 2018-02-12]</td>
-      <td>[2018-06-06, 2018-06-30, 2018-05-23]</td>
-      <td>12,332.20</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1253</th>
-      <td>C00677096</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>165,657.60</td>
-      <td>76,122.37</td>
-    </tr>
-    <tr>
-      <th>1254</th>
-      <td>C00677112</td>
-      <td>[2018-04-18]</td>
-      <td>[2018-06-30]</td>
-      <td>24,103.00</td>
-      <td>18,651.00</td>
-    </tr>
-    <tr>
-      <th>1255</th>
-      <td>C00677435</td>
-      <td>[2018-04-26, 2018-04-01]</td>
-      <td>[2018-06-30, 2018-04-25]</td>
-      <td>50.00</td>
-      <td>50.00</td>
-    </tr>
-    <tr>
-      <th>1256</th>
-      <td>C00677492</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>17,698.74</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1257</th>
-      <td>C00677617</td>
-      <td>[2018-04-30]</td>
-      <td>[2018-06-30]</td>
-      <td>37,370.00</td>
-      <td>13,020.00</td>
-    </tr>
-    <tr>
-      <th>1258</th>
-      <td>C00677849</td>
-      <td>[2018-01-01]</td>
-      <td>[2018-05-23]</td>
-      <td>6,705.00</td>
-      <td>75.00</td>
-    </tr>
-    <tr>
-      <th>1259</th>
-      <td>C00677898</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>263,236.25</td>
-      <td>151,077.75</td>
-    </tr>
-    <tr>
-      <th>1260</th>
-      <td>C00677997</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>0.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1261</th>
-      <td>C00678037</td>
-      <td>[2018-05-17, 2018-02-03]</td>
-      <td>[2018-06-30, 2018-05-16]</td>
-      <td>5,127.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1262</th>
-      <td>C00678045</td>
-      <td>[2018-05-11]</td>
-      <td>[2018-06-30]</td>
-      <td>24,485.18</td>
-      <td>16,233.18</td>
-    </tr>
-    <tr>
-      <th>1263</th>
-      <td>C00678086</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>3,224.01</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1264</th>
-      <td>C00678326</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>22,245.04</td>
-      <td>15,980.04</td>
-    </tr>
-    <tr>
-      <th>1265</th>
-      <td>C00678342</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>656.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1266</th>
-      <td>C00678532</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>62,485.71</td>
-      <td>42,935.71</td>
-    </tr>
-    <tr>
-      <th>1267</th>
-      <td>C00678557</td>
-      <td>[2017-07-04]</td>
-      <td>[2018-06-30]</td>
-      <td>8,409.87</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1268</th>
-      <td>C00679779</td>
-      <td>[2018-06-11]</td>
-      <td>[2018-06-30]</td>
-      <td>550.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1269</th>
-      <td>C00679837</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>70,188.39</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1270</th>
-      <td>C00680553</td>
-      <td>[2018-06-08]</td>
-      <td>[2018-06-30]</td>
-      <td>130,855.66</td>
-      <td>84,131.66</td>
-    </tr>
-    <tr>
-      <th>1271</th>
-      <td>C00680793</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>360.00</td>
-      <td>25.00</td>
-    </tr>
-    <tr>
-      <th>1272</th>
-      <td>C00680918</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>117,735.99</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1273</th>
-      <td>C00680934</td>
-      <td>[2018-06-07]</td>
-      <td>[2018-06-30]</td>
-      <td>173,290.15</td>
-      <td>135,431.37</td>
-    </tr>
-    <tr>
-      <th>1274</th>
-      <td>C00681098</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>3,000.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1275</th>
-      <td>C00681296</td>
-      <td>[2018-06-05]</td>
-      <td>[2018-06-30]</td>
-      <td>46,497.00</td>
-      <td>34,532.00</td>
-    </tr>
-    <tr>
-      <th>1276</th>
-      <td>C00682351</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>8,987.60</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1277</th>
-      <td>C00682690</td>
-      <td>[2016-11-09]</td>
-      <td>[2018-06-30]</td>
-      <td>3,730.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>1278</th>
-      <td>C00683342</td>
-      <td>[2018-04-01]</td>
-      <td>[2018-06-30]</td>
-      <td>60,165.00</td>
-      <td>nan</td>
-    </tr>
-  </tbody>
-</table>
-<p>1279 rows × 5 columns</p>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2018 cycle&quot;</span>
+    
 </pre></div>
 
 </div>
@@ -14396,13 +14228,13 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[81]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.534432257204556</pre>
+<pre>&#39;53.44 percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2018 cycle&#39;</pre>
 </div>
 
 </div>
@@ -14413,40 +14245,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[18]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>340399348.67</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_proportion.csv&#39;</span><span class="p">)</span>
@@ -14459,12 +14258,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount_14</span> <span class="o">=</span> <span class="n">calc_actblue_proportion_amount</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span>
 
-<span class="n">actblue_proportion_amount_14</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_proportion_amount_14</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">actblue_proportion_amount_14</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_proportion_amount_14</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2014 cycle&quot;</span>
 </pre></div>
 
 </div>
@@ -14477,595 +14276,13 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[20]:</div>
+<div class="prompt output_prompt">Out[83]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.08830272408099248</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount_14</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[21]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cand_pcc</th>
-      <th>from_dates</th>
-      <th>through_dates</th>
-      <th>committee_total</th>
-      <th>actblue_total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>C00002600</td>
-      <td>[2013-07-01, 2013-04-01, 2014-04-01, 2013-10-0...</td>
-      <td>[2013-09-30, 2013-06-30, 2014-06-30, 2013-12-3...</td>
-      <td>58,335.00</td>
-      <td>100.00</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>C00013128</td>
-      <td>[2013-10-01, 2014-01-01, 2014-04-01, 2013-01-0...</td>
-      <td>[2013-12-31, 2014-03-31, 2014-06-30, 2013-03-3...</td>
-      <td>466,245.00</td>
-      <td>209.00</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>C00026757</td>
-      <td>[2014-04-01, 2013-01-01, 2013-10-01, 2013-07-0...</td>
-      <td>[2014-06-30, 2013-03-31, 2013-12-31, 2013-09-3...</td>
-      <td>191,410.02</td>
-      <td>110.00</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>C00081356</td>
-      <td>[2013-07-01, 2013-01-01, 2013-04-01, 2013-10-0...</td>
-      <td>[2013-09-30, 2013-03-31, 2013-06-30, 2013-12-3...</td>
-      <td>581,162.61</td>
-      <td>16,241.77</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>C00088484</td>
-      <td>[2013-01-01]</td>
-      <td>[2013-03-31]</td>
-      <td>500.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>C00140715</td>
-      <td>[2013-10-01, 2013-01-01, 2013-04-01, 2014-04-0...</td>
-      <td>[2013-12-31, 2013-03-31, 2013-06-30, 2014-06-0...</td>
-      <td>969,131.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>C00148999</td>
-      <td>[2013-07-01, 2013-10-01, 2013-04-01, 2013-01-0...</td>
-      <td>[2013-09-30, 2013-12-31, 2013-06-30, 2013-03-3...</td>
-      <td>4,047,069.78</td>
-      <td>34,461.96</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>C00154625</td>
-      <td>[2014-04-01, 2013-04-01, 2013-07-01, 2013-01-0...</td>
-      <td>[2014-04-16, 2013-06-30, 2013-09-30, 2013-03-3...</td>
-      <td>157,765.46</td>
-      <td>3,008.00</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>C00156612</td>
-      <td>[2014-04-01, 2013-01-01, 2014-01-01, 2013-10-0...</td>
-      <td>[2014-06-30, 2013-03-31, 2014-03-31, 2013-12-3...</td>
-      <td>264,830.36</td>
-      <td>300.00</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>C00165241</td>
-      <td>[2013-07-01, 2014-01-01, 2013-04-01, 2013-10-0...</td>
-      <td>[2013-09-30, 2014-03-31, 2013-06-30, 2013-12-3...</td>
-      <td>0.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>C00166504</td>
-      <td>[2014-01-01, 2013-07-01, 2013-04-01, 2014-04-0...</td>
-      <td>[2014-03-31, 2013-09-30, 2013-06-30, 2014-04-1...</td>
-      <td>227,729.83</td>
-      <td>1,168.00</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>C00166827</td>
-      <td>[2013-01-01]</td>
-      <td>[2013-03-31]</td>
-      <td>28,388.76</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>C00167585</td>
-      <td>[2014-05-15, 2014-01-01, 2014-04-01, 2013-10-0...</td>
-      <td>[2014-06-30, 2014-03-31, 2014-05-14, 2013-12-3...</td>
-      <td>230,915.06</td>
-      <td>9,271.00</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>C00172619</td>
-      <td>[2013-04-01, 2013-07-01, 2013-01-01, 2014-04-0...</td>
-      <td>[2013-06-30, 2013-09-30, 2013-03-31, 2014-06-3...</td>
-      <td>66,450.68</td>
-      <td>950.00</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>C00195628</td>
-      <td>[2013-07-01, 2014-04-17, 2014-01-01, 2013-10-0...</td>
-      <td>[2013-09-30, 2014-06-30, 2014-03-31, 2013-12-3...</td>
-      <td>225,450.52</td>
-      <td>55.00</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>C00196774</td>
-      <td>[2014-04-01, 2014-01-01, 2013-01-01, 2013-06-0...</td>
-      <td>[2014-06-30, 2014-03-31, 2013-04-10, 2013-07-1...</td>
-      <td>9,966,006.74</td>
-      <td>460,931.24</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>C00201533</td>
-      <td>[2013-01-01]</td>
-      <td>[2013-03-31]</td>
-      <td>73,150.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>C00202416</td>
-      <td>[2013-04-01, 2014-04-01, 2013-01-01, 2014-05-0...</td>
-      <td>[2013-06-30, 2014-04-30, 2013-03-31, 2014-06-3...</td>
-      <td>84,475.41</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>C00213512</td>
-      <td>[2014-01-01, 2013-04-01, 2014-04-01, 2013-07-0...</td>
-      <td>[2014-03-31, 2013-06-30, 2014-05-14, 2013-09-3...</td>
-      <td>804,265.09</td>
-      <td>118,861.77</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>C00213611</td>
-      <td>[2013-07-01, 2014-06-05, 2013-01-01, 2013-10-0...</td>
-      <td>[2013-09-30, 2014-06-30, 2013-03-31, 2013-12-3...</td>
-      <td>347,864.73</td>
-      <td>62,600.40</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>C00215905</td>
-      <td>[2013-10-01, 2014-05-01, 2014-04-01, 2013-01-0...</td>
-      <td>[2013-12-31, 2014-06-30, 2014-04-30, 2013-03-3...</td>
-      <td>300,930.80</td>
-      <td>35,705.20</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>C00219881</td>
-      <td>[2013-10-01, 2014-01-01, 2014-06-05, 2013-04-0...</td>
-      <td>[2013-12-31, 2014-03-31, 2014-06-30, 2013-06-3...</td>
-      <td>1,194,672.77</td>
-      <td>40,975.15</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>C00223073</td>
-      <td>[2013-10-01, 2014-01-01, 2014-04-01, 2013-01-0...</td>
-      <td>[2013-12-31, 2014-03-31, 2014-06-30, 2013-03-3...</td>
-      <td>106,369.59</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>C00226522</td>
-      <td>[2013-01-01, 2014-04-01, 2013-07-01, 2013-04-0...</td>
-      <td>[2013-03-31, 2014-06-30, 2013-09-30, 2013-06-3...</td>
-      <td>239,392.93</td>
-      <td>38,025.00</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>C00226928</td>
-      <td>[2014-05-15, 2013-10-01, 2014-01-01, 2013-07-0...</td>
-      <td>[2014-06-30, 2013-12-31, 2014-03-31, 2013-09-3...</td>
-      <td>521,057.15</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>C00231092</td>
-      <td>[2013-04-01, 2014-01-01, 2014-04-01, 2013-01-0...</td>
-      <td>[2013-06-30, 2014-03-31, 2014-06-30, 2013-03-3...</td>
-      <td>42,100.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>C00236513</td>
-      <td>[2014-04-01, 2013-01-01, 2014-06-05, 2014-01-0...</td>
-      <td>[2014-06-04, 2013-03-31, 2014-06-30, 2014-03-3...</td>
-      <td>597,990.00</td>
-      <td>7,455.00</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>C00238865</td>
-      <td>[2014-01-01, 2014-04-25, 2013-10-01, 2013-04-0...</td>
-      <td>[2014-03-31, 2014-06-30, 2013-12-31, 2013-06-3...</td>
-      <td>545,039.50</td>
-      <td>620.00</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>C00238907</td>
-      <td>[2014-04-01, 2013-10-01, 2013-01-01, 2013-07-0...</td>
-      <td>[2014-06-30, 2013-12-31, 2013-03-31, 2013-09-3...</td>
-      <td>1,406,042.27</td>
-      <td>77,463.69</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>C00240986</td>
-      <td>[2013-10-01, 2013-07-01, 2014-01-01, 2013-04-0...</td>
-      <td>[2013-12-31, 2013-09-30, 2014-03-31, 2013-06-3...</td>
-      <td>24,315.07</td>
-      <td>4,071.51</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>607</th>
-      <td>C00560789</td>
-      <td>[2014-01-01, 2014-05-22, 2014-04-01]</td>
-      <td>[2014-03-31, 2014-06-30, 2014-05-21]</td>
-      <td>155,952.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>608</th>
-      <td>C00560847</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>15,078.37</td>
-      <td>1,010.00</td>
-    </tr>
-    <tr>
-      <th>609</th>
-      <td>C00560896</td>
-      <td>[2014-06-05, 2014-01-01, 2014-04-01]</td>
-      <td>[2014-06-30, 2014-03-31, 2014-06-04]</td>
-      <td>101,055.35</td>
-      <td>33,102.00</td>
-    </tr>
-    <tr>
-      <th>610</th>
-      <td>C00560920</td>
-      <td>[2014-01-01, 2014-04-01, 2014-05-01]</td>
-      <td>[2014-03-31, 2014-04-30, 2014-06-30]</td>
-      <td>23,865.00</td>
-      <td>5,581.00</td>
-    </tr>
-    <tr>
-      <th>611</th>
-      <td>C00560938</td>
-      <td>[2014-01-01, 2014-04-02, 2014-04-01]</td>
-      <td>[2014-03-31, 2014-05-14, 2014-06-30]</td>
-      <td>5,718.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>612</th>
-      <td>C00560995</td>
-      <td>[2014-04-01, 2014-01-01]</td>
-      <td>[2014-06-30, 2014-03-31]</td>
-      <td>48,844.61</td>
-      <td>1,225.00</td>
-    </tr>
-    <tr>
-      <th>613</th>
-      <td>C00561142</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>8,372.00</td>
-      <td>25.00</td>
-    </tr>
-    <tr>
-      <th>614</th>
-      <td>C00561324</td>
-      <td>[2014-01-01]</td>
-      <td>[2014-06-30]</td>
-      <td>0.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>615</th>
-      <td>C00561340</td>
-      <td>[2014-04-16, 2014-01-01]</td>
-      <td>[2014-06-30, 2014-03-31]</td>
-      <td>782.20</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>616</th>
-      <td>C00561548</td>
-      <td>[2014-04-01, 2014-05-01, 2014-04-01, 2014-01-01]</td>
-      <td>[2014-05-08, 2014-06-30, 2014-04-30, 2014-03-31]</td>
-      <td>650.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>617</th>
-      <td>C00561589</td>
-      <td>[2013-08-23]</td>
-      <td>[2014-05-14]</td>
-      <td>975.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>618</th>
-      <td>C00561696</td>
-      <td>[2014-03-24, 2014-06-05]</td>
-      <td>[2014-06-04, 2014-06-30]</td>
-      <td>36,577.50</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>619</th>
-      <td>C00562058</td>
-      <td>[2014-04-10]</td>
-      <td>[2014-06-30]</td>
-      <td>2,820.98</td>
-      <td>1,484.00</td>
-    </tr>
-    <tr>
-      <th>620</th>
-      <td>C00562181</td>
-      <td>[2014-02-19]</td>
-      <td>[2014-06-30]</td>
-      <td>1,278.79</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>621</th>
-      <td>C00562298</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>23,995.00</td>
-      <td>9,175.00</td>
-    </tr>
-    <tr>
-      <th>622</th>
-      <td>C00562504</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>4,984.21</td>
-      <td>195.00</td>
-    </tr>
-    <tr>
-      <th>623</th>
-      <td>C00562629</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>137,665.60</td>
-      <td>40,969.23</td>
-    </tr>
-    <tr>
-      <th>624</th>
-      <td>C00562843</td>
-      <td>[2014-05-15, 2014-03-15]</td>
-      <td>[2014-06-30, 2014-05-14]</td>
-      <td>7,028.20</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>625</th>
-      <td>C00562876</td>
-      <td>[2014-05-14]</td>
-      <td>[2014-06-03]</td>
-      <td>340.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>626</th>
-      <td>C00563353</td>
-      <td>[2012-10-14]</td>
-      <td>[2014-06-30]</td>
-      <td>11,759.00</td>
-      <td>10.10</td>
-    </tr>
-    <tr>
-      <th>627</th>
-      <td>C00563460</td>
-      <td>[2013-11-01]</td>
-      <td>[2014-06-30]</td>
-      <td>8,905.79</td>
-      <td>120.00</td>
-    </tr>
-    <tr>
-      <th>628</th>
-      <td>C00563486</td>
-      <td>[2014-03-01]</td>
-      <td>[2014-06-30]</td>
-      <td>5,840.50</td>
-      <td>1,000.00</td>
-    </tr>
-    <tr>
-      <th>629</th>
-      <td>C00563577</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>601.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>630</th>
-      <td>C00564617</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>10,265.00</td>
-      <td>3,085.00</td>
-    </tr>
-    <tr>
-      <th>631</th>
-      <td>C00564666</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>602.66</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>632</th>
-      <td>C00564724</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>21,610.00</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>633</th>
-      <td>C00564856</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>2,515.00</td>
-      <td>15.00</td>
-    </tr>
-    <tr>
-      <th>634</th>
-      <td>C00565218</td>
-      <td>[2014-06-08]</td>
-      <td>[2014-06-30]</td>
-      <td>154,003.13</td>
-      <td>140,112.13</td>
-    </tr>
-    <tr>
-      <th>635</th>
-      <td>C00565432</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>3,726.28</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>636</th>
-      <td>C00565515</td>
-      <td>[2014-04-01]</td>
-      <td>[2014-06-30]</td>
-      <td>3,075.00</td>
-      <td>nan</td>
-    </tr>
-  </tbody>
-</table>
-<p>637 rows × 5 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount_14</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[22]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>28939170.05</pre>
+<pre>&#39;8.83 percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2014 cycle&#39;</pre>
 </div>
 
 </div>
@@ -15078,477 +14295,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Are-Republican-groups-reporting-any-small-donor-data-that-we-could-analyze-in-a-valid-way,-or-is-that-just-impossible?">Are Republican groups reporting any small donor data that we could analyze in a valid way, or is that just impossible?<a class="anchor-link" href="#Are-Republican-groups-reporting-any-small-donor-data-that-we-could-analyze-in-a-valid-way,-or-is-that-just-impossible?">&#182;</a></h3>
+<h3 id="Did-candidates-in-the-DCCC&#8217;s-Red-to-Blue-program-receive-a-higher-percentage-of-their-contributions-through-ActBlue?">Did candidates in the DCCC&#8217;s Red to Blue program receive a higher percentage of their contributions through ActBlue?<a class="anchor-link" href="#Did-candidates-in-the-DCCC&#8217;s-Red-to-Blue-program-receive-a-higher-percentage-of-their-contributions-through-ActBlue?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">transfer_committees</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;transfer_committees&#39;</span><span class="p">,</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT filer_committee_id_number,</span>
-<span class="s2">           fec_committees.name,</span>
-<span class="s2">           count,</span>
-<span class="s2">           sum</span>
-<span class="s2">    FROM</span>
-<span class="s2">        (SELECT filer_committee_id_number,</span>
-<span class="s2">               count(*) AS count,</span>
-<span class="s2">               sum(expenditure_amount) as sum</span>
-<span class="s2">        FROM fec_expenditures</span>
-<span class="s2">        JOIN fec_amended_filings using (filing_id)</span>
-<span class="s2">        WHERE </span>
-<span class="s2">        -- filer_committee_id_number != &#39;&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">committee_id</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&#39; AND </span>
-<span class="s2">         extract(YEAR</span>
-<span class="s2">                      FROM expenditure _date) &gt;= 2017</span>
-<span class="s2">          AND beneficiary_committee_fec_id IS NOT NULL</span>
-<span class="s2">          AND form_type = &#39;SB23&#39;</span>
-<span class="s2">        GROUP BY filer_committee_id_number</span>
-<span class="s2">        ORDER BY COUNT DESC</span>
-<span class="s2">        LIMIT 10) as counts</span>
-<span class="s2">    LEFT JOIN fec_committees</span>
-<span class="s2">    ON fec_committees.id = filer_committee_id_number</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="n">transfer_committees</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[23]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>filer_committee_id_number</th>
-      <th>name</th>
-      <th>count</th>
-      <th>sum</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>C00401224</td>
-      <td>ACTBLUE</td>
-      <td>24728794</td>
-      <td>689,493,693.07</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>C00632133</td>
-      <td>SWING LEFT</td>
-      <td>1181420</td>
-      <td>3,152,628.51</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>C00341396</td>
-      <td>MOVEON.ORG POLITICAL ACTION</td>
-      <td>54605</td>
-      <td>1,918,649.46</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>C00252940</td>
-      <td>LEAGUE OF CONSERVATION VOTERS ACTION FUND</td>
-      <td>15418</td>
-      <td>2,636,712.18</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>C00432260</td>
-      <td>CLUB FOR GROWTH PAC</td>
-      <td>12542</td>
-      <td>3,587,125.87</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>C00608489</td>
-      <td>GREAT AMERICA PAC</td>
-      <td>11463</td>
-      <td>132,394.46</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>C00441949</td>
-      <td>JSTREETPAC</td>
-      <td>6750</td>
-      <td>2,937,913.21</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>C00484535</td>
-      <td>VOTESANE PAC</td>
-      <td>5486</td>
-      <td>3,076,859.16</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>C00544767</td>
-      <td>THE COMMITTEE TO DEFEND THE PRESIDENT</td>
-      <td>5422</td>
-      <td>121,234.46</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>C00552851</td>
-      <td>HOUSE FREEDOM FUND</td>
-      <td>4280</td>
-      <td>3,660,084.00</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Unitemized-contributions-versus-itemized-for-this-point-in-the-cycle-for-both-the-2018-and-2014-cycle,-and-break-it-down-by-Republican-versus-Democrat?">Unitemized contributions versus itemized for this point in the cycle for both the 2018 and 2014 cycle, and break it down by Republican versus Democrat?<a class="anchor-link" href="#Unitemized-contributions-versus-itemized-for-this-point-in-the-cycle-for-both-the-2018-and-2014-cycle,-and-break-it-down-by-Republican-versus-Democrat?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">candidate_unitemized_by_party_14</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;candidate_unitemized_by_party_14&#39;</span><span class="p">,</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT CASE</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;DEM&#39; THEN &#39;Democrat&#39;</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;DFL&#39; THEN &#39;Democrat&#39;</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;REP&#39; THEN &#39;Republican&#39;</span>
-<span class="s2">               ELSE &#39;other&#39;</span>
-<span class="s2">           END AS party,</span>
-<span class="s2">           -- cand_office,</span>
-<span class="s2">           count(DISTINCT cand_id),</span>
-<span class="s2">           sum(col_a_individual_contributions_itemized) AS itemized,</span>
-<span class="s2">           sum(col_a_individual_contributions_unitemized) AS unitemized,</span>
-<span class="s2">           sum(col_a_total_individual_contributions) AS indivs</span>
-<span class="s2">    FROM</span>
-<span class="s2">      (SELECT DISTINCT ON (cand_id,</span>
-<span class="s2">                           cand_pcc) *</span>
-<span class="s2">       FROM fec_candidates</span>
-<span class="s2">       WHERE</span>
-<span class="s2">       cand_election_yr = &#39;2014&#39; AND</span>
-<span class="s2">     cand_pcc IS NOT NULL</span>
-<span class="s2">       ORDER BY cand_id,</span>
-<span class="s2">                cand_pcc) AS cands</span>
-<span class="s2">    JOIN</span>
-<span class="s2">      (SELECT filing_id,</span>
-<span class="s2">              filer_committee_id_number,</span>
-<span class="s2">              col_a_individual_contributions_itemized,</span>
-<span class="s2">              col_a_individual_contributions_unitemized,</span>
-<span class="s2">              col_a_total_individual_contributions,</span>
-<span class="s2">              col_a_total_receipts,</span>
-<span class="s2">              col_a_total_disbursements,</span>
-<span class="s2">              coverage_from_date,</span>
-<span class="s2">              coverage_through_date</span>
-<span class="s2">       FROM fec_campaign_summaries</span>
-<span class="s2">       JOIN fec_amended_filings USING (filing_id)</span>
-<span class="s2">       UNION SELECT DISTINCT ON (filer_committee_id_number,</span>
-<span class="s2">                                 coverage_from_date,</span>
-<span class="s2">                                 coverage_through_date) filing_id,</span>
-<span class="s2">                                filer_committee_id_number,</span>
-<span class="s2">                                col_a_individual_contributions_itemized,</span>
-<span class="s2">                                col_a_individual_contributions_unitemized,</span>
-<span class="s2">                                col_a_total_individual_contributions,</span>
-<span class="s2">                                col_a_total_receipts,</span>
-<span class="s2">                                col_a_total_disbursements,</span>
-<span class="s2">                                coverage_from_date,</span>
-<span class="s2">                                coverage_through_date</span>
-<span class="s2">       FROM fec_paper_campaign_summaries</span>
-<span class="s2">       WHERE col_a_total_individual_contributions IS NOT NULL</span>
-<span class="s2">       ORDER BY filer_committee_id_number,</span>
-<span class="s2">                coverage_through_date,</span>
-<span class="s2">                coverage_from_date,</span>
-<span class="s2">                filing_id DESC) AS summaries ON cand_pcc = filer_committee_id_number</span>
-<span class="s2">    WHERE extract(YEAR</span>
-<span class="s2">                  FROM coverage_through_date) &gt;= 2013</span>
-<span class="s2">      AND coverage_through_date &lt;= &#39;2014-06-30&#39;::date</span>
-<span class="s2">      -- AND (col_a_total_receipts &gt; 0</span>
-<span class="s2">    --       OR col_a_total_disbursements &gt; 0)</span>
-<span class="s2">    GROUP BY -- cand_office,</span>
-<span class="s2">             party</span>
-<span class="s2">    ORDER BY indivs DESC</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="n">candidate_unitemized_by_party_14</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[24]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>party</th>
-      <th>count</th>
-      <th>itemized</th>
-      <th>unitemized</th>
-      <th>indivs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Republican</td>
-      <td>849</td>
-      <td>319,873,352.63</td>
-      <td>53,296,471.38</td>
-      <td>373,167,891.91</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Democrat</td>
-      <td>640</td>
-      <td>283,647,027.55</td>
-      <td>62,509,524.09</td>
-      <td>346,161,686.64</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>other</td>
-      <td>85</td>
-      <td>2,176,185.10</td>
-      <td>675,662.02</td>
-      <td>2,854,043.12</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">candidate_unitemized_by_party_18</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;candidate_unitemized_by_party_18&#39;</span><span class="p">,</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT CASE</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;DEM&#39; THEN &#39;Democrat&#39;</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;DFL&#39; THEN &#39;Democrat&#39;</span>
-<span class="s2">               WHEN cand_pty_affiliation = &#39;REP&#39; THEN &#39;Republican&#39;</span>
-<span class="s2">               ELSE &#39;other&#39;</span>
-<span class="s2">           END AS party,</span>
-<span class="s2">           -- cand_office,</span>
-<span class="s2">           count(DISTINCT cand_id),</span>
-<span class="s2">           sum(col_a_individual_contributions_itemized) AS itemized,</span>
-<span class="s2">           sum(col_a_individual_contributions_unitemized) AS unitemized,</span>
-<span class="s2">           sum(col_a_total_individual_contributions) AS indivs</span>
-<span class="s2">    FROM</span>
-<span class="s2">      (SELECT DISTINCT ON (cand_id,</span>
-<span class="s2">                           cand_pcc) *</span>
-<span class="s2">       FROM fec_candidates</span>
-<span class="s2">       WHERE</span>
-<span class="s2">       cand_election_yr = &#39;2018&#39; AND</span>
-<span class="s2">     cand_pcc IS NOT NULL</span>
-<span class="s2">       ORDER BY cand_id,</span>
-<span class="s2">                cand_pcc) AS cands</span>
-<span class="s2">    JOIN</span>
-<span class="s2">      (SELECT filing_id,</span>
-<span class="s2">              filer_committee_id_number,</span>
-<span class="s2">              col_a_individual_contributions_itemized,</span>
-<span class="s2">              col_a_individual_contributions_unitemized,</span>
-<span class="s2">              col_a_total_individual_contributions,</span>
-<span class="s2">              col_a_total_receipts,</span>
-<span class="s2">              col_a_total_disbursements,</span>
-<span class="s2">              coverage_from_date,</span>
-<span class="s2">              coverage_through_date</span>
-<span class="s2">       FROM fec_campaign_summaries</span>
-<span class="s2">       JOIN fec_amended_filings USING (filing_id)</span>
-<span class="s2">       UNION SELECT DISTINCT ON (filer_committee_id_number,</span>
-<span class="s2">                                 coverage_from_date,</span>
-<span class="s2">                                 coverage_through_date) filing_id,</span>
-<span class="s2">                                filer_committee_id_number,</span>
-<span class="s2">                                col_a_individual_contributions_itemized,</span>
-<span class="s2">                                col_a_individual_contributions_unitemized,</span>
-<span class="s2">                                col_a_total_individual_contributions,</span>
-<span class="s2">                                col_a_total_receipts,</span>
-<span class="s2">                                col_a_total_disbursements,</span>
-<span class="s2">                                coverage_from_date,</span>
-<span class="s2">                                coverage_through_date</span>
-<span class="s2">       FROM fec_paper_campaign_summaries</span>
-<span class="s2">       WHERE col_a_total_individual_contributions IS NOT NULL</span>
-<span class="s2">       ORDER BY filer_committee_id_number,</span>
-<span class="s2">                coverage_through_date,</span>
-<span class="s2">                coverage_from_date,</span>
-<span class="s2">                filing_id DESC) AS summaries ON cand_pcc = filer_committee_id_number</span>
-<span class="s2">    WHERE extract(YEAR</span>
-<span class="s2">                  FROM coverage_through_date) &gt;= 2017</span>
-<span class="s2">      AND coverage_through_date &lt;= &#39;2018-06-30&#39;::date</span>
-<span class="s2">      -- AND (col_a_total_receipts &gt; 0</span>
-<span class="s2">    --       OR col_a_total_disbursements &gt; 0)</span>
-<span class="s2">    GROUP BY -- cand_office,</span>
-<span class="s2">             party</span>
-<span class="s2">    ORDER BY indivs DESC</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="n">candidate_unitemized_by_party_18</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[25]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>party</th>
-      <th>count</th>
-      <th>itemized</th>
-      <th>unitemized</th>
-      <th>indivs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Democrat</td>
-      <td>1287</td>
-      <td>493,920,027.53</td>
-      <td>179,692,020.49</td>
-      <td>675,492,335.17</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Republican</td>
-      <td>929</td>
-      <td>301,799,698.88</td>
-      <td>59,671,848.62</td>
-      <td>361,227,378.50</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>other</td>
-      <td>138</td>
-      <td>7,469,548.68</td>
-      <td>7,097,598.75</td>
-      <td>14,619,006.43</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-candidates-in-the-DCCC&#8217;s-Red-to-Blue-program-do-via-ActBlue.">How candidates in the DCCC&#8217;s Red to Blue program do via ActBlue.<a class="anchor-link" href="#How-candidates-in-the-DCCC&#8217;s-Red-to-Blue-program-do-via-ActBlue.">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">redtoblue</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00572859&#39;</span><span class="p">,</span>
@@ -15608,500 +14361,20 @@ div#notebook {
             <span class="s1">&#39;C00639989&#39;</span><span class="p">]</span>
 
 <span class="n">redtoblue_actblue</span> <span class="o">=</span> <span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;cand_pcc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">redtoblue</span><span class="p">)]</span>
-
-<span class="n">redtoblue_actblue</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[26]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cand_pcc</th>
-      <th>from_dates</th>
-      <th>through_dates</th>
-      <th>committee_total</th>
-      <th>actblue_total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>221</th>
-      <td>C00572859</td>
-      <td>[2018-01-01, 2017-10-01, 2017-01-01, 2017-07-0...</td>
-      <td>[2018-03-31, 2017-12-31, 2017-03-31, 2017-09-3...</td>
-      <td>1,026,390.47</td>
-      <td>675,571.51</td>
-    </tr>
-    <tr>
-      <th>227</th>
-      <td>C00575209</td>
-      <td>[2018-04-01, 2017-10-01, 2017-07-01, 2017-04-0...</td>
-      <td>[2018-06-30, 2017-12-31, 2017-09-30, 2017-06-3...</td>
-      <td>1,425,243.95</td>
-      <td>774,510.06</td>
-    </tr>
-    <tr>
-      <th>335</th>
-      <td>C00633982</td>
-      <td>[2018-04-01, 2018-05-17, 2017-10-01, 2018-01-0...</td>
-      <td>[2018-05-16, 2018-06-30, 2017-12-31, 2018-03-3...</td>
-      <td>1,309,809.33</td>
-      <td>886,406.23</td>
-    </tr>
-    <tr>
-      <th>343</th>
-      <td>C00634212</td>
-      <td>[2017-10-01, 2017-04-01, 2018-05-17, 2018-01-0...</td>
-      <td>[2017-12-31, 2017-06-30, 2018-06-30, 2018-03-3...</td>
-      <td>2,215,921.16</td>
-      <td>934,442.68</td>
-    </tr>
-    <tr>
-      <th>344</th>
-      <td>C00634253</td>
-      <td>[2018-04-01, 2017-10-01, 2018-05-17, 2018-01-0...</td>
-      <td>[2018-05-16, 2017-12-31, 2018-06-30, 2018-03-3...</td>
-      <td>2,492,909.55</td>
-      <td>1,985,970.76</td>
-    </tr>
-    <tr>
-      <th>386</th>
-      <td>C00636571</td>
-      <td>[2017-07-01, 2017-10-01, 2017-03-31, 2018-05-1...</td>
-      <td>[2017-09-30, 2017-12-31, 2017-06-30, 2018-06-3...</td>
-      <td>1,866,741.32</td>
-      <td>1,396,861.47</td>
-    </tr>
-    <tr>
-      <th>403</th>
-      <td>C00637074</td>
-      <td>[2017-10-01, 2017-07-01, 2017-04-01, 2018-05-1...</td>
-      <td>[2017-12-31, 2017-09-30, 2017-06-30, 2018-06-3...</td>
-      <td>1,432,268.16</td>
-      <td>753,149.96</td>
-    </tr>
-    <tr>
-      <th>415</th>
-      <td>C00637363</td>
-      <td>[2017-07-01, 2017-10-01, 2018-01-01, 2017-04-0...</td>
-      <td>[2017-09-30, 2017-12-31, 2018-03-31, 2017-06-3...</td>
-      <td>1,580,297.24</td>
-      <td>418,364.87</td>
-    </tr>
-    <tr>
-      <th>416</th>
-      <td>C00637371</td>
-      <td>[2017-07-01, 2018-04-01, 2017-03-21, 2017-10-0...</td>
-      <td>[2017-09-30, 2018-04-25, 2017-06-30, 2017-12-3...</td>
-      <td>2,164,825.06</td>
-      <td>949,314.22</td>
-    </tr>
-    <tr>
-      <th>429</th>
-      <td>C00637868</td>
-      <td>[2018-01-01, 2018-02-15, 2017-04-23, 2018-04-0...</td>
-      <td>[2018-02-14, 2018-03-31, 2017-06-30, 2018-05-0...</td>
-      <td>1,716,020.60</td>
-      <td>1,197,246.90</td>
-    </tr>
-    <tr>
-      <th>437</th>
-      <td>C00638023</td>
-      <td>[2018-01-01, 2017-04-01, 2017-07-01, 2018-05-2...</td>
-      <td>[2018-03-31, 2017-06-30, 2017-09-30, 2018-06-3...</td>
-      <td>1,728,094.12</td>
-      <td>892,840.57</td>
-    </tr>
-    <tr>
-      <th>465</th>
-      <td>C00639146</td>
-      <td>[2018-01-01, 2018-04-01, 2017-07-01, 2017-10-0...</td>
-      <td>[2018-03-31, 2018-05-16, 2017-09-30, 2017-12-3...</td>
-      <td>2,381,945.89</td>
-      <td>1,777,495.96</td>
-    </tr>
-    <tr>
-      <th>502</th>
-      <td>C00639989</td>
-      <td>[2017-10-01, 2018-01-01, 2018-04-19, 2018-04-0...</td>
-      <td>[2017-12-31, 2018-03-31, 2018-06-30, 2018-04-1...</td>
-      <td>321,909.16</td>
-      <td>198,030.47</td>
-    </tr>
-    <tr>
-      <th>503</th>
-      <td>C00640003</td>
-      <td>[2018-04-01, 2017-04-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2018-05-16, 2017-06-30, 2017-12-31, 2018-03-3...</td>
-      <td>3,351,230.34</td>
-      <td>1,390,782.57</td>
-    </tr>
-    <tr>
-      <th>505</th>
-      <td>C00640045</td>
-      <td>[2017-07-01, 2018-05-03, 2017-10-01, 2018-04-0...</td>
-      <td>[2017-09-30, 2018-06-30, 2017-12-31, 2018-05-0...</td>
-      <td>2,205,170.52</td>
-      <td>749,761.23</td>
-    </tr>
-    <tr>
-      <th>526</th>
-      <td>C00640714</td>
-      <td>[2018-01-01, 2017-04-01, 2018-04-01, 2017-10-0...</td>
-      <td>[2018-03-31, 2017-06-30, 2018-06-30, 2017-12-3...</td>
-      <td>2,253,203.88</td>
-      <td>1,058,406.95</td>
-    </tr>
-    <tr>
-      <th>546</th>
-      <td>C00641381</td>
-      <td>[2018-01-01, 2017-10-01, 2016-12-30, 2017-07-0...</td>
-      <td>[2018-03-31, 2017-12-31, 2017-06-30, 2017-09-3...</td>
-      <td>2,238,146.37</td>
-      <td>1,460,637.47</td>
-    </tr>
-    <tr>
-      <th>567</th>
-      <td>C00646745</td>
-      <td>[2018-01-01, 2018-05-03, 2017-05-15, 2017-07-0...</td>
-      <td>[2018-03-31, 2018-06-30, 2017-06-30, 2017-09-3...</td>
-      <td>2,740,631.64</td>
-      <td>2,159,338.50</td>
-    </tr>
-    <tr>
-      <th>568</th>
-      <td>C00646752</td>
-      <td>[2018-04-01, 2017-07-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2018-04-18, 2017-09-30, 2017-12-31, 2018-03-3...</td>
-      <td>1,343,460.80</td>
-      <td>997,835.93</td>
-    </tr>
-    <tr>
-      <th>570</th>
-      <td>C00646844</td>
-      <td>[2017-04-01, 2018-01-01, 2017-07-01, 2017-10-0...</td>
-      <td>[2017-06-30, 2018-03-31, 2017-09-30, 2017-12-3...</td>
-      <td>949,955.55</td>
-      <td>537,438.77</td>
-    </tr>
-    <tr>
-      <th>583</th>
-      <td>C00647164</td>
-      <td>[2017-10-01, 2017-04-01, 2018-01-01, 2018-04-0...</td>
-      <td>[2017-12-31, 2017-06-30, 2018-03-31, 2018-06-3...</td>
-      <td>1,568,124.40</td>
-      <td>257,347.31</td>
-    </tr>
-    <tr>
-      <th>591</th>
-      <td>C00647537</td>
-      <td>[2018-04-01, 2017-07-01, 2018-01-01, 2017-10-0...</td>
-      <td>[2018-06-30, 2017-09-30, 2018-03-31, 2017-12-3...</td>
-      <td>5,794,241.77</td>
-      <td>4,396,649.83</td>
-    </tr>
-    <tr>
-      <th>611</th>
-      <td>C00648220</td>
-      <td>[2018-04-01, 2017-07-01, 2018-01-01, 2017-10-0...</td>
-      <td>[2018-05-16, 2017-09-30, 2018-03-31, 2017-12-3...</td>
-      <td>1,814,621.18</td>
-      <td>1,250,789.01</td>
-    </tr>
-    <tr>
-      <th>618</th>
-      <td>C00648493</td>
-      <td>[2017-04-01, 2018-01-01, 2017-07-01, 2018-03-0...</td>
-      <td>[2017-06-30, 2018-02-28, 2017-09-30, 2018-03-3...</td>
-      <td>1,235,649.59</td>
-      <td>375,268.55</td>
-    </tr>
-    <tr>
-      <th>627</th>
-      <td>C00648725</td>
-      <td>[2018-01-01, 2017-10-01, 2017-07-01, 2018-04-0...</td>
-      <td>[2018-03-31, 2017-12-31, 2017-09-30, 2018-06-0...</td>
-      <td>1,401,508.10</td>
-      <td>675,612.31</td>
-    </tr>
-    <tr>
-      <th>634</th>
-      <td>C00648956</td>
-      <td>[2018-01-01, 2018-05-17, 2017-10-01, 2018-04-0...</td>
-      <td>[2018-03-31, 2018-06-30, 2017-12-31, 2018-05-1...</td>
-      <td>832,113.11</td>
-      <td>280,634.30</td>
-    </tr>
-    <tr>
-      <th>656</th>
-      <td>C00649327</td>
-      <td>[2017-10-01, 2018-04-01, 2017-07-01, 2018-01-01]</td>
-      <td>[2017-12-31, 2018-06-30, 2017-09-30, 2018-03-31]</td>
-      <td>729,456.66</td>
-      <td>487,913.56</td>
-    </tr>
-    <tr>
-      <th>662</th>
-      <td>C00649483</td>
-      <td>[2017-10-01, 2018-01-01, 2017-06-01, 2018-04-0...</td>
-      <td>[2017-12-31, 2018-02-28, 2017-09-30, 2018-06-3...</td>
-      <td>1,132,081.15</td>
-      <td>593,339.92</td>
-    </tr>
-    <tr>
-      <th>667</th>
-      <td>C00649558</td>
-      <td>[2017-07-01, 2018-04-01, 2017-10-01, 2018-03-0...</td>
-      <td>[2017-09-30, 2018-06-30, 2017-12-31, 2018-03-3...</td>
-      <td>1,251,123.56</td>
-      <td>383,796.11</td>
-    </tr>
-    <tr>
-      <th>680</th>
-      <td>C00649798</td>
-      <td>[2017-07-01, 2017-10-01, 2018-01-01, 2018-04-01]</td>
-      <td>[2017-09-30, 2017-12-31, 2018-03-31, 2018-06-30]</td>
-      <td>1,357,714.20</td>
-      <td>104,699.31</td>
-    </tr>
-    <tr>
-      <th>685</th>
-      <td>C00649913</td>
-      <td>[2018-01-01, 2017-10-01, 2017-06-20, 2018-05-2...</td>
-      <td>[2018-03-31, 2017-12-31, 2017-09-30, 2018-06-3...</td>
-      <td>1,275,053.27</td>
-      <td>731,510.00</td>
-    </tr>
-    <tr>
-      <th>698</th>
-      <td>C00650150</td>
-      <td>[2017-10-01, 2018-04-01, 2018-01-01, 2017-06-27]</td>
-      <td>[2017-12-31, 2018-06-30, 2018-03-31, 2017-09-30]</td>
-      <td>2,122,739.82</td>
-      <td>1,053,000.35</td>
-    </tr>
-    <tr>
-      <th>725</th>
-      <td>C00650648</td>
-      <td>[2017-10-01, 2017-06-07, 2018-05-17, 2018-04-0...</td>
-      <td>[2017-12-31, 2017-09-30, 2018-06-30, 2018-05-1...</td>
-      <td>785,813.20</td>
-      <td>220,502.42</td>
-    </tr>
-    <tr>
-      <th>738</th>
-      <td>C00651042</td>
-      <td>[2018-04-01, 2018-01-01, 2017-07-01, 2017-10-01]</td>
-      <td>[2018-06-30, 2018-03-31, 2017-09-30, 2017-12-31]</td>
-      <td>1,364,953.83</td>
-      <td>741,390.07</td>
-    </tr>
-    <tr>
-      <th>764</th>
-      <td>C00652065</td>
-      <td>[2018-04-01, 2018-01-01, 2017-08-01, 2017-10-01]</td>
-      <td>[2018-06-30, 2018-03-31, 2017-09-30, 2017-12-31]</td>
-      <td>1,235,566.25</td>
-      <td>509,814.35</td>
-    </tr>
-    <tr>
-      <th>768</th>
-      <td>C00652248</td>
-      <td>[2018-06-07, 2018-01-01, 2017-10-01, 2018-04-0...</td>
-      <td>[2018-06-30, 2018-03-31, 2017-12-31, 2018-06-0...</td>
-      <td>1,592,807.63</td>
-      <td>888,797.65</td>
-    </tr>
-    <tr>
-      <th>771</th>
-      <td>C00652297</td>
-      <td>[2017-07-01, 2018-04-01, 2018-05-03, 2018-01-0...</td>
-      <td>[2017-09-30, 2018-05-02, 2018-06-30, 2018-02-1...</td>
-      <td>1,592,221.76</td>
-      <td>687,482.24</td>
-    </tr>
-    <tr>
-      <th>780</th>
-      <td>C00652594</td>
-      <td>[2017-10-01, 2017-08-01, 2018-04-01, 2018-01-01]</td>
-      <td>[2017-12-31, 2017-09-30, 2018-06-30, 2018-03-31]</td>
-      <td>1,434,361.20</td>
-      <td>1,178,148.49</td>
-    </tr>
-    <tr>
-      <th>785</th>
-      <td>C00652719</td>
-      <td>[2017-05-06, 2018-04-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2017-09-30, 2018-06-30, 2017-12-31, 2018-02-2...</td>
-      <td>834,921.23</td>
-      <td>328,503.69</td>
-    </tr>
-    <tr>
-      <th>795</th>
-      <td>C00653121</td>
-      <td>[2017-07-01, 2017-10-01, 2018-04-01, 2018-01-01]</td>
-      <td>[2017-09-30, 2017-12-31, 2018-06-30, 2018-03-31]</td>
-      <td>1,200,174.25</td>
-      <td>428,026.66</td>
-    </tr>
-    <tr>
-      <th>810</th>
-      <td>C00653816</td>
-      <td>[2018-04-01, 2018-01-01, 2017-08-24, 2017-10-0...</td>
-      <td>[2018-05-23, 2018-03-31, 2017-09-30, 2017-12-3...</td>
-      <td>1,000,400.54</td>
-      <td>713,480.52</td>
-    </tr>
-    <tr>
-      <th>823</th>
-      <td>C00654400</td>
-      <td>[2018-01-01, 2017-10-01, 2017-07-01, 2018-04-01]</td>
-      <td>[2018-03-31, 2017-12-31, 2017-09-30, 2018-06-30]</td>
-      <td>2,012,154.29</td>
-      <td>933,979.36</td>
-    </tr>
-    <tr>
-      <th>875</th>
-      <td>C00656686</td>
-      <td>[2018-05-17, 2017-09-23, 2018-01-01, 2018-04-01]</td>
-      <td>[2018-06-30, 2017-12-31, 2018-03-31, 2018-05-16]</td>
-      <td>1,869,150.06</td>
-      <td>1,200,405.33</td>
-    </tr>
-    <tr>
-      <th>922</th>
-      <td>C00658567</td>
-      <td>[2017-10-01, 2018-04-01, 2018-04-26, 2018-01-01]</td>
-      <td>[2017-12-31, 2018-04-25, 2018-06-30, 2018-03-31]</td>
-      <td>679,252.28</td>
-      <td>264,658.17</td>
-    </tr>
-    <tr>
-      <th>925</th>
-      <td>C00658633</td>
-      <td>[2018-04-01, 2018-01-01, 2017-10-01, 2018-04-09]</td>
-      <td>[2018-04-08, 2018-03-31, 2017-12-31, 2018-06-30]</td>
-      <td>1,464,434.27</td>
-      <td>479,600.41</td>
-    </tr>
-    <tr>
-      <th>1001</th>
-      <td>C00661868</td>
-      <td>[2018-01-01, 2018-05-17, 2018-04-01, 2017-10-01]</td>
-      <td>[2018-03-31, 2018-06-30, 2018-05-16, 2017-12-31]</td>
-      <td>659,155.74</td>
-      <td>125,716.08</td>
-    </tr>
-    <tr>
-      <th>1015</th>
-      <td>C00662577</td>
-      <td>[2018-04-19, 2018-01-01, 2017-11-22, 2018-04-01]</td>
-      <td>[2018-06-30, 2018-03-31, 2017-12-31, 2018-04-18]</td>
-      <td>1,697,218.14</td>
-      <td>956,582.48</td>
-    </tr>
-    <tr>
-      <th>1050</th>
-      <td>C00664375</td>
-      <td>[2018-01-01, 2018-05-24, 2018-04-01]</td>
-      <td>[2018-03-31, 2018-06-30, 2018-05-23]</td>
-      <td>849,932.06</td>
-      <td>374,572.82</td>
-    </tr>
-    <tr>
-      <th>1090</th>
-      <td>C00666149</td>
-      <td>[2018-04-01, 2018-01-01, 2018-05-17]</td>
-      <td>[2018-05-16, 2018-03-31, 2018-06-30]</td>
-      <td>686,043.47</td>
-      <td>416,313.31</td>
-    </tr>
-    <tr>
-      <th>1109</th>
-      <td>C00667097</td>
-      <td>[2018-01-24, 2018-04-26, 2018-04-01]</td>
-      <td>[2018-03-31, 2018-06-30, 2018-04-25]</td>
-      <td>478,472.61</td>
-      <td>347,251.68</td>
-    </tr>
-    <tr>
-      <th>1116</th>
-      <td>C00667519</td>
-      <td>[2018-04-19, 2018-04-01, 2018-01-01]</td>
-      <td>[2018-06-30, 2018-04-18, 2018-03-31]</td>
-      <td>1,364,049.20</td>
-      <td>809,659.42</td>
-    </tr>
-    <tr>
-      <th>1134</th>
-      <td>C00668228</td>
-      <td>[2018-04-01, 2018-01-01, 2018-05-24]</td>
-      <td>[2018-05-23, 2018-03-31, 2018-06-30]</td>
-      <td>363,850.24</td>
-      <td>225,589.13</td>
-    </tr>
-    <tr>
-      <th>1186</th>
-      <td>C00671156</td>
-      <td>[2018-01-01, 2018-05-03, 2018-04-01]</td>
-      <td>[2018-03-31, 2018-06-30, 2018-05-02]</td>
-      <td>904,973.04</td>
-      <td>447,689.81</td>
-    </tr>
-    <tr>
-      <th>1239</th>
-      <td>C00675538</td>
-      <td>[2018-04-01, 2018-06-07]</td>
-      <td>[2018-06-06, 2018-06-30]</td>
-      <td>71,161.73</td>
-      <td>56,297.73</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns in the Red to Blue program came through ActBlue in the 2018 cycle&quot;</span>
+          
 </pre></div>
 
 </div>
@@ -16114,13 +14387,13 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[27]:</div>
+<div class="prompt output_prompt">Out[85]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.5420099373195313</pre>
+<pre>&#39;54.2 percent of contributions from individuals to Democratic campaigns in the Red to Blue program came through ActBlue in the 2018 cycle&#39;</pre>
 </div>
 
 </div>
@@ -16133,13 +14406,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Whether-candidates-who-pledge-not-to-take-corporate-PAC-money-are-getting-more-contributions-than-other-candidates.">Whether candidates who pledge not to take corporate PAC money are getting more contributions than other candidates.<a class="anchor-link" href="#Whether-candidates-who-pledge-not-to-take-corporate-PAC-money-are-getting-more-contributions-than-other-candidates.">&#182;</a></h3>
+<h3 id="Do-candidates-who-pledge-not-to-take-corporate-PAC-money-get-more-contributions-than-other-candidates?">Do candidates who pledge not to take corporate PAC money get more contributions than other candidates?<a class="anchor-link" href="#Do-candidates-who-pledge-not-to-take-corporate-PAC-money-get-more-contributions-than-other-candidates?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">endcu</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00413914&#39;</span><span class="p">,</span>
@@ -16282,557 +14555,19 @@ div#notebook {
         <span class="s1">&#39;C00663146&#39;</span><span class="p">]</span>
 
 <span class="n">endcu_actblue</span> <span class="o">=</span> <span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;cand_pcc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">endcu</span><span class="p">)]</span>
-
-<span class="n">endcu_actblue</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[28]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cand_pcc</th>
-      <th>from_dates</th>
-      <th>through_dates</th>
-      <th>committee_total</th>
-      <th>actblue_total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>C00140715</td>
-      <td>[2017-04-01, 2018-01-01, 2017-01-01, 2017-10-0...</td>
-      <td>[2017-06-30, 2018-03-31, 2017-03-31, 2017-12-3...</td>
-      <td>833,046.34</td>
-      <td>6,566.66</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>C00213512</td>
-      <td>[2018-01-01, 2018-05-17, 2017-07-01, 2017-10-0...</td>
-      <td>[2018-03-31, 2018-06-30, 2017-09-30, 2017-12-3...</td>
-      <td>2,176,410.60</td>
-      <td>3,601,026.08</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>C00236513</td>
-      <td>[2017-07-01, 2017-01-01, 2017-04-01, 2018-01-0...</td>
-      <td>[2017-09-30, 2017-03-31, 2017-06-30, 2018-03-3...</td>
-      <td>966,555.90</td>
-      <td>1,406.90</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>C00238865</td>
-      <td>[2018-01-01, 2017-07-01, 2017-10-01, 2018-04-2...</td>
-      <td>[2018-03-31, 2017-09-30, 2017-12-31, 2018-06-3...</td>
-      <td>504,355.16</td>
-      <td>174,758.00</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>C00264697</td>
-      <td>[2017-07-01, 2018-01-01, 2018-04-19, 2017-10-0...</td>
-      <td>[2017-09-30, 2018-03-31, 2018-06-30, 2017-12-3...</td>
-      <td>13,269,011.53</td>
-      <td>5,317,997.75</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>C00273169</td>
-      <td>[2017-07-01, 2018-04-01, 2017-04-01, 2018-01-0...</td>
-      <td>[2017-09-30, 2018-06-06, 2017-06-30, 2018-03-3...</td>
-      <td>1,053,471.94</td>
-      <td>92,399.67</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>C00310318</td>
-      <td>[2017-10-01, 2018-04-01, 2017-07-01, 2017-04-0...</td>
-      <td>[2017-12-31, 2018-06-06, 2017-09-30, 2017-06-3...</td>
-      <td>335,492.05</td>
-      <td>193,475.79</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>C00326801</td>
-      <td>[2017-10-01, 2017-07-01, 2018-04-01, 2017-04-0...</td>
-      <td>[2017-12-31, 2017-09-30, 2018-06-30, 2017-06-3...</td>
-      <td>15,814,953.10</td>
-      <td>5,819,781.38</td>
-    </tr>
-    <tr>
-      <th>50</th>
-      <td>C00327023</td>
-      <td>[2017-01-01, 2017-04-01, 2018-01-01, 2017-07-0...</td>
-      <td>[2017-03-31, 2017-06-30, 2018-02-28, 2017-09-3...</td>
-      <td>969,358.26</td>
-      <td>104,946.83</td>
-    </tr>
-    <tr>
-      <th>52</th>
-      <td>C00331769</td>
-      <td>[2017-01-01, 2018-05-17, 2017-07-01, 2018-04-0...</td>
-      <td>[2017-03-31, 2018-06-30, 2017-09-30, 2018-05-1...</td>
-      <td>1,022,157.38</td>
-      <td>640,117.48</td>
-    </tr>
-    <tr>
-      <th>56</th>
-      <td>C00338954</td>
-      <td>[2018-01-01, 2017-04-01, 2018-04-01, 2017-07-0...</td>
-      <td>[2018-03-31, 2017-06-30, 2018-06-06, 2017-09-3...</td>
-      <td>1,114,563.34</td>
-      <td>159,154.40</td>
-    </tr>
-    <tr>
-      <th>58</th>
-      <td>C00344051</td>
-      <td>[2017-10-01, 2018-04-01, 2018-01-01, 2017-07-0...</td>
-      <td>[2017-12-31, 2018-06-30, 2018-03-31, 2017-09-3...</td>
-      <td>13,411,552.55</td>
-      <td>4,810,956.37</td>
-    </tr>
-    <tr>
-      <th>59</th>
-      <td>C00344473</td>
-      <td>[2017-04-01, 2017-01-01, 2018-04-01, 2017-10-0...</td>
-      <td>[2017-06-30, 2017-03-31, 2018-06-30, 2017-12-3...</td>
-      <td>7,522,639.29</td>
-      <td>3,445,846.70</td>
-    </tr>
-    <tr>
-      <th>62</th>
-      <td>C00345546</td>
-      <td>[2017-07-01, 2017-10-01, 2018-01-01, 2017-04-0...</td>
-      <td>[2017-09-30, 2017-12-31, 2018-03-31, 2017-06-3...</td>
-      <td>207,637.17</td>
-      <td>28,344.61</td>
-    </tr>
-    <tr>
-      <th>72</th>
-      <td>C00374058</td>
-      <td>[2017-07-01, 2018-01-01, 2017-10-01, 2017-04-0...</td>
-      <td>[2017-09-30, 2018-03-31, 2017-12-31, 2017-06-3...</td>
-      <td>303,098.87</td>
-      <td>201,148.42</td>
-    </tr>
-    <tr>
-      <th>83</th>
-      <td>C00401190</td>
-      <td>[2017-04-01, 2017-07-01, 2018-01-01, 2017-01-0...</td>
-      <td>[2017-06-30, 2017-09-30, 2018-03-31, 2017-03-3...</td>
-      <td>81,742.03</td>
-      <td>24,623.64</td>
-    </tr>
-    <tr>
-      <th>93</th>
-      <td>C00410803</td>
-      <td>[2017-01-01, 2018-04-01, 2017-04-01, 2018-01-0...</td>
-      <td>[2017-03-31, 2018-06-30, 2017-06-30, 2018-03-3...</td>
-      <td>3,114,998.10</td>
-      <td>1,644,986.16</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>C00412304</td>
-      <td>[2017-10-01, 2017-01-01, 2017-07-01, 2018-01-0...</td>
-      <td>[2017-12-31, 2017-03-31, 2017-09-30, 2018-03-3...</td>
-      <td>8,762,594.08</td>
-      <td>3,296,809.30</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>C00413914</td>
-      <td>[2018-01-01, 2018-06-07, 2017-04-01, 2018-04-0...</td>
-      <td>[2018-03-31, 2018-06-30, 2017-06-30, 2018-06-0...</td>
-      <td>14,397,661.43</td>
-      <td>12,148,726.13</td>
-    </tr>
-    <tr>
-      <th>99</th>
-      <td>C00415182</td>
-      <td>[2017-04-01, 2018-01-01, 2017-07-01, 2018-04-0...</td>
-      <td>[2017-06-30, 2018-03-31, 2017-09-30, 2018-06-0...</td>
-      <td>856,277.57</td>
-      <td>81,319.57</td>
-    </tr>
-    <tr>
-      <th>102</th>
-      <td>C00419630</td>
-      <td>[2018-01-01, 2017-01-01, 2018-04-01, 2018-05-0...</td>
-      <td>[2018-03-31, 2017-03-31, 2018-05-02, 2018-06-3...</td>
-      <td>243,243.25</td>
-      <td>617.67</td>
-    </tr>
-    <tr>
-      <th>104</th>
-      <td>C00420760</td>
-      <td>[2017-07-01, 2018-04-01, 2017-10-01, 2017-04-0...</td>
-      <td>[2017-09-30, 2018-06-30, 2017-12-31, 2017-06-3...</td>
-      <td>1,326,243.96</td>
-      <td>735,269.49</td>
-    </tr>
-    <tr>
-      <th>109</th>
-      <td>C00431056</td>
-      <td>[2017-10-01, 2017-01-01, 2017-04-01, 2018-04-2...</td>
-      <td>[2017-12-31, 2017-03-31, 2017-06-30, 2018-06-3...</td>
-      <td>11,181,617.44</td>
-      <td>5,351,586.34</td>
-    </tr>
-    <tr>
-      <th>110</th>
-      <td>C00431304</td>
-      <td>[2017-01-01, 2017-07-01, 2017-10-01, 2017-04-0...</td>
-      <td>[2017-03-31, 2017-09-30, 2017-12-31, 2017-06-3...</td>
-      <td>16,162,912.03</td>
-      <td>8,484,944.02</td>
-    </tr>
-    <tr>
-      <th>111</th>
-      <td>C00431353</td>
-      <td>[2017-10-01, 2017-01-01, 2017-04-01, 2017-07-0...</td>
-      <td>[2017-12-31, 2017-03-31, 2017-06-30, 2017-09-3...</td>
-      <td>5,993,555.63</td>
-      <td>1,903,896.05</td>
-    </tr>
-    <tr>
-      <th>115</th>
-      <td>C00434563</td>
-      <td>[2017-10-01, 2018-05-17, 2017-04-01, 2017-07-0...</td>
-      <td>[2017-12-31, 2018-06-30, 2017-06-30, 2017-09-3...</td>
-      <td>3,076,490.45</td>
-      <td>1,725,648.33</td>
-    </tr>
-    <tr>
-      <th>122</th>
-      <td>C00446906</td>
-      <td>[2018-01-01, 2018-04-01, 2017-01-01, 2017-04-0...</td>
-      <td>[2018-03-31, 2018-04-25, 2017-03-31, 2017-06-3...</td>
-      <td>469,001.04</td>
-      <td>226,450.32</td>
-    </tr>
-    <tr>
-      <th>124</th>
-      <td>C00450049</td>
-      <td>[2018-01-01, 2017-01-01, 2017-07-01, 2017-04-0...</td>
-      <td>[2018-03-31, 2017-03-31, 2017-09-30, 2017-06-3...</td>
-      <td>296,146.06</td>
-      <td>81,944.32</td>
-    </tr>
-    <tr>
-      <th>130</th>
-      <td>C00459099</td>
-      <td>[2017-04-01, 2018-04-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2017-06-30, 2018-06-30, 2017-12-31, 2018-03-3...</td>
-      <td>721,198.70</td>
-      <td>173,537.69</td>
-    </tr>
-    <tr>
-      <th>132</th>
-      <td>C00460261</td>
-      <td>[2017-04-01, 2017-07-01, 2018-01-01, 2017-10-0...</td>
-      <td>[2017-06-30, 2017-09-30, 2018-03-31, 2017-12-3...</td>
-      <td>139,700.09</td>
-      <td>195.22</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>685</th>
-      <td>C00649913</td>
-      <td>[2018-01-01, 2017-10-01, 2017-06-20, 2018-05-2...</td>
-      <td>[2018-03-31, 2017-12-31, 2017-09-30, 2018-06-3...</td>
-      <td>1,275,053.27</td>
-      <td>731,510.00</td>
-    </tr>
-    <tr>
-      <th>713</th>
-      <td>C00650440</td>
-      <td>[2018-01-01, 2017-10-01, 2017-07-14, 2018-04-01]</td>
-      <td>[2018-03-31, 2017-12-31, 2017-09-30, 2018-06-30]</td>
-      <td>807,284.13</td>
-      <td>532,460.10</td>
-    </tr>
-    <tr>
-      <th>718</th>
-      <td>C00650507</td>
-      <td>[2018-04-01, 2018-05-24, 2017-05-28, 2018-01-0...</td>
-      <td>[2018-05-23, 2018-06-30, 2017-09-30, 2018-03-3...</td>
-      <td>785,655.84</td>
-      <td>484,406.88</td>
-    </tr>
-    <tr>
-      <th>725</th>
-      <td>C00650648</td>
-      <td>[2017-10-01, 2017-06-07, 2018-05-17, 2018-04-0...</td>
-      <td>[2017-12-31, 2017-09-30, 2018-06-30, 2018-05-1...</td>
-      <td>785,813.20</td>
-      <td>220,502.42</td>
-    </tr>
-    <tr>
-      <th>738</th>
-      <td>C00651042</td>
-      <td>[2018-04-01, 2018-01-01, 2017-07-01, 2017-10-01]</td>
-      <td>[2018-06-30, 2018-03-31, 2017-09-30, 2017-12-31]</td>
-      <td>1,364,953.83</td>
-      <td>741,390.07</td>
-    </tr>
-    <tr>
-      <th>741</th>
-      <td>C00651158</td>
-      <td>[2017-07-03, 2017-10-01, 2018-04-01, 2018-01-01]</td>
-      <td>[2017-09-30, 2017-12-31, 2018-06-30, 2018-03-31]</td>
-      <td>567,336.59</td>
-      <td>378,028.63</td>
-    </tr>
-    <tr>
-      <th>745</th>
-      <td>C00651331</td>
-      <td>[2018-04-19, 2018-04-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2018-06-30, 2018-04-18, 2017-12-31, 2018-03-3...</td>
-      <td>866,517.43</td>
-      <td>480,295.21</td>
-    </tr>
-    <tr>
-      <th>764</th>
-      <td>C00652065</td>
-      <td>[2018-04-01, 2018-01-01, 2017-08-01, 2017-10-01]</td>
-      <td>[2018-06-30, 2018-03-31, 2017-09-30, 2017-12-31]</td>
-      <td>1,235,566.25</td>
-      <td>509,814.35</td>
-    </tr>
-    <tr>
-      <th>768</th>
-      <td>C00652248</td>
-      <td>[2018-06-07, 2018-01-01, 2017-10-01, 2018-04-0...</td>
-      <td>[2018-06-30, 2018-03-31, 2017-12-31, 2018-06-0...</td>
-      <td>1,592,807.63</td>
-      <td>888,797.65</td>
-    </tr>
-    <tr>
-      <th>771</th>
-      <td>C00652297</td>
-      <td>[2017-07-01, 2018-04-01, 2018-05-03, 2018-01-0...</td>
-      <td>[2017-09-30, 2018-05-02, 2018-06-30, 2018-02-1...</td>
-      <td>1,592,221.76</td>
-      <td>687,482.24</td>
-    </tr>
-    <tr>
-      <th>780</th>
-      <td>C00652594</td>
-      <td>[2017-10-01, 2017-08-01, 2018-04-01, 2018-01-01]</td>
-      <td>[2017-12-31, 2017-09-30, 2018-06-30, 2018-03-31]</td>
-      <td>1,434,361.20</td>
-      <td>1,178,148.49</td>
-    </tr>
-    <tr>
-      <th>785</th>
-      <td>C00652719</td>
-      <td>[2017-05-06, 2018-04-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2017-09-30, 2018-06-30, 2017-12-31, 2018-02-2...</td>
-      <td>834,921.23</td>
-      <td>328,503.69</td>
-    </tr>
-    <tr>
-      <th>795</th>
-      <td>C00653121</td>
-      <td>[2017-07-01, 2017-10-01, 2018-04-01, 2018-01-01]</td>
-      <td>[2017-09-30, 2017-12-31, 2018-06-30, 2018-03-31]</td>
-      <td>1,200,174.25</td>
-      <td>428,026.66</td>
-    </tr>
-    <tr>
-      <th>810</th>
-      <td>C00653816</td>
-      <td>[2018-04-01, 2018-01-01, 2017-08-24, 2017-10-0...</td>
-      <td>[2018-05-23, 2018-03-31, 2017-09-30, 2017-12-3...</td>
-      <td>1,000,400.54</td>
-      <td>713,480.52</td>
-    </tr>
-    <tr>
-      <th>813</th>
-      <td>C00653923</td>
-      <td>[2017-10-01, 2018-01-01, 2018-04-01, 2018-02-1...</td>
-      <td>[2017-12-31, 2018-02-14, 2018-06-30, 2018-03-3...</td>
-      <td>842,563.54</td>
-      <td>281,292.76</td>
-    </tr>
-    <tr>
-      <th>823</th>
-      <td>C00654400</td>
-      <td>[2018-01-01, 2017-10-01, 2017-07-01, 2018-04-01]</td>
-      <td>[2018-03-31, 2017-12-31, 2017-09-30, 2018-06-30]</td>
-      <td>2,012,154.29</td>
-      <td>933,979.36</td>
-    </tr>
-    <tr>
-      <th>832</th>
-      <td>C00654822</td>
-      <td>[2018-01-01, 2018-04-01, 2018-04-26, 2017-08-0...</td>
-      <td>[2018-03-31, 2018-04-25, 2018-06-30, 2017-09-3...</td>
-      <td>1,046,501.61</td>
-      <td>488,779.14</td>
-    </tr>
-    <tr>
-      <th>853</th>
-      <td>C00655613</td>
-      <td>[2017-10-01, 2018-04-01, 2018-01-01, 2017-07-0...</td>
-      <td>[2017-12-31, 2018-05-23, 2018-03-31, 2017-09-3...</td>
-      <td>1,430,977.82</td>
-      <td>nan</td>
-    </tr>
-    <tr>
-      <th>899</th>
-      <td>C00657635</td>
-      <td>[2017-10-01, 2018-04-01, 2018-04-19, 2018-01-01]</td>
-      <td>[2017-12-31, 2018-04-18, 2018-06-30, 2018-03-31]</td>
-      <td>534,706.79</td>
-      <td>103,027.22</td>
-    </tr>
-    <tr>
-      <th>925</th>
-      <td>C00658633</td>
-      <td>[2018-04-01, 2018-01-01, 2017-10-01, 2018-04-09]</td>
-      <td>[2018-04-08, 2018-03-31, 2017-12-31, 2018-06-30]</td>
-      <td>1,464,434.27</td>
-      <td>479,600.41</td>
-    </tr>
-    <tr>
-      <th>971</th>
-      <td>C00660555</td>
-      <td>[2018-02-15, 2017-10-01, 2018-04-01, 2018-01-01]</td>
-      <td>[2018-03-31, 2017-12-31, 2018-06-30, 2018-02-14]</td>
-      <td>452,883.06</td>
-      <td>270,646.50</td>
-    </tr>
-    <tr>
-      <th>1015</th>
-      <td>C00662577</td>
-      <td>[2018-04-19, 2018-01-01, 2017-11-22, 2018-04-01]</td>
-      <td>[2018-06-30, 2018-03-31, 2017-12-31, 2018-04-18]</td>
-      <td>1,697,218.14</td>
-      <td>956,582.48</td>
-    </tr>
-    <tr>
-      <th>1026</th>
-      <td>C00663146</td>
-      <td>[2017-12-10, 2018-01-01, 2018-04-01]</td>
-      <td>[2017-12-31, 2018-03-31, 2018-06-30]</td>
-      <td>544,706.62</td>
-      <td>238,441.49</td>
-    </tr>
-    <tr>
-      <th>1050</th>
-      <td>C00664375</td>
-      <td>[2018-01-01, 2018-05-24, 2018-04-01]</td>
-      <td>[2018-03-31, 2018-06-30, 2018-05-23]</td>
-      <td>849,932.06</td>
-      <td>374,572.82</td>
-    </tr>
-    <tr>
-      <th>1077</th>
-      <td>C00665471</td>
-      <td>[2018-01-01, 2018-04-19, 2018-04-01]</td>
-      <td>[2018-03-31, 2018-06-30, 2018-04-18]</td>
-      <td>348,988.57</td>
-      <td>202,600.86</td>
-    </tr>
-    <tr>
-      <th>1090</th>
-      <td>C00666149</td>
-      <td>[2018-04-01, 2018-01-01, 2018-05-17]</td>
-      <td>[2018-05-16, 2018-03-31, 2018-06-30]</td>
-      <td>686,043.47</td>
-      <td>416,313.31</td>
-    </tr>
-    <tr>
-      <th>1109</th>
-      <td>C00667097</td>
-      <td>[2018-01-24, 2018-04-26, 2018-04-01]</td>
-      <td>[2018-03-31, 2018-06-30, 2018-04-25]</td>
-      <td>478,472.61</td>
-      <td>347,251.68</td>
-    </tr>
-    <tr>
-      <th>1116</th>
-      <td>C00667519</td>
-      <td>[2018-04-19, 2018-04-01, 2018-01-01]</td>
-      <td>[2018-06-30, 2018-04-18, 2018-03-31]</td>
-      <td>1,364,049.20</td>
-      <td>809,659.42</td>
-    </tr>
-    <tr>
-      <th>1139</th>
-      <td>C00668574</td>
-      <td>[2018-01-01, 2018-04-01, 2018-05-17]</td>
-      <td>[2018-03-31, 2018-05-16, 2018-06-30]</td>
-      <td>163,699.60</td>
-      <td>106,339.75</td>
-    </tr>
-    <tr>
-      <th>1186</th>
-      <td>C00671156</td>
-      <td>[2018-01-01, 2018-05-03, 2018-04-01]</td>
-      <td>[2018-03-31, 2018-06-30, 2018-05-02]</td>
-      <td>904,973.04</td>
-      <td>447,689.81</td>
-    </tr>
-  </tbody>
-</table>
-<p>136 rows × 5 columns</p>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">endcu_actblue</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns endorsed by End CU came through ActBlue in the 2018 cycle&quot;</span>
 </pre></div>
 
 </div>
@@ -16845,207 +14580,13 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[29]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>committee_total</th>
-      <th>actblue_total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>136.00</td>
-      <td>135.00</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>2,250,212.21</td>
-      <td>1,261,477.05</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>3,729,555.95</td>
-      <td>3,062,892.63</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>81,742.03</td>
-      <td>195.22</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>659,742.90</td>
-      <td>153,437.08</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>1,084,017.64</td>
-      <td>431,035.36</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>1,623,309.22</td>
-      <td>931,078.05</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>23,522,659.90</td>
-      <td>28,896,553.74</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="o">~</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;cand_pcc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">endcu</span><span class="p">)]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[30]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>committee_total</th>
-      <th>actblue_total</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>1,143.00</td>
-      <td>1,025.00</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>289,507.89</td>
-      <td>165,951.17</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>964,238.41</td>
-      <td>795,132.71</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>0.00</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>11,329.34</td>
-      <td>3,793.93</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>63,413.21</td>
-      <td>22,164.06</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>264,786.48</td>
-      <td>113,680.46</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>23,524,504.95</td>
-      <td>21,829,737.17</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[31]:</div>
+<div class="prompt output_prompt">Out[87]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.5564815084229917</pre>
+<pre>&#39;55.65 percent of contributions from individuals to Democratic campaigns endorsed by End CU came through ActBlue in the 2018 cycle&#39;</pre>
 </div>
 
 </div>
@@ -17058,13 +14599,77 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Where-do-the-donors-giving-through-ActBlue-come-from-geographically?-Any-striking-or-interesting-patterns,-or-zip-codes-that-typically-don&#8217;t-contribute?">Where do the donors giving through ActBlue come from geographically? Any striking or interesting patterns, or zip codes that typically don&#8217;t contribute?<a class="anchor-link" href="#Where-do-the-donors-giving-through-ActBlue-come-from-geographically?-Any-striking-or-interesting-patterns,-or-zip-codes-that-typically-don&#8217;t-contribute?">&#182;</a></h3>
+<h3 id="Where-do-the-donors-giving-through-ActBlue-come-from-geographically?-Any-striking-or-interesting-patterns?">Where do the donors giving through ActBlue come from geographically? Any striking or interesting patterns?<a class="anchor-link" href="#Where-do-the-donors-giving-through-ActBlue-come-from-geographically?-Any-striking-or-interesting-patterns?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-money-from-blue-states-propping-up-Dems-in-red-states?">Is money from blue states propping up Dems in red states?<a class="anchor-link" href="#Is-money-from-blue-states-propping-up-Dems-in-red-states?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Where-is-the-money-going?-Are-people-giving-to-local-candidates-or-are-they-giving-to-candidates-around-the-country?">Where is the money going? Are people giving to local candidates or are they giving to candidates around the country?<a class="anchor-link" href="#Where-is-the-money-going?-Are-people-giving-to-local-candidates-or-are-they-giving-to-candidates-around-the-country?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Geographic-distribution:-Which-states-gave-to-which?">Geographic distribution: Which states gave to which?<a class="anchor-link" href="#Geographic-distribution:-Which-states-gave-to-which?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What-percentage-of-the-contributions-came-from-each-state?">What percentage of the contributions came from each state?<a class="anchor-link" href="#What-percentage-of-the-contributions-came-from-each-state?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What-percentage-came-from-out-of-state-in-each-state?">What percentage came from out of state in each state?<a class="anchor-link" href="#What-percentage-came-from-out-of-state-in-each-state?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Which-campaigns-have-done-the-best-job-tapping-into-this-network?">Which campaigns have done the best job tapping into this network?<a class="anchor-link" href="#Which-campaigns-have-done-the-best-job-tapping-into-this-network?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What&#8217;s-the-state-by-state-breakdown-for-Ocasio-Cortez?">What&#8217;s the state by state breakdown for Ocasio-Cortez?<a class="anchor-link" href="#What&#8217;s-the-state-by-state-breakdown-for-Ocasio-Cortez?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What&#8217;s-the-state-by-state-breakdown-for-McGrath?">What&#8217;s the state by state breakdown for McGrath?<a class="anchor-link" href="#What&#8217;s-the-state-by-state-breakdown-for-McGrath?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -17090,7 +14695,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[32]:</div>
+<div class="prompt output_prompt">Out[88]:</div>
 
 
 
@@ -17499,7 +15104,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/states.csv&#39;</span><span class="p">)</span>
@@ -17512,7 +15117,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">clinton_votes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/clintonvotes.csv&#39;</span><span class="p">)</span>
@@ -17536,7 +15141,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[34]:</div>
+<div class="prompt output_prompt">Out[90]:</div>
 
 
 
@@ -18092,7 +15697,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;contribs_per&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;votes&#39;</span><span class="p">]</span>
@@ -18110,7 +15715,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[35]:</div>
+<div class="prompt output_prompt">Out[91]:</div>
 
 
 
@@ -18718,7 +16323,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_in_state</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18749,7 +16354,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[36]:</div>
+<div class="prompt output_prompt">Out[92]:</div>
 
 
 
@@ -18801,9 +16406,26 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Do-the-majority-of-these-donors-give-repeatedly-or-are-they-one-and-done?-How-&#8220;sticky&#8221;-is-this?-What-percentage-of-donors-gave-how-many-times?">Do the majority of these donors give repeatedly or are they one and done? How &#8220;sticky&#8221; is this? What percentage of donors gave how many times?<a class="anchor-link" href="#Do-the-majority-of-these-donors-give-repeatedly-or-are-they-one-and-done?-How-&#8220;sticky&#8221;-is-this?-What-percentage-of-donors-gave-how-many-times?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Note: Need to account for multi-candidate contribs.</em></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_freq</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18823,7 +16445,10 @@ div#notebook {
 <span class="s2">    GROUP BY COUNT</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
-<span class="n">actblue_freq</span>
+
+<span class="n">actblue_freq</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_freq</span><span class="p">[</span><span class="s1">&#39;count_of_count&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_freq</span><span class="p">[</span><span class="s1">&#39;count_of_count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+
+<span class="n">actblue_freq</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;count_of_count&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -18836,7 +16461,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[37]:</div>
+<div class="prompt output_prompt">Out[93]:</div>
 
 
 
@@ -18861,317 +16486,42 @@ div#notebook {
       <th></th>
       <th>count</th>
       <th>count_of_count</th>
+      <th>percent</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>1798</td>
+      <th>2120</th>
       <td>1</td>
+      <td>1872304</td>
+      <td>31.60</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>1489</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1269</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>652</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>273</td>
-      <td>160</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>51</td>
-      <td>5705</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2574</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>951</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1898</td>
+      <th>100</th>
       <td>2</td>
+      <td>1174514</td>
+      <td>19.82</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>70</td>
-      <td>3081</td>
+      <th>1332</th>
+      <td>3</td>
+      <td>470075</td>
+      <td>7.93</td>
     </tr>
     <tr>
-      <th>10</th>
-      <td>350</td>
-      <td>95</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>758</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>1750</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>1136</td>
+      <th>597</th>
       <td>4</td>
+      <td>370019</td>
+      <td>6.24</td>
     </tr>
     <tr>
-      <th>14</th>
-      <td>176</td>
-      <td>442</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>576</td>
-      <td>23</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>1831</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>1003</td>
+      <th>344</th>
       <td>5</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>292</td>
-      <td>123</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>1331</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>6517</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>2784</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>929</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>663</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>1552</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>1589</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>1493</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>3725</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>5733</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>2125</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2239</th>
-      <td>1450</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2240</th>
-      <td>183</td>
-      <td>409</td>
-    </tr>
-    <tr>
-      <th>2241</th>
-      <td>1225</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>2242</th>
-      <td>150</td>
-      <td>629</td>
-    </tr>
-    <tr>
-      <th>2243</th>
-      <td>2787</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2244</th>
-      <td>3225</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2245</th>
-      <td>656</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>2246</th>
-      <td>2033</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2247</th>
-      <td>2304</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2248</th>
-      <td>3565</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2249</th>
-      <td>122</td>
-      <td>1000</td>
-    </tr>
-    <tr>
-      <th>2250</th>
-      <td>3022</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2251</th>
-      <td>1355</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2252</th>
-      <td>648</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>2253</th>
-      <td>570</td>
-      <td>32</td>
-    </tr>
-    <tr>
-      <th>2254</th>
-      <td>923</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>2255</th>
-      <td>995</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>2256</th>
-      <td>4944</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2257</th>
-      <td>1867</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2258</th>
-      <td>1014</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>2259</th>
-      <td>1125</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2260</th>
-      <td>530</td>
-      <td>36</td>
-    </tr>
-    <tr>
-      <th>2261</th>
-      <td>536</td>
-      <td>37</td>
-    </tr>
-    <tr>
-      <th>2262</th>
-      <td>928</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>2263</th>
-      <td>6571</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2264</th>
-      <td>1715</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2265</th>
-      <td>520</td>
-      <td>33</td>
-    </tr>
-    <tr>
-      <th>2266</th>
-      <td>55</td>
-      <td>4892</td>
-    </tr>
-    <tr>
-      <th>2267</th>
-      <td>148</td>
-      <td>660</td>
-    </tr>
-    <tr>
-      <th>2268</th>
-      <td>790</td>
-      <td>10</td>
+      <td>223409</td>
+      <td>3.77</td>
     </tr>
   </tbody>
 </table>
-<p>2269 rows × 2 columns</p>
 </div>
 </div>
 
@@ -19180,10 +16530,18 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="ActBlue-addicts:-Do-certain-donors-give-a-lot-through-ActBlue?">ActBlue addicts: Do certain donors give a lot through ActBlue?<a class="anchor-link" href="#ActBlue-addicts:-Do-certain-donors-give-a-lot-through-ActBlue?">&#182;</a></h3>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -19224,7 +16582,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[38]:</div>
+<div class="prompt output_prompt">Out[94]:</div>
 
 
 
@@ -20127,6 +17485,28 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_addicts.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Spreadsheet of all of them: <a href="data/actblue_addicts.csv">actblue_addicts.csv</a></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -20178,7 +17558,7 @@ jupyter nbconvert analysis.ipynb
 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>[NbConvertApp] Converting notebook analysis.ipynb to html
-[NbConvertApp] Writing 524824 bytes to analysis.html
+[NbConvertApp] Writing 525420 bytes to analysis.html
 </pre>
 </div>
 </div>
