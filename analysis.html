@@ -14730,16 +14730,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-percentage-of-the-individual-contributions-to-congressional-candidates-came-from-each-state-in-this-cycle?">What percentage of the individual contributions to congressional candidates came from each state in this cycle?<a class="anchor-link" href="#What-percentage-of-the-individual-contributions-to-congressional-candidates-came-from-each-state-in-this-cycle?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Jan. 1, 2017 — now</p>
-
+<h3 id="Which-states-did-contributions-from-come-from-for-each-candidate-state?">Which states did contributions from come from for each candidate state?<a class="anchor-link" href="#Which-states-did-contributions-from-come-from-for-each-candidate-state?">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14752,16 +14743,16 @@ div#notebook {
     <span class="s1">&#39;actblue_states&#39;</span><span class="p">,</span>
     <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    SELECT contributor_state,</span>
+<span class="s2">           coalesce(beneficiary_candidate_state,cand_office_st) as recipient_state,</span>
 <span class="s2">           count(*),</span>
 <span class="s2">           sum(contribution_amount)</span>
 <span class="s2">    FROM actblue_contribs</span>
 <span class="s2">    WHERE extract(YEAR FROM contribution_date) &gt;= 2017</span>
 <span class="s2">    and cand_office in (&#39;H&#39;,&#39;S&#39;)</span>
-<span class="s2">    GROUP BY contributor_state</span>
+<span class="s2">    GROUP BY coalesce(beneficiary_candidate_state,cand_office_st),</span>
+<span class="s2">             contributor_state</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
-
-<span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 
 <span class="n">actblue_states</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -14800,221 +14791,221 @@ div#notebook {
     <tr style="text-align: right;">
       <th></th>
       <th>contributor_state</th>
+      <th>recipient_state</th>
       <th>count</th>
       <th>sum</th>
-      <th>percent</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>12</th>
+      <th>271</th>
       <td>CA</td>
-      <td>2726271</td>
-      <td>96,308,858.39</td>
-      <td>20.86</td>
+      <td>CA</td>
+      <td>776206</td>
+      <td>36,691,956.47</td>
     </tr>
     <tr>
-      <th>53</th>
-      <td>NY</td>
-      <td>1272673</td>
-      <td>55,822,097.85</td>
-      <td>12.09</td>
-    </tr>
-    <tr>
-      <th>73</th>
+      <th>2870</th>
       <td>TX</td>
-      <td>848008</td>
-      <td>33,681,092.62</td>
-      <td>7.30</td>
+      <td>TX</td>
+      <td>461822</td>
+      <td>22,929,392.99</td>
     </tr>
     <tr>
-      <th>30</th>
-      <td>MA</td>
-      <td>630936</td>
-      <td>24,027,085.11</td>
-      <td>5.20</td>
+      <th>2278</th>
+      <td>NY</td>
+      <td>NY</td>
+      <td>227853</td>
+      <td>16,480,709.99</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>591</th>
       <td>FL</td>
-      <td>607719</td>
-      <td>20,856,355.01</td>
-      <td>4.52</td>
+      <td>FL</td>
+      <td>201295</td>
+      <td>10,025,268.29</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>IL</td>
-      <td>503670</td>
-      <td>16,872,490.31</td>
-      <td>3.65</td>
-    </tr>
-    <tr>
-      <th>80</th>
-      <td>WA</td>
-      <td>574979</td>
-      <td>14,850,502.18</td>
-      <td>3.22</td>
-    </tr>
-    <tr>
-      <th>76</th>
-      <td>VA</td>
-      <td>361557</td>
-      <td>14,846,735.36</td>
-      <td>3.22</td>
-    </tr>
-    <tr>
-      <th>59</th>
+      <th>2548</th>
       <td>PA</td>
-      <td>454279</td>
-      <td>14,343,967.74</td>
-      <td>3.11</td>
+      <td>PA</td>
+      <td>135260</td>
+      <td>8,232,014.86</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>DC</td>
-      <td>134463</td>
-      <td>12,593,293.48</td>
-      <td>2.73</td>
+      <th>3003</th>
+      <td>VA</td>
+      <td>VA</td>
+      <td>106609</td>
+      <td>7,091,496.88</td>
     </tr>
     <tr>
-      <th>32</th>
-      <td>MD</td>
-      <td>292195</td>
-      <td>12,262,350.70</td>
-      <td>2.66</td>
+      <th>1239</th>
+      <td>MA</td>
+      <td>MA</td>
+      <td>118411</td>
+      <td>6,927,560.69</td>
     </tr>
     <tr>
-      <th>46</th>
-      <td>NJ</td>
-      <td>341758</td>
-      <td>11,386,807.73</td>
-      <td>2.47</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>CT</td>
-      <td>272245</td>
-      <td>9,578,866.59</td>
-      <td>2.07</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>MI</td>
-      <td>297021</td>
-      <td>8,773,272.40</td>
-      <td>1.90</td>
-    </tr>
-    <tr>
-      <th>54</th>
-      <td>OH</td>
-      <td>307173</td>
-      <td>8,444,581.47</td>
-      <td>1.83</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>MN</td>
-      <td>248668</td>
-      <td>7,978,786.70</td>
-      <td>1.73</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>AZ</td>
-      <td>263018</td>
-      <td>7,774,687.21</td>
-      <td>1.68</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>CO</td>
-      <td>278355</td>
-      <td>7,652,925.44</td>
-      <td>1.66</td>
-    </tr>
-    <tr>
-      <th>58</th>
-      <td>OR</td>
-      <td>431700</td>
-      <td>6,922,949.00</td>
-      <td>1.50</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>MO</td>
-      <td>176421</td>
-      <td>6,260,989.44</td>
-      <td>1.36</td>
-    </tr>
-    <tr>
-      <th>81</th>
-      <td>WI</td>
-      <td>212997</td>
-      <td>5,914,272.75</td>
-      <td>1.28</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>NC</td>
-      <td>213208</td>
-      <td>5,858,935.52</td>
-      <td>1.27</td>
-    </tr>
-    <tr>
-      <th>18</th>
+      <th>658</th>
+      <td>CA</td>
       <td>GA</td>
-      <td>177847</td>
-      <td>5,646,006.66</td>
-      <td>1.22</td>
+      <td>337073</td>
+      <td>6,579,128.69</td>
     </tr>
     <tr>
-      <th>48</th>
-      <td>NM</td>
-      <td>162131</td>
-      <td>4,466,523.13</td>
-      <td>0.97</td>
+      <th>927</th>
+      <td>IL</td>
+      <td>IL</td>
+      <td>110439</td>
+      <td>5,980,015.27</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>IN</td>
-      <td>127761</td>
-      <td>3,871,877.24</td>
-      <td>0.84</td>
+      <th>2347</th>
+      <td>OH</td>
+      <td>OH</td>
+      <td>133714</td>
+      <td>5,522,275.41</td>
     </tr>
     <tr>
-      <th>71</th>
-      <td>TN</td>
-      <td>122374</td>
-      <td>3,756,632.70</td>
-      <td>0.81</td>
+      <th>1441</th>
+      <td>MI</td>
+      <td>MI</td>
+      <td>84001</td>
+      <td>5,477,856.12</td>
     </tr>
     <tr>
-      <th>39</th>
-      <td>MT</td>
-      <td>87334</td>
-      <td>3,731,563.40</td>
-      <td>0.81</td>
+      <th>3162</th>
+      <td>WA</td>
+      <td>WA</td>
+      <td>95262</td>
+      <td>5,284,645.85</td>
     </tr>
     <tr>
-      <th>52</th>
-      <td>NV</td>
-      <td>89061</td>
-      <td>3,286,783.60</td>
-      <td>0.71</td>
+      <th>1508</th>
+      <td>MN</td>
+      <td>MN</td>
+      <td>88563</td>
+      <td>5,158,815.61</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>198</th>
+      <td>AZ</td>
+      <td>AZ</td>
+      <td>88334</td>
+      <td>4,789,891.46</td>
+    </tr>
+    <tr>
+      <th>2066</th>
+      <td>NJ</td>
+      <td>NJ</td>
+      <td>65684</td>
+      <td>4,787,289.64</td>
+    </tr>
+    <tr>
+      <th>2818</th>
+      <td>CA</td>
+      <td>TX</td>
+      <td>137156</td>
+      <td>4,551,331.47</td>
+    </tr>
+    <tr>
+      <th>408</th>
+      <td>CT</td>
+      <td>CT</td>
+      <td>103067</td>
+      <td>4,542,573.68</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>CA</td>
       <td>AL</td>
-      <td>73166</td>
-      <td>2,645,641.77</td>
-      <td>0.57</td>
+      <td>157300</td>
+      <td>4,533,011.88</td>
     </tr>
     <tr>
-      <th>27</th>
-      <td>KS</td>
-      <td>69908</td>
-      <td>2,300,679.03</td>
-      <td>0.50</td>
+      <th>1579</th>
+      <td>MO</td>
+      <td>MO</td>
+      <td>70436</td>
+      <td>4,371,569.25</td>
+    </tr>
+    <tr>
+      <th>3230</th>
+      <td>WI</td>
+      <td>WI</td>
+      <td>94435</td>
+      <td>4,087,590.35</td>
+    </tr>
+    <tr>
+      <th>695</th>
+      <td>NY</td>
+      <td>GA</td>
+      <td>175538</td>
+      <td>3,877,086.61</td>
+    </tr>
+    <tr>
+      <th>2243</th>
+      <td>CA</td>
+      <td>NY</td>
+      <td>69856</td>
+      <td>3,351,993.33</td>
+    </tr>
+    <tr>
+      <th>1736</th>
+      <td>MT</td>
+      <td>MT</td>
+      <td>62240</td>
+      <td>3,268,064.00</td>
+    </tr>
+    <tr>
+      <th>1223</th>
+      <td>CA</td>
+      <td>MA</td>
+      <td>133683</td>
+      <td>3,008,608.99</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>NY</td>
+      <td>AL</td>
+      <td>87914</td>
+      <td>3,004,620.52</td>
+    </tr>
+    <tr>
+      <th>308</th>
+      <td>NY</td>
+      <td>CA</td>
+      <td>108082</td>
+      <td>2,933,053.97</td>
+    </tr>
+    <tr>
+      <th>2311</th>
+      <td>CA</td>
+      <td>OH</td>
+      <td>95853</td>
+      <td>2,601,772.42</td>
+    </tr>
+    <tr>
+      <th>664</th>
+      <td>GA</td>
+      <td>GA</td>
+      <td>54730</td>
+      <td>2,585,825.67</td>
+    </tr>
+    <tr>
+      <th>2505</th>
+      <td>CA</td>
+      <td>PA</td>
+      <td>62803</td>
+      <td>2,561,229.78</td>
+    </tr>
+    <tr>
+      <th>3178</th>
+      <td>CA</td>
+      <td>WI</td>
+      <td>92910</td>
+      <td>2,509,987.13</td>
     </tr>
     <tr>
       <th>...</th>
@@ -15024,236 +15015,223 @@ div#notebook {
       <td>...</td>
     </tr>
     <tr>
-      <th>0</th>
-      <td>AA</td>
-      <td>1171</td>
-      <td>32,321.83</td>
-      <td>0.01</td>
+      <th>2721</th>
+      <td>MT</td>
+      <td>SD</td>
+      <td>1</td>
+      <td>1.00</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>2731</th>
+      <td>ON</td>
+      <td>SD</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1632</th>
+      <td>OK</td>
+      <td>MP</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>2703</th>
+      <td>DE</td>
+      <td>SD</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1619</th>
+      <td>FL</td>
+      <td>MP</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>3141</th>
+      <td>NS</td>
+      <td>WA</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1149</th>
+      <td>PE</td>
+      <td>KY</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>2372</th>
+      <td>AE</td>
+      <td>OK</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>2375</th>
+      <td>AP</td>
+      <td>OK</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>2403</th>
+      <td>ND</td>
+      <td>OK</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>990</th>
       <td>GU</td>
-      <td>508</td>
-      <td>17,440.56</td>
-      <td>0.00</td>
+      <td>IN</td>
+      <td>1</td>
+      <td>1.00</td>
     </tr>
     <tr>
-      <th>87</th>
-      <td>None</td>
-      <td>268</td>
-      <td>13,320.36</td>
-      <td>0.00</td>
+      <th>901</th>
+      <td>VT</td>
+      <td>ID</td>
+      <td>1</td>
+      <td>1.00</td>
     </tr>
     <tr>
-      <th>63</th>
-      <td>QC</td>
-      <td>970</td>
-      <td>12,702.60</td>
-      <td>0.00</td>
+      <th>1591</th>
+      <td>NS</td>
+      <td>MO</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>466</th>
+      <td>AR</td>
+      <td>DC</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>896</th>
+      <td>SC</td>
+      <td>ID</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>VI</td>
+      <td>AK</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>OK</td>
+      <td>ID</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>2696</th>
+      <td>AR</td>
+      <td>SD</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1624</th>
+      <td>KS</td>
+      <td>MP</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1625</th>
+      <td>KY</td>
+      <td>MP</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1629</th>
+      <td>MO</td>
+      <td>MP</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1348</th>
+      <td>AB</td>
+      <td>ME</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>2947</th>
+      <td>AB</td>
+      <td>VA</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1994</th>
+      <td>NB</td>
+      <td>NH</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>1635</th>
+      <td>SC</td>
+      <td>MP</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>857</th>
+      <td>AR</td>
+      <td>ID</td>
+      <td>1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>514</th>
+      <td>WY</td>
+      <td>DC</td>
+      <td>1</td>
+      <td>1.00</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>AB</td>
-      <td>415</td>
-      <td>10,634.25</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>AS</td>
-      <td>349</td>
-      <td>5,096.83</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>84</th>
-      <td>YT</td>
-      <td>64</td>
-      <td>4,503.50</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>NS</td>
-      <td>217</td>
-      <td>3,920.25</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>MP</td>
-      <td>159</td>
-      <td>3,376.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>MB</td>
-      <td>304</td>
-      <td>3,303.64</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>NB</td>
-      <td>46</td>
-      <td>2,012.69</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>NL</td>
-      <td>25</td>
-      <td>867.50</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>70</th>
-      <td>SK</td>
-      <td>33</td>
-      <td>739.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>50</th>
-      <td>NT</td>
-      <td>27</td>
-      <td>349.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>77</th>
-      <td>VD</td>
-      <td>4</td>
-      <td>225.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>60</th>
-      <td>PE</td>
-      <td>17</td>
-      <td>207.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>HE</td>
-      <td>40</td>
-      <td>178.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>56</th>
-      <td>OM</td>
-      <td>18</td>
-      <td>174.52</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>85</th>
-      <td>ZH</td>
-      <td>7</td>
-      <td>168.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>51</th>
-      <td>NU</td>
-      <td>9</td>
-      <td>149.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>BW</td>
-      <td>11</td>
-      <td>113.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>72</th>
-      <td>TR</td>
+      <td>AE</td>
+      <td>AK</td>
       <td>1</td>
-      <td>100.00</td>
-      <td>0.00</td>
+      <td>1.00</td>
     </tr>
     <tr>
-      <th>69</th>
-      <td>SH</td>
-      <td>2</td>
-      <td>50.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>74</th>
-      <td>UK</td>
+      <th>532</th>
+      <td>GU</td>
+      <td>DE</td>
       <td>1</td>
-      <td>50.00</td>
-      <td>0.00</td>
+      <td>1.00</td>
     </tr>
     <tr>
-      <th>66</th>
-      <td>RM</td>
+      <th>0</th>
+      <td>AA</td>
+      <td>AK</td>
       <td>1</td>
-      <td>25.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>BS</td>
-      <td>1</td>
-      <td>25.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>HH</td>
-      <td>2</td>
-      <td>15.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>NA</td>
-      <td>1</td>
-      <td>15.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>65</th>
-      <td>RJ</td>
-      <td>1</td>
-      <td>10.00</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>61</th>
-      <td>PG</td>
-      <td>2</td>
-      <td>5.00</td>
-      <td>0.00</td>
+      <td>1.00</td>
     </tr>
   </tbody>
 </table>
-<p>88 rows × 4 columns</p>
+<p>3356 rows × 4 columns</p>
 </div>
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/states.csv&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
 </div>
 </div>
 
@@ -15262,32 +15240,29 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="To-which-states-do-individual-contributions-to-congressional-candidates-go?">To which states do individual contributions to congressional candidates go?<a class="anchor-link" href="#To-which-states-do-individual-contributions-to-congressional-candidates-go?">&#182;</a></h3><p>Jan. 1, 2017 — now</p>
+<h3 id="What-percentage-of-the-individual-contributions-to-congressional-candidates-came-from-each-state-in-this-cycle?">What percentage of the individual contributions to congressional candidates came from each state in this cycle?<a class="anchor-link" href="#What-percentage-of-the-individual-contributions-to-congressional-candidates-came-from-each-state-in-this-cycle?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Jan. 1, 2017 — now</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_recipient_states</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;actblue_recipient_states&#39;</span><span class="p">,</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT coalesce(beneficiary_candidate_state,cand_office_st),</span>
-<span class="s2">           count(*),</span>
-<span class="s2">           sum(contribution_amount)</span>
-<span class="s2">    FROM actblue_contribs</span>
-<span class="s2">    WHERE extract(YEAR FROM contribution_date) &gt;= 2017</span>
-<span class="s2">    and cand_office in (&#39;H&#39;,&#39;S&#39;)</span>
-<span class="s2">    GROUP BY coalesce(beneficiary_candidate_state,cand_office_st)</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
-<span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contributor_states</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
 
-<span class="n">actblue_recipient_states</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_recipient_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_recipient_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">actblue_contributor_states</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_contributor_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_contributor_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 
-<span class="n">actblue_recipient_states</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">actblue_contributor_states</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -15300,7 +15275,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[31]:</div>
+<div class="prompt output_prompt">Out[30]:</div>
 
 
 
@@ -15323,391 +15298,342 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>coalesce</th>
-      <th>count</th>
       <th>sum</th>
       <th>percent</th>
+    </tr>
+    <tr>
+      <th>contributor_state</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>4</th>
-      <td>CA</td>
-      <td>1590037</td>
-      <td>52,950,919.94</td>
-      <td>11.47</td>
+      <th>CA</th>
+      <td>96,308,858.39</td>
+      <td>20.86</td>
     </tr>
     <tr>
-      <th>44</th>
-      <td>TX</td>
-      <td>1036615</td>
-      <td>39,168,490.76</td>
-      <td>8.48</td>
+      <th>NY</th>
+      <td>55,822,097.85</td>
+      <td>12.09</td>
     </tr>
     <tr>
-      <th>10</th>
-      <td>GA</td>
-      <td>1606217</td>
-      <td>30,602,688.53</td>
-      <td>6.63</td>
+      <th>TX</th>
+      <td>33,681,092.62</td>
+      <td>7.30</td>
     </tr>
     <tr>
-      <th>35</th>
-      <td>NY</td>
-      <td>576139</td>
-      <td>29,933,133.91</td>
-      <td>6.48</td>
+      <th>MA</th>
+      <td>24,027,085.11</td>
+      <td>5.20</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>AL</td>
-      <td>784637</td>
-      <td>22,298,530.92</td>
-      <td>4.83</td>
+      <th>FL</th>
+      <td>20,856,355.01</td>
+      <td>4.52</td>
     </tr>
     <tr>
-      <th>39</th>
-      <td>PA</td>
-      <td>444800</td>
-      <td>19,817,025.90</td>
-      <td>4.29</td>
+      <th>IL</th>
+      <td>16,872,490.31</td>
+      <td>3.65</td>
     </tr>
     <tr>
-      <th>19</th>
-      <td>MA</td>
-      <td>667556</td>
-      <td>18,890,647.81</td>
-      <td>4.09</td>
+      <th>WA</th>
+      <td>14,850,502.18</td>
+      <td>3.22</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>FL</td>
-      <td>540363</td>
-      <td>18,669,243.31</td>
-      <td>4.04</td>
+      <th>VA</th>
+      <td>14,846,735.36</td>
+      <td>3.22</td>
     </tr>
     <tr>
-      <th>36</th>
-      <td>OH</td>
-      <td>566498</td>
-      <td>15,809,478.82</td>
-      <td>3.42</td>
+      <th>PA</th>
+      <td>14,343,967.74</td>
+      <td>3.11</td>
     </tr>
     <tr>
-      <th>46</th>
-      <td>VA</td>
-      <td>226970</td>
-      <td>15,100,570.19</td>
-      <td>3.27</td>
+      <th>DC</th>
+      <td>12,593,293.48</td>
+      <td>2.73</td>
     </tr>
     <tr>
-      <th>50</th>
-      <td>WI</td>
-      <td>540433</td>
-      <td>14,644,052.39</td>
-      <td>3.17</td>
+      <th>MD</th>
+      <td>12,262,350.70</td>
+      <td>2.66</td>
     </tr>
     <tr>
-      <th>27</th>
-      <td>MT</td>
-      <td>435205</td>
-      <td>12,098,921.81</td>
-      <td>2.62</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>IL</td>
-      <td>440969</td>
-      <td>12,007,438.15</td>
-      <td>2.60</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>MO</td>
-      <td>289603</td>
-      <td>11,989,893.13</td>
-      <td>2.60</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>MI</td>
-      <td>205456</td>
-      <td>11,944,604.30</td>
-      <td>2.59</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>NJ</td>
-      <td>215330</td>
-      <td>11,530,051.94</td>
-      <td>2.50</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>MN</td>
-      <td>345816</td>
-      <td>11,459,736.40</td>
-      <td>2.48</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>AZ</td>
-      <td>372900</td>
-      <td>11,384,541.47</td>
+      <th>NJ</th>
+      <td>11,386,807.73</td>
       <td>2.47</td>
     </tr>
     <tr>
-      <th>34</th>
-      <td>NV</td>
-      <td>210562</td>
-      <td>9,012,588.94</td>
-      <td>1.95</td>
+      <th>CT</th>
+      <td>9,578,866.59</td>
+      <td>2.07</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>CT</td>
-      <td>236085</td>
-      <td>8,710,750.67</td>
-      <td>1.89</td>
+      <th>MI</th>
+      <td>8,773,272.40</td>
+      <td>1.90</td>
     </tr>
     <tr>
-      <th>49</th>
-      <td>WA</td>
-      <td>166866</td>
-      <td>7,606,825.62</td>
-      <td>1.65</td>
+      <th>OH</th>
+      <td>8,444,581.47</td>
+      <td>1.83</td>
     </tr>
     <tr>
-      <th>48</th>
-      <td>VT</td>
-      <td>313863</td>
-      <td>6,834,428.79</td>
-      <td>1.48</td>
+      <th>MN</th>
+      <td>7,978,786.70</td>
+      <td>1.73</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>IN</td>
-      <td>92855</td>
-      <td>5,116,543.13</td>
-      <td>1.11</td>
+      <th>AZ</th>
+      <td>7,774,687.21</td>
+      <td>1.68</td>
     </tr>
     <tr>
-      <th>33</th>
-      <td>NM</td>
-      <td>105470</td>
-      <td>5,099,490.39</td>
-      <td>1.10</td>
+      <th>CO</th>
+      <td>7,652,925.44</td>
+      <td>1.66</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>IA</td>
-      <td>152331</td>
-      <td>4,711,694.25</td>
-      <td>1.02</td>
+      <th>OR</th>
+      <td>6,922,949.00</td>
+      <td>1.50</td>
     </tr>
     <tr>
-      <th>29</th>
-      <td>ND</td>
-      <td>80882</td>
-      <td>4,424,964.05</td>
-      <td>0.96</td>
+      <th>MO</th>
+      <td>6,260,989.44</td>
+      <td>1.36</td>
     </tr>
     <tr>
-      <th>31</th>
-      <td>NH</td>
-      <td>79375</td>
-      <td>4,051,581.33</td>
-      <td>0.88</td>
+      <th>WI</th>
+      <td>5,914,272.75</td>
+      <td>1.28</td>
     </tr>
     <tr>
-      <th>16</th>
-      <td>KS</td>
-      <td>141427</td>
-      <td>4,048,737.85</td>
-      <td>0.88</td>
+      <th>NC</th>
+      <td>5,858,935.52</td>
+      <td>1.27</td>
     </tr>
     <tr>
-      <th>28</th>
-      <td>NC</td>
-      <td>43101</td>
-      <td>3,916,268.51</td>
-      <td>0.85</td>
+      <th>GA</th>
+      <td>5,646,006.66</td>
+      <td>1.22</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>CO</td>
-      <td>63680</td>
-      <td>3,769,898.00</td>
-      <td>0.82</td>
+      <th>NM</th>
+      <td>4,466,523.13</td>
+      <td>0.97</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>KY</td>
-      <td>52657</td>
-      <td>3,743,859.88</td>
+      <th>IN</th>
+      <td>3,871,877.24</td>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <th>TN</th>
+      <td>3,756,632.70</td>
       <td>0.81</td>
     </tr>
     <tr>
-      <th>20</th>
-      <td>MD</td>
-      <td>42522</td>
-      <td>3,577,144.95</td>
-      <td>0.77</td>
+      <th>MT</th>
+      <td>3,731,563.40</td>
+      <td>0.81</td>
     </tr>
     <tr>
-      <th>38</th>
-      <td>OR</td>
-      <td>197058</td>
-      <td>3,381,706.28</td>
-      <td>0.73</td>
+      <th>NV</th>
+      <td>3,286,783.60</td>
+      <td>0.71</td>
     </tr>
     <tr>
-      <th>51</th>
-      <td>WV</td>
-      <td>40881</td>
-      <td>3,117,953.33</td>
-      <td>0.68</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>TN</td>
-      <td>48894</td>
-      <td>2,618,492.11</td>
+      <th>AL</th>
+      <td>2,645,641.77</td>
       <td>0.57</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>ME</td>
-      <td>35932</td>
-      <td>2,474,521.03</td>
-      <td>0.54</td>
+      <th>KS</th>
+      <td>2,300,679.03</td>
+      <td>0.50</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>HI</td>
-      <td>72469</td>
-      <td>2,197,230.56</td>
-      <td>0.48</td>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>41</th>
-      <td>SC</td>
-      <td>52545</td>
-      <td>2,178,968.43</td>
-      <td>0.47</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>RI</td>
-      <td>31182</td>
-      <td>2,042,188.88</td>
-      <td>0.44</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>NE</td>
-      <td>80877</td>
-      <td>1,725,326.48</td>
-      <td>0.37</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>UT</td>
-      <td>35084</td>
-      <td>1,543,076.60</td>
-      <td>0.33</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>DC</td>
-      <td>5966</td>
-      <td>1,476,616.19</td>
-      <td>0.32</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>AR</td>
-      <td>17602</td>
-      <td>959,387.78</td>
-      <td>0.21</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>DE</td>
-      <td>12699</td>
-      <td>922,951.30</td>
-      <td>0.20</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>MS</td>
-      <td>10452</td>
-      <td>761,987.40</td>
-      <td>0.17</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>OK</td>
-      <td>10905</td>
-      <td>426,067.01</td>
-      <td>0.09</td>
-    </tr>
-    <tr>
-      <th>52</th>
-      <td>WY</td>
-      <td>2978</td>
-      <td>344,649.55</td>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>AK</td>
-      <td>9759</td>
-      <td>305,544.51</td>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>LA</td>
-      <td>1858</td>
-      <td>239,404.67</td>
-      <td>0.05</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>VI</td>
-      <td>33</td>
-      <td>23,330.00</td>
+      <th>ON</th>
+      <td>43,379.64</td>
       <td>0.01</td>
     </tr>
     <tr>
-      <th>42</th>
-      <td>SD</td>
-      <td>1594</td>
-      <td>19,425.87</td>
+      <th>AA</th>
+      <td>32,321.83</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>GU</th>
+      <td>17,440.56</td>
       <td>0.00</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>ID</td>
-      <td>2338</td>
-      <td>10,215.80</td>
+      <th>QC</th>
+      <td>12,702.60</td>
       <td>0.00</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>MP</td>
-      <td>83</td>
-      <td>206.40</td>
+      <th>AB</th>
+      <td>10,634.25</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>AS</th>
+      <td>5,096.83</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>YT</th>
+      <td>4,503.50</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>NS</th>
+      <td>3,920.25</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>MP</th>
+      <td>3,376.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>MB</th>
+      <td>3,303.64</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>NB</th>
+      <td>2,012.69</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>NL</th>
+      <td>867.50</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>SK</th>
+      <td>739.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>NT</th>
+      <td>349.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>VD</th>
+      <td>225.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>PE</th>
+      <td>207.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>HE</th>
+      <td>178.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>OM</th>
+      <td>174.52</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>ZH</th>
+      <td>168.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>NU</th>
+      <td>149.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>BW</th>
+      <td>113.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>TR</th>
+      <td>100.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>SH</th>
+      <td>50.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>UK</th>
+      <td>50.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>RM</th>
+      <td>25.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>BS</th>
+      <td>25.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>HH</th>
+      <td>15.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>NA</th>
+      <td>15.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>RJ</th>
+      <td>10.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>PG</th>
+      <td>5.00</td>
       <td>0.00</td>
     </tr>
   </tbody>
 </table>
+<p>87 rows × 2 columns</p>
 </div>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contributor_states</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_contributor_states.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
@@ -15716,7 +15642,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Is-money-from-blue-states-propping-up-Dems-in-red-states?-(WIP)">Is money from blue states propping up Dems in red states? (WIP)<a class="anchor-link" href="#Is-money-from-blue-states-propping-up-Dems-in-red-states?-(WIP)">&#182;</a></h3><p>Jan. 1, 2017 — now</p>
+<h3 id="To-which-states-do-individual-contributions-to-congressional-candidates-go?">To which states do individual contributions to congressional candidates go?<a class="anchor-link" href="#To-which-states-do-individual-contributions-to-congressional-candidates-go?">&#182;</a></h3><p>Jan. 1, 2017 — now</p>
 
 </div>
 </div>
@@ -15726,15 +15652,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clinton_votes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/clintonvotes.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_recipient_states</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
 
-<span class="n">clinton_votes</span>
+<span class="n">actblue_recipient_states</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_recipient_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_recipient_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 
-<span class="n">votes_vs_contribs</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">clinton_votes</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;postal&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
-
-<span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;dollars_per&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;votes&#39;</span><span class="p">]</span>
-
-<span class="n">votes_vs_contribs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dollars_per&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">actblue_recipient_states</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -15770,577 +15692,280 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>contributor_state</th>
-      <th>count</th>
       <th>sum</th>
       <th>percent</th>
-      <th>state</th>
-      <th>postal</th>
-      <th>votes</th>
-      <th>dollars_per</th>
+    </tr>
+    <tr>
+      <th>recipient_state</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>7</th>
-      <td>DC</td>
-      <td>134463</td>
-      <td>12,593,293.48</td>
-      <td>2.73</td>
-      <td>District of Columbia</td>
-      <td>DC</td>
-      <td>282830</td>
-      <td>44.53</td>
+      <th>CA</th>
+      <td>52,950,919.94</td>
+      <td>11.47</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>MT</td>
-      <td>87334</td>
-      <td>3,731,563.40</td>
-      <td>0.81</td>
-      <td>Montana</td>
-      <td>MT</td>
-      <td>177709</td>
-      <td>21.00</td>
+      <th>TX</th>
+      <td>39,168,490.76</td>
+      <td>8.48</td>
     </tr>
     <tr>
-      <th>34</th>
-      <td>NY</td>
-      <td>1272673</td>
-      <td>55,822,097.85</td>
-      <td>12.09</td>
-      <td>New York</td>
-      <td>NY</td>
-      <td>4556142</td>
-      <td>12.25</td>
+      <th>GA</th>
+      <td>30,602,688.53</td>
+      <td>6.63</td>
     </tr>
     <tr>
-      <th>19</th>
-      <td>MA</td>
-      <td>630936</td>
-      <td>24,027,085.11</td>
-      <td>5.20</td>
-      <td>Massachusetts</td>
-      <td>MA</td>
-      <td>1995196</td>
-      <td>12.04</td>
+      <th>NY</th>
+      <td>29,933,133.91</td>
+      <td>6.48</td>
     </tr>
     <tr>
-      <th>32</th>
-      <td>NM</td>
-      <td>162131</td>
-      <td>4,466,523.13</td>
-      <td>0.97</td>
-      <td>New Mexico</td>
-      <td>NM</td>
-      <td>385234</td>
-      <td>11.59</td>
+      <th>AL</th>
+      <td>22,298,530.92</td>
+      <td>4.83</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>CA</td>
-      <td>2726271</td>
-      <td>96,308,858.39</td>
-      <td>20.86</td>
-      <td>California</td>
-      <td>CA</td>
-      <td>8753792</td>
-      <td>11.00</td>
+      <th>PA</th>
+      <td>19,817,025.90</td>
+      <td>4.29</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>CT</td>
-      <td>272245</td>
-      <td>9,578,866.59</td>
-      <td>2.07</td>
-      <td>Connecticut</td>
-      <td>CT</td>
-      <td>897572</td>
-      <td>10.67</td>
+      <th>MA</th>
+      <td>18,890,647.81</td>
+      <td>4.09</td>
     </tr>
     <tr>
-      <th>50</th>
-      <td>WY</td>
-      <td>13064</td>
-      <td>566,867.77</td>
-      <td>0.12</td>
-      <td>Wyoming</td>
-      <td>WY</td>
-      <td>55973</td>
-      <td>10.13</td>
+      <th>FL</th>
+      <td>18,669,243.31</td>
+      <td>4.04</td>
     </tr>
     <tr>
-      <th>43</th>
-      <td>TX</td>
-      <td>848008</td>
-      <td>33,681,092.62</td>
-      <td>7.30</td>
-      <td>Texas</td>
-      <td>TX</td>
-      <td>3877868</td>
-      <td>8.69</td>
+      <th>OH</th>
+      <td>15,809,478.82</td>
+      <td>3.42</td>
     </tr>
     <tr>
-      <th>47</th>
-      <td>WA</td>
-      <td>574979</td>
-      <td>14,850,502.18</td>
-      <td>3.22</td>
-      <td>Washington</td>
-      <td>WA</td>
-      <td>1742718</td>
-      <td>8.52</td>
+      <th>VA</th>
+      <td>15,100,570.19</td>
+      <td>3.27</td>
     </tr>
     <tr>
-      <th>45</th>
-      <td>VA</td>
-      <td>361557</td>
-      <td>14,846,735.36</td>
-      <td>3.22</td>
-      <td>Virginia</td>
-      <td>VA</td>
-      <td>1981473</td>
-      <td>7.49</td>
+      <th>WI</th>
+      <td>14,644,052.39</td>
+      <td>3.17</td>
     </tr>
     <tr>
-      <th>20</th>
-      <td>MD</td>
-      <td>292195</td>
-      <td>12,262,350.70</td>
-      <td>2.66</td>
-      <td>Maryland</td>
-      <td>MD</td>
-      <td>1677928</td>
-      <td>7.31</td>
+      <th>MT</th>
+      <td>12,098,921.81</td>
+      <td>2.62</td>
     </tr>
     <tr>
-      <th>46</th>
-      <td>VT</td>
-      <td>59562</td>
-      <td>1,268,902.53</td>
-      <td>0.27</td>
-      <td>Vermont</td>
-      <td>VT</td>
-      <td>178573</td>
-      <td>7.11</td>
+      <th>IL</th>
+      <td>12,007,438.15</td>
+      <td>2.60</td>
     </tr>
     <tr>
-      <th>37</th>
-      <td>OR</td>
-      <td>431700</td>
-      <td>6,922,949.00</td>
-      <td>1.50</td>
-      <td>Oregon</td>
-      <td>OR</td>
-      <td>1002106</td>
-      <td>6.91</td>
+      <th>MO</th>
+      <td>11,989,893.13</td>
+      <td>2.60</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>HI</td>
-      <td>65478</td>
-      <td>1,825,880.49</td>
-      <td>0.40</td>
-      <td>Hawaii</td>
-      <td>HI</td>
-      <td>266891</td>
-      <td>6.84</td>
+      <th>MI</th>
+      <td>11,944,604.30</td>
+      <td>2.59</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>AZ</td>
-      <td>263018</td>
-      <td>7,774,687.21</td>
-      <td>1.68</td>
-      <td>Arizona</td>
-      <td>AZ</td>
-      <td>1161167</td>
-      <td>6.70</td>
+      <th>NJ</th>
+      <td>11,530,051.94</td>
+      <td>2.50</td>
     </tr>
     <tr>
-      <th>0</th>
-      <td>AK</td>
-      <td>31850</td>
-      <td>778,700.32</td>
-      <td>0.17</td>
-      <td>Alaska</td>
-      <td>AK</td>
-      <td>116454</td>
-      <td>6.69</td>
+      <th>MN</th>
+      <td>11,459,736.40</td>
+      <td>2.48</td>
     </tr>
     <tr>
-      <th>28</th>
-      <td>ND</td>
-      <td>12254</td>
-      <td>624,183.09</td>
-      <td>0.14</td>
-      <td>North Dakota</td>
-      <td>ND</td>
-      <td>93758</td>
-      <td>6.66</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>NH</td>
-      <td>76486</td>
-      <td>2,273,943.26</td>
-      <td>0.49</td>
-      <td>New Hampshire</td>
-      <td>NH</td>
-      <td>348526</td>
-      <td>6.52</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>RI</td>
-      <td>48447</td>
-      <td>1,647,545.73</td>
-      <td>0.36</td>
-      <td>Rhode Island</td>
-      <td>RI</td>
-      <td>252525</td>
-      <td>6.52</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>UT</td>
-      <td>60915</td>
-      <td>2,016,569.02</td>
-      <td>0.44</td>
-      <td>Utah</td>
-      <td>UT</td>
-      <td>310676</td>
-      <td>6.49</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>NV</td>
-      <td>89061</td>
-      <td>3,286,783.60</td>
-      <td>0.71</td>
-      <td>Nevada</td>
-      <td>NV</td>
-      <td>539260</td>
-      <td>6.09</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>ME</td>
-      <td>72097</td>
-      <td>2,168,314.12</td>
-      <td>0.47</td>
-      <td>Maine</td>
-      <td>ME</td>
-      <td>357735</td>
-      <td>6.06</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>MO</td>
-      <td>176421</td>
-      <td>6,260,989.44</td>
-      <td>1.36</td>
-      <td>Missouri</td>
-      <td>MO</td>
-      <td>1071068</td>
-      <td>5.85</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>MN</td>
-      <td>248668</td>
-      <td>7,978,786.70</td>
-      <td>1.73</td>
-      <td>Minnesota</td>
-      <td>MN</td>
-      <td>1367825</td>
-      <td>5.83</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CO</td>
-      <td>278355</td>
-      <td>7,652,925.44</td>
-      <td>1.66</td>
-      <td>Colorado</td>
-      <td>CO</td>
-      <td>1338870</td>
-      <td>5.72</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>IL</td>
-      <td>503670</td>
-      <td>16,872,490.31</td>
-      <td>3.65</td>
-      <td>Illinois</td>
-      <td>IL</td>
-      <td>3090729</td>
-      <td>5.46</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>KS</td>
-      <td>69908</td>
-      <td>2,300,679.03</td>
-      <td>0.50</td>
-      <td>Kansas</td>
-      <td>KS</td>
-      <td>427005</td>
-      <td>5.39</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>NJ</td>
-      <td>341758</td>
-      <td>11,386,807.73</td>
+      <th>AZ</th>
+      <td>11,384,541.47</td>
       <td>2.47</td>
-      <td>New Jersey</td>
-      <td>NJ</td>
-      <td>2148278</td>
-      <td>5.30</td>
     </tr>
     <tr>
-      <th>29</th>
-      <td>NE</td>
-      <td>40472</td>
-      <td>1,451,639.32</td>
-      <td>0.31</td>
-      <td>Nebraska</td>
-      <td>NE</td>
-      <td>284494</td>
-      <td>5.10</td>
+      <th>NV</th>
+      <td>9,012,588.94</td>
+      <td>1.95</td>
     </tr>
     <tr>
-      <th>38</th>
-      <td>PA</td>
-      <td>454279</td>
-      <td>14,343,967.74</td>
-      <td>3.11</td>
-      <td>Pennsylvania</td>
-      <td>PA</td>
-      <td>2926441</td>
-      <td>4.90</td>
+      <th>CT</th>
+      <td>8,710,750.67</td>
+      <td>1.89</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>FL</td>
-      <td>607719</td>
-      <td>20,856,355.01</td>
-      <td>4.52</td>
-      <td>Florida</td>
-      <td>FL</td>
-      <td>4504975</td>
-      <td>4.63</td>
+      <th>WA</th>
+      <td>7,606,825.62</td>
+      <td>1.65</td>
     </tr>
     <tr>
-      <th>42</th>
-      <td>TN</td>
-      <td>122374</td>
-      <td>3,756,632.70</td>
+      <th>VT</th>
+      <td>6,834,428.79</td>
+      <td>1.48</td>
+    </tr>
+    <tr>
+      <th>IN</th>
+      <td>5,116,543.13</td>
+      <td>1.11</td>
+    </tr>
+    <tr>
+      <th>NM</th>
+      <td>5,099,490.39</td>
+      <td>1.10</td>
+    </tr>
+    <tr>
+      <th>IA</th>
+      <td>4,711,694.25</td>
+      <td>1.02</td>
+    </tr>
+    <tr>
+      <th>ND</th>
+      <td>4,424,964.05</td>
+      <td>0.96</td>
+    </tr>
+    <tr>
+      <th>NH</th>
+      <td>4,051,581.33</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <th>KS</th>
+      <td>4,048,737.85</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <th>NC</th>
+      <td>3,916,268.51</td>
+      <td>0.85</td>
+    </tr>
+    <tr>
+      <th>CO</th>
+      <td>3,769,898.00</td>
+      <td>0.82</td>
+    </tr>
+    <tr>
+      <th>KY</th>
+      <td>3,743,859.88</td>
       <td>0.81</td>
-      <td>Tennessee</td>
-      <td>TN</td>
-      <td>870695</td>
-      <td>4.31</td>
     </tr>
     <tr>
-      <th>48</th>
-      <td>WI</td>
-      <td>212997</td>
-      <td>5,914,272.75</td>
-      <td>1.28</td>
-      <td>Wisconsin</td>
-      <td>WI</td>
-      <td>1382536</td>
-      <td>4.28</td>
+      <th>MD</th>
+      <td>3,577,144.95</td>
+      <td>0.77</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>DE</td>
-      <td>35355</td>
-      <td>982,384.17</td>
-      <td>0.21</td>
-      <td>Delaware</td>
-      <td>DE</td>
-      <td>235603</td>
-      <td>4.17</td>
+      <th>OR</th>
+      <td>3,381,706.28</td>
+      <td>0.73</td>
     </tr>
     <tr>
-      <th>22</th>
-      <td>MI</td>
-      <td>297021</td>
-      <td>8,773,272.40</td>
-      <td>1.90</td>
-      <td>Michigan</td>
-      <td>MI</td>
-      <td>2268839</td>
-      <td>3.87</td>
+      <th>WV</th>
+      <td>3,117,953.33</td>
+      <td>0.68</td>
     </tr>
     <tr>
-      <th>15</th>
-      <td>IN</td>
-      <td>127761</td>
-      <td>3,871,877.24</td>
-      <td>0.84</td>
-      <td>Indiana</td>
-      <td>IN</td>
-      <td>1033126</td>
-      <td>3.75</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>AL</td>
-      <td>73166</td>
-      <td>2,645,641.77</td>
+      <th>TN</th>
+      <td>2,618,492.11</td>
       <td>0.57</td>
-      <td>Alabama</td>
-      <td>AL</td>
-      <td>729547</td>
-      <td>3.63</td>
     </tr>
     <tr>
-      <th>49</th>
-      <td>WV</td>
-      <td>30973</td>
-      <td>676,865.70</td>
-      <td>0.15</td>
-      <td>West Virginia</td>
-      <td>WV</td>
-      <td>188794</td>
-      <td>3.59</td>
+      <th>ME</th>
+      <td>2,474,521.03</td>
+      <td>0.54</td>
     </tr>
     <tr>
-      <th>35</th>
-      <td>OH</td>
-      <td>307173</td>
-      <td>8,444,581.47</td>
-      <td>1.83</td>
-      <td>Ohio</td>
-      <td>OH</td>
-      <td>2394169</td>
-      <td>3.53</td>
+      <th>HI</th>
+      <td>2,197,230.56</td>
+      <td>0.48</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>KY</td>
-      <td>61756</td>
-      <td>2,133,170.91</td>
-      <td>0.46</td>
-      <td>Kentucky</td>
-      <td>KY</td>
-      <td>628854</td>
-      <td>3.39</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>IA</td>
-      <td>70679</td>
-      <td>2,168,822.93</td>
+      <th>SC</th>
+      <td>2,178,968.43</td>
       <td>0.47</td>
-      <td>Iowa</td>
-      <td>IA</td>
-      <td>653669</td>
-      <td>3.32</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>ID</td>
-      <td>34910</td>
-      <td>579,568.96</td>
-      <td>0.13</td>
-      <td>Idaho</td>
-      <td>ID</td>
-      <td>189765</td>
-      <td>3.05</td>
+      <th>RI</th>
+      <td>2,042,188.88</td>
+      <td>0.44</td>
     </tr>
     <tr>
-      <th>10</th>
-      <td>GA</td>
-      <td>177847</td>
-      <td>5,646,006.66</td>
-      <td>1.22</td>
-      <td>Georgia</td>
-      <td>GA</td>
-      <td>1877963</td>
-      <td>3.01</td>
+      <th>NE</th>
+      <td>1,725,326.48</td>
+      <td>0.37</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>AR</td>
-      <td>34723</td>
-      <td>1,124,713.17</td>
-      <td>0.24</td>
-      <td>Arkansas</td>
-      <td>AR</td>
-      <td>380494</td>
-      <td>2.96</td>
+      <th>UT</th>
+      <td>1,543,076.60</td>
+      <td>0.33</td>
     </tr>
     <tr>
-      <th>36</th>
-      <td>OK</td>
-      <td>44697</td>
-      <td>1,139,844.53</td>
-      <td>0.25</td>
-      <td>Oklahoma</td>
-      <td>OK</td>
-      <td>420375</td>
-      <td>2.71</td>
+      <th>DC</th>
+      <td>1,476,616.19</td>
+      <td>0.32</td>
     </tr>
     <tr>
-      <th>27</th>
-      <td>NC</td>
-      <td>213208</td>
-      <td>5,858,935.52</td>
-      <td>1.27</td>
-      <td>North Carolina</td>
-      <td>NC</td>
-      <td>2189316</td>
-      <td>2.68</td>
+      <th>AR</th>
+      <td>959,387.78</td>
+      <td>0.21</td>
     </tr>
     <tr>
-      <th>40</th>
-      <td>SC</td>
-      <td>74723</td>
-      <td>2,160,444.73</td>
-      <td>0.47</td>
-      <td>South Carolina</td>
-      <td>SC</td>
-      <td>855373</td>
-      <td>2.53</td>
+      <th>DE</th>
+      <td>922,951.30</td>
+      <td>0.20</td>
     </tr>
     <tr>
-      <th>41</th>
-      <td>SD</td>
-      <td>10811</td>
-      <td>225,889.90</td>
+      <th>MS</th>
+      <td>761,987.40</td>
+      <td>0.17</td>
+    </tr>
+    <tr>
+      <th>OK</th>
+      <td>426,067.01</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>WY</th>
+      <td>344,649.55</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>AK</th>
+      <td>305,544.51</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>LA</th>
+      <td>239,404.67</td>
       <td>0.05</td>
-      <td>South Dakota</td>
-      <td>SD</td>
-      <td>117458</td>
-      <td>1.92</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>LA</td>
-      <td>46712</td>
-      <td>1,208,576.29</td>
-      <td>0.26</td>
-      <td>Louisiana</td>
-      <td>LA</td>
-      <td>780154</td>
-      <td>1.55</td>
+      <th>VI</th>
+      <td>23,330.00</td>
+      <td>0.01</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>MS</td>
-      <td>13542</td>
-      <td>482,341.27</td>
-      <td>0.10</td>
-      <td>Mississippi</td>
-      <td>MS</td>
-      <td>485131</td>
-      <td>0.99</td>
+      <th>SD</th>
+      <td>19,425.87</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <td>10,215.80</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>MP</th>
+      <td>206.40</td>
+      <td>0.00</td>
     </tr>
   </tbody>
 </table>
@@ -16353,14 +15978,26 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-money-from-blue-states-propping-up-Dems-in-red-states?-(WIP)">Is money from blue states propping up Dems in red states? (WIP)<a class="anchor-link" href="#Is-money-from-blue-states-propping-up-Dems-in-red-states?-(WIP)">&#182;</a></h3><p>Jan. 1, 2017 — now</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;contribs_per&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;votes&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/presvotes.csv&#39;</span><span class="p">)</span>
 
-<span class="n">votes_vs_contribs</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;contribs_per&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;trump&#39;</span><span class="p">]</span>
+<span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;trump&#39;</span><span class="p">]</span>
+
+<span class="n">pres_votes</span>
 </pre></div>
 
 </div>
@@ -16396,629 +16033,525 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>contributor_state</th>
-      <th>count</th>
-      <th>sum</th>
-      <th>percent</th>
       <th>state</th>
-      <th>postal</th>
-      <th>votes</th>
-      <th>dollars_per</th>
-      <th>contribs_per</th>
+      <th>trump</th>
+      <th>clinton</th>
+      <th>others</th>
+      <th>total</th>
+      <th>red</th>
+      <th>blue</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>26</th>
-      <td>MT</td>
-      <td>87334</td>
-      <td>3,731,563.40</td>
-      <td>0.81</td>
-      <td>Montana</td>
-      <td>MT</td>
-      <td>177709</td>
-      <td>21.00</td>
-      <td>0.49</td>
+      <th>0</th>
+      <td>AL</td>
+      <td>1318255</td>
+      <td>729547</td>
+      <td>75570</td>
+      <td>2123372</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>DC</td>
-      <td>134463</td>
-      <td>12,593,293.48</td>
-      <td>2.73</td>
-      <td>District of Columbia</td>
-      <td>DC</td>
-      <td>282830</td>
-      <td>44.53</td>
-      <td>0.48</td>
+      <th>1</th>
+      <td>AK</td>
+      <td>163387</td>
+      <td>116454</td>
+      <td>38767</td>
+      <td>318608</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>37</th>
-      <td>OR</td>
-      <td>431700</td>
-      <td>6,922,949.00</td>
-      <td>1.50</td>
-      <td>Oregon</td>
-      <td>OR</td>
-      <td>1002106</td>
-      <td>6.91</td>
-      <td>0.43</td>
+      <th>2</th>
+      <td>AZ</td>
+      <td>1252401</td>
+      <td>1161167</td>
+      <td>159597</td>
+      <td>2573165</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>32</th>
-      <td>NM</td>
-      <td>162131</td>
-      <td>4,466,523.13</td>
-      <td>0.97</td>
-      <td>New Mexico</td>
-      <td>NM</td>
-      <td>385234</td>
-      <td>11.59</td>
-      <td>0.42</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>VT</td>
-      <td>59562</td>
-      <td>1,268,902.53</td>
-      <td>0.27</td>
-      <td>Vermont</td>
-      <td>VT</td>
-      <td>178573</td>
-      <td>7.11</td>
-      <td>0.33</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>WA</td>
-      <td>574979</td>
-      <td>14,850,502.18</td>
-      <td>3.22</td>
-      <td>Washington</td>
-      <td>WA</td>
-      <td>1742718</td>
-      <td>8.52</td>
-      <td>0.33</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>MA</td>
-      <td>630936</td>
-      <td>24,027,085.11</td>
-      <td>5.20</td>
-      <td>Massachusetts</td>
-      <td>MA</td>
-      <td>1995196</td>
-      <td>12.04</td>
-      <td>0.32</td>
+      <th>3</th>
+      <td>AR</td>
+      <td>684872</td>
+      <td>380494</td>
+      <td>65310</td>
+      <td>1130676</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>4</th>
       <td>CA</td>
-      <td>2726271</td>
-      <td>96,308,858.39</td>
-      <td>20.86</td>
-      <td>California</td>
-      <td>CA</td>
+      <td>4483814</td>
       <td>8753792</td>
-      <td>11.00</td>
-      <td>0.31</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>CT</td>
-      <td>272245</td>
-      <td>9,578,866.59</td>
-      <td>2.07</td>
-      <td>Connecticut</td>
-      <td>CT</td>
-      <td>897572</td>
-      <td>10.67</td>
-      <td>0.30</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>NY</td>
-      <td>1272673</td>
-      <td>55,822,097.85</td>
-      <td>12.09</td>
-      <td>New York</td>
-      <td>NY</td>
-      <td>4556142</td>
-      <td>12.25</td>
-      <td>0.28</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>AK</td>
-      <td>31850</td>
-      <td>778,700.32</td>
-      <td>0.17</td>
-      <td>Alaska</td>
-      <td>AK</td>
-      <td>116454</td>
-      <td>6.69</td>
-      <td>0.27</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>HI</td>
-      <td>65478</td>
-      <td>1,825,880.49</td>
-      <td>0.40</td>
-      <td>Hawaii</td>
-      <td>HI</td>
-      <td>266891</td>
-      <td>6.84</td>
-      <td>0.25</td>
-    </tr>
-    <tr>
-      <th>50</th>
-      <td>WY</td>
-      <td>13064</td>
-      <td>566,867.77</td>
-      <td>0.12</td>
-      <td>Wyoming</td>
-      <td>WY</td>
-      <td>55973</td>
-      <td>10.13</td>
-      <td>0.23</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>AZ</td>
-      <td>263018</td>
-      <td>7,774,687.21</td>
-      <td>1.68</td>
-      <td>Arizona</td>
-      <td>AZ</td>
-      <td>1161167</td>
-      <td>6.70</td>
-      <td>0.23</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>NH</td>
-      <td>76486</td>
-      <td>2,273,943.26</td>
-      <td>0.49</td>
-      <td>New Hampshire</td>
-      <td>NH</td>
-      <td>348526</td>
-      <td>6.52</td>
-      <td>0.22</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>TX</td>
-      <td>848008</td>
-      <td>33,681,092.62</td>
-      <td>7.30</td>
-      <td>Texas</td>
-      <td>TX</td>
-      <td>3877868</td>
-      <td>8.69</td>
-      <td>0.22</td>
+      <td>943998</td>
+      <td>14181604</td>
+      <td>False</td>
+      <td>True</td>
     </tr>
     <tr>
       <th>5</th>
       <td>CO</td>
-      <td>278355</td>
-      <td>7,652,925.44</td>
-      <td>1.66</td>
-      <td>Colorado</td>
-      <td>CO</td>
+      <td>1202484</td>
       <td>1338870</td>
-      <td>5.72</td>
-      <td>0.21</td>
+      <td>238893</td>
+      <td>2780247</td>
+      <td>False</td>
+      <td>True</td>
     </tr>
     <tr>
-      <th>21</th>
-      <td>ME</td>
-      <td>72097</td>
-      <td>2,168,314.12</td>
-      <td>0.47</td>
-      <td>Maine</td>
-      <td>ME</td>
-      <td>357735</td>
-      <td>6.06</td>
-      <td>0.20</td>
+      <th>6</th>
+      <td>CT</td>
+      <td>673215</td>
+      <td>897572</td>
+      <td>74133</td>
+      <td>1644920</td>
+      <td>False</td>
+      <td>True</td>
     </tr>
     <tr>
-      <th>44</th>
-      <td>UT</td>
-      <td>60915</td>
-      <td>2,016,569.02</td>
-      <td>0.44</td>
-      <td>Utah</td>
-      <td>UT</td>
-      <td>310676</td>
-      <td>6.49</td>
-      <td>0.20</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>RI</td>
-      <td>48447</td>
-      <td>1,647,545.73</td>
-      <td>0.36</td>
-      <td>Rhode Island</td>
-      <td>RI</td>
-      <td>252525</td>
-      <td>6.52</td>
-      <td>0.19</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>ID</td>
-      <td>34910</td>
-      <td>579,568.96</td>
-      <td>0.13</td>
-      <td>Idaho</td>
-      <td>ID</td>
-      <td>189765</td>
-      <td>3.05</td>
-      <td>0.18</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>VA</td>
-      <td>361557</td>
-      <td>14,846,735.36</td>
-      <td>3.22</td>
-      <td>Virginia</td>
-      <td>VA</td>
-      <td>1981473</td>
-      <td>7.49</td>
-      <td>0.18</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>MN</td>
-      <td>248668</td>
-      <td>7,978,786.70</td>
-      <td>1.73</td>
-      <td>Minnesota</td>
-      <td>MN</td>
-      <td>1367825</td>
-      <td>5.83</td>
-      <td>0.18</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>MD</td>
-      <td>292195</td>
-      <td>12,262,350.70</td>
-      <td>2.66</td>
-      <td>Maryland</td>
-      <td>MD</td>
-      <td>1677928</td>
-      <td>7.31</td>
-      <td>0.17</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>NV</td>
-      <td>89061</td>
-      <td>3,286,783.60</td>
-      <td>0.71</td>
-      <td>Nevada</td>
-      <td>NV</td>
-      <td>539260</td>
-      <td>6.09</td>
-      <td>0.17</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>MO</td>
-      <td>176421</td>
-      <td>6,260,989.44</td>
-      <td>1.36</td>
-      <td>Missouri</td>
-      <td>MO</td>
-      <td>1071068</td>
-      <td>5.85</td>
-      <td>0.16</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>WV</td>
-      <td>30973</td>
-      <td>676,865.70</td>
-      <td>0.15</td>
-      <td>West Virginia</td>
-      <td>WV</td>
-      <td>188794</td>
-      <td>3.59</td>
-      <td>0.16</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>KS</td>
-      <td>69908</td>
-      <td>2,300,679.03</td>
-      <td>0.50</td>
-      <td>Kansas</td>
-      <td>KS</td>
-      <td>427005</td>
-      <td>5.39</td>
-      <td>0.16</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>IL</td>
-      <td>503670</td>
-      <td>16,872,490.31</td>
-      <td>3.65</td>
-      <td>Illinois</td>
-      <td>IL</td>
-      <td>3090729</td>
-      <td>5.46</td>
-      <td>0.16</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>NJ</td>
-      <td>341758</td>
-      <td>11,386,807.73</td>
-      <td>2.47</td>
-      <td>New Jersey</td>
-      <td>NJ</td>
-      <td>2148278</td>
-      <td>5.30</td>
-      <td>0.16</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>PA</td>
-      <td>454279</td>
-      <td>14,343,967.74</td>
-      <td>3.11</td>
-      <td>Pennsylvania</td>
-      <td>PA</td>
-      <td>2926441</td>
-      <td>4.90</td>
-      <td>0.16</td>
-    </tr>
-    <tr>
-      <th>48</th>
-      <td>WI</td>
-      <td>212997</td>
-      <td>5,914,272.75</td>
-      <td>1.28</td>
-      <td>Wisconsin</td>
-      <td>WI</td>
-      <td>1382536</td>
-      <td>4.28</td>
-      <td>0.15</td>
+      <th>7</th>
+      <td>DE</td>
+      <td>185127</td>
+      <td>235603</td>
+      <td>23084</td>
+      <td>443814</td>
+      <td>False</td>
+      <td>True</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>DE</td>
-      <td>35355</td>
-      <td>982,384.17</td>
-      <td>0.21</td>
-      <td>Delaware</td>
-      <td>DE</td>
-      <td>235603</td>
-      <td>4.17</td>
-      <td>0.15</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>NE</td>
-      <td>40472</td>
-      <td>1,451,639.32</td>
-      <td>0.31</td>
-      <td>Nebraska</td>
-      <td>NE</td>
-      <td>284494</td>
-      <td>5.10</td>
-      <td>0.14</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>TN</td>
-      <td>122374</td>
-      <td>3,756,632.70</td>
-      <td>0.81</td>
-      <td>Tennessee</td>
-      <td>TN</td>
-      <td>870695</td>
-      <td>4.31</td>
-      <td>0.14</td>
+      <td>DC</td>
+      <td>12723</td>
+      <td>282830</td>
+      <td>15715</td>
+      <td>311268</td>
+      <td>False</td>
+      <td>True</td>
     </tr>
     <tr>
       <th>9</th>
       <td>FL</td>
-      <td>607719</td>
-      <td>20,856,355.01</td>
-      <td>4.52</td>
-      <td>Florida</td>
-      <td>FL</td>
+      <td>4617886</td>
       <td>4504975</td>
-      <td>4.63</td>
-      <td>0.13</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>MI</td>
-      <td>297021</td>
-      <td>8,773,272.40</td>
-      <td>1.90</td>
-      <td>Michigan</td>
-      <td>MI</td>
-      <td>2268839</td>
-      <td>3.87</td>
-      <td>0.13</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>ND</td>
-      <td>12254</td>
-      <td>624,183.09</td>
-      <td>0.14</td>
-      <td>North Dakota</td>
-      <td>ND</td>
-      <td>93758</td>
-      <td>6.66</td>
-      <td>0.13</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>OH</td>
-      <td>307173</td>
-      <td>8,444,581.47</td>
-      <td>1.83</td>
-      <td>Ohio</td>
-      <td>OH</td>
-      <td>2394169</td>
-      <td>3.53</td>
-      <td>0.13</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>IN</td>
-      <td>127761</td>
-      <td>3,871,877.24</td>
-      <td>0.84</td>
-      <td>Indiana</td>
-      <td>IN</td>
-      <td>1033126</td>
-      <td>3.75</td>
-      <td>0.12</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>IA</td>
-      <td>70679</td>
-      <td>2,168,822.93</td>
-      <td>0.47</td>
-      <td>Iowa</td>
-      <td>IA</td>
-      <td>653669</td>
-      <td>3.32</td>
-      <td>0.11</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>OK</td>
-      <td>44697</td>
-      <td>1,139,844.53</td>
-      <td>0.25</td>
-      <td>Oklahoma</td>
-      <td>OK</td>
-      <td>420375</td>
-      <td>2.71</td>
-      <td>0.11</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>AL</td>
-      <td>73166</td>
-      <td>2,645,641.77</td>
-      <td>0.57</td>
-      <td>Alabama</td>
-      <td>AL</td>
-      <td>729547</td>
-      <td>3.63</td>
-      <td>0.10</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>KY</td>
-      <td>61756</td>
-      <td>2,133,170.91</td>
-      <td>0.46</td>
-      <td>Kentucky</td>
-      <td>KY</td>
-      <td>628854</td>
-      <td>3.39</td>
-      <td>0.10</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>NC</td>
-      <td>213208</td>
-      <td>5,858,935.52</td>
-      <td>1.27</td>
-      <td>North Carolina</td>
-      <td>NC</td>
-      <td>2189316</td>
-      <td>2.68</td>
-      <td>0.10</td>
+      <td>297178</td>
+      <td>9420039</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>10</th>
       <td>GA</td>
-      <td>177847</td>
-      <td>5,646,006.66</td>
-      <td>1.22</td>
-      <td>Georgia</td>
-      <td>GA</td>
+      <td>2089104</td>
       <td>1877963</td>
-      <td>3.01</td>
-      <td>0.09</td>
+      <td>147665</td>
+      <td>4114732</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>41</th>
-      <td>SD</td>
-      <td>10811</td>
-      <td>225,889.90</td>
-      <td>0.05</td>
-      <td>South Dakota</td>
-      <td>SD</td>
-      <td>117458</td>
-      <td>1.92</td>
-      <td>0.09</td>
+      <th>11</th>
+      <td>HI</td>
+      <td>128847</td>
+      <td>266891</td>
+      <td>33199</td>
+      <td>428937</td>
+      <td>False</td>
+      <td>True</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>AR</td>
-      <td>34723</td>
-      <td>1,124,713.17</td>
-      <td>0.24</td>
-      <td>Arkansas</td>
-      <td>AR</td>
-      <td>380494</td>
-      <td>2.96</td>
-      <td>0.09</td>
+      <th>12</th>
+      <td>ID</td>
+      <td>409055</td>
+      <td>189765</td>
+      <td>91435</td>
+      <td>690255</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>40</th>
-      <td>SC</td>
-      <td>74723</td>
-      <td>2,160,444.73</td>
-      <td>0.47</td>
-      <td>South Carolina</td>
-      <td>SC</td>
-      <td>855373</td>
-      <td>2.53</td>
-      <td>0.09</td>
+      <th>13</th>
+      <td>IL</td>
+      <td>2146015</td>
+      <td>3090729</td>
+      <td>299680</td>
+      <td>5536424</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>IN</td>
+      <td>1557286</td>
+      <td>1033126</td>
+      <td>144546</td>
+      <td>2734958</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>IA</td>
+      <td>800983</td>
+      <td>653669</td>
+      <td>111379</td>
+      <td>1566031</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>KS</td>
+      <td>671018</td>
+      <td>427005</td>
+      <td>86379</td>
+      <td>1184402</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>KY</td>
+      <td>1202971</td>
+      <td>628854</td>
+      <td>92324</td>
+      <td>1924149</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>18</th>
       <td>LA</td>
-      <td>46712</td>
-      <td>1,208,576.29</td>
-      <td>0.26</td>
-      <td>Louisiana</td>
-      <td>LA</td>
+      <td>1178638</td>
       <td>780154</td>
-      <td>1.55</td>
-      <td>0.06</td>
+      <td>70240</td>
+      <td>2029032</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>ME</td>
+      <td>335593</td>
+      <td>357735</td>
+      <td>54599</td>
+      <td>747927</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>MD</td>
+      <td>943169</td>
+      <td>1677928</td>
+      <td>160349</td>
+      <td>2781446</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>MA</td>
+      <td>1090893</td>
+      <td>1995196</td>
+      <td>238957</td>
+      <td>3325046</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>MI</td>
+      <td>2279543</td>
+      <td>2268839</td>
+      <td>250902</td>
+      <td>4799284</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>MN</td>
+      <td>1322951</td>
+      <td>1367716</td>
+      <td>254146</td>
+      <td>2944813</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>MS</td>
+      <td>700714</td>
+      <td>485131</td>
+      <td>23512</td>
+      <td>1209357</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>MS</td>
-      <td>13542</td>
-      <td>482,341.27</td>
-      <td>0.10</td>
-      <td>Mississippi</td>
-      <td>MS</td>
-      <td>485131</td>
-      <td>0.99</td>
-      <td>0.03</td>
+      <td>MO</td>
+      <td>1594511</td>
+      <td>1071068</td>
+      <td>143026</td>
+      <td>2808605</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>MT</td>
+      <td>279240</td>
+      <td>177709</td>
+      <td>40198</td>
+      <td>497147</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>NE</td>
+      <td>495961</td>
+      <td>284494</td>
+      <td>63772</td>
+      <td>844227</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>NV</td>
+      <td>512058</td>
+      <td>539260</td>
+      <td>74067</td>
+      <td>1125385</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>NH</td>
+      <td>345790</td>
+      <td>348526</td>
+      <td>49980</td>
+      <td>744296</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>NJ</td>
+      <td>1601933</td>
+      <td>2148278</td>
+      <td>123835</td>
+      <td>3874046</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>NM</td>
+      <td>319667</td>
+      <td>385234</td>
+      <td>93418</td>
+      <td>798319</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>NY</td>
+      <td>2819533</td>
+      <td>4556118</td>
+      <td>345791</td>
+      <td>7721442</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>NC</td>
+      <td>2362631</td>
+      <td>2189316</td>
+      <td>189617</td>
+      <td>4741564</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>ND</td>
+      <td>216794</td>
+      <td>93758</td>
+      <td>33808</td>
+      <td>344360</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>OH</td>
+      <td>2841005</td>
+      <td>2394164</td>
+      <td>261318</td>
+      <td>5496487</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>OK</td>
+      <td>949136</td>
+      <td>420375</td>
+      <td>83481</td>
+      <td>1452992</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>OR</td>
+      <td>782403</td>
+      <td>1002106</td>
+      <td>216827</td>
+      <td>2001336</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>PA</td>
+      <td>2970733</td>
+      <td>2926441</td>
+      <td>268304</td>
+      <td>6165478</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>RI</td>
+      <td>180543</td>
+      <td>252525</td>
+      <td>31076</td>
+      <td>464144</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>SC</td>
+      <td>1155389</td>
+      <td>855373</td>
+      <td>92265</td>
+      <td>2103027</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>SD</td>
+      <td>227721</td>
+      <td>117458</td>
+      <td>24914</td>
+      <td>370093</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>TN</td>
+      <td>1522925</td>
+      <td>870695</td>
+      <td>114407</td>
+      <td>2508027</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>TX</td>
+      <td>4685047</td>
+      <td>3877868</td>
+      <td>406311</td>
+      <td>8969226</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>UT</td>
+      <td>515231</td>
+      <td>310676</td>
+      <td>305523</td>
+      <td>1131430</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>VT</td>
+      <td>95369</td>
+      <td>178573</td>
+      <td>41125</td>
+      <td>315067</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>VA</td>
+      <td>1769443</td>
+      <td>1981473</td>
+      <td>233715</td>
+      <td>3984631</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>WA</td>
+      <td>1221747</td>
+      <td>1742718</td>
+      <td>352554</td>
+      <td>3317019</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>WV</td>
+      <td>489371</td>
+      <td>188794</td>
+      <td>36258</td>
+      <td>714423</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>WI</td>
+      <td>1405284</td>
+      <td>1382536</td>
+      <td>188330</td>
+      <td>2976150</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>WY</td>
+      <td>174419</td>
+      <td>55973</td>
+      <td>25457</td>
+      <td>255849</td>
+      <td>True</td>
+      <td>False</td>
     </tr>
   </tbody>
 </table>
@@ -17031,36 +16564,20 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Where-is-the-money-going?-Are-people-giving-to-local-congressional-candidates-or-are-they-giving-to-candidates-around-the-country?">Where is the money going? Are people giving to local congressional candidates or are they giving to candidates around the country?<a class="anchor-link" href="#Where-is-the-money-going?-Are-people-giving-to-local-congressional-candidates-or-are-they-giving-to-candidates-around-the-country?">&#182;</a></h3><p>Jan. 1, 2017 — now</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_in_state</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
-    <span class="s1">&#39;actblue_in_state&#39;</span><span class="p">,</span>
-    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT CASE</span>
-<span class="s2">               WHEN coalesce(beneficiary_candidate_state,cand_office_st) = contributor_state THEN TRUE</span>
-<span class="s2">               ELSE FALSE</span>
-<span class="s2">           END AS in_state,</span>
-<span class="s2">           sum(contribution_amount),</span>
-<span class="s2">           count(*)</span>
-<span class="s2">    FROM actblue_contribs</span>
-<span class="s2">    WHERE extract(YEAR FROM contribution_date) &gt;= 2017</span>
-<span class="s2">    and cand_office in (&#39;H&#39;,&#39;S&#39;)</span>
-<span class="s2">    GROUP BY in_state</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="n">actblue_in_state</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;margin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">])</span><span class="o">-</span><span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;trump&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">])</span>
+
+<span class="n">pres_votes</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">votes_vs_contribs</span> <span class="o">=</span> <span class="n">actblue_contributor_states</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pres_votes</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;dollars_per&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span>
+
+<span class="n">votes_vs_contribs</span><span class="p">[</span><span class="n">votes_vs_contribs</span><span class="o">.</span><span class="n">index</span> <span class="o">!=</span> <span class="s2">&quot;DC&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;margin&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;dollars_per&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -17096,27 +16613,783 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>in_state</th>
       <th>sum</th>
-      <th>count</th>
+      <th>percent</th>
+      <th>trump</th>
+      <th>clinton</th>
+      <th>others</th>
+      <th>total</th>
+      <th>red</th>
+      <th>blue</th>
+      <th>margin</th>
+      <th>dollars_per</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <th>AK</th>
+      <td>778,700.32</td>
+      <td>0.17</td>
+      <td>163387</td>
+      <td>116454</td>
+      <td>38767</td>
+      <td>318608</td>
+      <td>True</td>
       <td>False</td>
-      <td>265,194,911.05</td>
-      <td>9714327</td>
+      <td>-0.15</td>
+      <td>2.44</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>AL</th>
+      <td>2,645,641.77</td>
+      <td>0.57</td>
+      <td>1318255</td>
+      <td>729547</td>
+      <td>75570</td>
+      <td>2123372</td>
       <td>True</td>
-      <td>196,499,085.17</td>
-      <td>3624082</td>
+      <td>False</td>
+      <td>-0.28</td>
+      <td>1.25</td>
+    </tr>
+    <tr>
+      <th>AR</th>
+      <td>1,124,713.17</td>
+      <td>0.24</td>
+      <td>684872</td>
+      <td>380494</td>
+      <td>65310</td>
+      <td>1130676</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.27</td>
+      <td>0.99</td>
+    </tr>
+    <tr>
+      <th>AZ</th>
+      <td>7,774,687.21</td>
+      <td>1.68</td>
+      <td>1252401</td>
+      <td>1161167</td>
+      <td>159597</td>
+      <td>2573165</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.04</td>
+      <td>3.02</td>
+    </tr>
+    <tr>
+      <th>CA</th>
+      <td>96,308,858.39</td>
+      <td>20.86</td>
+      <td>4483814</td>
+      <td>8753792</td>
+      <td>943998</td>
+      <td>14181604</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.30</td>
+      <td>6.79</td>
+    </tr>
+    <tr>
+      <th>CO</th>
+      <td>7,652,925.44</td>
+      <td>1.66</td>
+      <td>1202484</td>
+      <td>1338870</td>
+      <td>238893</td>
+      <td>2780247</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.05</td>
+      <td>2.75</td>
+    </tr>
+    <tr>
+      <th>CT</th>
+      <td>9,578,866.59</td>
+      <td>2.07</td>
+      <td>673215</td>
+      <td>897572</td>
+      <td>74133</td>
+      <td>1644920</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.14</td>
+      <td>5.82</td>
+    </tr>
+    <tr>
+      <th>DC</th>
+      <td>12,593,293.48</td>
+      <td>2.73</td>
+      <td>12723</td>
+      <td>282830</td>
+      <td>15715</td>
+      <td>311268</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.87</td>
+      <td>40.46</td>
+    </tr>
+    <tr>
+      <th>DE</th>
+      <td>982,384.17</td>
+      <td>0.21</td>
+      <td>185127</td>
+      <td>235603</td>
+      <td>23084</td>
+      <td>443814</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.11</td>
+      <td>2.21</td>
+    </tr>
+    <tr>
+      <th>FL</th>
+      <td>20,856,355.01</td>
+      <td>4.52</td>
+      <td>4617886</td>
+      <td>4504975</td>
+      <td>297178</td>
+      <td>9420039</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.01</td>
+      <td>2.21</td>
+    </tr>
+    <tr>
+      <th>GA</th>
+      <td>5,646,006.66</td>
+      <td>1.22</td>
+      <td>2089104</td>
+      <td>1877963</td>
+      <td>147665</td>
+      <td>4114732</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.05</td>
+      <td>1.37</td>
+    </tr>
+    <tr>
+      <th>HI</th>
+      <td>1,825,880.49</td>
+      <td>0.40</td>
+      <td>128847</td>
+      <td>266891</td>
+      <td>33199</td>
+      <td>428937</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.32</td>
+      <td>4.26</td>
+    </tr>
+    <tr>
+      <th>IA</th>
+      <td>2,168,822.93</td>
+      <td>0.47</td>
+      <td>800983</td>
+      <td>653669</td>
+      <td>111379</td>
+      <td>1566031</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.09</td>
+      <td>1.38</td>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <td>579,568.96</td>
+      <td>0.13</td>
+      <td>409055</td>
+      <td>189765</td>
+      <td>91435</td>
+      <td>690255</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.32</td>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <th>IL</th>
+      <td>16,872,490.31</td>
+      <td>3.65</td>
+      <td>2146015</td>
+      <td>3090729</td>
+      <td>299680</td>
+      <td>5536424</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.17</td>
+      <td>3.05</td>
+    </tr>
+    <tr>
+      <th>IN</th>
+      <td>3,871,877.24</td>
+      <td>0.84</td>
+      <td>1557286</td>
+      <td>1033126</td>
+      <td>144546</td>
+      <td>2734958</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.19</td>
+      <td>1.42</td>
+    </tr>
+    <tr>
+      <th>KS</th>
+      <td>2,300,679.03</td>
+      <td>0.50</td>
+      <td>671018</td>
+      <td>427005</td>
+      <td>86379</td>
+      <td>1184402</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.21</td>
+      <td>1.94</td>
+    </tr>
+    <tr>
+      <th>KY</th>
+      <td>2,133,170.91</td>
+      <td>0.46</td>
+      <td>1202971</td>
+      <td>628854</td>
+      <td>92324</td>
+      <td>1924149</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.30</td>
+      <td>1.11</td>
+    </tr>
+    <tr>
+      <th>LA</th>
+      <td>1,208,576.29</td>
+      <td>0.26</td>
+      <td>1178638</td>
+      <td>780154</td>
+      <td>70240</td>
+      <td>2029032</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.20</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <th>MA</th>
+      <td>24,027,085.11</td>
+      <td>5.20</td>
+      <td>1090893</td>
+      <td>1995196</td>
+      <td>238957</td>
+      <td>3325046</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.27</td>
+      <td>7.23</td>
+    </tr>
+    <tr>
+      <th>MD</th>
+      <td>12,262,350.70</td>
+      <td>2.66</td>
+      <td>943169</td>
+      <td>1677928</td>
+      <td>160349</td>
+      <td>2781446</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.26</td>
+      <td>4.41</td>
+    </tr>
+    <tr>
+      <th>ME</th>
+      <td>2,168,314.12</td>
+      <td>0.47</td>
+      <td>335593</td>
+      <td>357735</td>
+      <td>54599</td>
+      <td>747927</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.03</td>
+      <td>2.90</td>
+    </tr>
+    <tr>
+      <th>MI</th>
+      <td>8,773,272.40</td>
+      <td>1.90</td>
+      <td>2279543</td>
+      <td>2268839</td>
+      <td>250902</td>
+      <td>4799284</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.00</td>
+      <td>1.83</td>
+    </tr>
+    <tr>
+      <th>MN</th>
+      <td>7,978,786.70</td>
+      <td>1.73</td>
+      <td>1322951</td>
+      <td>1367716</td>
+      <td>254146</td>
+      <td>2944813</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.02</td>
+      <td>2.71</td>
+    </tr>
+    <tr>
+      <th>MO</th>
+      <td>6,260,989.44</td>
+      <td>1.36</td>
+      <td>1594511</td>
+      <td>1071068</td>
+      <td>143026</td>
+      <td>2808605</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.19</td>
+      <td>2.23</td>
+    </tr>
+    <tr>
+      <th>MS</th>
+      <td>482,341.27</td>
+      <td>0.10</td>
+      <td>700714</td>
+      <td>485131</td>
+      <td>23512</td>
+      <td>1209357</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.18</td>
+      <td>0.40</td>
+    </tr>
+    <tr>
+      <th>MT</th>
+      <td>3,731,563.40</td>
+      <td>0.81</td>
+      <td>279240</td>
+      <td>177709</td>
+      <td>40198</td>
+      <td>497147</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.20</td>
+      <td>7.51</td>
+    </tr>
+    <tr>
+      <th>NC</th>
+      <td>5,858,935.52</td>
+      <td>1.27</td>
+      <td>2362631</td>
+      <td>2189316</td>
+      <td>189617</td>
+      <td>4741564</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.04</td>
+      <td>1.24</td>
+    </tr>
+    <tr>
+      <th>ND</th>
+      <td>624,183.09</td>
+      <td>0.14</td>
+      <td>216794</td>
+      <td>93758</td>
+      <td>33808</td>
+      <td>344360</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.36</td>
+      <td>1.81</td>
+    </tr>
+    <tr>
+      <th>NE</th>
+      <td>1,451,639.32</td>
+      <td>0.31</td>
+      <td>495961</td>
+      <td>284494</td>
+      <td>63772</td>
+      <td>844227</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.25</td>
+      <td>1.72</td>
+    </tr>
+    <tr>
+      <th>NH</th>
+      <td>2,273,943.26</td>
+      <td>0.49</td>
+      <td>345790</td>
+      <td>348526</td>
+      <td>49980</td>
+      <td>744296</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.00</td>
+      <td>3.06</td>
+    </tr>
+    <tr>
+      <th>NJ</th>
+      <td>11,386,807.73</td>
+      <td>2.47</td>
+      <td>1601933</td>
+      <td>2148278</td>
+      <td>123835</td>
+      <td>3874046</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.14</td>
+      <td>2.94</td>
+    </tr>
+    <tr>
+      <th>NM</th>
+      <td>4,466,523.13</td>
+      <td>0.97</td>
+      <td>319667</td>
+      <td>385234</td>
+      <td>93418</td>
+      <td>798319</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.08</td>
+      <td>5.59</td>
+    </tr>
+    <tr>
+      <th>NV</th>
+      <td>3,286,783.60</td>
+      <td>0.71</td>
+      <td>512058</td>
+      <td>539260</td>
+      <td>74067</td>
+      <td>1125385</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.02</td>
+      <td>2.92</td>
+    </tr>
+    <tr>
+      <th>NY</th>
+      <td>55,822,097.85</td>
+      <td>12.09</td>
+      <td>2819533</td>
+      <td>4556118</td>
+      <td>345791</td>
+      <td>7721442</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.22</td>
+      <td>7.23</td>
+    </tr>
+    <tr>
+      <th>OH</th>
+      <td>8,444,581.47</td>
+      <td>1.83</td>
+      <td>2841005</td>
+      <td>2394164</td>
+      <td>261318</td>
+      <td>5496487</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.08</td>
+      <td>1.54</td>
+    </tr>
+    <tr>
+      <th>OK</th>
+      <td>1,139,844.53</td>
+      <td>0.25</td>
+      <td>949136</td>
+      <td>420375</td>
+      <td>83481</td>
+      <td>1452992</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.36</td>
+      <td>0.78</td>
+    </tr>
+    <tr>
+      <th>OR</th>
+      <td>6,922,949.00</td>
+      <td>1.50</td>
+      <td>782403</td>
+      <td>1002106</td>
+      <td>216827</td>
+      <td>2001336</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.11</td>
+      <td>3.46</td>
+    </tr>
+    <tr>
+      <th>PA</th>
+      <td>14,343,967.74</td>
+      <td>3.11</td>
+      <td>2970733</td>
+      <td>2926441</td>
+      <td>268304</td>
+      <td>6165478</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.01</td>
+      <td>2.33</td>
+    </tr>
+    <tr>
+      <th>RI</th>
+      <td>1,647,545.73</td>
+      <td>0.36</td>
+      <td>180543</td>
+      <td>252525</td>
+      <td>31076</td>
+      <td>464144</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.16</td>
+      <td>3.55</td>
+    </tr>
+    <tr>
+      <th>SC</th>
+      <td>2,160,444.73</td>
+      <td>0.47</td>
+      <td>1155389</td>
+      <td>855373</td>
+      <td>92265</td>
+      <td>2103027</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.14</td>
+      <td>1.03</td>
+    </tr>
+    <tr>
+      <th>SD</th>
+      <td>225,889.90</td>
+      <td>0.05</td>
+      <td>227721</td>
+      <td>117458</td>
+      <td>24914</td>
+      <td>370093</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.30</td>
+      <td>0.61</td>
+    </tr>
+    <tr>
+      <th>TN</th>
+      <td>3,756,632.70</td>
+      <td>0.81</td>
+      <td>1522925</td>
+      <td>870695</td>
+      <td>114407</td>
+      <td>2508027</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.26</td>
+      <td>1.50</td>
+    </tr>
+    <tr>
+      <th>TX</th>
+      <td>33,681,092.62</td>
+      <td>7.30</td>
+      <td>4685047</td>
+      <td>3877868</td>
+      <td>406311</td>
+      <td>8969226</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.09</td>
+      <td>3.76</td>
+    </tr>
+    <tr>
+      <th>UT</th>
+      <td>2,016,569.02</td>
+      <td>0.44</td>
+      <td>515231</td>
+      <td>310676</td>
+      <td>305523</td>
+      <td>1131430</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.18</td>
+      <td>1.78</td>
+    </tr>
+    <tr>
+      <th>VA</th>
+      <td>14,846,735.36</td>
+      <td>3.22</td>
+      <td>1769443</td>
+      <td>1981473</td>
+      <td>233715</td>
+      <td>3984631</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.05</td>
+      <td>3.73</td>
+    </tr>
+    <tr>
+      <th>VT</th>
+      <td>1,268,902.53</td>
+      <td>0.27</td>
+      <td>95369</td>
+      <td>178573</td>
+      <td>41125</td>
+      <td>315067</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.26</td>
+      <td>4.03</td>
+    </tr>
+    <tr>
+      <th>WA</th>
+      <td>14,850,502.18</td>
+      <td>3.22</td>
+      <td>1221747</td>
+      <td>1742718</td>
+      <td>352554</td>
+      <td>3317019</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.16</td>
+      <td>4.48</td>
+    </tr>
+    <tr>
+      <th>WI</th>
+      <td>5,914,272.75</td>
+      <td>1.28</td>
+      <td>1405284</td>
+      <td>1382536</td>
+      <td>188330</td>
+      <td>2976150</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.01</td>
+      <td>1.99</td>
+    </tr>
+    <tr>
+      <th>WV</th>
+      <td>676,865.70</td>
+      <td>0.15</td>
+      <td>489371</td>
+      <td>188794</td>
+      <td>36258</td>
+      <td>714423</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.42</td>
+      <td>0.95</td>
+    </tr>
+    <tr>
+      <th>WY</th>
+      <td>566,867.77</td>
+      <td>0.12</td>
+      <td>174419</td>
+      <td>55973</td>
+      <td>25457</td>
+      <td>255849</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.46</td>
+      <td>2.22</td>
     </tr>
   </tbody>
 </table>
 </div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">votes_vs_contribs</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">])[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>blue
+False   151,198,752.87
+True    309,024,025.87
+Name: sum, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Where-is-the-money-going?-Are-people-giving-to-local-congressional-candidates-or-are-they-giving-to-candidates-around-the-country?">Where is the money going? Are people giving to local congressional candidates or are they giving to candidates around the country?<a class="anchor-link" href="#Where-is-the-money-going?-Are-people-giving-to-local-congressional-candidates-or-are-they-giving-to-candidates-around-the-country?">&#182;</a></h3><p>Jan. 1, 2017 — now</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">]</span>
+
+<span class="n">actblue_states</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">])[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[36]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>in
+False   265,194,911.05
+True    196,499,085.17
+Name: sum, dtype: float64</pre>
 </div>
 
 </div>
@@ -17198,7 +17471,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_freq</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -17234,7 +17507,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[35]:</div>
+<div class="prompt output_prompt">Out[37]:</div>
 
 
 
@@ -17315,7 +17588,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -17356,7 +17629,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[36]:</div>
+<div class="prompt output_prompt">Out[38]:</div>
 
 
 
@@ -18261,7 +18534,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_addicts.csv&#39;</span><span class="p">)</span>
@@ -18301,7 +18574,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
@@ -18323,7 +18596,7 @@ jupyter nbconvert analysis.ipynb
 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>[NbConvertApp] Converting notebook analysis.ipynb to html
-[NbConvertApp] Writing 466622 bytes to analysis.html
+[NbConvertApp] Writing 492979 bytes to analysis.html
 </pre>
 </div>
 </div>
