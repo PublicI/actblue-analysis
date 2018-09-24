@@ -11,6 +11,7 @@ tornado = "==4.5.3"
 matplotlib = "==2.2.2"
 requests = "==2.18.4"
 "psycopg2" = "*"
+gender-guesser = "*"
 
 [dev-packages]
 
