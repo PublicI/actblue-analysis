@@ -12132,7 +12132,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="2014">2014<a class="anchor-link" href="#2014">&#182;</a></h4><p>Jan. 1, 2013 — June 30, 2014</p>
+<h4 id="2014">2014<a class="anchor-link" href="#2014">&#182;</a></h4><p>Jan. 1, 2013 — Septem 30, 2014</p>
 
 </div>
 </div>
@@ -12290,7 +12290,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="2018">2018<a class="anchor-link" href="#2018">&#182;</a></h4><p>Jan. 1, 2017 — June 30, 2018</p>
+<h4 id="2018">2018<a class="anchor-link" href="#2018">&#182;</a></h4><p>Jan. 1, 2017 — Setptember 30, 2018</p>
 
 </div>
 </div>
@@ -18419,7 +18419,7 @@ Name: contribution_amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_first_names</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18446,10 +18446,91 @@ Name: contribution_amount, dtype: float64</pre>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[54]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>contributor_first_name</th>
+      <th>count</th>
+      <th>sum</th>
+      <th>gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>53325</th>
+      <td>JOHN</td>
+      <td>222778</td>
+      <td>9,835,671.29</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>23912</th>
+      <td>DAVID</td>
+      <td>202935</td>
+      <td>9,965,304.13</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>77637</th>
+      <td>MICHAEL</td>
+      <td>182416</td>
+      <td>8,198,781.87</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>106627</th>
+      <td>SUSAN</td>
+      <td>180593</td>
+      <td>5,176,089.09</td>
+      <td>female</td>
+    </tr>
+    <tr>
+      <th>94501</th>
+      <td>ROBERT</td>
+      <td>180296</td>
+      <td>7,883,807.55</td>
+      <td>male</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_gender</span> <span class="o">=</span> <span class="n">actblue_first_names</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_first_names</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">])[</span><span class="s1">&#39;count&#39;</span><span class="p">,</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -18464,10 +18545,105 @@ Name: contribution_amount, dtype: float64</pre>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[55]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>sum</th>
+      <th>percent_by_count</th>
+      <th>percent_by_sum</th>
+    </tr>
+    <tr>
+      <th>gender</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>andy</th>
+      <td>85434</td>
+      <td>2,756,815.77</td>
+      <td>0.64</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <th>female</th>
+      <td>6220119</td>
+      <td>172,502,131.83</td>
+      <td>46.63</td>
+      <td>37.36</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>4911536</td>
+      <td>215,218,678.05</td>
+      <td>36.82</td>
+      <td>46.62</td>
+    </tr>
+    <tr>
+      <th>mostly_female</th>
+      <td>646643</td>
+      <td>18,353,167.47</td>
+      <td>4.85</td>
+      <td>3.98</td>
+    </tr>
+    <tr>
+      <th>mostly_male</th>
+      <td>302147</td>
+      <td>11,466,376.52</td>
+      <td>2.27</td>
+      <td>2.48</td>
+    </tr>
+    <tr>
+      <th>unknown</th>
+      <td>1172530</td>
+      <td>41,396,826.58</td>
+      <td>8.79</td>
+      <td>8.97</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
@@ -18475,6 +18651,25 @@ jupyter nbconvert analysis.ipynb
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[NbConvertApp] Converting notebook analysis.ipynb to html
+[NbConvertApp] Writing 525575 bytes to analysis.html
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
