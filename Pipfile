@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-jupyterlab = "==0.33.6"
+jupyterlab = "==0.35.2"
 numpy = "==1.14.3"
 pandas = "==0.22.0"
 tornado = "==4.5.3"
