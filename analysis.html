@@ -16177,7 +16177,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_itself</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -16202,7 +16202,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[&nbsp;]:</div>
+    <div class="prompt output_prompt">Out[24]:</div>
 
 
 
@@ -16248,7 +16248,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># &quot;this may be in addition to the &quot; + str(actblue_transfers[~actblue_transfers[&#39;beneficiary_committee_fec_id&#39;].isna()][&#39;sum&#39;].sum()*.0395) + &quot; in fees that ActBlue would collect from the other contribs&quot;</span>
@@ -16269,7 +16269,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -16324,7 +16324,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[&nbsp;]:</div>
+    <div class="prompt output_prompt">Out[26]:</div>
 
 
 
@@ -16385,7 +16385,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_actblue_proportion_amount</span><span class="p">(</span><span class="n">cycle</span><span class="p">):</span>
@@ -16494,7 +16494,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span>
@@ -16510,7 +16510,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[&nbsp;]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -17353,7 +17353,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2018 cycle (Jan. 1, 2017 — June 30, 2018)&quot;</span>
@@ -17370,7 +17370,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[&nbsp;]:</div>
+    <div class="prompt output_prompt">Out[29]:</div>
 
 
 
@@ -17387,7 +17387,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_proportion.csv&#39;</span><span class="p">)</span>
@@ -17400,7 +17400,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount_14</span> <span class="o">=</span> <span class="n">calc_actblue_proportion_amount</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span>
@@ -17409,6 +17409,26 @@ div#notebook {
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;15.96 percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2014 cycle (Jan. 1, 2013 — June 30, 2014)&#39;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -17423,7 +17443,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">redtoblue</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00572859&#39;</span><span class="p">,</span>
@@ -17492,7 +17512,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns in the Red to Blue program came through ActBlue in the 2018 cycle&quot;</span>
@@ -17500,6 +17520,26 @@ div#notebook {
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[33]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;54.39 percent of contributions from individuals to Democratic campaigns in the Red to Blue program came through ActBlue in the 2018 cycle&#39;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -17514,7 +17554,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">endcu</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00413914&#39;</span><span class="p">,</span>
@@ -17666,13 +17706,33 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns endorsed by End CU came through ActBlue in the 2018 cycle&quot;</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;48.48 percent of contributions from individuals to Democratic campaigns endorsed by End CU came through ActBlue in the 2018 cycle&#39;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -17693,7 +17753,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -17718,10 +17778,126 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[36]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>contributor_state</th>
+      <th>recipient_state</th>
+      <th>count</th>
+      <th>sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>271</th>
+      <td>CA</td>
+      <td>CA</td>
+      <td>776206</td>
+      <td>36,691,956.47</td>
+    </tr>
+    <tr>
+      <th>2870</th>
+      <td>TX</td>
+      <td>TX</td>
+      <td>461822</td>
+      <td>22,929,392.99</td>
+    </tr>
+    <tr>
+      <th>2278</th>
+      <td>NY</td>
+      <td>NY</td>
+      <td>227853</td>
+      <td>16,480,709.99</td>
+    </tr>
+    <tr>
+      <th>591</th>
+      <td>FL</td>
+      <td>FL</td>
+      <td>201295</td>
+      <td>10,025,268.29</td>
+    </tr>
+    <tr>
+      <th>2548</th>
+      <td>PA</td>
+      <td>PA</td>
+      <td>135260</td>
+      <td>8,232,014.86</td>
+    </tr>
+    <tr>
+      <th>3003</th>
+      <td>VA</td>
+      <td>VA</td>
+      <td>106609</td>
+      <td>7,091,496.88</td>
+    </tr>
+    <tr>
+      <th>1239</th>
+      <td>MA</td>
+      <td>MA</td>
+      <td>118411</td>
+      <td>6,927,560.69</td>
+    </tr>
+    <tr>
+      <th>658</th>
+      <td>CA</td>
+      <td>GA</td>
+      <td>337073</td>
+      <td>6,579,128.69</td>
+    </tr>
+    <tr>
+      <th>927</th>
+      <td>IL</td>
+      <td>IL</td>
+      <td>110439</td>
+      <td>5,980,015.27</td>
+    </tr>
+    <tr>
+      <th>2347</th>
+      <td>OH</td>
+      <td>OH</td>
+      <td>133714</td>
+      <td>5,522,275.41</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_states.csv&#39;</span><span class="p">)</span>
@@ -17757,7 +17933,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contributor_states</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
@@ -17771,10 +17947,109 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[38]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sum</th>
+      <th>percent</th>
+    </tr>
+    <tr>
+      <th>contributor_state</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CA</th>
+      <td>96,308,858.39</td>
+      <td>20.86</td>
+    </tr>
+    <tr>
+      <th>NY</th>
+      <td>55,822,097.85</td>
+      <td>12.09</td>
+    </tr>
+    <tr>
+      <th>TX</th>
+      <td>33,681,092.62</td>
+      <td>7.30</td>
+    </tr>
+    <tr>
+      <th>MA</th>
+      <td>24,027,085.11</td>
+      <td>5.20</td>
+    </tr>
+    <tr>
+      <th>FL</th>
+      <td>20,856,355.01</td>
+      <td>4.52</td>
+    </tr>
+    <tr>
+      <th>IL</th>
+      <td>16,872,490.31</td>
+      <td>3.65</td>
+    </tr>
+    <tr>
+      <th>WA</th>
+      <td>14,850,502.18</td>
+      <td>3.22</td>
+    </tr>
+    <tr>
+      <th>VA</th>
+      <td>14,846,735.36</td>
+      <td>3.22</td>
+    </tr>
+    <tr>
+      <th>PA</th>
+      <td>14,343,967.74</td>
+      <td>3.11</td>
+    </tr>
+    <tr>
+      <th>DC</th>
+      <td>12,593,293.48</td>
+      <td>2.73</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contributor_states</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_contributor_states.csv&#39;</span><span class="p">)</span>
@@ -17795,7 +18070,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_recipient_states</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
@@ -17806,6 +18081,320 @@ div#notebook {
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[40]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sum</th>
+      <th>percent</th>
+    </tr>
+    <tr>
+      <th>recipient_state</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CA</th>
+      <td>52,950,919.94</td>
+      <td>11.47</td>
+    </tr>
+    <tr>
+      <th>TX</th>
+      <td>39,168,490.76</td>
+      <td>8.48</td>
+    </tr>
+    <tr>
+      <th>GA</th>
+      <td>30,602,688.53</td>
+      <td>6.63</td>
+    </tr>
+    <tr>
+      <th>NY</th>
+      <td>29,933,133.91</td>
+      <td>6.48</td>
+    </tr>
+    <tr>
+      <th>AL</th>
+      <td>22,298,530.92</td>
+      <td>4.83</td>
+    </tr>
+    <tr>
+      <th>PA</th>
+      <td>19,817,025.90</td>
+      <td>4.29</td>
+    </tr>
+    <tr>
+      <th>MA</th>
+      <td>18,890,647.81</td>
+      <td>4.09</td>
+    </tr>
+    <tr>
+      <th>FL</th>
+      <td>18,669,243.31</td>
+      <td>4.04</td>
+    </tr>
+    <tr>
+      <th>OH</th>
+      <td>15,809,478.82</td>
+      <td>3.42</td>
+    </tr>
+    <tr>
+      <th>VA</th>
+      <td>15,100,570.19</td>
+      <td>3.27</td>
+    </tr>
+    <tr>
+      <th>WI</th>
+      <td>14,644,052.39</td>
+      <td>3.17</td>
+    </tr>
+    <tr>
+      <th>MT</th>
+      <td>12,098,921.81</td>
+      <td>2.62</td>
+    </tr>
+    <tr>
+      <th>IL</th>
+      <td>12,007,438.15</td>
+      <td>2.60</td>
+    </tr>
+    <tr>
+      <th>MO</th>
+      <td>11,989,893.13</td>
+      <td>2.60</td>
+    </tr>
+    <tr>
+      <th>MI</th>
+      <td>11,944,604.30</td>
+      <td>2.59</td>
+    </tr>
+    <tr>
+      <th>NJ</th>
+      <td>11,530,051.94</td>
+      <td>2.50</td>
+    </tr>
+    <tr>
+      <th>MN</th>
+      <td>11,459,736.40</td>
+      <td>2.48</td>
+    </tr>
+    <tr>
+      <th>AZ</th>
+      <td>11,384,541.47</td>
+      <td>2.47</td>
+    </tr>
+    <tr>
+      <th>NV</th>
+      <td>9,012,588.94</td>
+      <td>1.95</td>
+    </tr>
+    <tr>
+      <th>CT</th>
+      <td>8,710,750.67</td>
+      <td>1.89</td>
+    </tr>
+    <tr>
+      <th>WA</th>
+      <td>7,606,825.62</td>
+      <td>1.65</td>
+    </tr>
+    <tr>
+      <th>VT</th>
+      <td>6,834,428.79</td>
+      <td>1.48</td>
+    </tr>
+    <tr>
+      <th>IN</th>
+      <td>5,116,543.13</td>
+      <td>1.11</td>
+    </tr>
+    <tr>
+      <th>NM</th>
+      <td>5,099,490.39</td>
+      <td>1.10</td>
+    </tr>
+    <tr>
+      <th>IA</th>
+      <td>4,711,694.25</td>
+      <td>1.02</td>
+    </tr>
+    <tr>
+      <th>ND</th>
+      <td>4,424,964.05</td>
+      <td>0.96</td>
+    </tr>
+    <tr>
+      <th>NH</th>
+      <td>4,051,581.33</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <th>KS</th>
+      <td>4,048,737.85</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <th>NC</th>
+      <td>3,916,268.51</td>
+      <td>0.85</td>
+    </tr>
+    <tr>
+      <th>CO</th>
+      <td>3,769,898.00</td>
+      <td>0.82</td>
+    </tr>
+    <tr>
+      <th>KY</th>
+      <td>3,743,859.88</td>
+      <td>0.81</td>
+    </tr>
+    <tr>
+      <th>MD</th>
+      <td>3,577,144.95</td>
+      <td>0.77</td>
+    </tr>
+    <tr>
+      <th>OR</th>
+      <td>3,381,706.28</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <th>WV</th>
+      <td>3,117,953.33</td>
+      <td>0.68</td>
+    </tr>
+    <tr>
+      <th>TN</th>
+      <td>2,618,492.11</td>
+      <td>0.57</td>
+    </tr>
+    <tr>
+      <th>ME</th>
+      <td>2,474,521.03</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <th>HI</th>
+      <td>2,197,230.56</td>
+      <td>0.48</td>
+    </tr>
+    <tr>
+      <th>SC</th>
+      <td>2,178,968.43</td>
+      <td>0.47</td>
+    </tr>
+    <tr>
+      <th>RI</th>
+      <td>2,042,188.88</td>
+      <td>0.44</td>
+    </tr>
+    <tr>
+      <th>NE</th>
+      <td>1,725,326.48</td>
+      <td>0.37</td>
+    </tr>
+    <tr>
+      <th>UT</th>
+      <td>1,543,076.60</td>
+      <td>0.33</td>
+    </tr>
+    <tr>
+      <th>DC</th>
+      <td>1,476,616.19</td>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <th>AR</th>
+      <td>959,387.78</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <th>DE</th>
+      <td>922,951.30</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <th>MS</th>
+      <td>761,987.40</td>
+      <td>0.17</td>
+    </tr>
+    <tr>
+      <th>OK</th>
+      <td>426,067.01</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>WY</th>
+      <td>344,649.55</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>AK</th>
+      <td>305,544.51</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>LA</th>
+      <td>239,404.67</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>VI</th>
+      <td>23,330.00</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>SD</th>
+      <td>19,425.87</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <td>10,215.80</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>MP</th>
+      <td>206.40</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -17820,7 +18409,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">]</span>
@@ -17829,6 +18418,29 @@ div#notebook {
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[41]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>in
+False   265,194,911.05
+True    196,499,085.17
+Name: sum, dtype: float64</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -17843,7 +18455,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/presvotes.csv&#39;</span><span class="p">)</span>
@@ -17858,10 +18470,569 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[42]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>trump</th>
+      <th>clinton</th>
+      <th>others</th>
+      <th>total</th>
+      <th>red</th>
+      <th>blue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AL</td>
+      <td>1318255</td>
+      <td>729547</td>
+      <td>75570</td>
+      <td>2123372</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AK</td>
+      <td>163387</td>
+      <td>116454</td>
+      <td>38767</td>
+      <td>318608</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AZ</td>
+      <td>1252401</td>
+      <td>1161167</td>
+      <td>159597</td>
+      <td>2573165</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AR</td>
+      <td>684872</td>
+      <td>380494</td>
+      <td>65310</td>
+      <td>1130676</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CA</td>
+      <td>4483814</td>
+      <td>8753792</td>
+      <td>943998</td>
+      <td>14181604</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CO</td>
+      <td>1202484</td>
+      <td>1338870</td>
+      <td>238893</td>
+      <td>2780247</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CT</td>
+      <td>673215</td>
+      <td>897572</td>
+      <td>74133</td>
+      <td>1644920</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>DE</td>
+      <td>185127</td>
+      <td>235603</td>
+      <td>23084</td>
+      <td>443814</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>DC</td>
+      <td>12723</td>
+      <td>282830</td>
+      <td>15715</td>
+      <td>311268</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>FL</td>
+      <td>4617886</td>
+      <td>4504975</td>
+      <td>297178</td>
+      <td>9420039</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>GA</td>
+      <td>2089104</td>
+      <td>1877963</td>
+      <td>147665</td>
+      <td>4114732</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>HI</td>
+      <td>128847</td>
+      <td>266891</td>
+      <td>33199</td>
+      <td>428937</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>ID</td>
+      <td>409055</td>
+      <td>189765</td>
+      <td>91435</td>
+      <td>690255</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>IL</td>
+      <td>2146015</td>
+      <td>3090729</td>
+      <td>299680</td>
+      <td>5536424</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>IN</td>
+      <td>1557286</td>
+      <td>1033126</td>
+      <td>144546</td>
+      <td>2734958</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>IA</td>
+      <td>800983</td>
+      <td>653669</td>
+      <td>111379</td>
+      <td>1566031</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>KS</td>
+      <td>671018</td>
+      <td>427005</td>
+      <td>86379</td>
+      <td>1184402</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>KY</td>
+      <td>1202971</td>
+      <td>628854</td>
+      <td>92324</td>
+      <td>1924149</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>LA</td>
+      <td>1178638</td>
+      <td>780154</td>
+      <td>70240</td>
+      <td>2029032</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>ME</td>
+      <td>335593</td>
+      <td>357735</td>
+      <td>54599</td>
+      <td>747927</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>MD</td>
+      <td>943169</td>
+      <td>1677928</td>
+      <td>160349</td>
+      <td>2781446</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>MA</td>
+      <td>1090893</td>
+      <td>1995196</td>
+      <td>238957</td>
+      <td>3325046</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>MI</td>
+      <td>2279543</td>
+      <td>2268839</td>
+      <td>250902</td>
+      <td>4799284</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>MN</td>
+      <td>1322951</td>
+      <td>1367716</td>
+      <td>254146</td>
+      <td>2944813</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>MS</td>
+      <td>700714</td>
+      <td>485131</td>
+      <td>23512</td>
+      <td>1209357</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>MO</td>
+      <td>1594511</td>
+      <td>1071068</td>
+      <td>143026</td>
+      <td>2808605</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>MT</td>
+      <td>279240</td>
+      <td>177709</td>
+      <td>40198</td>
+      <td>497147</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>NE</td>
+      <td>495961</td>
+      <td>284494</td>
+      <td>63772</td>
+      <td>844227</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>NV</td>
+      <td>512058</td>
+      <td>539260</td>
+      <td>74067</td>
+      <td>1125385</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>NH</td>
+      <td>345790</td>
+      <td>348526</td>
+      <td>49980</td>
+      <td>744296</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>NJ</td>
+      <td>1601933</td>
+      <td>2148278</td>
+      <td>123835</td>
+      <td>3874046</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>NM</td>
+      <td>319667</td>
+      <td>385234</td>
+      <td>93418</td>
+      <td>798319</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>NY</td>
+      <td>2819533</td>
+      <td>4556118</td>
+      <td>345791</td>
+      <td>7721442</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>NC</td>
+      <td>2362631</td>
+      <td>2189316</td>
+      <td>189617</td>
+      <td>4741564</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>ND</td>
+      <td>216794</td>
+      <td>93758</td>
+      <td>33808</td>
+      <td>344360</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>OH</td>
+      <td>2841005</td>
+      <td>2394164</td>
+      <td>261318</td>
+      <td>5496487</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>OK</td>
+      <td>949136</td>
+      <td>420375</td>
+      <td>83481</td>
+      <td>1452992</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>OR</td>
+      <td>782403</td>
+      <td>1002106</td>
+      <td>216827</td>
+      <td>2001336</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>PA</td>
+      <td>2970733</td>
+      <td>2926441</td>
+      <td>268304</td>
+      <td>6165478</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>RI</td>
+      <td>180543</td>
+      <td>252525</td>
+      <td>31076</td>
+      <td>464144</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>SC</td>
+      <td>1155389</td>
+      <td>855373</td>
+      <td>92265</td>
+      <td>2103027</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>SD</td>
+      <td>227721</td>
+      <td>117458</td>
+      <td>24914</td>
+      <td>370093</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>TN</td>
+      <td>1522925</td>
+      <td>870695</td>
+      <td>114407</td>
+      <td>2508027</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>TX</td>
+      <td>4685047</td>
+      <td>3877868</td>
+      <td>406311</td>
+      <td>8969226</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>UT</td>
+      <td>515231</td>
+      <td>310676</td>
+      <td>305523</td>
+      <td>1131430</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>VT</td>
+      <td>95369</td>
+      <td>178573</td>
+      <td>41125</td>
+      <td>315067</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>VA</td>
+      <td>1769443</td>
+      <td>1981473</td>
+      <td>233715</td>
+      <td>3984631</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>WA</td>
+      <td>1221747</td>
+      <td>1742718</td>
+      <td>352554</td>
+      <td>3317019</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>WV</td>
+      <td>489371</td>
+      <td>188794</td>
+      <td>36258</td>
+      <td>714423</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>WI</td>
+      <td>1405284</td>
+      <td>1382536</td>
+      <td>188330</td>
+      <td>2976150</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>WY</td>
+      <td>174419</td>
+      <td>55973</td>
+      <td>25457</td>
+      <td>255849</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;margin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">])</span><span class="o">-</span><span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;trump&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">])</span>
@@ -17879,10 +19050,45 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[43]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10d063fd0&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;dollars_per&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">7.5</span><span class="p">]</span>
@@ -17892,10 +19098,88 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[44]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sum</th>
+      <th>percent</th>
+      <th>trump</th>
+      <th>clinton</th>
+      <th>others</th>
+      <th>total</th>
+      <th>red</th>
+      <th>blue</th>
+      <th>margin</th>
+      <th>dollars_per</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>DC</th>
+      <td>12,593,293.48</td>
+      <td>2.73</td>
+      <td>12723</td>
+      <td>282830</td>
+      <td>15715</td>
+      <td>311268</td>
+      <td>False</td>
+      <td>True</td>
+      <td>0.87</td>
+      <td>40.46</td>
+    </tr>
+    <tr>
+      <th>MT</th>
+      <td>3,731,563.40</td>
+      <td>0.81</td>
+      <td>279240</td>
+      <td>177709</td>
+      <td>40198</td>
+      <td>497147</td>
+      <td>True</td>
+      <td>False</td>
+      <td>-0.20</td>
+      <td>7.51</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">votes_vs_contribs</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">])[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -17905,10 +19189,33 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[45]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>blue
+False   151,198,752.87
+True    309,024,025.87
+Name: sum, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">contrib_flow</span> <span class="o">=</span> <span class="n">pres_votes</span><span class="p">[[</span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pres_votes</span><span class="p">[[</span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">),</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;_recip&#39;</span><span class="p">,</span><span class="s1">&#39;_contrib&#39;</span><span class="p">])</span>
@@ -17919,6 +19226,65 @@ div#notebook {
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[46]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>blue_contrib</th>
+      <th>False</th>
+      <th>True</th>
+    </tr>
+    <tr>
+      <th>blue_recip</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>False</th>
+      <td>124,660,446.94</td>
+      <td>123,229,612.40</td>
+    </tr>
+    <tr>
+      <th>True</th>
+      <td>26,537,907.90</td>
+      <td>185,782,738.10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -17940,13 +19306,72 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">contrib_flow</span><span class="p">[</span><span class="o">~</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]],</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue_recip&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue_contrib&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[47]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>blue_contrib</th>
+      <th>False</th>
+      <th>True</th>
+    </tr>
+    <tr>
+      <th>blue_recip</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>False</th>
+      <td>35,836,203.20</td>
+      <td>123,229,612.40</td>
+    </tr>
+    <tr>
+      <th>True</th>
+      <td>26,537,907.90</td>
+      <td>78,118,346.67</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -17960,7 +19385,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_recipient_out_states</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="p">[</span><span class="o">~</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="o">~</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]][</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
@@ -17974,6 +19399,320 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[48]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sum</th>
+      <th>percent</th>
+    </tr>
+    <tr>
+      <th>recipient_state</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>GA</th>
+      <td>28,016,862.86</td>
+      <td>10.56</td>
+    </tr>
+    <tr>
+      <th>AL</th>
+      <td>20,332,757.55</td>
+      <td>7.67</td>
+    </tr>
+    <tr>
+      <th>CA</th>
+      <td>16,258,963.47</td>
+      <td>6.13</td>
+    </tr>
+    <tr>
+      <th>TX</th>
+      <td>16,239,097.77</td>
+      <td>6.12</td>
+    </tr>
+    <tr>
+      <th>NY</th>
+      <td>13,452,423.92</td>
+      <td>5.07</td>
+    </tr>
+    <tr>
+      <th>MA</th>
+      <td>11,963,087.12</td>
+      <td>4.51</td>
+    </tr>
+    <tr>
+      <th>PA</th>
+      <td>11,585,011.04</td>
+      <td>4.37</td>
+    </tr>
+    <tr>
+      <th>WI</th>
+      <td>10,556,462.04</td>
+      <td>3.98</td>
+    </tr>
+    <tr>
+      <th>OH</th>
+      <td>10,287,203.41</td>
+      <td>3.88</td>
+    </tr>
+    <tr>
+      <th>MT</th>
+      <td>8,830,857.81</td>
+      <td>3.33</td>
+    </tr>
+    <tr>
+      <th>FL</th>
+      <td>8,643,975.02</td>
+      <td>3.26</td>
+    </tr>
+    <tr>
+      <th>VA</th>
+      <td>8,009,073.31</td>
+      <td>3.02</td>
+    </tr>
+    <tr>
+      <th>MO</th>
+      <td>7,618,323.88</td>
+      <td>2.87</td>
+    </tr>
+    <tr>
+      <th>NV</th>
+      <td>7,112,470.80</td>
+      <td>2.68</td>
+    </tr>
+    <tr>
+      <th>NJ</th>
+      <td>6,742,762.30</td>
+      <td>2.54</td>
+    </tr>
+    <tr>
+      <th>VT</th>
+      <td>6,647,808.52</td>
+      <td>2.51</td>
+    </tr>
+    <tr>
+      <th>AZ</th>
+      <td>6,594,650.01</td>
+      <td>2.49</td>
+    </tr>
+    <tr>
+      <th>MI</th>
+      <td>6,466,748.18</td>
+      <td>2.44</td>
+    </tr>
+    <tr>
+      <th>MN</th>
+      <td>6,300,920.79</td>
+      <td>2.38</td>
+    </tr>
+    <tr>
+      <th>IL</th>
+      <td>6,027,422.88</td>
+      <td>2.27</td>
+    </tr>
+    <tr>
+      <th>CT</th>
+      <td>4,168,176.99</td>
+      <td>1.57</td>
+    </tr>
+    <tr>
+      <th>ND</th>
+      <td>3,917,761.06</td>
+      <td>1.48</td>
+    </tr>
+    <tr>
+      <th>IA</th>
+      <td>3,410,454.91</td>
+      <td>1.29</td>
+    </tr>
+    <tr>
+      <th>NH</th>
+      <td>2,990,272.49</td>
+      <td>1.13</td>
+    </tr>
+    <tr>
+      <th>IN</th>
+      <td>2,898,325.14</td>
+      <td>1.09</td>
+    </tr>
+    <tr>
+      <th>WV</th>
+      <td>2,779,501.62</td>
+      <td>1.05</td>
+    </tr>
+    <tr>
+      <th>NM</th>
+      <td>2,708,566.32</td>
+      <td>1.02</td>
+    </tr>
+    <tr>
+      <th>KY</th>
+      <td>2,666,025.12</td>
+      <td>1.01</td>
+    </tr>
+    <tr>
+      <th>KS</th>
+      <td>2,608,581.46</td>
+      <td>0.98</td>
+    </tr>
+    <tr>
+      <th>WA</th>
+      <td>2,322,179.77</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <th>MD</th>
+      <td>1,675,319.54</td>
+      <td>0.63</td>
+    </tr>
+    <tr>
+      <th>NC</th>
+      <td>1,553,613.29</td>
+      <td>0.59</td>
+    </tr>
+    <tr>
+      <th>ME</th>
+      <td>1,493,985.11</td>
+      <td>0.56</td>
+    </tr>
+    <tr>
+      <th>DC</th>
+      <td>1,435,665.22</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <th>OR</th>
+      <td>1,393,048.71</td>
+      <td>0.53</td>
+    </tr>
+    <tr>
+      <th>HI</th>
+      <td>1,389,856.70</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <th>RI</th>
+      <td>1,378,052.71</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <th>CO</th>
+      <td>1,336,591.45</td>
+      <td>0.50</td>
+    </tr>
+    <tr>
+      <th>SC</th>
+      <td>1,134,927.60</td>
+      <td>0.43</td>
+    </tr>
+    <tr>
+      <th>TN</th>
+      <td>937,944.68</td>
+      <td>0.35</td>
+    </tr>
+    <tr>
+      <th>NE</th>
+      <td>753,901.19</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <th>MS</th>
+      <td>594,525.24</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>DE</th>
+      <td>559,381.72</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <th>UT</th>
+      <td>495,454.24</td>
+      <td>0.19</td>
+    </tr>
+    <tr>
+      <th>AR</th>
+      <td>459,441.62</td>
+      <td>0.17</td>
+    </tr>
+    <tr>
+      <th>WY</th>
+      <td>203,384.88</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>OK</th>
+      <td>77,231.31</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>LA</th>
+      <td>76,131.96</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>AK</th>
+      <td>64,806.25</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>VI</th>
+      <td>12,880.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>SD</th>
+      <td>5,994.87</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <td>5,838.80</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>MP</th>
+      <td>206.40</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -17984,7 +19723,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_14</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18010,10 +19749,126 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[49]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>contributor_state</th>
+      <th>recipient_state</th>
+      <th>count</th>
+      <th>sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>252</th>
+      <td>CA</td>
+      <td>CA</td>
+      <td>133394</td>
+      <td>7,012,698.42</td>
+    </tr>
+    <tr>
+      <th>322</th>
+      <td>CO</td>
+      <td>CO</td>
+      <td>72560</td>
+      <td>4,331,650.76</td>
+    </tr>
+    <tr>
+      <th>2061</th>
+      <td>NY</td>
+      <td>NY</td>
+      <td>65793</td>
+      <td>3,827,196.77</td>
+    </tr>
+    <tr>
+      <th>2695</th>
+      <td>VA</td>
+      <td>VA</td>
+      <td>44953</td>
+      <td>3,524,258.10</td>
+    </tr>
+    <tr>
+      <th>817</th>
+      <td>IL</td>
+      <td>IL</td>
+      <td>52903</td>
+      <td>3,371,706.41</td>
+    </tr>
+    <tr>
+      <th>514</th>
+      <td>FL</td>
+      <td>FL</td>
+      <td>60414</td>
+      <td>2,764,482.61</td>
+    </tr>
+    <tr>
+      <th>1122</th>
+      <td>MA</td>
+      <td>MA</td>
+      <td>34224</td>
+      <td>2,743,338.51</td>
+    </tr>
+    <tr>
+      <th>1609</th>
+      <td>NC</td>
+      <td>NC</td>
+      <td>42142</td>
+      <td>2,175,535.46</td>
+    </tr>
+    <tr>
+      <th>185</th>
+      <td>AZ</td>
+      <td>AZ</td>
+      <td>48553</td>
+      <td>2,156,247.86</td>
+    </tr>
+    <tr>
+      <th>1302</th>
+      <td>MI</td>
+      <td>MI</td>
+      <td>31717</td>
+      <td>1,799,950.21</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_14</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_states_14</span><span class="p">[</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">actblue_states_14</span><span class="p">[</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">]</span>
@@ -18027,6 +19882,65 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[50]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>blue_contrib</th>
+      <th>False</th>
+      <th>True</th>
+    </tr>
+    <tr>
+      <th>blue_recip</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>False</th>
+      <td>27,667,166.98</td>
+      <td>21,799,198.55</td>
+    </tr>
+    <tr>
+      <th>True</th>
+      <td>7,632,520.85</td>
+      <td>56,808,541.21</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -18037,13 +19951,72 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">contrib_flow_14</span><span class="p">[</span><span class="o">~</span><span class="n">contrib_flow_14</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]],</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue_recip&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue_contrib&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[51]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>blue_contrib</th>
+      <th>False</th>
+      <th>True</th>
+    </tr>
+    <tr>
+      <th>blue_recip</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>False</th>
+      <td>7,481,564.62</td>
+      <td>21,799,198.55</td>
+    </tr>
+    <tr>
+      <th>True</th>
+      <td>7,632,520.85</td>
+      <td>23,596,317.86</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -18057,7 +20030,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_texas_cities</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18082,6 +20055,81 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[52]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lower</th>
+      <th>count</th>
+      <th>sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>austin</td>
+      <td>87823</td>
+      <td>4,055,187.59</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>houston</td>
+      <td>63523</td>
+      <td>4,588,117.94</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>dallas</td>
+      <td>44585</td>
+      <td>3,183,700.18</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>san antonio</td>
+      <td>29248</td>
+      <td>1,134,668.34</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>fort worth</td>
+      <td>14985</td>
+      <td>492,852.17</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -18092,7 +20140,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">specials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00631564&#39;</span><span class="p">,</span>
@@ -18138,13 +20186,37 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_specials</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[54]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>cand_pcc           C00615823C00629659C00630426C00631564C00632232C...
+name               BARRERA FOR CONGRESSJIMMY GOMEZ FOR CONGRESSJO...
+committee_total                                        73,937,744.65
+actblue_total                                          65,780,331.97
+dtype: object</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -18167,7 +20239,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_freq</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18197,10 +20269,85 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[55]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>count_of_count</th>
+      <th>percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2188</th>
+      <td>1</td>
+      <td>1923573</td>
+      <td>31.56</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>2</td>
+      <td>1205087</td>
+      <td>19.77</td>
+    </tr>
+    <tr>
+      <th>1375</th>
+      <td>3</td>
+      <td>485248</td>
+      <td>7.96</td>
+    </tr>
+    <tr>
+      <th>622</th>
+      <td>4</td>
+      <td>380323</td>
+      <td>6.24</td>
+    </tr>
+    <tr>
+      <th>359</th>
+      <td>5</td>
+      <td>229865</td>
+      <td>3.77</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_freq</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_freq.csv&#39;</span><span class="p">)</span>
@@ -18229,7 +20376,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18264,10 +20411,918 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[57]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>contributor_first_name</th>
+      <th>contributor_last_name</th>
+      <th>array_agg</th>
+      <th>array_agg</th>
+      <th>array_agg</th>
+      <th>array_agg</th>
+      <th>contributor_state</th>
+      <th>contributor_zip_code</th>
+      <th>count</th>
+      <th>total</th>
+      <th>avg_per</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SIBYLLE</td>
+      <td>BARLOW</td>
+      <td>[RETIRED]</td>
+      <td>[RETIRED]</td>
+      <td>[241 HOLDEN WOOD ROAD]</td>
+      <td>[CONCORD]</td>
+      <td>MA</td>
+      <td>01742</td>
+      <td>16355</td>
+      <td>61,407.05</td>
+      <td>3.75</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>JOHN</td>
+      <td>COMELLA</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[1900 J F KENNEDY BLVD SUITE 1624]</td>
+      <td>[PHILADELPHIA]</td>
+      <td>PA</td>
+      <td>19103</td>
+      <td>10790</td>
+      <td>30,147.37</td>
+      <td>2.79</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>TERRY</td>
+      <td>WOLFE</td>
+      <td>[RETAIL]</td>
+      <td>[LOWES, LOWE'S]</td>
+      <td>[1199 E 3RD ST, 1199 EAST THIRD STREET]</td>
+      <td>[MORGANTOWN]</td>
+      <td>WV</td>
+      <td>26508</td>
+      <td>10054</td>
+      <td>28,480.25</td>
+      <td>2.83</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ROXANNE</td>
+      <td>WARREN</td>
+      <td>[ARCHITECT, ARCHITECTS]</td>
+      <td>[SELF]</td>
+      <td>[523 WEST 112TH STREET 72]</td>
+      <td>[NEW YORK]</td>
+      <td>NY</td>
+      <td>10025</td>
+      <td>8419</td>
+      <td>86,496.79</td>
+      <td>10.27</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>RICHARD</td>
+      <td>GOLDSTEIN</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[375 SAGAPONACK RD, L O BOX752, P O 752, POB0X...</td>
+      <td>[SAFAPONACK, SAGAPONACK]</td>
+      <td>NY</td>
+      <td>11962</td>
+      <td>8406</td>
+      <td>146,468.73</td>
+      <td>17.42</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CAROLINE</td>
+      <td>MERRIAM</td>
+      <td>[FOUNDATION PRESIDENT]</td>
+      <td>[RAMSAY MERRIAM FUND]</td>
+      <td>[1316 30TH STREET NW]</td>
+      <td>[WASHINGTON]</td>
+      <td>DC</td>
+      <td>20007</td>
+      <td>8246</td>
+      <td>119,777.36</td>
+      <td>14.53</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>VICKI</td>
+      <td>FARRAR</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[P O BOX 140375]</td>
+      <td>[GARDEN CITY]</td>
+      <td>ID</td>
+      <td>83714</td>
+      <td>8163</td>
+      <td>35,765.95</td>
+      <td>4.38</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>MARTHA</td>
+      <td>UTZ</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[1118 ALLSTON CT]</td>
+      <td>[SAN JOSE]</td>
+      <td>CA</td>
+      <td>95120</td>
+      <td>7773</td>
+      <td>27,081.31</td>
+      <td>3.48</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>WILLIAM</td>
+      <td>CHEEK</td>
+      <td>[RETIRED PROFESSOR]</td>
+      <td>[NONE]</td>
+      <td>[6209 ESTELLE ST]</td>
+      <td>[SAN DIEGO]</td>
+      <td>CA</td>
+      <td>92115</td>
+      <td>7338</td>
+      <td>86,530.11</td>
+      <td>11.79</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>GARLAND</td>
+      <td>RIGGS</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[8603 NIGHTINGALE DR ]</td>
+      <td>[LANHAM]</td>
+      <td>MD</td>
+      <td>20706</td>
+      <td>7291</td>
+      <td>21,706.98</td>
+      <td>2.98</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CLAUDIA</td>
+      <td>PALMER</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[15 GORHAM ROAD]</td>
+      <td>[SCARSDALE]</td>
+      <td>NY</td>
+      <td>10583</td>
+      <td>7002</td>
+      <td>29,404.75</td>
+      <td>4.20</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>LUCY</td>
+      <td>HARMON</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[SELF]</td>
+      <td>[13621SHANNON ST]</td>
+      <td>[LINDALE]</td>
+      <td>TX</td>
+      <td>75771</td>
+      <td>6960</td>
+      <td>63,168.01</td>
+      <td>9.08</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>MONIQUE</td>
+      <td>WEIL</td>
+      <td>[RETIRED]</td>
+      <td>[NONE]</td>
+      <td>[6022 MERRIEWOOD DR]</td>
+      <td>[OAKLAND]</td>
+      <td>CA</td>
+      <td>94611</td>
+      <td>6937</td>
+      <td>47,915.22</td>
+      <td>6.91</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>ROBERT</td>
+      <td>ECKEL</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[331 L DOLINGTON RD APT R2, 331LOWERDOLINGT N ...</td>
+      <td>[NEWTOWN]</td>
+      <td>PA</td>
+      <td>18940</td>
+      <td>6147</td>
+      <td>19,833.66</td>
+      <td>3.23</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>CHARLES Y</td>
+      <td>WRIGLEY</td>
+      <td>[CEO, PRESIDENT]</td>
+      <td>[LUMITEK INTERNATIONAL, INC.]</td>
+      <td>[2732 HILLSIDE COURT]</td>
+      <td>[IJAMSVILLE]</td>
+      <td>MD</td>
+      <td>21754</td>
+      <td>5755</td>
+      <td>15,175.47</td>
+      <td>2.64</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>VIRGINIA</td>
+      <td>SMITH</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[130 BULMER DRIVE, 130BULMER DRIVE, 130 NULMER...</td>
+      <td>[STRATFORD]</td>
+      <td>CT</td>
+      <td>06614</td>
+      <td>5240</td>
+      <td>80,418.61</td>
+      <td>15.35</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>ROSE-MARY(MRS.DONALD</td>
+      <td>STROM</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[1408 N0 10TH ST ]</td>
+      <td>[MOORHEAD]</td>
+      <td>MN</td>
+      <td>56560</td>
+      <td>5226</td>
+      <td>28,394.40</td>
+      <td>5.43</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>GEORGE</td>
+      <td>KEARNEY</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[3104 E BROADWAY RD - LOT 70]</td>
+      <td>[MESA]</td>
+      <td>AZ</td>
+      <td>85204</td>
+      <td>4803</td>
+      <td>22,281.60</td>
+      <td>4.64</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>DR. JUN</td>
+      <td>CHO</td>
+      <td>[LAWYER, WHITE HOUSE]</td>
+      <td>[LAWYER, WHITE HOUSE]</td>
+      <td>[26 OKRIM-GIL DONG-MYUN ]</td>
+      <td>[HWASUN-GUN, CHONNA, WASHINGTON DC]</td>
+      <td>DC</td>
+      <td>20001</td>
+      <td>4758</td>
+      <td>7,412.00</td>
+      <td>1.56</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>DON</td>
+      <td>DUMOND</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[1744 MOSS ST, 1744 MOSS ST ]</td>
+      <td>[EUGENE]</td>
+      <td>OR</td>
+      <td>97403</td>
+      <td>4709</td>
+      <td>25,266.90</td>
+      <td>5.37</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>BRENDA</td>
+      <td>TROUP</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[21 MEADOW ROAD]</td>
+      <td>[BOLTON]</td>
+      <td>MA</td>
+      <td>01740</td>
+      <td>4620</td>
+      <td>20,313.09</td>
+      <td>4.40</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>ALICE</td>
+      <td>CARY</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[33 LINDA AVE 2503]</td>
+      <td>[OAKLAND]</td>
+      <td>CA</td>
+      <td>94611</td>
+      <td>4610</td>
+      <td>47,819.10</td>
+      <td>10.37</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>JAN</td>
+      <td>GARRETT</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[2108 MCCUBBIN DR]</td>
+      <td>[BOWLING GREEN]</td>
+      <td>KY</td>
+      <td>42104</td>
+      <td>4577</td>
+      <td>19,145.01</td>
+      <td>4.18</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>LINDA</td>
+      <td>KOHN</td>
+      <td>[NURSE PRACTITIONER]</td>
+      <td>[WHITFORD FAMILY MEDICINE]</td>
+      <td>[PO BOX 655, POBOX 655]</td>
+      <td>[DEVAULT]</td>
+      <td>PA</td>
+      <td>19432</td>
+      <td>4514</td>
+      <td>13,144.43</td>
+      <td>2.91</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>JAMES</td>
+      <td>MARSH</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[5204 COLLINGSWOOD]</td>
+      <td>[RALEIGH]</td>
+      <td>NC</td>
+      <td>27609</td>
+      <td>4342</td>
+      <td>35,575.05</td>
+      <td>8.19</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>JAN</td>
+      <td>WISE</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[4308 SELKIRK DR W, 4308 SELKIRK W DR 3717747671]</td>
+      <td>[FORT WORTH]</td>
+      <td>TX</td>
+      <td>76109</td>
+      <td>4319</td>
+      <td>26,266.97</td>
+      <td>6.08</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>THOMAS</td>
+      <td>RE'</td>
+      <td>[ENTREPRENEUR]</td>
+      <td>[SELF]</td>
+      <td>[661 BLANDFORD ROAD]</td>
+      <td>[GRANVILLE]</td>
+      <td>MA</td>
+      <td>01034</td>
+      <td>4318</td>
+      <td>27,491.05</td>
+      <td>6.37</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>HENRY</td>
+      <td>EHRLICH</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[2218 BURDETT AVE APT 318]</td>
+      <td>[TROY]</td>
+      <td>NY</td>
+      <td>12180</td>
+      <td>4201</td>
+      <td>25,690.87</td>
+      <td>6.12</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>CLAUDIA</td>
+      <td>BUDGE</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE]</td>
+      <td>[2 LYFORD DRIVE 6]</td>
+      <td>[TIBURON]</td>
+      <td>CA</td>
+      <td>94920</td>
+      <td>4194</td>
+      <td>16,643.78</td>
+      <td>3.97</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>GLENN</td>
+      <td>ZOSKI</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[11300 COROBON LANE]</td>
+      <td>[GREAT FALLS]</td>
+      <td>VA</td>
+      <td>22066</td>
+      <td>4134</td>
+      <td>23,834.71</td>
+      <td>5.77</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>ELIZABETH M.</td>
+      <td>POSTELL</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[425 DAVIS ST UNIT 909]</td>
+      <td>[EVANSTON]</td>
+      <td>IL</td>
+      <td>60201</td>
+      <td>2918</td>
+      <td>58,093.90</td>
+      <td>19.91</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>ELIZABETH</td>
+      <td>WILLIAMS</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[1111 10TH STREET]</td>
+      <td>[ALAMOGORDO]</td>
+      <td>NM</td>
+      <td>88310</td>
+      <td>2901</td>
+      <td>16,176.75</td>
+      <td>5.58</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>DOUGLAS</td>
+      <td>KATZER</td>
+      <td>[ELECTRICAL ENGINEER]</td>
+      <td>[US NAVAL RESEARCH LABORATORY]</td>
+      <td>[2407 CHILDS LANE, 2407 CHILDS LN]</td>
+      <td>[ALEXANDRIA]</td>
+      <td>VA</td>
+      <td>22308</td>
+      <td>2889</td>
+      <td>13,402.02</td>
+      <td>4.64</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>LARRY</td>
+      <td>YATES</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[995 LIMA STREET, 99 LIMA STREET]</td>
+      <td>[AURORA]</td>
+      <td>CO</td>
+      <td>80010</td>
+      <td>2873</td>
+      <td>6,672.57</td>
+      <td>2.32</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>MARY</td>
+      <td>KAZANOWSKI</td>
+      <td>[NURSE PRACTITIONER]</td>
+      <td>[VNA HOSPICE]</td>
+      <td>[11 WEYMOUTH DRIVE]</td>
+      <td>[BEDFORD]</td>
+      <td>NH</td>
+      <td>03110</td>
+      <td>2804</td>
+      <td>10,992.75</td>
+      <td>3.92</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>MARILYN</td>
+      <td>BAILEY</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[2001 SANFORD AVE]</td>
+      <td>[SANFORD]</td>
+      <td>FL</td>
+      <td>32771</td>
+      <td>2799</td>
+      <td>23,439.13</td>
+      <td>8.37</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>MARGUERITE</td>
+      <td>JORGENSEN</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[560 E CHANNEL ROAD, 560 ECHANNE ROAD]</td>
+      <td>[SANTA MONICA]</td>
+      <td>CA</td>
+      <td>90402</td>
+      <td>2790</td>
+      <td>10,865.18</td>
+      <td>3.89</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>WYATT &amp; LINDA</td>
+      <td>UNDERWOOD</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[17834 BURBANK BLVD APT 204]</td>
+      <td>[ENCINO]</td>
+      <td>CA</td>
+      <td>91316</td>
+      <td>2777</td>
+      <td>14,198.00</td>
+      <td>5.11</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>STEPHEN</td>
+      <td>STOKER</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, RETIRED]</td>
+      <td>[1036 IVY LANE, 8401 N NEW BRAUNFELS NUMBER 135]</td>
+      <td>[SAN ANTONIO]</td>
+      <td>TX</td>
+      <td>78209</td>
+      <td>2772</td>
+      <td>2,288.87</td>
+      <td>0.83</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>BEVERLY</td>
+      <td>MULLINEAUX</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[602 N 116TH ST NONE]</td>
+      <td>[WAUWATOSA]</td>
+      <td>WI</td>
+      <td>53226</td>
+      <td>2770</td>
+      <td>26,274.03</td>
+      <td>9.49</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>ROTRAUD</td>
+      <td>COFFEY</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[3304 OAKELLAR AVE, 3304 W OAKELLAR AVE]</td>
+      <td>[TAMPA]</td>
+      <td>FL</td>
+      <td>33611</td>
+      <td>2731</td>
+      <td>5,817.05</td>
+      <td>2.13</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>DENNIS</td>
+      <td>ALANEN</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[3077 EVELYN ST ]</td>
+      <td>[ROSEVILLE]</td>
+      <td>MN</td>
+      <td>55113</td>
+      <td>2723</td>
+      <td>3,787.72</td>
+      <td>1.39</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>ANN</td>
+      <td>RUCHHOFT</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[1265 FOREST COURT]</td>
+      <td>[CINCINNATI]</td>
+      <td>OH</td>
+      <td>45215</td>
+      <td>2690</td>
+      <td>36,407.47</td>
+      <td>13.53</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>ANN MARIE</td>
+      <td>HARRISON</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[4200 JACKSON AVE APT 2002, 4200 JACKSON AVENU...</td>
+      <td>[AUSTIN]</td>
+      <td>TX</td>
+      <td>78731</td>
+      <td>2690</td>
+      <td>21,440.09</td>
+      <td>7.97</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>BENNE</td>
+      <td>RUBINR</td>
+      <td>[ACCOUNTAINT]</td>
+      <td>[SEL]</td>
+      <td>[739 DUMONT PL]</td>
+      <td>[VALLEY STREAM]</td>
+      <td>NY</td>
+      <td>11581</td>
+      <td>2672</td>
+      <td>1,937.04</td>
+      <td>0.72</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>EDWARD</td>
+      <td>MOCKFORD</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[505 BOWLES ST, 505 BOWLES ST ]</td>
+      <td>[NORMAL]</td>
+      <td>IL</td>
+      <td>61761</td>
+      <td>2643</td>
+      <td>28,578.02</td>
+      <td>10.81</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>JOHN</td>
+      <td>MOORHOUSE</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[6250 ALFRED HARRELL HWY ]</td>
+      <td>[BAKERSFIELD]</td>
+      <td>CA</td>
+      <td>93308</td>
+      <td>2600</td>
+      <td>21,882.15</td>
+      <td>8.42</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>SUZIE</td>
+      <td>RHEA HAUGHN</td>
+      <td>[NONE, RETIRED]</td>
+      <td>[NONE, RETIRED]</td>
+      <td>[1725PO, 1725 SUN CITY AZ 85372, PO 1725]</td>
+      <td>[SUN CITY]</td>
+      <td>AZ</td>
+      <td>85372</td>
+      <td>2592</td>
+      <td>11,154.92</td>
+      <td>4.30</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>JON</td>
+      <td>GOERNER</td>
+      <td>[RETAIL]</td>
+      <td>[OUTLINES MENSWEAR]</td>
+      <td>[4423 COLE AVE 103]</td>
+      <td>[DALLAS]</td>
+      <td>TX</td>
+      <td>75205</td>
+      <td>2575</td>
+      <td>10,904.02</td>
+      <td>4.23</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>NIEVES</td>
+      <td>POUSADA</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[18 ORCHARD ST ]</td>
+      <td>[MONTROSE]</td>
+      <td>NY</td>
+      <td>10548</td>
+      <td>2562</td>
+      <td>8,012.60</td>
+      <td>3.13</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>DAVID</td>
+      <td>CATCHPOLE</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[3206 KENDALE VE NW, 3206 KONDALE AVE NW]</td>
+      <td>[CONCORD]</td>
+      <td>NC</td>
+      <td>28027</td>
+      <td>2555</td>
+      <td>11,165.20</td>
+      <td>4.37</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>STEPHEN</td>
+      <td>SWITZER</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[2529 MORNINGSTAR RD, 2529 MORNINGSTAR ROAD]</td>
+      <td>[MANASQUAN]</td>
+      <td>NJ</td>
+      <td>08736</td>
+      <td>2554</td>
+      <td>13,323.75</td>
+      <td>5.22</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>PATTI</td>
+      <td>WEST-TRUBY</td>
+      <td>[RN]</td>
+      <td>[CURRY GENERAL HOSPITAL, CURRY MEDICAL CENTER,...</td>
+      <td>[7090 SIGNA ANN TERRACE, PO BOX 997, PO BOX 99...</td>
+      <td>[LUCERNE]</td>
+      <td>CA</td>
+      <td>95458</td>
+      <td>2538</td>
+      <td>15,872.92</td>
+      <td>6.25</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>JUDITH</td>
+      <td>SHATTUCK</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[2925 DEAKIN ST ]</td>
+      <td>[BERKELEY,]</td>
+      <td>CA</td>
+      <td>94705</td>
+      <td>2512</td>
+      <td>30,993.32</td>
+      <td>12.34</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>JANE</td>
+      <td>WHEELER</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[15 HAMILTON ROAD]</td>
+      <td>[HOPEWELL JUNCTION]</td>
+      <td>NY</td>
+      <td>12533</td>
+      <td>2504</td>
+      <td>23,251.61</td>
+      <td>9.29</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>CATHERINE</td>
+      <td>BOYAN</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE]</td>
+      <td>[4 S COVE RD]</td>
+      <td>[BURLINGTON]</td>
+      <td>VT</td>
+      <td>05401</td>
+      <td>2481</td>
+      <td>51,571.00</td>
+      <td>20.79</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>JOYCE</td>
+      <td>THIBODEAUX</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE]</td>
+      <td>[113 OAKDALE LOOP]</td>
+      <td>[HOUMA]</td>
+      <td>LA</td>
+      <td>70360</td>
+      <td>2470</td>
+      <td>84,172.89</td>
+      <td>34.08</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>BETH</td>
+      <td>PEWTHER</td>
+      <td>[ARTIST]</td>
+      <td>[SELF]</td>
+      <td>[80 BRONTE ST ]</td>
+      <td>[SAN FRANCISCO]</td>
+      <td>CA</td>
+      <td>94110</td>
+      <td>2441</td>
+      <td>6,366.25</td>
+      <td>2.61</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>WALTER</td>
+      <td>HANSON</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[2364 HIGHLAND LOOP]</td>
+      <td>[PORT TOWNSEND, PT TOWNSEND]</td>
+      <td>WA</td>
+      <td>98368</td>
+      <td>2440</td>
+      <td>18,738.79</td>
+      <td>7.68</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>KENNETH L</td>
+      <td>BAKER</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[1292 S TOWNSHIP LINE ROAD]</td>
+      <td>[ROYERSFORD]</td>
+      <td>PA</td>
+      <td>19468</td>
+      <td>2405</td>
+      <td>33,253.79</td>
+      <td>13.83</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 11 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_addicts.csv&#39;</span><span class="p">)</span>
@@ -18295,7 +21350,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_wolfe</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18317,16 +21372,228 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[59]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>filing_id</th>
+      <th>transaction_id</th>
+      <th>contributor_last_name</th>
+      <th>contributor_first_name</th>
+      <th>contributor_street_1</th>
+      <th>contributor_city</th>
+      <th>contributor_state</th>
+      <th>contributor_zip_code</th>
+      <th>contribution_date</th>
+      <th>contribution_amount</th>
+      <th>...</th>
+      <th>election_code</th>
+      <th>beneficiary_committee_fec_id</th>
+      <th>beneficiary_candidate_fec_id</th>
+      <th>beneficiary_candidate_state</th>
+      <th>beneficiary_candidate_office</th>
+      <th>cand_id</th>
+      <th>cand_pty_affiliation</th>
+      <th>cand_office_st</th>
+      <th>cand_office</th>
+      <th>cand_pcc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1216764</td>
+      <td>SA11AI_72158257</td>
+      <td>WOLFE</td>
+      <td>TERRY</td>
+      <td>1199 E 3RD ST</td>
+      <td>MORGANTOWN</td>
+      <td>WV</td>
+      <td>265089706</td>
+      <td>2017-02-23</td>
+      <td>5.00</td>
+      <td>...</td>
+      <td>P2016</td>
+      <td>C00349506</td>
+      <td>S8WA00194</td>
+      <td>WA</td>
+      <td>S</td>
+      <td>S8WA00194</td>
+      <td>DEM</td>
+      <td>WA</td>
+      <td>S</td>
+      <td>C00349506</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1216764</td>
+      <td>SA11AI_71431326</td>
+      <td>WOLFE</td>
+      <td>TERRY</td>
+      <td>1199 E 3RD ST</td>
+      <td>MORGANTOWN</td>
+      <td>WV</td>
+      <td>265089706</td>
+      <td>2017-02-14</td>
+      <td>5.00</td>
+      <td>...</td>
+      <td>P2016</td>
+      <td>C00437277</td>
+      <td>S8OR00207</td>
+      <td>OR</td>
+      <td>S</td>
+      <td>S8OR00207</td>
+      <td>DEM</td>
+      <td>OR</td>
+      <td>S</td>
+      <td>C00437277</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1216920</td>
+      <td>SA11AI_73950342</td>
+      <td>WOLFE</td>
+      <td>TERRY</td>
+      <td>1199 E 3RD ST</td>
+      <td>MORGANTOWN</td>
+      <td>WV</td>
+      <td>265089706</td>
+      <td>2017-03-13</td>
+      <td>5.00</td>
+      <td>...</td>
+      <td>P2016</td>
+      <td>C00580068</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1216920</td>
+      <td>SA11AI_73002724</td>
+      <td>WOLFE</td>
+      <td>TERRY</td>
+      <td>1199 E 3RD ST</td>
+      <td>MORGANTOWN</td>
+      <td>WV</td>
+      <td>265089706</td>
+      <td>2017-03-02</td>
+      <td>5.00</td>
+      <td>...</td>
+      <td>P2016</td>
+      <td>C00437277</td>
+      <td>S8OR00207</td>
+      <td>OR</td>
+      <td>S</td>
+      <td>S8OR00207</td>
+      <td>DEM</td>
+      <td>OR</td>
+      <td>S</td>
+      <td>C00437277</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1216920</td>
+      <td>SA11AI_73611226</td>
+      <td>WOLFE</td>
+      <td>TERRY</td>
+      <td>1199 E 3RD ST</td>
+      <td>MORGANTOWN</td>
+      <td>WV</td>
+      <td>265089706</td>
+      <td>2017-03-09</td>
+      <td>10.00</td>
+      <td>...</td>
+      <td>P2016</td>
+      <td>C00257642</td>
+      <td>S2WA00189</td>
+      <td>WA</td>
+      <td>S</td>
+      <td>S2WA00189</td>
+      <td>DEM</td>
+      <td>WA</td>
+      <td>S</td>
+      <td>C00257642</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 23 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_wolfe</span><span class="p">[</span><span class="s1">&#39;contribution_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[60]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>count   10,054.00
+mean         2.83
+std         54.99
+min          1.00
+25%          1.00
+50%          1.50
+75%          2.00
+max      5,400.00
+Name: contribution_amount, dtype: float64</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -18340,7 +21607,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_barlow</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18362,6 +21629,34 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[61]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>count   16,355.00
+mean         3.75
+std         30.92
+min          0.10
+25%          0.50
+50%          2.00
+75%          5.00
+max      2,700.00
+Name: contribution_amount, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -18372,7 +21667,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_nottingham</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18394,6 +21689,26 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[62]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>7315.0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -18404,7 +21719,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_first_names</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -18431,10 +21746,91 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[63]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>contributor_first_name</th>
+      <th>count</th>
+      <th>sum</th>
+      <th>gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>53325</th>
+      <td>JOHN</td>
+      <td>222778</td>
+      <td>9,835,671.29</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>23912</th>
+      <td>DAVID</td>
+      <td>202935</td>
+      <td>9,965,304.13</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>77637</th>
+      <td>MICHAEL</td>
+      <td>182416</td>
+      <td>8,198,781.87</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>106627</th>
+      <td>SUSAN</td>
+      <td>180593</td>
+      <td>5,176,089.09</td>
+      <td>female</td>
+    </tr>
+    <tr>
+      <th>94501</th>
+      <td>ROBERT</td>
+      <td>180296</td>
+      <td>7,883,807.55</td>
+      <td>male</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_gender</span> <span class="o">=</span> <span class="n">actblue_first_names</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_first_names</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">])[</span><span class="s1">&#39;count&#39;</span><span class="p">,</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -18449,10 +21845,105 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[64]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>sum</th>
+      <th>percent_by_count</th>
+      <th>percent_by_sum</th>
+    </tr>
+    <tr>
+      <th>gender</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>andy</th>
+      <td>85434</td>
+      <td>2,756,815.77</td>
+      <td>0.64</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <th>female</th>
+      <td>6220119</td>
+      <td>172,502,131.83</td>
+      <td>46.63</td>
+      <td>37.36</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>4911536</td>
+      <td>215,218,678.05</td>
+      <td>36.82</td>
+      <td>46.62</td>
+    </tr>
+    <tr>
+      <th>mostly_female</th>
+      <td>646643</td>
+      <td>18,353,167.47</td>
+      <td>4.85</td>
+      <td>3.98</td>
+    </tr>
+    <tr>
+      <th>mostly_male</th>
+      <td>302147</td>
+      <td>11,466,376.52</td>
+      <td>2.27</td>
+      <td>2.48</td>
+    </tr>
+    <tr>
+      <th>unknown</th>
+      <td>1172530</td>
+      <td>41,396,826.58</td>
+      <td>8.79</td>
+      <td>8.97</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
@@ -18460,6 +21951,25 @@ jupyter nbconvert analysis.ipynb
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[NbConvertApp] Converting notebook analysis.ipynb to html
+[NbConvertApp] Writing 527010 bytes to analysis.html
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
