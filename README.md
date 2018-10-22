@@ -28,3 +28,4 @@ jupyter lab
 ```
 
 To connect to a PostgreSQL database with campaign finance records, copy config.json.example to config.json, then update the values in [config.json](config.json) to the correct hostname and password.
+
