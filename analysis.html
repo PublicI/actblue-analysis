@@ -14735,6 +14735,116 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="How-much-in-itemized-federal-individual-contributions-to-congressional-candidates-are-we-analyzing-to-date?">How much in itemized federal individual contributions to congressional candidates are we analyzing to date?<a class="anchor-link" href="#How-much-in-itemized-federal-individual-contributions-to-congressional-candidates-are-we-analyzing-to-date?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_congress_contrib_totals_to_date</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
+    <span class="s1">&#39;actblue_congress_contrib_totals_to_date&#39;</span><span class="p">,</span>
+    <span class="k">lambda</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT extract(YEAR</span>
+<span class="s2">                   FROM contribution_date) AS YEAR,</span>
+<span class="s2">           count(*),</span>
+<span class="s2">           sum(contribution_amount)</span>
+<span class="s2">    FROM actblue_contribs</span>
+<span class="s2">    WHERE beneficiary_candidate_office IN (&#39;H&#39;,</span>
+<span class="s2">                                           &#39;S&#39;)</span>
+<span class="s2">      AND ((contribution_date &gt;= &#39;2017-01-01&#39;</span>
+<span class="s2">           AND contribution_date &lt;= &#39;2018-09-30&#39;)</span>
+<span class="s2">      OR (contribution_date &gt;= &#39;2015-01-01&#39;</span>
+<span class="s2">          AND contribution_date &lt;= &#39;2016-09-30&#39;)</span>
+<span class="s2">      OR (contribution_date &gt;= &#39;2013-01-01&#39;</span>
+<span class="s2">          AND contribution_date &lt;= &#39;2014-09-30&#39;))</span>
+<span class="s2">    GROUP BY extract(YEAR</span>
+<span class="s2">                     FROM contribution_date);</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">actblue_congress_contrib_totals_to_date</span><span class="p">[</span><span class="s1">&#39;cycle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_congress_contrib_totals_to_date</span><span class="p">[</span><span class="o">~</span><span class="n">actblue_congress_contrib_totals_to_date</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()][</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
+
+<span class="n">actblue_congress_contrib_count_by_cycle_to_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">actblue_congress_contrib_totals_to_date</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_congress_contrib_totals_to_date</span><span class="p">[</span><span class="s1">&#39;cycle&#39;</span><span class="p">])[</span><span class="s1">&#39;count&#39;</span><span class="p">,</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">actblue_congress_contrib_count_by_cycle_to_date</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[92]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>sum</th>
+    </tr>
+    <tr>
+      <th>cycle</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2014</th>
+      <td>2462294</td>
+      <td>86,601,563.51</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>4365861</td>
+      <td>162,630,650.90</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>15033855</td>
+      <td>545,955,211.40</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="How-have-total-contributions-to-ActBlue-changed-over-reporting-periods?">How have total contributions to ActBlue changed over reporting periods?<a class="anchor-link" href="#How-have-total-contributions-to-ActBlue-changed-over-reporting-periods?">&#182;</a></h3><p>Jan. 1, 2013 — now</p>
 
 </div>
@@ -14742,7 +14852,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">contribs_over_time</span> <span class="o">=</span> <span class="n">actblue_summaries</span><span class="p">[[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">,</span><span class="s1">&#39;col_a_total_contributions&#39;</span><span class="p">]]</span>
@@ -14773,7 +14883,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[16]:</div>
+    <div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -14806,13 +14916,13 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Contributions-by-day">Contributions by day<a class="anchor-link" href="#Contributions-by-day">&#182;</a></h3>
+<h3 id="How-much-did-donors-give-through-ActBlue-overall-by-day?">How much did donors give through ActBlue overall by day?<a class="anchor-link" href="#How-much-did-donors-give-through-ActBlue-overall-by-day?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contribs_by_day</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -14828,7 +14938,7 @@ div#notebook {
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
 
-<span class="n">actblue_contribs_by_day</span>
+<span class="n">actblue_contribs_by_day</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14841,7 +14951,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[17]:</div>
+    <div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -14930,315 +15040,8 @@ div#notebook {
       <td>73,739.31</td>
       <td>4289</td>
     </tr>
-    <tr>
-      <th>10</th>
-      <td>2013-01-11</td>
-      <td>80,169.17</td>
-      <td>4590</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2013-01-12</td>
-      <td>91,549.78</td>
-      <td>4094</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2013-01-13</td>
-      <td>37,373.16</td>
-      <td>1750</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2013-01-14</td>
-      <td>58,261.62</td>
-      <td>3025</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2013-01-15</td>
-      <td>113,114.80</td>
-      <td>5741</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2013-01-16</td>
-      <td>98,394.20</td>
-      <td>5371</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>2013-01-17</td>
-      <td>72,469.45</td>
-      <td>3992</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>2013-01-18</td>
-      <td>89,548.32</td>
-      <td>6084</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>2013-01-19</td>
-      <td>36,947.11</td>
-      <td>2944</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>2013-01-20</td>
-      <td>27,382.28</td>
-      <td>2024</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>2013-01-21</td>
-      <td>42,523.36</td>
-      <td>1732</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>2013-01-22</td>
-      <td>30,132.89</td>
-      <td>1356</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>2013-01-23</td>
-      <td>108,222.56</td>
-      <td>7914</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>2013-01-24</td>
-      <td>113,107.56</td>
-      <td>4491</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>2013-01-25</td>
-      <td>88,052.61</td>
-      <td>3801</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>2013-01-26</td>
-      <td>38,016.10</td>
-      <td>2782</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>2013-01-27</td>
-      <td>75,986.02</td>
-      <td>6613</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>2013-01-28</td>
-      <td>209,224.17</td>
-      <td>9297</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>2013-01-29</td>
-      <td>231,997.51</td>
-      <td>11605</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>2013-01-30</td>
-      <td>295,836.25</td>
-      <td>12471</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2070</th>
-      <td>2018-09-02</td>
-      <td>2,180,778.56</td>
-      <td>66165</td>
-    </tr>
-    <tr>
-      <th>2071</th>
-      <td>2018-09-03</td>
-      <td>2,547,727.11</td>
-      <td>70139</td>
-    </tr>
-    <tr>
-      <th>2072</th>
-      <td>2018-09-04</td>
-      <td>3,634,678.52</td>
-      <td>86896</td>
-    </tr>
-    <tr>
-      <th>2073</th>
-      <td>2018-09-05</td>
-      <td>3,497,800.10</td>
-      <td>89044</td>
-    </tr>
-    <tr>
-      <th>2074</th>
-      <td>2018-09-06</td>
-      <td>3,985,363.17</td>
-      <td>100832</td>
-    </tr>
-    <tr>
-      <th>2075</th>
-      <td>2018-09-07</td>
-      <td>3,866,884.50</td>
-      <td>103672</td>
-    </tr>
-    <tr>
-      <th>2076</th>
-      <td>2018-09-08</td>
-      <td>3,241,237.47</td>
-      <td>95852</td>
-    </tr>
-    <tr>
-      <th>2077</th>
-      <td>2018-09-09</td>
-      <td>3,263,286.57</td>
-      <td>85787</td>
-    </tr>
-    <tr>
-      <th>2078</th>
-      <td>2018-09-10</td>
-      <td>4,179,870.89</td>
-      <td>96791</td>
-    </tr>
-    <tr>
-      <th>2079</th>
-      <td>2018-09-11</td>
-      <td>4,193,486.24</td>
-      <td>84653</td>
-    </tr>
-    <tr>
-      <th>2080</th>
-      <td>2018-09-12</td>
-      <td>4,722,705.88</td>
-      <td>109904</td>
-    </tr>
-    <tr>
-      <th>2081</th>
-      <td>2018-09-13</td>
-      <td>4,418,026.14</td>
-      <td>115416</td>
-    </tr>
-    <tr>
-      <th>2082</th>
-      <td>2018-09-14</td>
-      <td>4,327,726.96</td>
-      <td>111477</td>
-    </tr>
-    <tr>
-      <th>2083</th>
-      <td>2018-09-15</td>
-      <td>3,354,324.74</td>
-      <td>102380</td>
-    </tr>
-    <tr>
-      <th>2084</th>
-      <td>2018-09-16</td>
-      <td>3,467,223.16</td>
-      <td>88706</td>
-    </tr>
-    <tr>
-      <th>2085</th>
-      <td>2018-09-17</td>
-      <td>4,728,285.12</td>
-      <td>97746</td>
-    </tr>
-    <tr>
-      <th>2086</th>
-      <td>2018-09-18</td>
-      <td>4,496,824.91</td>
-      <td>112443</td>
-    </tr>
-    <tr>
-      <th>2087</th>
-      <td>2018-09-19</td>
-      <td>4,631,836.11</td>
-      <td>126701</td>
-    </tr>
-    <tr>
-      <th>2088</th>
-      <td>2018-09-20</td>
-      <td>4,655,776.73</td>
-      <td>123648</td>
-    </tr>
-    <tr>
-      <th>2089</th>
-      <td>2018-09-21</td>
-      <td>5,254,110.05</td>
-      <td>137678</td>
-    </tr>
-    <tr>
-      <th>2090</th>
-      <td>2018-09-22</td>
-      <td>3,924,186.87</td>
-      <td>107113</td>
-    </tr>
-    <tr>
-      <th>2091</th>
-      <td>2018-09-23</td>
-      <td>3,718,224.87</td>
-      <td>91341</td>
-    </tr>
-    <tr>
-      <th>2092</th>
-      <td>2018-09-24</td>
-      <td>5,743,213.72</td>
-      <td>122824</td>
-    </tr>
-    <tr>
-      <th>2093</th>
-      <td>2018-09-25</td>
-      <td>6,115,297.50</td>
-      <td>130253</td>
-    </tr>
-    <tr>
-      <th>2094</th>
-      <td>2018-09-26</td>
-      <td>5,872,671.14</td>
-      <td>131961</td>
-    </tr>
-    <tr>
-      <th>2095</th>
-      <td>2018-09-27</td>
-      <td>5,965,622.04</td>
-      <td>138283</td>
-    </tr>
-    <tr>
-      <th>2096</th>
-      <td>2018-09-28</td>
-      <td>9,003,103.40</td>
-      <td>230899</td>
-    </tr>
-    <tr>
-      <th>2097</th>
-      <td>2018-09-29</td>
-      <td>8,042,618.43</td>
-      <td>216428</td>
-    </tr>
-    <tr>
-      <th>2098</th>
-      <td>2018-09-30</td>
-      <td>14,724,021.10</td>
-      <td>380768</td>
-    </tr>
-    <tr>
-      <th>2099</th>
-      <td>None</td>
-      <td>nan</td>
-      <td>76</td>
-    </tr>
   </tbody>
 </table>
-<p>2100 rows × 3 columns</p>
 </div>
 </div>
 
@@ -15250,7 +15053,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contribs_by_day</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_contribs_by_day.csv&#39;</span><span class="p">)</span>
@@ -15272,13 +15075,13 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Congressional-contributions-by-day">Congressional contributions by day<a class="anchor-link" href="#Congressional-contributions-by-day">&#182;</a></h3>
+<h3 id="How-much-did-donors-give-through-ActBlue-to-congressional-candidates-by-day?">How much did donors give through ActBlue to congressional candidates by day?<a class="anchor-link" href="#How-much-did-donors-give-through-ActBlue-to-congressional-candidates-by-day?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_congress_contribs_by_day</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -15294,7 +15097,7 @@ div#notebook {
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
 
-<span class="n">actblue_congress_contribs_by_day</span>
+<span class="n">actblue_congress_contribs_by_day</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15307,7 +15110,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[19]:</div>
+    <div class="prompt output_prompt">Out[20]:</div>
 
 
 
@@ -15396,315 +15199,8 @@ div#notebook {
       <td>10,161.63</td>
       <td>335</td>
     </tr>
-    <tr>
-      <th>10</th>
-      <td>2013-01-11</td>
-      <td>17,382.06</td>
-      <td>432</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2013-01-12</td>
-      <td>41,151.55</td>
-      <td>983</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2013-01-13</td>
-      <td>14,073.90</td>
-      <td>373</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2013-01-14</td>
-      <td>36,712.26</td>
-      <td>1825</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2013-01-15</td>
-      <td>81,196.94</td>
-      <td>3790</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2013-01-16</td>
-      <td>36,795.08</td>
-      <td>907</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>2013-01-17</td>
-      <td>32,528.74</td>
-      <td>1392</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>2013-01-18</td>
-      <td>47,551.34</td>
-      <td>3306</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>2013-01-19</td>
-      <td>22,765.02</td>
-      <td>1597</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>2013-01-20</td>
-      <td>8,854.15</td>
-      <td>640</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>2013-01-21</td>
-      <td>19,515.75</td>
-      <td>515</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>2013-01-22</td>
-      <td>15,088.14</td>
-      <td>296</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>2013-01-23</td>
-      <td>89,981.66</td>
-      <td>6187</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>2013-01-24</td>
-      <td>56,207.56</td>
-      <td>1913</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>2013-01-25</td>
-      <td>60,346.69</td>
-      <td>1844</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>2013-01-26</td>
-      <td>15,194.23</td>
-      <td>942</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>2013-01-27</td>
-      <td>34,867.32</td>
-      <td>2600</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>2013-01-28</td>
-      <td>29,461.15</td>
-      <td>1176</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>2013-01-29</td>
-      <td>26,649.08</td>
-      <td>593</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>2013-01-30</td>
-      <td>39,379.00</td>
-      <td>752</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2070</th>
-      <td>2018-09-02</td>
-      <td>1,368,652.79</td>
-      <td>24328</td>
-    </tr>
-    <tr>
-      <th>2071</th>
-      <td>2018-09-03</td>
-      <td>1,737,463.06</td>
-      <td>28079</td>
-    </tr>
-    <tr>
-      <th>2072</th>
-      <td>2018-09-04</td>
-      <td>2,388,903.69</td>
-      <td>36748</td>
-    </tr>
-    <tr>
-      <th>2073</th>
-      <td>2018-09-05</td>
-      <td>2,199,401.29</td>
-      <td>38757</td>
-    </tr>
-    <tr>
-      <th>2074</th>
-      <td>2018-09-06</td>
-      <td>2,537,731.54</td>
-      <td>44688</td>
-    </tr>
-    <tr>
-      <th>2075</th>
-      <td>2018-09-07</td>
-      <td>2,390,999.80</td>
-      <td>45428</td>
-    </tr>
-    <tr>
-      <th>2076</th>
-      <td>2018-09-08</td>
-      <td>2,199,393.68</td>
-      <td>42935</td>
-    </tr>
-    <tr>
-      <th>2077</th>
-      <td>2018-09-09</td>
-      <td>2,286,675.53</td>
-      <td>40444</td>
-    </tr>
-    <tr>
-      <th>2078</th>
-      <td>2018-09-10</td>
-      <td>2,758,163.41</td>
-      <td>46085</td>
-    </tr>
-    <tr>
-      <th>2079</th>
-      <td>2018-09-11</td>
-      <td>2,651,245.68</td>
-      <td>34601</td>
-    </tr>
-    <tr>
-      <th>2080</th>
-      <td>2018-09-12</td>
-      <td>3,174,864.03</td>
-      <td>50924</td>
-    </tr>
-    <tr>
-      <th>2081</th>
-      <td>2018-09-13</td>
-      <td>2,907,229.19</td>
-      <td>55439</td>
-    </tr>
-    <tr>
-      <th>2082</th>
-      <td>2018-09-14</td>
-      <td>2,734,532.31</td>
-      <td>52060</td>
-    </tr>
-    <tr>
-      <th>2083</th>
-      <td>2018-09-15</td>
-      <td>2,284,342.73</td>
-      <td>50744</td>
-    </tr>
-    <tr>
-      <th>2084</th>
-      <td>2018-09-16</td>
-      <td>2,372,124.44</td>
-      <td>40829</td>
-    </tr>
-    <tr>
-      <th>2085</th>
-      <td>2018-09-17</td>
-      <td>2,920,158.27</td>
-      <td>43593</td>
-    </tr>
-    <tr>
-      <th>2086</th>
-      <td>2018-09-18</td>
-      <td>3,017,980.08</td>
-      <td>58923</td>
-    </tr>
-    <tr>
-      <th>2087</th>
-      <td>2018-09-19</td>
-      <td>3,013,014.04</td>
-      <td>64686</td>
-    </tr>
-    <tr>
-      <th>2088</th>
-      <td>2018-09-20</td>
-      <td>3,077,073.87</td>
-      <td>63958</td>
-    </tr>
-    <tr>
-      <th>2089</th>
-      <td>2018-09-21</td>
-      <td>3,502,997.11</td>
-      <td>74187</td>
-    </tr>
-    <tr>
-      <th>2090</th>
-      <td>2018-09-22</td>
-      <td>2,816,696.65</td>
-      <td>54308</td>
-    </tr>
-    <tr>
-      <th>2091</th>
-      <td>2018-09-23</td>
-      <td>2,646,401.06</td>
-      <td>43753</td>
-    </tr>
-    <tr>
-      <th>2092</th>
-      <td>2018-09-24</td>
-      <td>3,879,094.57</td>
-      <td>61123</td>
-    </tr>
-    <tr>
-      <th>2093</th>
-      <td>2018-09-25</td>
-      <td>4,118,562.88</td>
-      <td>58448</td>
-    </tr>
-    <tr>
-      <th>2094</th>
-      <td>2018-09-26</td>
-      <td>3,827,073.88</td>
-      <td>58498</td>
-    </tr>
-    <tr>
-      <th>2095</th>
-      <td>2018-09-27</td>
-      <td>3,701,829.73</td>
-      <td>66586</td>
-    </tr>
-    <tr>
-      <th>2096</th>
-      <td>2018-09-28</td>
-      <td>6,076,326.70</td>
-      <td>125782</td>
-    </tr>
-    <tr>
-      <th>2097</th>
-      <td>2018-09-29</td>
-      <td>5,047,251.55</td>
-      <td>106095</td>
-    </tr>
-    <tr>
-      <th>2098</th>
-      <td>2018-09-30</td>
-      <td>10,146,836.59</td>
-      <td>182610</td>
-    </tr>
-    <tr>
-      <th>2099</th>
-      <td>None</td>
-      <td>nan</td>
-      <td>2</td>
-    </tr>
   </tbody>
 </table>
-<p>2100 rows × 3 columns</p>
 </div>
 </div>
 
@@ -15716,7 +15212,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_congress_contribs_by_day</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_congress_contribs_by_day.csv&#39;</span><span class="p">)</span>
@@ -15735,6 +15231,69 @@ div#notebook {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contribs_by_day</span> <span class="o">=</span> <span class="n">actblue_congress_contribs_by_day</span><span class="p">[[</span><span class="s1">&#39;contribution_date&#39;</span><span class="p">,</span><span class="s1">&#39;sum&#39;</span><span class="p">]]</span>
+
+<span class="c1"># https://scentellegher.github.io/programming/2017/05/24/pandas-bar-plot-with-formatted-dates.html</span>
+<span class="n">contribs_by_day</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;contribution_date&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">YearLocator</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">))</span>
+
+<span class="c1"># https://matplotlib.org/examples/pylab_examples/custom_ticker1.html</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">ticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="s1">&#39;$%1.fM&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mf">1e-6</span><span class="p">)))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">contribs_by_day</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">contribs_by_day</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Congressional contribution totals by day&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0.5,1,&#39;Congressional contribution totals by day&#39;)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtcAAAGsCAYAAAAWg4vCAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDIuMi4yLCBodHRwOi8vbWF0cGxvdGxpYi5vcmcvhp/UCwAAIABJREFUeJzt3Xl8VNX9//H3kJAEEpIQhqiQSCIgQgRBo2wKUdL660Lab6sRKlVaRTQ+BFI3BBFcquhXxVaxiFpbsSq0dUNFaZSIsrgEAUmUHQOChoAhRBIg4fz+oMyXyULCzMmsr+fj4UNmcu8959zPnck7d8694zDGGAEAAADwWht/dwAAAAAIFYRrAAAAwBLCNQAAAGAJ4RoAAACwhHANAAAAWEK4BgAAACwhXAMICmPHjlV2drZf2k5LS9N9993nl7a9Ub/frT0Oh8OhF154odW270/eHn9/+9vfFBkZabFHJxbKtQACHeEaCHB79uzRbbfdpl69eikmJkbJyckaNmyYnn/+edXW1vq7ez7zpz/9Sf/85z/93Q2/uu+++5SWltbi5T/99FPl5+db70d2drbGjh3b4Pldu3bpsssus95efSe7H47ZsWOHHA6HCgsLrfcJAI7x3Z/RAE7a9u3bdeGFFyoyMlL33HOPBgwYoLZt22r58uV6+OGH1a9fP/Xv39+vfTx06JCioqJavZ2EhIRWbyNUHKtJ586dfdruqaee6tP2ACAQceYaCGB5eXk6ePCgVq1apSuvvFJ9+vRRz549dfXVV6uoqEg9e/aUJB0+fFiTJ09W165dFRUVpT59+ujFF19025bD4dCTTz6p3/72t+rQoYNSUlL0wAMPuC2zZ88eXX755YqNjdUpp5yiadOm6eqrr3b7ODwrK0vXXHONpk2bptNOO02nn366qw8zZsxQenq6YmJilJGRoaeeespt+88884x69+6tmJgYJSUladiwYdqxY4ckqbKyUr/73e906qmnKjo6WqmpqfrDH/7gWrf+x/LGGD388MM644wzFBUVpe7du+uxxx5zay8tLU133XWXJk6cqKSkJJ1yyinKz893O+P/n//8R1lZWUpKSlJCQoKGDx+uTz755KRrtXnzZl122WVKSkpS+/bt1a9fP7355puun7/99ts677zzFB0dreTkZOXl5emHH35oML65c+eqW7duio+PV05Ojr777jtJR6cVTJs2TV9//bUcDoccDodmzJjhGuedd96pvLw8derUSRdddJHr+frTQKqrq3XttdcqPj5eTqdTU6ZM0ZEjR9z2Wf11rr32WmVlZbn6+d577+nvf/+7qx/HzgTXn4qwa9cujRo1SomJiWrXrp2ysrL02WefuX5eWFgoh8Oh//znPxo2bJjat2+vPn36aNGiRU3u5xPth/3792v8+PHq3LmzoqOjlZmZqcWLF7vWTU1NlSRdfPHFcjgcrrPfW7du1a9+9St16dJF7du3V9++fTVv3rwm+yBJxcXFuvTSS5WYmKjY2Fj17t272XUkqaCgQBkZGYqJidHAgQO1evVqV987dOjQ4HW7bds2tWnTRh9++GGT21yyZIn69eunmJgY9evXT0uWLGmwzNSpU9W7d2+1b99eqampuv7667Vv3z6v2wbQCAMgIO3Zs8e0adPG3Hvvvc0ue8stt5ikpCSzYMECs379evPHP/7ROBwOU1BQ4FpGkklOTjZz5841mzZtMk888YSR5LbMyJEjTc+ePc37779v1q1bZ8aOHWvi4+PNiBEjXMsMHz7cxMXFmfHjx5vi4mKzdu1aY4wxV199tenbt6959913zZYtW8zLL79sEhISzDPPPGOMMeazzz4zERER5u9//7vZtm2bWbt2rXn66afN9u3bjTHG3HTTTaZfv35m5cqV5uuvvzbLli0zc+fOdbV79dVXu/XjiSeeMDExMeapp54yGzZsMH/5y19MdHS0qz1jjOnWrZtJTEw0DzzwgNmwYYOZP3++iYyMdFvmlVdeMfPnzzdfffWVWbdunbnmmmtMx44dTXl5udt2TlSHXbt2meTkZDNixAjz4Ycfmk2bNpnXXnvNvPXWW8YYY9asWWMiIiLMpEmTzJdffmnefvttk5qaasaMGeM2vvj4eDNq1CjzxRdfmOXLl5u0tDTXMgcOHDC33367SUlJMbt27TK7du0y+/fvd/WvQ4cOZvr06Wb9+vWmuLi40X4fW27atGnmq6++Ms8//7xp3769eeyxx0441muuucYMHz7cGGNMRUWFueiii0xubq6rHwcPHjTGHD3G5s2bZ4wx5siRI+aCCy4w55xzjvnwww/N2rVrTW5urklMTDS7d+82xhizZMkSI8n069fPLFq0yGzYsMGMHTvWdOjQwezdu7fRfX2i/XDZZZeZbt26mXfeeceUlJSYCRMmmLZt25ovv/zSGGPMqlWrjCTz73//2+zatcuUlZUZY4xZu3atefzxx83q1avNpk2bzJ///GcTERFh3n//fbf6HH/89e3b14wePdoUFxebzZs3m7ffftssXLiwyWPkueeeMw6HwwwYMMAUFhaaNWvWmJ/97GemS5cu5sCBA8YYY6677jqTlZXltt6dd95pevfu3eR2v/nmG9O+fXszduxYU1xcbBYvXmz69u3rVgtjjLn33nvN0qVLzdatW01BQYHp1auXueqqq1w/96RtAI0jXAMB6uOPP3YFgRP54YcfTFRUlJk9e7bb87/85S/NxRdf7Hosydx0001uy5x11llm8uTJxhhjNmzY0CBsHzp0yKSkpDQI1z179jR1dXWu57Zs2WIcDocrxBxz9913m3POOccYczTExsfHm3379jU6jpycHHP11Vc3Oc764SYlJcXceuutbstMmjTJpKenux5369bNjBw50m2Z//f//p8ZNWpUk+3U1dWZxMRE88ILL7ht50Th+s477zSnnHKKqaqqavTnY8aMMeeff77bc6+99ppxOBxm27ZtrvF17tzZ1NTUuJaZOXOmOfXUU12P7733XtOtW7cG2+/WrZu55JJLGn2+fri+8MIL3Za54447TEpKygnHeny4NsaYESNGNFqr4wNdQUGBkeQK+sYYU1NTY0499VRz9913G2P+L1wff4x/++23RpJ55513Gmz/mMb2w8aNG40k1x80xwwYMMD87ne/M8YYs337diPJLFmypMltH5OTk2OuvfZa1+P6x198fLx57rnnmt3OMc8991yD19fevXtNbGys64+9oqIiI8ls2LDBGGNMbW2t6dq1q3n00Ueb3O7UqVPN6aefbg4fPux6buHChQ3CdX2vvPKKiYqKcr2OPWkbQOOYFgIEKGNMi5bbtGmTDh06pGHDhrk9P3z4cBUXF7s9V39+dpcuXVzTDkpKSiRJgwYNcv28bdu2yszMbNDmeeedpzZt/u/t47PPPpMxRpmZmYqLi3P9d//992vjxo2SpB/96Ec644wzlJ6erlGjRmnu3LkqLy93bSMvL0//+te/dPbZZ2vixIlatGiR23SF41VWVmrHjh2Njnnbtm06cOBAi8YsHZ0S8Nvf/lY9evRQfHy84uPjtW/fPn399deNtt2YoqIiDRkyRLGxsY3+vLi4uNG+GmNc+12SzjrrLEVHRzfZ1xO54IILWrTc4MGD3R4PHTpUO3bsUGVlZYvWb6ni4mJ16tRJffr0cT0XHR2tgQMHnvC4POWUUxQREdHicR9zbD/W38/Dhg1r0F59Bw4c0OTJk5WRkaGkpCTFxcXp7bffPuExcMstt7imy8yYMUOrVq1qUT+P3/8dO3ZU7969Xf0799xzlZmZqWeeeUaStGjRIpWXl+uqq65qcnslJSW64IIL3O5EcuGFFzZY7pVXXtGwYcPUpUsXxcXF6corr9ShQ4f07bffetw2gMYRroEA1bNnT7Vp08YtfHmr/oWHDoejQYB1OBzNbqd+iDy2jeXLl2v16tWu/9atW6e1a9dKkuLi4vTZZ5/p1Vdf1Zlnnqk5c+aoR48eKioqkiRdeumlKi0t1dSpU1VTU6MxY8bokksuUV1dncfjlZof889//nOVlpZq9uzZWrlypVavXq3k5GQdOnTIq3Y90VhfW/pHVlPB/mS1adOmQZuHDx+2su2mNHZBbFN/WLWGW2+9VS+88IKmT5+uJUuWaPXq1frpT396wmNg2rRp2rBhg3Jzc7Vu3ToNGjRId955p9d9uf766/W3v/1Nhw8f1jPPPKNf/epX6tSpk1fb/Pjjj3X55Zdr2LBhevXVV7Vq1SrNmTNHktzG2BptA+GIcA0EqKSkJP3kJz/RE0884brw6HiHDx/WDz/8oB49eig6OlpLly51+/kHH3ygs88+u8XtHTvDuGLFCtdztbW1rvB7Iuedd54kqbS0VD169HD7r3v37q7lIiIiNGzYMN1zzz0qKirSaaed5nYRVVJSkkaPHq2nnnpKb731lj744ING/7iIj49XSkpKo2NOT09X+/btWzTmPXv2qKSkRJMnT9all16qPn36KCYmRmVlZS1a//jxL1++3O0CxeNlZGQ02leHw6GMjIwWtxMVFeX1HxsrV650e7x8+XJ17dpV8fHxkqTk5GTt3LnTbZnPP//8pPuRkZHh2r/HHDx4UB9//PFJHZeNaaz9Y/ux/n5eunSpq71jIb7+ukuXLtWVV16p3NxcnXPOOTrjjDO0YcOGZvtxxhlnuD5xueeee/SXv/yl2XWO3/8VFRX68ssv3c7ujxo1SjU1Na7XwLhx4064vT59+uiTTz5xG9OyZcvclvnoo4/kdDp13333aeDAgTrzzDNdFxIf72TbBtA4wjUQwJ588km1bdtW5513nl588UWVlJRo06ZNeuGFF5SZmamNGzeqffv2mjBhgqZNm6Z//vOf2rBhg+6//369/vrrmjJlSovb6tmzp0aOHKkbb7zRFWrHjx+vysrKZs9m9+jRQ7///e81btw4zZs3T5s2bdKaNWv017/+VQ8++KAk6fXXX9esWbNUVFSk0tJSvfbaa9q+fbsrWEydOlWvvPKK1q9fr40bN+of//iH4uLiXHcjqe+OO+7Q448/rqefflobN27UU089pb/85S8nNeaOHTuqc+fOevrpp7VhwwatWLFCo0ePVrt27Vq8DenolJYjR47oF7/4hZYtW6atW7fqzTffdN314tZbb9WqVauUn5+vr776Su+8845uuukmXXnllU2OrzHp6en69ttvtWLFCpWXl7tNf2mp1atXa8aMGdqwYYNefPFF/elPf9LNN9/s+nl2drbmz5+vxYsXa/369crPz28wPSI9PV1FRUXavHmzysvLGz2zfckll+iCCy7Qb37zGy1btkzr1q3TVVddpZqaGt1www0n3e/67dffD927d9fll1+uvLw8vfvuu/rqq680ceJErVu3Trfeeqskyel0Ki4uTosXL9a3336r77//XpLUq1cvvf766/rkk09UUlKi6667rsEfGMerqqrSjTfeqPfff19bt27V559/rnfeecctJDfG4XDotttu09KlS/XFF1/oqquuUocOHfSb3/zGtUxsbKzGjBmjm2++Wenp6br44otPuM0bbrhBu3fv1nXXXacvv/xS7733nqZOneq2TK9evbR79249++yz2rJli55//nk9+eSTDbZ1sm0DaIJfZ3wDaFZZWZm5+eabTc+ePU10dLTp3LmzGTZsmJk3b57rIqZDhw6Z22+/3XTp0sW0bdvW9O7d2/zjH/9w244aucCp/oVp5eXl5te//rVp166d6dy5s5k2bZq57LLLzM9//nPXMsOHDzfXXHNNg37W1taaBx980PTq1cu0bdvWdOrUyQwbNswsWLDAGGPMBx98YC6++GLjdDpNdHS06dGjh3nggQdc699zzz0mIyPDxMbGmvj4eDNs2DDz4Ycfun5e/4KyI0eOmIceesikpaWZyMhIk56ebmbNmuXWp5ZcnFdYWGj69etnoqOjzZlnnmn+9a9/me7du5vp06efcDv1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kvbs2SNJqqur04EDB9ShQwfXOomJiYqMjNTatWvVt29f73oPAAAABBCPp4XU1NS4pnu0a9dOKSkpqqqq0nnnnafCwkKdeeaZWrlypTIyMuRwONzWzc3N1b59+9SmDd9hAwAAgNDhcbiura3V3LlzVVVVpcrKSjmdTk2cOFFxcXF64okndNNNNykuLk6TJk1qsG6vXr286rSvZWdn+7sLaAHqFPioUXCgTsGBOgUH6hT4bNfI+n2uAQAAgHDl9byM2NhYpaWlWegKAAAAENy8PnMNAAAA4CivvqExWJWXl2v27NmqqKiQw+FQdna2fvrTn6qqqkqzZs3S7t271blzZ+Xn5ysuLk7ffPONnnzySW3dulWjRo1yfVX7oUOHNH36dNXW1qqurk6DBg1Sbm6un0cXOmzV6ZgjR45o8uTJSkpK4tZIltis0Y033qiYmBi1adNGERERfr8FZyixWacffvhBc+bM0fbt2+VwOHTDDTfozDPP9OPoQoetOu3cuVOzZs1ybbesrEy5ubn62c9+5q+hhRSbr6c333xT77//vhwOh1JTU5WXl6eoqCg/ji402KzR22+/rffee0/GGI0YMaJlryMThvbu3Ws2b95sjDHmwIEDZsKECWb79u1m3rx55tVXXzXGGPPqq6+aefPmGWOMqaioMBs3bjQvvviief31113bOXLkiKmurjbGGHP48GFzxx13mPXr1/t4NKHLVp2OWbhwoXnsscfMAw884LtBhDibNcrLyzP79u3z7QDChM06Pf7446agoMAYc/R9r6qqyocjCW223/OMMaaurs5ce+21pqyszDeDCAO26rRnzx6Tl5dnDh48aIwx5pFHHjFLlizx7WBClK0aff311+YPf/iDqampMbW1teaee+4xu3btarb9sLwXXseOHXXGGWdIOnobwa5du2rv3r369NNPNXz4cEnS8OHD9emnn0qSEhIS1KNHD0VERLhtx+FwKCYmRtLRe3rX1dU1uO0gPGerTpK0Z88erVq1SiNGjPDdAMKAzRqh9diq04EDB/Tll1/qkksukSRFRkYqNjbWhyMJba3xevriiy906qmnqnPnzq0/gDBhs05HjhzRoUOHVFdXp0OHDqljx46+G0gIs1Wjb775Rj169FB0dLQiIiLUu3dvffzxx822H5bTQo5XVlamrVu3qkePHtq3b5/rwE5MTNS+ffuaXf/IkSO6/fbb9e233+rSSy9Vz549W7vLYcnbOv3tb3/TmDFjVF1d3dpdDVve1kiS/vjHP0qSfvSjH3H7qlbiTZ3KysoUHx+vJ598Ul9//bXOOOMMjR071nWSAfbYeD1JatG3IcNz3tQpKSlJI0eO1A033KCoqCidc845Ouecc3zR7bDiTY1SU1P18ssva//+/YqKitLnn3+u7t27N9tmWJ65PqampkaPPPKIxo4dq/bt27v9zOFwtOgsdJs2bfS///u/mjNnjjZv3qzS0tLW6m7Y8rZORUVFSkhIcP0VC/tsvJbuvfdePfjgg5oyZYreffddlZSUtFZ3w5a3daqrq9PWrVv14x//WA899JCio6P12muvtWaXw5KN15N09PsoioqKNGjQoNboZtjztk5VVVX69NNPNXv2bD311FOqqanR0qVLW7PLYcfbGqWkpOgXv/iF7rvvPt1///1KS0tr0Rcghm24rq2t1SOPPKKLLrpIAwcOlHT0Y4Hvv/9ekvT9998rPj6+xduLjY1VRkaGVq9e3Sr9DVc26rR+/Xp99tlnuvHGG/XYY49p3bp1+vOf/9zqfQ8Xtl5LSUlJrnXPP/98bdq0qfU6HYZs1KlTp07q1KmT6xO6QYMGaevWra3b8TBj83fT559/rvT0dCUmJrZaf8OVjTp98cUXSk5OVnx8vCIjIzVw4EBt2LCh1fseLmy9li655BI9+OCDuvvuuxUbG6vTTjut2XXCMlwbYzRnzhx17dpVP//5z13PZ2Zm6oMPPpAkffDBBzr//PNPuJ3Kykr98MMPko7eOWTt2rXq2rVr63U8zNiq029+8xvNmTNHs2fP1qRJk3T22WdrwoQJrdr3cGGrRjU1Na4pOzU1NVq7dq1OP/301ut4mLFVp8TERHXq1Ek7d+6UdDQcpKSktF7Hw4ytOh3DlJDWYatOTqdTGzdu1MGDB2WM0RdffEGGsMTma+nY1JHy8nJ98sknuvDCC5tdJyzvc/3VV1/prrvu0umnn+76SGD06NHq2bOnZs2apfLycrdbtFRUVGjy5Mmqrq52XcT46KOPavfu3Zo9e7aOHDkiY4wGDx6syy67zM+jCx226nT8R0HFxcVauHAht+KzxFaN9u/fr4cffljS0akHF154oX71q1/5c2ghxeZradu2bZozZ45qa2uVnJysvLw8xcXF+XmEocFmnWpqapSXl6cnnniiwcfh8I7NOi1YsEDLly9XRESE0tLSdP3116tt27Z+HmHws1mju+66S/v371dkZKSuuuoq9e3bt9n2wzJcAwAAAK0hLKeFAAAAAK2BcA0AAABYQrgGAAAALCFcAwAAAJYQrgEAAABLCNcAAACAJYRrAAAAwJL/D0srHQTpq+LlAAAAAElFTkSuQmCC
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15745,7 +15304,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;cycle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_summaries</span><span class="o">.</span><span class="n">coverage_through_date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
@@ -15766,7 +15325,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
+    <div class="prompt output_prompt">Out[23]:</div>
 
 
 
@@ -15829,17 +15388,17 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;cycle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_summaries</span><span class="o">.</span><span class="n">coverage_through_date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
 
 <span class="n">actblue_summaries_to_date</span> <span class="o">=</span> <span class="n">actblue_summaries</span><span class="p">[((</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;2017-01-01&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
-                                              <span class="p">(</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2018-08-31&#39;</span><span class="p">))</span> <span class="o">|</span>
+                                              <span class="p">(</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2018-09-30&#39;</span><span class="p">))</span> <span class="o">|</span>
                                               <span class="p">((</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
-                                              <span class="p">(</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2016-08-31&#39;</span><span class="p">))</span> <span class="o">|</span> 
+                                              <span class="p">(</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2016-09-30&#39;</span><span class="p">))</span> <span class="o">|</span> 
                                               <span class="p">((</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;2013-01-01&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
-                                              <span class="p">(</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2014-08-31&#39;</span><span class="p">))]</span>
+                                              <span class="p">(</span><span class="n">actblue_summaries</span><span class="p">[</span><span class="s1">&#39;coverage_through_date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2014-09-30&#39;</span><span class="p">))]</span>
 
 <span class="n">contribs_by_cycle</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="n">actblue_summaries_to_date</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_summaries_to_date</span><span class="p">[</span><span class="s1">&#39;cycle&#39;</span><span class="p">])[</span><span class="s1">&#39;col_a_total_contributions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -15857,7 +15416,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[22]:</div>
+    <div class="prompt output_prompt">Out[24]:</div>
 
 
 
@@ -15913,7 +15472,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://scentellegher.github.io/programming/2017/05/24/pandas-bar-plot-with-formatted-dates.html</span>
@@ -15942,7 +15501,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[23]:</div>
+    <div class="prompt output_prompt">Out[25]:</div>
 
 
 
@@ -15982,7 +15541,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_transfers</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -16012,7 +15571,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[24]:</div>
+    <div class="prompt output_prompt">Out[26]:</div>
 
 
 
@@ -16196,14 +15755,14 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-much-of-this-is-a-contribution-to-ActBlue?">How much of this is a contribution to ActBlue?<a class="anchor-link" href="#How-much-of-this-is-a-contribution-to-ActBlue?">&#182;</a></h3><p>Jan. 1, 2013 — now</p>
+<h3 id="How-much-of-this-is-a-contribution-to-ActBlue-itself?">How much of this is a contribution to ActBlue itself?<a class="anchor-link" href="#How-much-of-this-is-a-contribution-to-ActBlue-itself?">&#182;</a></h3><p>Jan. 1, 2013 — now</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_itself</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -16228,7 +15787,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[25]:</div>
+    <div class="prompt output_prompt">Out[27]:</div>
 
 
 
@@ -16282,7 +15841,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -16337,7 +15896,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[26]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -16398,7 +15957,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_actblue_proportion_amount</span><span class="p">(</span><span class="n">cycle</span><span class="p">):</span>
@@ -16508,7 +16067,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span>
@@ -16521,7 +16080,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2018 cycle (Jan. 1, 2017 — September 30, 2018)&quot;</span>
@@ -16538,7 +16097,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[29]:</div>
+    <div class="prompt output_prompt">Out[31]:</div>
 
 
 
@@ -16555,7 +16114,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount_14</span> <span class="o">=</span> <span class="n">calc_actblue_proportion_amount</span><span class="p">(</span><span class="mi">2014</span><span class="p">)</span>
@@ -16573,7 +16132,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[30]:</div>
+    <div class="prompt output_prompt">Out[32]:</div>
 
 
 
@@ -16597,10 +16156,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="p">[(</span><span class="o">~</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30000</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="p">[(</span><span class="o">~</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30000</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -16613,7 +16172,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[31]:</div>
+    <div class="prompt output_prompt">Out[33]:</div>
 
 
 
@@ -16930,286 +16489,6 @@ div#notebook {
       <td>37,532.09</td>
       <td>0.92</td>
     </tr>
-    <tr>
-      <th>723</th>
-      <td>C00650283</td>
-      <td>WHITNEY, ROBERT (TOBY)</td>
-      <td>H</td>
-      <td>WA</td>
-      <td>08</td>
-      <td>2018</td>
-      <td>[2017-10-01, 2017-07-01, 2018-01-01]</td>
-      <td>[2017-12-31, 2017-09-30, 2018-03-31]</td>
-      <td>98,200.99</td>
-      <td>90,005.99</td>
-      <td>0.92</td>
-    </tr>
-    <tr>
-      <th>617</th>
-      <td>C00647925</td>
-      <td>KEIRSTEAD, HANS</td>
-      <td>H</td>
-      <td>CA</td>
-      <td>48</td>
-      <td>2018</td>
-      <td>[2018-05-17, 2018-01-01, 2018-07-01, 2017-07-0...</td>
-      <td>[2018-06-30, 2018-03-31, 2018-09-30, 2017-09-3...</td>
-      <td>979,382.28</td>
-      <td>888,527.97</td>
-      <td>0.91</td>
-    </tr>
-    <tr>
-      <th>987</th>
-      <td>C00660530</td>
-      <td>HADER, SHANNON</td>
-      <td>H</td>
-      <td>WA</td>
-      <td>08</td>
-      <td>2018</td>
-      <td>[2018-01-01, 2018-07-01, 2017-10-01, 2018-07-1...</td>
-      <td>[2018-03-31, 2018-07-18, 2017-12-31, 2018-09-3...</td>
-      <td>433,940.37</td>
-      <td>389,126.91</td>
-      <td>0.90</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>C00629675</td>
-      <td>CARRILLO DONO, WENDY MARIA</td>
-      <td>H</td>
-      <td>CA</td>
-      <td>34</td>
-      <td>2017</td>
-      <td>[2017-03-16, 2017-01-01, 2017-04-01, 2017-04-2...</td>
-      <td>[2017-03-31, 2017-03-15, 2017-04-24, 2017-06-3...</td>
-      <td>145,548.88</td>
-      <td>130,147.88</td>
-      <td>0.89</td>
-    </tr>
-    <tr>
-      <th>314</th>
-      <td>C00630749</td>
-      <td>WOLF, BENJAMIN</td>
-      <td>H</td>
-      <td>IL</td>
-      <td>05</td>
-      <td>2018</td>
-      <td>[2017-07-01, 2018-01-01, 2017-04-01, 2017-01-0...</td>
-      <td>[2017-09-30, 2018-02-28, 2017-06-30, 2017-03-3...</td>
-      <td>33,448.73</td>
-      <td>29,798.93</td>
-      <td>0.89</td>
-    </tr>
-    <tr>
-      <th>459</th>
-      <td>C00638403</td>
-      <td>KANEW, JUSTIN</td>
-      <td>H</td>
-      <td>TN</td>
-      <td>07</td>
-      <td>2018</td>
-      <td>[2017-04-01, 2018-07-14, 2018-07-01, 2017-10-0...</td>
-      <td>[2017-06-30, 2018-09-30, 2018-07-13, 2017-12-3...</td>
-      <td>409,019.33</td>
-      <td>362,813.58</td>
-      <td>0.89</td>
-    </tr>
-    <tr>
-      <th>1209</th>
-      <td>C00671412</td>
-      <td>COLLIER, ERIN</td>
-      <td>H</td>
-      <td>NY</td>
-      <td>19</td>
-      <td>2018</td>
-      <td>[2018-04-01, 2018-07-01, 2018-01-01, 2018-06-07]</td>
-      <td>[2018-06-06, 2018-09-30, 2018-03-31, 2018-06-30]</td>
-      <td>198,830.05</td>
-      <td>176,328.03</td>
-      <td>0.89</td>
-    </tr>
-    <tr>
-      <th>107</th>
-      <td>C00424713</td>
-      <td>GRAYSON, ALAN MARK</td>
-      <td>H</td>
-      <td>FL</td>
-      <td>09</td>
-      <td>2018</td>
-      <td>[2017-01-01, 2017-10-01, 2017-07-01, 2018-01-0...</td>
-      <td>[2017-03-31, 2017-12-31, 2017-09-30, 2018-03-3...</td>
-      <td>832,023.32</td>
-      <td>737,559.99</td>
-      <td>0.89</td>
-    </tr>
-    <tr>
-      <th>645</th>
-      <td>C00648741</td>
-      <td>SPENCER, PAUL JOHN MR.</td>
-      <td>H</td>
-      <td>AR</td>
-      <td>02</td>
-      <td>2018</td>
-      <td>[2018-05-03, 2018-01-01, 2017-07-01, 2017-04-0...</td>
-      <td>[2018-06-30, 2018-03-31, 2017-09-30, 2017-06-3...</td>
-      <td>265,593.99</td>
-      <td>235,112.29</td>
-      <td>0.89</td>
-    </tr>
-    <tr>
-      <th>238</th>
-      <td>C00581595</td>
-      <td>APPLEGATE, DOUGLAS LOREN</td>
-      <td>H</td>
-      <td>CA</td>
-      <td>49</td>
-      <td>2018</td>
-      <td>[2018-01-01, 2018-04-01, 2018-07-01, 2017-10-0...</td>
-      <td>[2018-03-31, 2018-05-16, 2018-09-30, 2017-12-3...</td>
-      <td>951,131.92</td>
-      <td>841,615.84</td>
-      <td>0.88</td>
-    </tr>
-    <tr>
-      <th>1200</th>
-      <td>C00671057</td>
-      <td>RATIGAN, DYLAN</td>
-      <td>H</td>
-      <td>NY</td>
-      <td>21</td>
-      <td>2018</td>
-      <td>[2018-04-01, 2018-06-07, 2018-01-01]</td>
-      <td>[2018-06-06, 2018-07-12, 2018-03-31]</td>
-      <td>189,783.66</td>
-      <td>167,201.20</td>
-      <td>0.88</td>
-    </tr>
-    <tr>
-      <th>647</th>
-      <td>C00648907</td>
-      <td>MYERS, CATHY</td>
-      <td>H</td>
-      <td>WI</td>
-      <td>01</td>
-      <td>2018</td>
-      <td>[2018-07-26, 2018-01-01, 2018-04-01, 2018-07-0...</td>
-      <td>[2018-09-30, 2018-03-31, 2018-06-30, 2018-07-2...</td>
-      <td>1,463,589.27</td>
-      <td>1,288,760.51</td>
-      <td>0.88</td>
-    </tr>
-    <tr>
-      <th>331</th>
-      <td>C00632232</td>
-      <td>QUIST, ROBERT E.</td>
-      <td>H</td>
-      <td>MT</td>
-      <td>00</td>
-      <td>2017</td>
-      <td>[2018-04-01, 2018-01-01, 2018-07-01, 2017-10-0...</td>
-      <td>[2018-06-30, 2018-03-31, 2018-09-30, 2017-12-3...</td>
-      <td>6,613,029.07</td>
-      <td>5,815,577.72</td>
-      <td>0.88</td>
-    </tr>
-    <tr>
-      <th>968</th>
-      <td>C00659615</td>
-      <td>ING, MARK KANIELA</td>
-      <td>H</td>
-      <td>HI</td>
-      <td>01</td>
-      <td>2018</td>
-      <td>[2017-10-01, 2018-07-23, 2018-01-01, 2018-07-0...</td>
-      <td>[2017-12-31, 2018-09-30, 2018-03-31, 2018-07-2...</td>
-      <td>404,185.66</td>
-      <td>355,242.31</td>
-      <td>0.88</td>
-    </tr>
-    <tr>
-      <th>782</th>
-      <td>C00652107</td>
-      <td>THORBURN, ANDY</td>
-      <td>H</td>
-      <td>CA</td>
-      <td>39</td>
-      <td>2018</td>
-      <td>[2018-05-17, 2017-07-31, 2017-10-01, 2018-04-0...</td>
-      <td>[2018-06-30, 2017-09-30, 2017-12-31, 2018-05-1...</td>
-      <td>272,270.92</td>
-      <td>238,963.52</td>
-      <td>0.88</td>
-    </tr>
-    <tr>
-      <th>463</th>
-      <td>C00638510</td>
-      <td>JANZ, ANDREW</td>
-      <td>H</td>
-      <td>CA</td>
-      <td>22</td>
-      <td>2018</td>
-      <td>[2017-04-01, 2017-07-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2017-06-30, 2017-09-30, 2017-12-31, 2018-03-3...</td>
-      <td>7,091,195.60</td>
-      <td>6,205,223.06</td>
-      <td>0.88</td>
-    </tr>
-    <tr>
-      <th>504</th>
-      <td>C00639591</td>
-      <td>OCASIO-CORTEZ, ALEXANDRIA</td>
-      <td>H</td>
-      <td>NY</td>
-      <td>14</td>
-      <td>2018</td>
-      <td>[2018-06-07, 2017-07-01, 2017-10-01, 2017-05-1...</td>
-      <td>[2018-06-30, 2017-09-30, 2017-12-31, 2017-06-3...</td>
-      <td>1,624,589.20</td>
-      <td>1,421,475.65</td>
-      <td>0.87</td>
-    </tr>
-    <tr>
-      <th>434</th>
-      <td>C00637454</td>
-      <td>ABBOUD, DEEDRA</td>
-      <td>S</td>
-      <td>AZ</td>
-      <td>00</td>
-      <td>2018</td>
-      <td>[2018-01-01, 2017-07-01, 2018-07-01, 2018-08-0...</td>
-      <td>[2018-03-31, 2017-09-30, 2018-08-08, 2018-09-3...</td>
-      <td>98,544.37</td>
-      <td>86,208.05</td>
-      <td>0.87</td>
-    </tr>
-    <tr>
-      <th>1267</th>
-      <td>C00676312</td>
-      <td>BARNHART, RACHEL</td>
-      <td>H</td>
-      <td>NY</td>
-      <td>25</td>
-      <td>2018</td>
-      <td>[2018-07-01, 2018-06-07, 2018-04-01]</td>
-      <td>[2018-09-30, 2018-06-30, 2018-06-06]</td>
-      <td>33,506.48</td>
-      <td>29,275.51</td>
-      <td>0.87</td>
-    </tr>
-    <tr>
-      <th>1093</th>
-      <td>C00665448</td>
-      <td>RAO, SAIRA</td>
-      <td>H</td>
-      <td>CO</td>
-      <td>01</td>
-      <td>2018</td>
-      <td>[2018-04-01, 2018-01-01, 2018-06-07, 2018-07-01]</td>
-      <td>[2018-06-06, 2018-03-31, 2018-06-30, 2018-09-30]</td>
-      <td>380,680.42</td>
-      <td>332,602.98</td>
-      <td>0.87</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -17223,7 +16502,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_proportion_amount</span><span class="p">[(</span><span class="o">~</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">20000</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_proportion.csv&#39;</span><span class="p">)</span>
@@ -17243,7 +16522,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_cand_totals</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -17286,7 +16565,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[33]:</div>
+    <div class="prompt output_prompt">Out[35]:</div>
 
 
 
@@ -17564,7 +16843,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_cand_totals</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_cand_totals.csv&#39;</span><span class="p">)</span>
@@ -17584,7 +16863,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_cand_totals</span><span class="p">[</span><span class="s1">&#39;percent_out&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_cand_totals</span><span class="p">[</span><span class="s1">&#39;out_of_state&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_cand_totals</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span>
@@ -17602,7 +16881,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[35]:</div>
+    <div class="prompt output_prompt">Out[37]:</div>
 
 
 
@@ -19072,7 +18351,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_cand_totals</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;out_of_state&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -19088,7 +18367,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[36]:</div>
+    <div class="prompt output_prompt">Out[38]:</div>
 
 
 
@@ -19378,324 +18657,13 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Did-candidates-in-the-DCCC&#8217;s-Red-to-Blue-program-receive-a-higher-percentage-of-their-contributions-through-ActBlue?">Did candidates in the DCCC&#8217;s Red to Blue program receive a higher percentage of their contributions through ActBlue?<a class="anchor-link" href="#Did-candidates-in-the-DCCC&#8217;s-Red-to-Blue-program-receive-a-higher-percentage-of-their-contributions-through-ActBlue?">&#182;</a></h3><p>Jan. 1, 2017 — June 30, 2018</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">redtoblue</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00572859&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00575209&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00578476&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00633982&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00637074&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00637363&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00637371&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00637868&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00640003&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00640045&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00640714&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00641381&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00646745&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00646752&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00647537&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00648220&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00648493&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00648725&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00648956&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00649327&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00649483&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00649558&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00649798&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00650150&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00650648&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00651042&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00652065&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00652248&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00652297&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00652594&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00652719&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00653121&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00654400&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00656686&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00658633&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00661868&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00662577&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00664375&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00666149&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00667519&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00668228&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00671156&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00675538&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00639146&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00634212&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00636571&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00634253&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00646844&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00653816&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00667097&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00658567&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00649913&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00638023&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00647164&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;C00639989&#39;</span><span class="p">]</span>
-
-<span class="n">redtoblue_actblue</span> <span class="o">=</span> <span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;cand_pcc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">redtoblue</span><span class="p">)]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">redtoblue_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns in the Red to Blue program came through ActBlue in the 2018 cycle&quot;</span>
-          
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[38]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;59.37 percent of contributions from individuals to Democratic campaigns in the Red to Blue program came through ActBlue in the 2018 cycle&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Do-candidates-who-pledge-not-to-take-corporate-PAC-money-get-more-contributions-than-other-candidates?">Do candidates who pledge not to take corporate PAC money get more contributions than other candidates?<a class="anchor-link" href="#Do-candidates-who-pledge-not-to-take-corporate-PAC-money-get-more-contributions-than-other-candidates?">&#182;</a></h3><p>Jan. 1, 2017 — June 30, 2018</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">endcu</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00413914&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00420760&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00500843&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00516047&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00505552&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00434563&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00326801&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00431353&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00431304&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00412304&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00264697&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00431056&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00410803&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00344051&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00344473&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00238865&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00460261&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00469163&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00462861&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00476564&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00345546&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00459099&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00374058&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00513077&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00502294&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00510461&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00502575&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00498667&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00503110&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00590489&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00494856&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00497396&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00495952&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00498568&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00140715&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00499947&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00516666&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00503052&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00635722&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00273169&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00512426&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00500421&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00497933&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00514893&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00502179&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00558627&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00503185&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00557652&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00541888&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00547240&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00401190&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00558320&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00555813&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00422360&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00576041&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00577353&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00620443&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00590067&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00575092&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00419630&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00415182&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00574640&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00310318&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00575126&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00572859&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00573949&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00592659&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00610964&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00605592&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00668574&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00671156&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00651042&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00649897&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00213512&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00331769&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00648956&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00638510&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00650648&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00633982&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00635888&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00637363&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00649798&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00652594&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00652065&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00649376&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00637074&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00646844&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00648493&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00327023&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00649558&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00649483&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00652719&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00657635&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00651331&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00653121&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00651158&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00646745&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00639427&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00653816&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00636324&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00649327&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00640714&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00650440&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00641381&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00662577&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00639310&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00640003&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00639054&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00666149&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00655613&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00338954&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00652248&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00236513&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00450049&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00648725&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00667519&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00646752&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00665471&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00446906&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00637371&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00667097&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00650507&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00640045&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00653923&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00652297&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00660555&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00649350&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00637868&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00658633&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00664375&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00649913&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00654400&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00639989&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00508804&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00654822&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00606939&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00501197&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;C00663146&#39;</span><span class="p">]</span>
-
-<span class="n">endcu_actblue</span> <span class="o">=</span> <span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="n">actblue_proportion_amount</span><span class="p">[</span><span class="s1">&#39;cand_pcc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">endcu</span><span class="p">)]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">endcu_actblue</span><span class="p">[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; percent of contributions from individuals to Democratic campaigns endorsed by End CU came through ActBlue in the 2018 cycle&quot;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[40]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;54.16 percent of contributions from individuals to Democratic campaigns endorsed by End CU came through ActBlue in the 2018 cycle&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Where-do-the-donors-giving-through-ActBlue-come-from-geographically?-Any-striking-or-interesting-patterns?">Where do the donors giving through ActBlue come from geographically? Any striking or interesting patterns?<a class="anchor-link" href="#Where-do-the-donors-giving-through-ActBlue-come-from-geographically?-Any-striking-or-interesting-patterns?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Which-states-did-contributions-from-come-from-for-each-candidate-state?">Which states did contributions from come from for each candidate state?<a class="anchor-link" href="#Which-states-did-contributions-from-come-from-for-each-candidate-state?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -19726,7 +18694,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[41]:</div>
+    <div class="prompt output_prompt">Out[39]:</div>
 
 
 
@@ -19839,7 +18807,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_states.csv&#39;</span><span class="p">)</span>
@@ -19875,7 +18843,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contributor_states</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
@@ -19895,7 +18863,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[43]:</div>
+    <div class="prompt output_prompt">Out[41]:</div>
 
 
 
@@ -19991,7 +18959,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_contributor_states</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_contributor_states.csv&#39;</span><span class="p">)</span>
@@ -20012,7 +18980,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_recipient_states</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
@@ -20032,7 +19000,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[45]:</div>
+    <div class="prompt output_prompt">Out[43]:</div>
 
 
 
@@ -20349,9 +19317,16 @@ div#notebook {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="How-much-ActBlue-money-came-in-vs.-out-of-state?">How much ActBlue money came in vs. out of state?<a class="anchor-link" href="#How-much-ActBlue-money-came-in-vs.-out-of-state?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">]</span>
@@ -20369,7 +19344,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[46]:</div>
+    <div class="prompt output_prompt">Out[44]:</div>
 
 
 
@@ -20387,12 +19362,19 @@ Name: sum, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What-percentage-of-ActBlue-money-to-congressional-candidates-came-from-out-of-state?">What percentage of ActBlue money to congressional candidates came from out of state?<a class="anchor-link" href="#What-percentage-of-ActBlue-money-to-congressional-candidates-came-from-out-of-state?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="p">[</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states</span><span class="p">[</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 </pre></div>
 
     </div>
@@ -20405,13 +19387,13 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[47]:</div>
+    <div class="prompt output_prompt">Out[45]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.5762422221039158</pre>
+<pre>57.624222210391586</pre>
 </div>
 
 </div>
@@ -20427,9 +19409,16 @@ Name: sum, dtype: float64</pre>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="How-much-of-the-money-Beto-raised-from-ActBlue-was-in-state-vs.-out-of-state?">How much of the money Beto raised from ActBlue was in state vs. out of state?<a class="anchor-link" href="#How-much-of-the-money-Beto-raised-from-ActBlue-was-in-state-vs.-out-of-state?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_beto</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -20462,7 +19451,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[48]:</div>
+    <div class="prompt output_prompt">Out[46]:</div>
 
 
 
@@ -20480,9 +19469,16 @@ Name: sum, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Where-did-his-ActBlue-money-come-from?">Where did his ActBlue money come from?<a class="anchor-link" href="#Where-did-his-ActBlue-money-come-from?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_beto</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -20498,7 +19494,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[47]:</div>
 
 
 
@@ -20620,12 +19616,19 @@ Name: sum, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What-percentage-of-Beto's-ActBlue-money-came-from-out-of-state?">What percentage of Beto's ActBlue money came from out of state?<a class="anchor-link" href="#What-percentage-of-Beto's-ActBlue-money-came-from-out-of-state?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_beto</span><span class="p">[</span><span class="n">actblue_states_beto</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_states_beto</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_beto</span><span class="p">[</span><span class="n">actblue_states_beto</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">actblue_states_beto</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 </pre></div>
 
     </div>
@@ -20638,13 +19641,13 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[48]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.47804821358627664</pre>
+<pre>47.80482135862766</pre>
 </div>
 
 </div>
@@ -20660,9 +19663,16 @@ Name: sum, dtype: float64</pre>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="How-much-of-the-money-Amy-McGrath-raised-from-ActBlue-was-in-state-vs.-out-of-state?">How much of the money Amy McGrath raised from ActBlue was in state vs. out of state?<a class="anchor-link" href="#How-much-of-the-money-Amy-McGrath-raised-from-ActBlue-was-in-state-vs.-out-of-state?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_mcgrath</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -20695,7 +19705,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[51]:</div>
+    <div class="prompt output_prompt">Out[49]:</div>
 
 
 
@@ -20713,9 +19723,16 @@ Name: sum, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Where-did-her-ActBlue-money-come-from?">Where did her ActBlue money come from?<a class="anchor-link" href="#Where-did-her-ActBlue-money-come-from?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_mcgrath</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -20731,7 +19748,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[52]:</div>
+    <div class="prompt output_prompt">Out[50]:</div>
 
 
 
@@ -20856,13 +19873,13 @@ Name: sum, dtype: float64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-much-of-McGrath's-Q3-fundraising-haul-was-from-ActBlue?">How much of McGrath's Q3 fundraising haul was from ActBlue?<a class="anchor-link" href="#How-much-of-McGrath's-Q3-fundraising-haul-was-from-ActBlue?">&#182;</a></h3>
+<h4 id="How-much-of-McGrath's-Q3-fundraising-haul-was-from-ActBlue?">How much of McGrath's Q3 fundraising haul was from ActBlue?<a class="anchor-link" href="#How-much-of-McGrath's-Q3-fundraising-haul-was-from-ActBlue?">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_mcgrath_q3</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -20890,7 +19907,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[53]:</div>
+    <div class="prompt output_prompt">Out[51]:</div>
 
 
 
@@ -20944,7 +19961,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/presvotes.csv&#39;</span><span class="p">)</span>
@@ -20960,9 +19977,16 @@ Name: sum, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What's-the-correlation-between-2018-ActBlue-dollars-per-2016-presidential-vote-and-Clinton-margin?">What's the correlation between 2018 ActBlue dollars per 2016 presidential vote and Clinton margin?<a class="anchor-link" href="#What's-the-correlation-between-2018-ActBlue-dollars-per-2016-presidential-vote-and-Clinton-margin?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;margin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">])</span><span class="o">-</span><span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;trump&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">])</span>
@@ -20986,13 +20010,13 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[55]:</div>
+    <div class="prompt output_prompt">Out[53]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1133d6a58&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x107a87550&gt;</pre>
 </div>
 
 </div>
@@ -21025,7 +20049,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">]][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">]][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -21041,7 +20065,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[56]:</div>
+    <div class="prompt output_prompt">Out[54]:</div>
 
 
 
@@ -21065,7 +20089,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">]][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="n">votes_vs_contribs</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">]][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -21081,7 +20105,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[57]:</div>
+    <div class="prompt output_prompt">Out[55]:</div>
 
 
 
@@ -21098,7 +20122,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># votes_vs_contribs[votes_vs_contribs[&#39;dollars_per&#39;] &gt; 7.5]</span>
@@ -21111,7 +20135,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># votes_vs_contribs[votes_vs_contribs[&#39;dollars_per&#39;] &lt;= 1.3]</span>
@@ -21124,7 +20148,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># votes_vs_contribs.groupby(votes_vs_contribs[&#39;blue&#39;])[&#39;sum&#39;].sum()</span>
@@ -21144,7 +20168,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">contrib_flow</span> <span class="o">=</span> <span class="n">pres_votes</span><span class="p">[[</span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pres_votes</span><span class="p">[[</span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">),</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;_recip&#39;</span><span class="p">,</span><span class="s1">&#39;_contrib&#39;</span><span class="p">])</span>
@@ -21164,7 +20188,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[61]:</div>
+    <div class="prompt output_prompt">Out[59]:</div>
 
 
 
@@ -21227,7 +20251,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">contrib_flow</span><span class="p">[(</span><span class="o">~</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;blue_recip&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;blue_contrib&#39;</span><span class="p">])][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -21243,7 +20267,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[103]:</div>
+    <div class="prompt output_prompt">Out[60]:</div>
 
 
 
@@ -21267,7 +20291,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">contrib_flow</span><span class="p">[(</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;blue_recip&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;blue_contrib&#39;</span><span class="p">])][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -21283,7 +20307,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[104]:</div>
+    <div class="prompt output_prompt">Out[61]:</div>
 
 
 
@@ -21307,7 +20331,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">contrib_flow</span><span class="p">[(</span><span class="o">~</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;blue_recip&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;blue_contrib&#39;</span><span class="p">])][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">contrib_flow</span><span class="p">[(</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;blue_recip&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;blue_contrib&#39;</span><span class="p">])][</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -21323,7 +20347,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[105]:</div>
+    <div class="prompt output_prompt">Out[62]:</div>
 
 
 
@@ -21347,7 +20371,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">contrib_flow</span><span class="p">[</span><span class="o">~</span><span class="n">contrib_flow</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]],</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue_recip&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue_contrib&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
@@ -21363,7 +20387,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[62]:</div>
+    <div class="prompt output_prompt">Out[63]:</div>
 
 
 
@@ -21426,7 +20450,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_recipient_out_states</span> <span class="o">=</span> <span class="n">actblue_states</span><span class="p">[</span><span class="o">~</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_states</span><span class="p">[</span><span class="o">~</span><span class="n">actblue_states</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]][</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
@@ -21446,7 +20470,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[63]:</div>
+    <div class="prompt output_prompt">Out[64]:</div>
 
 
 
@@ -21764,7 +20788,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_14</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -21796,7 +20820,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[64]:</div>
+    <div class="prompt output_prompt">Out[65]:</div>
 
 
 
@@ -21909,7 +20933,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_states_14</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_states_14</span><span class="p">[</span><span class="s1">&#39;contributor_state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">actblue_states_14</span><span class="p">[</span><span class="s1">&#39;recipient_state&#39;</span><span class="p">]</span>
@@ -21929,7 +20953,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[65]:</div>
+    <div class="prompt output_prompt">Out[66]:</div>
 
 
 
@@ -21992,7 +21016,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">contrib_flow_14</span><span class="p">[</span><span class="o">~</span><span class="n">contrib_flow_14</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">]],</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue_recip&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue_contrib&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
@@ -22008,7 +21032,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[66]:</div>
+    <div class="prompt output_prompt">Out[67]:</div>
 
 
 
@@ -22065,13 +21089,20 @@ Name: sum, dtype: float64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Percent-of-Clinton-votes-from-California-and-New-York">Percent of Clinton votes from California and New York<a class="anchor-link" href="#Percent-of-Clinton-votes-from-California-and-New-York">&#182;</a></h2>
+<h2 id="What-percent-of-Clinton-votes-from-California-and-New-York?">What percent of Clinton votes from California and New York?<a class="anchor-link" href="#What-percent-of-Clinton-votes-from-California-and-New-York?">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="How-many-from-California-and-New-York?">How many from California and New York?<a class="anchor-link" href="#How-many-from-California-and-New-York?">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span><span class="p">[(</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;CA&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;NY&#39;</span><span class="p">)]</span>
@@ -22087,7 +21118,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[67]:</div>
+    <div class="prompt output_prompt">Out[68]:</div>
 
 
 
@@ -22154,45 +21185,19 @@ Name: sum, dtype: float64</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What-was-the-popular-vote-from-all-states?">What was the popular vote from all states?<a class="anchor-link" href="#What-was-the-popular-vote-from-all-states?">&#182;</a></h4>
 </div>
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[68]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>65853514</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;CA&#39;</span><span class="p">][</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">+</span><span class="n">pres_votes</span><span class="p">[</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;NY&#39;</span><span class="p">][</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">/</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -22211,7 +21216,7 @@ Name: sum, dtype: float64</pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.20211389175071204</pre>
+<pre>65853514</pre>
 </div>
 
 </div>
@@ -22223,13 +21228,53 @@ Name: sum, dtype: float64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-about-Texas?-Which-cities?">What about Texas? Which cities?<a class="anchor-link" href="#What-about-Texas?-Which-cities?">&#182;</a></h3>
+<h4 id="What-percentage-of-Clinton-votes-were-from-those-two-states?">What percentage of Clinton votes were from those two states?<a class="anchor-link" href="#What-percentage-of-Clinton-votes-were-from-those-two-states?">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">pres_votes</span><span class="p">[</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;CA&#39;</span><span class="p">][</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">+</span><span class="n">pres_votes</span><span class="p">[</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;NY&#39;</span><span class="p">][</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">/</span><span class="n">pres_votes</span><span class="p">[</span><span class="s1">&#39;clinton&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[70]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>20.211389175071204</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What-about-Texas?-Which-cities-gave?">What about Texas? Which cities gave?<a class="anchor-link" href="#What-about-Texas?-Which-cities-gave?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_texas_cities</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -22248,7 +21293,7 @@ Name: sum, dtype: float64</pre>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
 <span class="p">)</span>
 
-<span class="n">actblue_texas_cities</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_texas_cities</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_texas_cities</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">actblue_texas_cities</span><span class="p">[</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_texas_cities</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">actblue_texas_cities</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
 
 <span class="n">actblue_texas_cities</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
@@ -22263,7 +21308,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[70]:</div>
+    <div class="prompt output_prompt">Out[71]:</div>
 
 
 
@@ -22298,39 +21343,79 @@ Name: sum, dtype: float64</pre>
       <td>austin</td>
       <td>136462</td>
       <td>6,658,372.44</td>
-      <td>0.20</td>
+      <td>19.50</td>
     </tr>
     <tr>
       <th>1</th>
       <td>houston</td>
       <td>91804</td>
       <td>6,753,687.20</td>
-      <td>0.20</td>
+      <td>19.78</td>
     </tr>
     <tr>
       <th>2</th>
       <td>dallas</td>
       <td>63994</td>
       <td>4,636,976.00</td>
-      <td>0.14</td>
+      <td>13.58</td>
     </tr>
     <tr>
       <th>3</th>
       <td>san antonio</td>
       <td>43196</td>
       <td>1,688,745.49</td>
-      <td>0.05</td>
+      <td>4.95</td>
     </tr>
     <tr>
       <th>4</th>
       <td>fort worth</td>
       <td>21636</td>
       <td>787,092.20</td>
-      <td>0.02</td>
+      <td>2.31</td>
     </tr>
   </tbody>
 </table>
 </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What-percentage-came-from-the-top-three-Texas-cities?">What percentage came from the top three Texas cities?<a class="anchor-link" href="#What-percentage-came-from-the-top-three-Texas-cities?">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_texas_cities</span><span class="p">[</span><span class="n">actblue_texas_cities</span><span class="p">[</span><span class="s1">&#39;lower&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;austin&#39;</span><span class="p">,</span><span class="s1">&#39;houston&#39;</span><span class="p">,</span><span class="s1">&#39;dallas&#39;</span><span class="p">])][</span><span class="s1">&#39;percent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[72]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>52.86484296032217</pre>
 </div>
 
 </div>
@@ -22348,7 +21433,7 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">specials</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C00631564&#39;</span><span class="p">,</span>
@@ -22394,10 +21479,10 @@ Name: sum, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_specials</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_specials</span><span class="p">[[</span><span class="s1">&#39;committee_total&#39;</span><span class="p">,</span><span class="s1">&#39;actblue_total&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -22410,17 +21495,15 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[72]:</div>
+    <div class="prompt output_prompt">Out[74]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>cand_pcc           C00615823C00629659C00630426C00631564C00632232C...
-name               BARRERA FOR CONGRESSJIMMY GOMEZ FOR CONGRESSJO...
-committee_total                                        82,121,621.48
-actblue_total                                          72,978,917.38
-dtype: object</pre>
+<pre>committee_total   82,121,621.48
+actblue_total     72,978,917.38
+dtype: float64</pre>
 </div>
 
 </div>
@@ -22447,7 +21530,7 @@ dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_freq</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -22484,7 +21567,7 @@ dtype: object</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[73]:</div>
+    <div class="prompt output_prompt">Out[75]:</div>
 
 
 
@@ -22556,7 +21639,7 @@ dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_freq</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_freq.csv&#39;</span><span class="p">)</span>
@@ -22585,7 +21668,7 @@ dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -22626,7 +21709,7 @@ dtype: object</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[75]:</div>
+    <div class="prompt output_prompt">Out[77]:</div>
 
 
 
@@ -23531,7 +22614,7 @@ dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_addicts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/actblue_addicts.csv&#39;</span><span class="p">)</span>
@@ -23559,7 +22642,7 @@ dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_wolfe</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -23596,7 +22679,7 @@ dtype: object</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[77]:</div>
+    <div class="prompt output_prompt">Out[79]:</div>
 
 
 
@@ -23672,50 +22755,16 @@ dtype: object</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_wolfe</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="How-much-did-Wolfe-give-in-total-to-Democrats?">How much did Wolfe give in total to Democrats?<a class="anchor-link" href="#How-much-did-Wolfe-give-in-total-to-Democrats?">&#182;</a></h4>
 </div>
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[78]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>count   1,330.00
-mean       10.93
-std        10.91
-min         1.00
-25%         4.00
-50%         7.50
-75%        14.83
-max       115.00
-Name: sum, dtype: float64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_wolfe</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -23731,7 +22780,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[79]:</div>
+    <div class="prompt output_prompt">Out[80]:</div>
 
 
 
@@ -23746,9 +22795,56 @@ Name: sum, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What-Wolfe's-(at-most)-average-contribution?">What Wolfe's (at most) average contribution?<a class="anchor-link" href="#What-Wolfe's-(at-most)-average-contribution?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_wolfe</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[81]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>10.925308270676691</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="How-much-did-Wolfe-give-to-Richard-Ojeda?">How much did Wolfe give to Richard Ojeda?<a class="anchor-link" href="#How-much-did-Wolfe-give-to-Richard-Ojeda?">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_wolfe_ojeda</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -23776,7 +22872,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[80]:</div>
+    <div class="prompt output_prompt">Out[82]:</div>
 
 
 
@@ -23791,9 +22887,16 @@ Name: sum, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="How-many-times-did-Wolfe-give-to-Ojeda?">How many times did Wolfe give to Ojeda?<a class="anchor-link" href="#How-many-times-did-Wolfe-give-to-Ojeda?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_wolfe_ojeda</span><span class="p">[</span><span class="s1">&#39;contribution_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -23809,7 +22912,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[81]:</div>
+    <div class="prompt output_prompt">Out[83]:</div>
 
 
 
@@ -23827,13 +22930,13 @@ Name: sum, dtype: float64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Sibylle-Barlow">Sibylle Barlow<a class="anchor-link" href="#Sibylle-Barlow">&#182;</a></h3>
+<h3 id="How-did-Sibylle-Barlow-give?">How did Sibylle Barlow give?<a class="anchor-link" href="#How-did-Sibylle-Barlow-give?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_barlow</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -23868,7 +22971,7 @@ Name: sum, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[82]:</div>
+    <div class="prompt output_prompt">Out[84]:</div>
 
 
 
@@ -23894,13 +22997,13 @@ Name: contribution_amount, dtype: float64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="William-Nottingham">William Nottingham<a class="anchor-link" href="#William-Nottingham">&#182;</a></h3>
+<h3 id="How-much-did-William-Nottingham-give?">How much did William Nottingham give?<a class="anchor-link" href="#How-much-did-William-Nottingham-give?">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_nottingham</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -23928,7 +23031,7 @@ Name: contribution_amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[83]:</div>
+    <div class="prompt output_prompt">Out[85]:</div>
 
 
 
@@ -23952,7 +23055,7 @@ Name: contribution_amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_first_names</span> <span class="o">=</span> <span class="n">read_or_save</span><span class="p">(</span>
@@ -23971,8 +23074,26 @@ Name: contribution_amount, dtype: float64</pre>
 <span class="n">d</span> <span class="o">=</span> <span class="n">gender</span><span class="o">.</span><span class="n">Detector</span><span class="p">(</span><span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">actblue_first_names</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actblue_first_names</span><span class="p">[</span><span class="s1">&#39;contributor_first_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get_gender</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">actblue_first_names</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What-are-the-most-common-first-names-and-what-gender-do-we-guess-those-donors-are?">What are the most common first names and what gender do we guess those donors are?<a class="anchor-link" href="#What-are-the-most-common-first-names-and-what-gender-do-we-guess-those-donors-are?">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_first_names</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -23985,7 +23106,7 @@ Name: contribution_amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[84]:</div>
+    <div class="prompt output_prompt">Out[87]:</div>
 
 
 
@@ -24061,9 +23182,16 @@ Name: contribution_amount, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What's-the-overall-breakdown-by-guessed-gender?">What's the overall breakdown by guessed gender?<a class="anchor-link" href="#What's-the-overall-breakdown-by-guessed-gender?">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">actblue_gender</span> <span class="o">=</span> <span class="n">actblue_first_names</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">actblue_first_names</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">])[</span><span class="s1">&#39;count&#39;</span><span class="p">,</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -24084,7 +23212,7 @@ Name: contribution_amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[85]:</div>
+    <div class="prompt output_prompt">Out[88]:</div>
 
 
 
@@ -24176,7 +23304,7 @@ Name: contribution_amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
@@ -24198,7 +23326,7 @@ jupyter nbconvert analysis.ipynb
 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>[NbConvertApp] Converting notebook analysis.ipynb to html
-[NbConvertApp] Writing 669530 bytes to analysis.html
+[NbConvertApp] Writing 505903 bytes to analysis.html
 </pre>
 </div>
 </div>
