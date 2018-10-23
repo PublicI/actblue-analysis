@@ -16042,7 +16042,7 @@ div#notebook {
 <span class="s1">                                                 FROM coverage_through_date) &gt;= </span><span class="si">%(year_before)s</span><span class="s1"></span>
 <span class="s1">           AND coverage_through_date &lt;= &#39;</span><span class="si">%(cycle)s</span><span class="s1">-09-30&#39;::date</span>
 <span class="s1">           AND actblue_contribs.cand_pcc = candidate_totals.cand_pcc</span>
-<span class="s1">           AND (beneficiary_committee_fec_id IS NULL OR beneficiary_committee_fec_id = actblue_contribs.cand_pcc)</span>
+<span class="s1">           AND beneficiary_committee_fec_id != &#39;C00492421&#39;</span>
 <span class="s1">           AND coverage_from_date &lt;= contribution_date</span>
 <span class="s1">           AND coverage_through_date &gt;= contribution_date</span>
 <span class="s1">           GROUP BY candidate_totals.cand_pcc,</span>
@@ -16099,7 +16099,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;54.81 percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2018 cycle (Jan. 1, 2017 — Sept/. 30, 2018)&#39;</pre>
+<pre>&#39;55.18 percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2018 cycle (Jan. 1, 2017 — Sept/. 30, 2018)&#39;</pre>
 </div>
 
 </div>
@@ -16134,7 +16134,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;17.58 percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2014 cycle (Jan. 1, 2013 — Sept. 30, 2014)&#39;</pre>
+<pre>&#39;18.74 percent of contributions from individuals to Democratic campaigns came through ActBlue in the 2014 cycle (Jan. 1, 2013 — Sept. 30, 2014)&#39;</pre>
 </div>
 
 </div>
@@ -16213,8 +16213,8 @@ div#notebook {
       <td>CA</td>
       <td>00</td>
       <td>2018</td>
-      <td>[2017-10-01, 2018-07-01, 2018-05-17, 2018-01-0...</td>
-      <td>[2017-12-31, 2018-09-30, 2018-06-30, 2018-03-3...</td>
+      <td>[2018-04-01, 2018-05-17, 2018-01-01, 2018-07-0...</td>
+      <td>[2018-05-16, 2018-06-30, 2018-03-31, 2018-09-3...</td>
       <td>423,952.55</td>
       <td>422,866.55</td>
       <td>1.00</td>
@@ -16227,8 +16227,8 @@ div#notebook {
       <td>CA</td>
       <td>12</td>
       <td>2018</td>
-      <td>[2018-07-01, 2018-05-17, 2017-01-01, 2018-01-0...</td>
-      <td>[2018-09-30, 2018-06-30, 2017-06-30, 2018-03-3...</td>
+      <td>[2018-05-17, 2018-01-01, 2017-10-01, 2018-07-0...</td>
+      <td>[2018-06-30, 2018-03-31, 2017-12-31, 2018-09-3...</td>
       <td>82,086.59</td>
       <td>81,828.59</td>
       <td>1.00</td>
@@ -16241,8 +16241,8 @@ div#notebook {
       <td>MD</td>
       <td>00</td>
       <td>2018</td>
-      <td>[2018-07-01, 2018-06-07, 2018-04-01, 2018-01-01]</td>
-      <td>[2018-09-30, 2018-06-30, 2018-06-06, 2018-03-31]</td>
+      <td>[2018-07-01, 2018-01-01, 2018-04-01, 2018-06-07]</td>
+      <td>[2018-09-30, 2018-03-31, 2018-06-06, 2018-06-30]</td>
       <td>80,616.83</td>
       <td>80,361.83</td>
       <td>1.00</td>
@@ -16255,8 +16255,8 @@ div#notebook {
       <td>NM</td>
       <td>02</td>
       <td>2018</td>
-      <td>[2017-07-01, 2017-04-01, 2017-01-01, 2018-01-0...</td>
-      <td>[2017-09-30, 2017-06-30, 2017-03-31, 2018-03-3...</td>
+      <td>[2017-07-01, 2018-05-17, 2018-01-01, 2017-01-0...</td>
+      <td>[2017-09-30, 2018-06-30, 2018-03-31, 2017-03-3...</td>
       <td>221,050.51</td>
       <td>219,384.11</td>
       <td>0.99</td>
@@ -16269,8 +16269,8 @@ div#notebook {
       <td>TX</td>
       <td>23</td>
       <td>2018</td>
-      <td>[2018-01-01, 2018-04-01, 2017-10-01, 2017-07-0...</td>
-      <td>[2018-02-14, 2018-05-02, 2017-12-31, 2017-09-3...</td>
+      <td>[2017-10-01, 2018-05-03, 2018-04-01, 2018-01-0...</td>
+      <td>[2017-12-31, 2018-06-30, 2018-05-02, 2018-02-1...</td>
       <td>40,944.77</td>
       <td>40,604.85</td>
       <td>0.99</td>
@@ -16283,10 +16283,24 @@ div#notebook {
       <td>NY</td>
       <td>11</td>
       <td>2018</td>
-      <td>[2017-10-01, 2017-04-01, 2018-06-07, 2017-07-0...</td>
-      <td>[2017-12-31, 2017-06-30, 2018-06-30, 2017-09-3...</td>
+      <td>[2018-04-01, 2017-10-01, 2018-06-07, 2017-07-0...</td>
+      <td>[2018-06-06, 2017-12-31, 2018-06-30, 2017-09-3...</td>
       <td>96,896.17</td>
       <td>95,236.16</td>
+      <td>0.98</td>
+    </tr>
+    <tr>
+      <th>384</th>
+      <td>C00635839</td>
+      <td>WEAVER, KIMBERLY</td>
+      <td>H</td>
+      <td>IA</td>
+      <td>04</td>
+      <td>2018</td>
+      <td>[2017-10-01, 2018-05-17, 2017-07-01, 2017-01-0...</td>
+      <td>[2017-12-31, 2018-06-30, 2017-09-30, 2017-03-3...</td>
+      <td>202,901.58</td>
+      <td>198,271.88</td>
       <td>0.98</td>
     </tr>
     <tr>
@@ -16297,8 +16311,8 @@ div#notebook {
       <td>FL</td>
       <td>27</td>
       <td>2018</td>
-      <td>[2018-07-01, 2018-04-01, 2017-10-01, 2018-01-0...</td>
-      <td>[2018-08-08, 2018-06-30, 2017-12-31, 2018-03-3...</td>
+      <td>[2018-01-01, 2017-07-01, 2018-07-01, 2017-01-2...</td>
+      <td>[2018-03-31, 2017-09-30, 2018-08-08, 2017-06-3...</td>
       <td>33,819.90</td>
       <td>32,980.75</td>
       <td>0.98</td>
@@ -16311,8 +16325,8 @@ div#notebook {
       <td>CA</td>
       <td>34</td>
       <td>2018</td>
-      <td>[2017-01-01, 2017-04-25, 2017-03-16, 2017-04-01]</td>
-      <td>[2017-03-15, 2017-05-23, 2017-03-31, 2017-04-24]</td>
+      <td>[2017-04-25, 2017-03-16, 2017-01-01, 2017-04-01]</td>
+      <td>[2017-05-23, 2017-03-31, 2017-03-15, 2017-04-24]</td>
       <td>240,804.24</td>
       <td>232,962.24</td>
       <td>0.97</td>
@@ -16325,8 +16339,8 @@ div#notebook {
       <td>WA</td>
       <td>09</td>
       <td>2018</td>
-      <td>[2018-01-01, 2018-07-01, 2018-07-19, 2017-07-0...</td>
-      <td>[2018-03-31, 2018-07-18, 2018-09-30, 2017-09-3...</td>
+      <td>[2018-07-01, 2018-04-01, 2018-07-19, 2017-05-2...</td>
+      <td>[2018-07-18, 2018-06-30, 2018-09-30, 2017-06-3...</td>
       <td>105,306.15</td>
       <td>101,260.70</td>
       <td>0.96</td>
@@ -16339,8 +16353,8 @@ div#notebook {
       <td>WI</td>
       <td>07</td>
       <td>2018</td>
-      <td>[2017-12-06, 2018-07-01, 2018-04-01]</td>
-      <td>[2018-03-31, 2018-09-30, 2018-06-30]</td>
+      <td>[2018-07-01, 2018-04-01, 2017-12-06]</td>
+      <td>[2018-09-30, 2018-06-30, 2018-03-31]</td>
       <td>236,665.52</td>
       <td>227,090.52</td>
       <td>0.96</td>
@@ -16353,8 +16367,8 @@ div#notebook {
       <td>CA</td>
       <td>12</td>
       <td>2018</td>
-      <td>[2018-04-01, 2018-05-17, 2017-04-01, 2017-10-0...</td>
-      <td>[2018-05-16, 2018-06-30, 2017-06-30, 2017-12-3...</td>
+      <td>[2018-05-17, 2018-07-01, 2017-01-01, 2018-04-0...</td>
+      <td>[2018-06-30, 2018-09-30, 2017-03-31, 2018-05-1...</td>
       <td>2,567,117.73</td>
       <td>2,459,120.44</td>
       <td>0.96</td>
@@ -16367,8 +16381,8 @@ div#notebook {
       <td>AZ</td>
       <td>08</td>
       <td>2018</td>
-      <td>[2017-07-01, 2018-04-01, 2017-10-01, 2018-02-0...</td>
-      <td>[2017-09-30, 2018-06-30, 2017-12-31, 2018-03-3...</td>
+      <td>[2017-10-01, 2017-07-01, 2017-04-01, 2018-01-0...</td>
+      <td>[2017-12-31, 2017-09-30, 2017-06-30, 2018-02-0...</td>
       <td>39,170.67</td>
       <td>37,285.68</td>
       <td>0.95</td>
@@ -16381,8 +16395,8 @@ div#notebook {
       <td>PA</td>
       <td>10</td>
       <td>2018</td>
-      <td>[2018-04-26, 2018-07-01, 2018-02-22, 2018-04-01]</td>
-      <td>[2018-06-30, 2018-09-30, 2018-03-31, 2018-04-25]</td>
+      <td>[2018-02-22, 2018-04-26, 2018-07-01, 2018-04-01]</td>
+      <td>[2018-03-31, 2018-06-30, 2018-09-30, 2018-04-25]</td>
       <td>208,455.31</td>
       <td>196,615.46</td>
       <td>0.94</td>
@@ -16395,8 +16409,8 @@ div#notebook {
       <td>NH</td>
       <td>01</td>
       <td>2018</td>
-      <td>[2018-08-23, 2018-04-01, 2018-01-01, 2018-07-01]</td>
-      <td>[2018-09-30, 2018-06-30, 2018-03-31, 2018-08-22]</td>
+      <td>[2018-04-01, 2018-01-01, 2018-07-01, 2018-08-23]</td>
+      <td>[2018-06-30, 2018-03-31, 2018-08-22, 2018-09-30]</td>
       <td>41,894.38</td>
       <td>39,473.24</td>
       <td>0.94</td>
@@ -16409,8 +16423,8 @@ div#notebook {
       <td>PA</td>
       <td>04</td>
       <td>2018</td>
-      <td>[2018-04-01, 2018-04-26, 2018-01-01, 2017-10-01]</td>
-      <td>[2018-04-25, 2018-06-30, 2018-03-31, 2017-12-31]</td>
+      <td>[2018-01-01, 2018-04-26, 2017-10-01, 2018-04-01]</td>
+      <td>[2018-03-31, 2018-06-30, 2017-12-31, 2018-04-25]</td>
       <td>239,856.38</td>
       <td>225,879.38</td>
       <td>0.94</td>
@@ -16423,8 +16437,8 @@ div#notebook {
       <td>FL</td>
       <td>27</td>
       <td>2018</td>
-      <td>[2017-07-01, 2018-08-09, 2018-04-01, 2018-07-0...</td>
-      <td>[2017-09-30, 2018-09-30, 2018-06-30, 2018-08-0...</td>
+      <td>[2018-08-09, 2017-07-01, 2018-07-01, 2017-10-0...</td>
+      <td>[2018-09-30, 2017-09-30, 2018-08-08, 2017-12-3...</td>
       <td>1,838,683.36</td>
       <td>1,718,867.66</td>
       <td>0.93</td>
@@ -16437,8 +16451,8 @@ div#notebook {
       <td>OH</td>
       <td>12</td>
       <td>2018</td>
-      <td>[2018-04-01, 2018-01-01, 2018-07-19, 2018-07-0...</td>
-      <td>[2018-04-18, 2018-03-31, 2018-08-27, 2018-07-1...</td>
+      <td>[2018-07-01, 2018-04-01, 2018-07-19, 2018-01-0...</td>
+      <td>[2018-07-18, 2018-04-18, 2018-08-27, 2018-03-3...</td>
       <td>6,509,845.87</td>
       <td>6,060,188.00</td>
       <td>0.93</td>
@@ -16451,8 +16465,8 @@ div#notebook {
       <td>GA</td>
       <td>06</td>
       <td>2017</td>
-      <td>[2018-01-01, 2017-03-30, 2017-07-11, 2018-04-0...</td>
-      <td>[2018-03-31, 2017-05-31, 2017-09-30, 2018-06-3...</td>
+      <td>[2017-07-11, 2016-12-21, 2017-10-01, 2018-01-0...</td>
+      <td>[2017-09-30, 2017-03-29, 2017-12-31, 2018-03-3...</td>
       <td>29,536,942.08</td>
       <td>27,468,759.69</td>
       <td>0.93</td>
@@ -16465,25 +16479,11 @@ div#notebook {
       <td>AL</td>
       <td>00</td>
       <td>2018</td>
-      <td>[2017-10-01, 2017-07-01, 2018-04-01, 2018-01-0...</td>
-      <td>[2017-11-22, 2017-07-26, 2018-06-30, 2018-03-3...</td>
+      <td>[2017-05-08, 2018-04-01, 2017-10-01, 2018-07-0...</td>
+      <td>[2017-06-30, 2018-06-30, 2017-11-22, 2018-09-3...</td>
       <td>23,961,141.21</td>
       <td>22,212,934.94</td>
       <td>0.93</td>
-    </tr>
-    <tr>
-      <th>547</th>
-      <td>C00640870</td>
-      <td>RICHARDSON, CHARDO</td>
-      <td>H</td>
-      <td>FL</td>
-      <td>07</td>
-      <td>2018</td>
-      <td>[2018-07-01, 2018-04-01, 2017-07-01, 2017-10-0...</td>
-      <td>[2018-08-08, 2018-06-30, 2017-09-30, 2017-12-3...</td>
-      <td>40,659.09</td>
-      <td>37,532.09</td>
-      <td>0.92</td>
     </tr>
   </tbody>
 </table>
@@ -20012,7 +20012,7 @@ Name: sum, dtype: float64</pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10fb35470&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1169694a8&gt;</pre>
 </div>
 
 </div>
@@ -21678,9 +21678,9 @@ dtype: float64</pre>
 <span class="s2">           array_agg(DISTINCT contributor_city),</span>
 <span class="s2">           contributor_state,</span>
 <span class="s2">           left(contributor_zip_code,5) AS contributor_zip_code,</span>
-<span class="s2">           count(*) AS COUNT,</span>
+<span class="s2">           count(DISTINCT contribution_date::text || contribution_amount) AS COUNT,</span>
 <span class="s2">           sum(contribution_amount) AS total,</span>
-<span class="s2">           sum(contribution_amount)/count(*) AS avg_per</span>
+<span class="s2">           sum(contribution_amount)/count(DISTINCT contribution_date::text || contribution_amount) AS avg_per</span>
 <span class="s2">    FROM actblue_contribs</span>
 <span class="s2">    WHERE extract(YEAR</span>
 <span class="s2">                  FROM contribution_date) &gt; 2016</span>
@@ -21752,37 +21752,37 @@ dtype: float64</pre>
       <td>[CONCORD]</td>
       <td>MA</td>
       <td>01742</td>
-      <td>17995</td>
+      <td>4877</td>
       <td>67,973.95</td>
-      <td>3.78</td>
+      <td>13.94</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>JOHN</td>
-      <td>COMELLA</td>
-      <td>[NONE]</td>
-      <td>[NONE]</td>
-      <td>[1900 J F KENNEDY BLVD SUITE 1624]</td>
-      <td>[PHILADELPHIA]</td>
-      <td>PA</td>
-      <td>19103</td>
-      <td>11785</td>
-      <td>35,048.60</td>
-      <td>2.97</td>
+      <td>VICKI</td>
+      <td>FARRAR</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[P O BOX 140375]</td>
+      <td>[GARDEN CITY]</td>
+      <td>ID</td>
+      <td>83714</td>
+      <td>4154</td>
+      <td>37,014.92</td>
+      <td>8.91</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>TERRY</td>
-      <td>WOLFE</td>
-      <td>[RETAIL]</td>
-      <td>[LOWES, LOWE'S]</td>
-      <td>[1199 E 3RD ST, 1199 EAST THIRD STREET]</td>
-      <td>[MORGANTOWN]</td>
-      <td>WV</td>
-      <td>26508</td>
-      <td>11349</td>
-      <td>32,557.89</td>
-      <td>2.87</td>
+      <td>MONIQUE</td>
+      <td>WEIL</td>
+      <td>[RETIRED]</td>
+      <td>[NONE]</td>
+      <td>[6022 MERRIEWOOD DR]</td>
+      <td>[OAKLAND]</td>
+      <td>CA</td>
+      <td>94611</td>
+      <td>3844</td>
+      <td>55,854.87</td>
+      <td>14.53</td>
     </tr>
     <tr>
       <th>3</th>
@@ -21794,12 +21794,26 @@ dtype: float64</pre>
       <td>[NEW YORK]</td>
       <td>NY</td>
       <td>10025</td>
-      <td>9068</td>
+      <td>3394</td>
       <td>96,462.68</td>
-      <td>10.64</td>
+      <td>28.42</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>JAN</td>
+      <td>GARRETT</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[2108 MCCUBBIN DR, 218 MCCUBBIN DR]</td>
+      <td>[BOWLING GREEN]</td>
+      <td>KY</td>
+      <td>42104</td>
+      <td>3191</td>
+      <td>20,348.06</td>
+      <td>6.38</td>
+    </tr>
+    <tr>
+      <th>5</th>
       <td>CAROLINE</td>
       <td>MERRIAM</td>
       <td>[FOUNDATION PRESIDENT]</td>
@@ -21808,40 +21822,12 @@ dtype: float64</pre>
       <td>[WASHINGTON]</td>
       <td>DC</td>
       <td>20007</td>
-      <td>8651</td>
+      <td>3004</td>
       <td>125,572.80</td>
-      <td>14.52</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>MARTHA</td>
-      <td>UTZ</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[1118 ALLSTON CT]</td>
-      <td>[SAN JOSE]</td>
-      <td>CA</td>
-      <td>95120</td>
-      <td>8528</td>
-      <td>29,855.01</td>
-      <td>3.50</td>
+      <td>41.80</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>VICKI</td>
-      <td>FARRAR</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[P O BOX 140375]</td>
-      <td>[GARDEN CITY]</td>
-      <td>ID</td>
-      <td>83714</td>
-      <td>8432</td>
-      <td>37,014.92</td>
-      <td>4.39</td>
-    </tr>
-    <tr>
-      <th>7</th>
       <td>RICHARD</td>
       <td>GOLDSTEIN</td>
       <td>[NOT EMPLOYED, RETIRED]</td>
@@ -21850,23 +21836,37 @@ dtype: float64</pre>
       <td>[SAFAPONACK, SAGAPONACK]</td>
       <td>NY</td>
       <td>11962</td>
-      <td>8411</td>
+      <td>2861</td>
       <td>146,650.73</td>
-      <td>17.44</td>
+      <td>51.26</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>VIRGINIA</td>
+      <td>SMITH</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[130 BULMER DRIVE, 130BULMER DRIVE, 130 NULMER...</td>
+      <td>[STRATFORD]</td>
+      <td>CT</td>
+      <td>06614</td>
+      <td>2845</td>
+      <td>85,852.79</td>
+      <td>30.18</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>MONIQUE</td>
-      <td>WEIL</td>
-      <td>[RETIRED]</td>
-      <td>[NONE]</td>
-      <td>[6022 MERRIEWOOD DR]</td>
-      <td>[OAKLAND]</td>
-      <td>CA</td>
-      <td>94611</td>
-      <td>8370</td>
-      <td>55,854.87</td>
-      <td>6.67</td>
+      <td>THOMAS</td>
+      <td>RE'</td>
+      <td>[ENTREPRENEUR]</td>
+      <td>[SELF]</td>
+      <td>[661 BLANDFORD ROAD]</td>
+      <td>[GRANVILLE]</td>
+      <td>MA</td>
+      <td>01034</td>
+      <td>2817</td>
+      <td>29,391.08</td>
+      <td>10.43</td>
     </tr>
     <tr>
       <th>9</th>
@@ -21878,110 +21878,12 @@ dtype: float64</pre>
       <td>[LANHAM]</td>
       <td>MD</td>
       <td>20706</td>
-      <td>7865</td>
+      <td>2668</td>
       <td>22,681.83</td>
-      <td>2.88</td>
+      <td>8.50</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>CLAUDIA</td>
-      <td>PALMER</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[15 GORHAM ROAD]</td>
-      <td>[SCARSDALE]</td>
-      <td>NY</td>
-      <td>10583</td>
-      <td>7607</td>
-      <td>34,337.22</td>
-      <td>4.51</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>WILLIAM</td>
-      <td>CHEEK</td>
-      <td>[RETIRED PROFESSOR]</td>
-      <td>[NONE]</td>
-      <td>[6209 ESTELLE ST]</td>
-      <td>[SAN DIEGO]</td>
-      <td>CA</td>
-      <td>92115</td>
-      <td>7500</td>
-      <td>88,468.61</td>
-      <td>11.80</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>LUCY</td>
-      <td>HARMON</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[SELF]</td>
-      <td>[13621SHANNON ST]</td>
-      <td>[LINDALE]</td>
-      <td>TX</td>
-      <td>75771</td>
-      <td>7093</td>
-      <td>65,058.73</td>
-      <td>9.17</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>CHARLES Y</td>
-      <td>WRIGLEY</td>
-      <td>[CEO, PRESIDENT]</td>
-      <td>[LUMITEK INTERNATIONAL, INC.]</td>
-      <td>[2732 HILLSIDE COURT]</td>
-      <td>[IJAMSVILLE]</td>
-      <td>MD</td>
-      <td>21754</td>
-      <td>6309</td>
-      <td>16,559.56</td>
-      <td>2.62</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>ROBERT</td>
-      <td>ECKEL</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[331 L DOLINGTON RD APT R2, 331LOWERDOLINGT N ...</td>
-      <td>[NEWTOWN]</td>
-      <td>PA</td>
-      <td>18940</td>
-      <td>6147</td>
-      <td>19,833.66</td>
-      <td>3.23</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>ROSE-MARY(MRS.DONALD</td>
-      <td>STROM</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[1408 N0 10TH ST ]</td>
-      <td>[MOORHEAD]</td>
-      <td>MN</td>
-      <td>56560</td>
-      <td>5628</td>
-      <td>30,790.19</td>
-      <td>5.47</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>VIRGINIA</td>
-      <td>SMITH</td>
-      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
-      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
-      <td>[130 BULMER DRIVE, 130BULMER DRIVE, 130 NULMER...</td>
-      <td>[STRATFORD]</td>
-      <td>CT</td>
-      <td>06614</td>
-      <td>5617</td>
-      <td>85,852.79</td>
-      <td>15.28</td>
-    </tr>
-    <tr>
-      <th>17</th>
       <td>BRENDA</td>
       <td>TROUP</td>
       <td>[NONE]</td>
@@ -21990,166 +21892,54 @@ dtype: float64</pre>
       <td>[BOLTON]</td>
       <td>MA</td>
       <td>01740</td>
-      <td>5054</td>
+      <td>2657</td>
       <td>23,249.87</td>
-      <td>4.60</td>
+      <td>8.75</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>JAN</td>
-      <td>GARRETT</td>
+      <th>11</th>
+      <td>TOM</td>
+      <td>BROWNSCOMBE</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[3019 TANGEY, 3019 TANGLEY, 3019 TANGLEY ROAD]</td>
+      <td>[HOUSTON]</td>
+      <td>TX</td>
+      <td>77005</td>
+      <td>2614</td>
+      <td>47,833.06</td>
+      <td>18.30</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>JUDITH</td>
+      <td>HUNT</td>
       <td>[NONE, NOT EMPLOYED]</td>
       <td>[NONE, NOT EMPLOYED]</td>
-      <td>[2108 MCCUBBIN DR, 218 MCCUBBIN DR]</td>
-      <td>[BOWLING GREEN]</td>
-      <td>KY</td>
-      <td>42104</td>
-      <td>4828</td>
-      <td>20,348.06</td>
-      <td>4.21</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>GEORGE</td>
-      <td>KEARNEY</td>
-      <td>[NONE]</td>
-      <td>[NONE]</td>
-      <td>[3104 E BROADWAY RD - LOT 70]</td>
-      <td>[MESA]</td>
-      <td>AZ</td>
-      <td>85204</td>
-      <td>4803</td>
-      <td>22,281.60</td>
-      <td>4.64</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>DR. JUN</td>
-      <td>CHO</td>
-      <td>[LAWYER, WHITE HOUSE]</td>
-      <td>[LAWYER, WHITE HOUSE]</td>
-      <td>[26 OKRIM-GIL DONG-MYUN ]</td>
-      <td>[HWASUN-GUN, CHONNA, WASHINGTON DC]</td>
-      <td>DC</td>
-      <td>20001</td>
-      <td>4758</td>
-      <td>7,412.00</td>
-      <td>1.56</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>DON</td>
-      <td>DUMOND</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[1744 MOSS ST, 1744 MOSS ST ]</td>
-      <td>[EUGENE]</td>
-      <td>OR</td>
-      <td>97403</td>
-      <td>4709</td>
-      <td>25,266.90</td>
-      <td>5.37</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>ELIZABETH A</td>
-      <td>MILLS</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[9775 ALTO DR]</td>
-      <td>[LA MESA]</td>
+      <td>[513 YELLOWSTONE CT, 513 YELLOWSTONE CT ]</td>
+      <td>[PETALUMA]</td>
       <td>CA</td>
-      <td>91941</td>
-      <td>4697</td>
-      <td>28,712.25</td>
-      <td>6.11</td>
+      <td>94954</td>
+      <td>2570</td>
+      <td>38,378.62</td>
+      <td>14.93</td>
     </tr>
     <tr>
-      <th>23</th>
-      <td>JAMES</td>
-      <td>MARSH</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[5204 COLLINGSWOOD]</td>
-      <td>[RALEIGH]</td>
-      <td>NC</td>
-      <td>27609</td>
-      <td>4654</td>
-      <td>37,528.79</td>
-      <td>8.06</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>LINDA</td>
-      <td>KOHN</td>
-      <td>[NURSE PRACTITIONER]</td>
-      <td>[WHITFORD FAMILY MEDICINE]</td>
-      <td>[PO BOX 655, POBOX 655]</td>
-      <td>[DEVAULT]</td>
-      <td>PA</td>
-      <td>19432</td>
-      <td>4623</td>
-      <td>13,463.43</td>
-      <td>2.91</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>ALICE</td>
-      <td>CARY</td>
-      <td>[NOT EMPLOYED, RETIRED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[33 LINDA AVE 2503]</td>
-      <td>[OAKLAND]</td>
+      <th>13</th>
+      <td>WILLIAM</td>
+      <td>CHEEK</td>
+      <td>[RETIRED PROFESSOR]</td>
+      <td>[NONE]</td>
+      <td>[6209 ESTELLE ST]</td>
+      <td>[SAN DIEGO]</td>
       <td>CA</td>
-      <td>94611</td>
-      <td>4616</td>
-      <td>47,999.80</td>
-      <td>10.40</td>
+      <td>92115</td>
+      <td>2568</td>
+      <td>88,468.61</td>
+      <td>34.45</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>THOMAS</td>
-      <td>RE'</td>
-      <td>[ENTREPRENEUR]</td>
-      <td>[SELF]</td>
-      <td>[661 BLANDFORD ROAD]</td>
-      <td>[GRANVILLE]</td>
-      <td>MA</td>
-      <td>01034</td>
-      <td>4610</td>
-      <td>29,391.08</td>
-      <td>6.38</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>DON E.</td>
-      <td>DUMOND</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[1744 MOSS ST]</td>
-      <td>[EUGENE]</td>
-      <td>OR</td>
-      <td>97403</td>
-      <td>4506</td>
-      <td>19,673.54</td>
-      <td>4.37</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>WENDY</td>
-      <td>TSIEN</td>
-      <td>[NONE]</td>
-      <td>[NONE]</td>
-      <td>[85200 RIDGETOP DRIVE]</td>
-      <td>[EUGENE]</td>
-      <td>OR</td>
-      <td>97405</td>
-      <td>4419</td>
-      <td>57,838.56</td>
-      <td>13.09</td>
-    </tr>
-    <tr>
-      <th>29</th>
+      <th>14</th>
       <td>EDITH</td>
       <td>ALLEN</td>
       <td>[ECONOMIST (RETIRED)]</td>
@@ -22158,9 +21948,219 @@ dtype: float64</pre>
       <td>[ALBANY]</td>
       <td>NY</td>
       <td>12206</td>
-      <td>4403</td>
+      <td>2540</td>
       <td>18,474.99</td>
-      <td>4.20</td>
+      <td>7.27</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>WENDY</td>
+      <td>TSIEN</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[85200 RIDGETOP DRIVE]</td>
+      <td>[EUGENE]</td>
+      <td>OR</td>
+      <td>97405</td>
+      <td>2395</td>
+      <td>57,838.56</td>
+      <td>24.15</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>ELIZABETH M.</td>
+      <td>POSTELL</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[425 DAVIS ST UNIT 909]</td>
+      <td>[EVANSTON]</td>
+      <td>IL</td>
+      <td>60201</td>
+      <td>2296</td>
+      <td>61,851.50</td>
+      <td>26.94</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>CLAUDIA</td>
+      <td>PALMER</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[15 GORHAM ROAD]</td>
+      <td>[SCARSDALE]</td>
+      <td>NY</td>
+      <td>10583</td>
+      <td>2237</td>
+      <td>34,337.22</td>
+      <td>15.35</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>CHARLES</td>
+      <td>FAVREAU</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[20 CONTINENTAL AVE, 20 CONTINENTAL AVENUE]</td>
+      <td>[FOREST HILLS, QUEENS]</td>
+      <td>NY</td>
+      <td>11375</td>
+      <td>2228</td>
+      <td>24,705.00</td>
+      <td>11.09</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>CLAUDIA</td>
+      <td>BUDGE</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE]</td>
+      <td>[2 LYFORD DRIVE 6]</td>
+      <td>[TIBURON]</td>
+      <td>CA</td>
+      <td>94920</td>
+      <td>2224</td>
+      <td>17,082.78</td>
+      <td>7.68</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>PATRICIA</td>
+      <td>WALKER</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[3868 POTOMAC AV ]</td>
+      <td>[DALLAS]</td>
+      <td>TX</td>
+      <td>75205</td>
+      <td>2218</td>
+      <td>322,887.47</td>
+      <td>145.58</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>ROBERT</td>
+      <td>ECKEL</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[331 L DOLINGTON RD APT R2, 331LOWERDOLINGT N ...</td>
+      <td>[NEWTOWN]</td>
+      <td>PA</td>
+      <td>18940</td>
+      <td>2212</td>
+      <td>19,833.66</td>
+      <td>8.97</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>PIERRE</td>
+      <td>PIPER</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[8792 BRUNELL WAY]</td>
+      <td>[INVER GROVE HEIGHT]</td>
+      <td>MN</td>
+      <td>55076</td>
+      <td>2163</td>
+      <td>31,057.99</td>
+      <td>14.36</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>SONIA</td>
+      <td>IMMASCHE</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[730 COTTONWOOD DRIVE]</td>
+      <td>[FORT COLLINS]</td>
+      <td>CO</td>
+      <td>80524</td>
+      <td>2120</td>
+      <td>16,423.02</td>
+      <td>7.75</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>CHARLES Y</td>
+      <td>WRIGLEY</td>
+      <td>[CEO, PRESIDENT]</td>
+      <td>[LUMITEK INTERNATIONAL, INC.]</td>
+      <td>[2732 HILLSIDE COURT]</td>
+      <td>[IJAMSVILLE]</td>
+      <td>MD</td>
+      <td>21754</td>
+      <td>2103</td>
+      <td>16,559.56</td>
+      <td>7.87</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>SAMUEL</td>
+      <td>BRADLEY</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[4824 27TH PLL N]</td>
+      <td>[ARLINGTON]</td>
+      <td>VA</td>
+      <td>22207</td>
+      <td>2075</td>
+      <td>27,972.25</td>
+      <td>13.48</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>CATHERINE</td>
+      <td>BOYAN</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[4 S COVE RD]</td>
+      <td>[BURLINGTON]</td>
+      <td>VT</td>
+      <td>05401</td>
+      <td>2065</td>
+      <td>56,162.46</td>
+      <td>27.20</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>LINDA</td>
+      <td>KOHN</td>
+      <td>[NURSE PRACTITIONER]</td>
+      <td>[WHITFORD FAMILY MEDICINE]</td>
+      <td>[PO BOX 655, POBOX 655]</td>
+      <td>[DEVAULT]</td>
+      <td>PA</td>
+      <td>19432</td>
+      <td>1977</td>
+      <td>13,463.43</td>
+      <td>6.81</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>LUCY</td>
+      <td>HARMON</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[SELF]</td>
+      <td>[13621SHANNON ST]</td>
+      <td>[LINDALE]</td>
+      <td>TX</td>
+      <td>75771</td>
+      <td>1974</td>
+      <td>65,058.73</td>
+      <td>32.96</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>DENNIS</td>
+      <td>MCPHERSON</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[128 NW WHITMAN DRIVE]</td>
+      <td>[LEES SUMMIT]</td>
+      <td>MO</td>
+      <td>64081</td>
+      <td>1967</td>
+      <td>13,392.20</td>
+      <td>6.81</td>
     </tr>
     <tr>
       <th>...</th>
@@ -22178,90 +22178,34 @@ dtype: float64</pre>
     </tr>
     <tr>
       <th>70</th>
-      <td>BENNE</td>
-      <td>RUBINR</td>
-      <td>[ACCOUNTAINT]</td>
-      <td>[SEL, SELF]</td>
-      <td>[739 DUMONT PL]</td>
-      <td>[VALLEY STREAM]</td>
-      <td>NY</td>
-      <td>11581</td>
-      <td>3098</td>
-      <td>2,230.02</td>
-      <td>0.72</td>
+      <td>ELLEN</td>
+      <td>TAYLOR</td>
+      <td>[RETIRED]</td>
+      <td>[NONE]</td>
+      <td>[5381 ASPENWOOD COURT, 5381ASPENWOOD CT]</td>
+      <td>[CONCORD]</td>
+      <td>CA</td>
+      <td>94521</td>
+      <td>1550</td>
+      <td>9,451.86</td>
+      <td>6.10</td>
     </tr>
     <tr>
       <th>71</th>
-      <td>ANN</td>
-      <td>RUCHHOFT</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[1265 FOREST COURT]</td>
-      <td>[CINCINNATI]</td>
-      <td>OH</td>
-      <td>45215</td>
-      <td>3087</td>
-      <td>39,764.20</td>
-      <td>12.88</td>
+      <td>BEN</td>
+      <td>RUBINROI</td>
+      <td>[ACCOUNTAINT]</td>
+      <td>[SELF]</td>
+      <td>[739 DUMONT PL]</td>
+      <td>[VALLEY]</td>
+      <td>NY</td>
+      <td>11581</td>
+      <td>1530</td>
+      <td>1,606.78</td>
+      <td>1.05</td>
     </tr>
     <tr>
       <th>72</th>
-      <td>DENNIS</td>
-      <td>ALANEN</td>
-      <td>[NONE]</td>
-      <td>[NONE]</td>
-      <td>[3077 EVELYN ST ]</td>
-      <td>[ROSEVILLE]</td>
-      <td>MN</td>
-      <td>55113</td>
-      <td>3078</td>
-      <td>4,206.72</td>
-      <td>1.37</td>
-    </tr>
-    <tr>
-      <th>73</th>
-      <td>HERMAN</td>
-      <td>WHITERABBIT</td>
-      <td>[FINISHER]</td>
-      <td>[BOB'S COPY SHOP]</td>
-      <td>[481 MARIGOLD DRIVE]</td>
-      <td>[MADISON]</td>
-      <td>WI</td>
-      <td>53713</td>
-      <td>3078</td>
-      <td>4,540.05</td>
-      <td>1.48</td>
-    </tr>
-    <tr>
-      <th>74</th>
-      <td>ALLEN</td>
-      <td>WASSERMAN</td>
-      <td>[RETIRED]</td>
-      <td>[OREGON STATE UNIVERSITY]</td>
-      <td>[8850 SW OAK LANE]</td>
-      <td>[PORTLAND]</td>
-      <td>OR</td>
-      <td>97223</td>
-      <td>3068</td>
-      <td>13,831.02</td>
-      <td>4.51</td>
-    </tr>
-    <tr>
-      <th>75</th>
-      <td>ANN MARIE</td>
-      <td>HARRISON</td>
-      <td>[NOT EMPLOYED, RETIRED]</td>
-      <td>[NOT EMPLOYED, RETIRED]</td>
-      <td>[4200 JACKSON AVE APT 2002, 4200 JACKSON AVENU...</td>
-      <td>[AUSTIN]</td>
-      <td>TX</td>
-      <td>78731</td>
-      <td>3049</td>
-      <td>23,573.88</td>
-      <td>7.73</td>
-    </tr>
-    <tr>
-      <th>76</th>
       <td>BEVERLY</td>
       <td>MULLINEAUX</td>
       <td>[NOT EMPLOYED]</td>
@@ -22270,320 +22214,138 @@ dtype: float64</pre>
       <td>[WAUWATOSA]</td>
       <td>WI</td>
       <td>53226</td>
-      <td>3034</td>
+      <td>1524</td>
       <td>29,296.53</td>
-      <td>9.66</td>
+      <td>19.22</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>SARAH</td>
+      <td>WEATHERSBY</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[700 QUIET WALK CIRCLE, PO BOX 548]</td>
+      <td>[ROLESVILLE]</td>
+      <td>NC</td>
+      <td>27571</td>
+      <td>1521</td>
+      <td>19,286.11</td>
+      <td>12.68</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>ROBERTA</td>
+      <td>CAMP</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[713 SOUTH WARNOCK STREET, 713 S WARNOCK ST ]</td>
+      <td>[PHILADELPHIA]</td>
+      <td>PA</td>
+      <td>19147</td>
+      <td>1519</td>
+      <td>8,584.61</td>
+      <td>5.65</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>JOHN</td>
+      <td>COMELLA</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[1900 J F KENNEDY BLVD SUITE 1624]</td>
+      <td>[PHILADELPHIA]</td>
+      <td>PA</td>
+      <td>19103</td>
+      <td>1512</td>
+      <td>35,048.60</td>
+      <td>23.18</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>KARL</td>
+      <td>ANDERSON</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[6733 N ASHLAND]</td>
+      <td>[CHICAGO]</td>
+      <td>IL</td>
+      <td>60626</td>
+      <td>1498</td>
+      <td>26,026.75</td>
+      <td>17.37</td>
     </tr>
     <tr>
       <th>77</th>
-      <td>WYATT &amp; LINDA</td>
-      <td>UNDERWOOD</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[17834 BURBANK BLVD APT 204]</td>
-      <td>[ENCINO]</td>
-      <td>CA</td>
-      <td>91316</td>
-      <td>3004</td>
-      <td>15,349.00</td>
-      <td>5.11</td>
+      <td>DAVID</td>
+      <td>COLES</td>
+      <td>[PROFESSOR OF HISTORY AND THEOLOGY]</td>
+      <td>[CONCORDIA THEOLOGICAL SEMINARY]</td>
+      <td>[5414-C RIVER RUN TRAIL]</td>
+      <td>[FORT WAYNE]</td>
+      <td>IN</td>
+      <td>46825</td>
+      <td>1497</td>
+      <td>130,395.10</td>
+      <td>87.10</td>
     </tr>
     <tr>
       <th>78</th>
-      <td>DOUGLAS</td>
-      <td>KATZER</td>
-      <td>[ELECTRICAL ENGINEER]</td>
-      <td>[US NAVAL RESEARCH LABORATORY]</td>
-      <td>[2407 CHILDS LANE, 2407 CHILDS LN]</td>
-      <td>[ALEXANDRIA]</td>
-      <td>VA</td>
-      <td>22308</td>
-      <td>2997</td>
-      <td>14,950.02</td>
-      <td>4.99</td>
+      <td>JANE</td>
+      <td>WHEELER</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[15 HAMILTON ROAD]</td>
+      <td>[HOPEWELL JUNCTION]</td>
+      <td>NY</td>
+      <td>12533</td>
+      <td>1493</td>
+      <td>24,920.45</td>
+      <td>16.69</td>
     </tr>
     <tr>
       <th>79</th>
-      <td>BRENDA</td>
-      <td>BLANC</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[307 LEONARD STREET H1]</td>
-      <td>[BROOKLYN]</td>
-      <td>NY</td>
-      <td>11211</td>
-      <td>2994</td>
-      <td>5,715.32</td>
-      <td>1.91</td>
+      <td>JONATHAN</td>
+      <td>WEINSTOCK</td>
+      <td>[PROGRAM MANAGER]</td>
+      <td>[EDGEWOOD]</td>
+      <td>[1846B PAGE ST]</td>
+      <td>[SAN FRANCISCO]</td>
+      <td>CA</td>
+      <td>94117</td>
+      <td>1493</td>
+      <td>13,580.55</td>
+      <td>9.10</td>
     </tr>
     <tr>
       <th>80</th>
-      <td>PATIENCE</td>
-      <td>PATTERSON</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[4936 STADIUM DR ]</td>
-      <td>[FORT WORTH]</td>
-      <td>TX</td>
-      <td>76133</td>
-      <td>2986</td>
-      <td>7,064.43</td>
-      <td>2.37</td>
+      <td>MICHAEL</td>
+      <td>AARSVOLD</td>
+      <td>[ARTIST]</td>
+      <td>[ELECTRONIC ARTS]</td>
+      <td>[4550 W 153RD PLACE]</td>
+      <td>[LAWNDALE]</td>
+      <td>CA</td>
+      <td>90260</td>
+      <td>1484</td>
+      <td>5,548.11</td>
+      <td>3.74</td>
     </tr>
     <tr>
       <th>81</th>
-      <td>MARGUERITE</td>
-      <td>JORGENSEN</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[560 E CHANNEL ROAD, 560 ECHANNE ROAD]</td>
-      <td>[SANTA MONICA]</td>
+      <td>LARRY</td>
+      <td>AUERBACH</td>
+      <td>[PROFESSOR]</td>
+      <td>[UNIVERSITY SOUTHERN CALIFORNIA, UNIV SOUTHERN...</td>
+      <td>[1040 COVE WAY]</td>
+      <td>[BEVERLY HILLS]</td>
       <td>CA</td>
-      <td>90402</td>
-      <td>2981</td>
-      <td>11,635.10</td>
-      <td>3.90</td>
+      <td>90210</td>
+      <td>1478</td>
+      <td>19,541.78</td>
+      <td>13.22</td>
     </tr>
     <tr>
       <th>82</th>
-      <td>STEPHEN</td>
-      <td>STOKER</td>
-      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
-      <td>[NONE, RETIRED]</td>
-      <td>[1036 IVY LANE, 8401 N NEW BRAUNFELS NUMBER 135]</td>
-      <td>[SAN ANTONIO]</td>
-      <td>TX</td>
-      <td>78209</td>
-      <td>2975</td>
-      <td>2,469.97</td>
-      <td>0.83</td>
-    </tr>
-    <tr>
-      <th>83</th>
-      <td>SUZIE</td>
-      <td>RHEA HAUGHN</td>
-      <td>[NONE, RETIRED]</td>
-      <td>[NONE, RETIRED]</td>
-      <td>[1725PO, 1725 SUN CITY AZ 85372, PO 1725]</td>
-      <td>[SUN CITY]</td>
-      <td>AZ</td>
-      <td>85372</td>
-      <td>2918</td>
-      <td>13,194.66</td>
-      <td>4.52</td>
-    </tr>
-    <tr>
-      <th>84</th>
-      <td>JON</td>
-      <td>GOERNER</td>
-      <td>[RETAIL]</td>
-      <td>[OUTLINES MENSWEAR]</td>
-      <td>[4423 COLE AVE 103]</td>
-      <td>[DALLAS]</td>
-      <td>TX</td>
-      <td>75205</td>
-      <td>2917</td>
-      <td>12,461.52</td>
-      <td>4.27</td>
-    </tr>
-    <tr>
-      <th>85</th>
-      <td>MARILYN</td>
-      <td>BAILEY</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[2001 SANFORD AVE]</td>
-      <td>[SANFORD]</td>
-      <td>FL</td>
-      <td>32771</td>
-      <td>2909</td>
-      <td>23,959.47</td>
-      <td>8.24</td>
-    </tr>
-    <tr>
-      <th>86</th>
-      <td>LARRY</td>
-      <td>YATES</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[995 LIMA STREET, 99 LIMA STREET]</td>
-      <td>[AURORA]</td>
-      <td>CO</td>
-      <td>80010</td>
-      <td>2894</td>
-      <td>6,730.97</td>
-      <td>2.33</td>
-    </tr>
-    <tr>
-      <th>87</th>
-      <td>ROTRAUD</td>
-      <td>COFFEY</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[3304 OAKELLAR AVE, 3304 W OAKELLAR AVE]</td>
-      <td>[TAMPA]</td>
-      <td>FL</td>
-      <td>33611</td>
-      <td>2870</td>
-      <td>6,202.65</td>
-      <td>2.16</td>
-    </tr>
-    <tr>
-      <th>88</th>
-      <td>JO ANN</td>
-      <td>MCGREEVY</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[9060 PALISADE, 9060 PALISADE 926]</td>
-      <td>[NORTH BERGEN]</td>
-      <td>NJ</td>
-      <td>07047</td>
-      <td>2849</td>
-      <td>17,227.79</td>
-      <td>6.05</td>
-    </tr>
-    <tr>
-      <th>89</th>
-      <td>MARY</td>
-      <td>KAZANOWSKI</td>
-      <td>[NURSE PRACTITIONER]</td>
-      <td>[ELLIOT, VNA HOSPICE]</td>
-      <td>[11 WEYMOUTH DRIVE, 11WEYMOUTH DRIVE]</td>
-      <td>[BEDFORD]</td>
-      <td>NH</td>
-      <td>03110</td>
-      <td>2843</td>
-      <td>11,189.35</td>
-      <td>3.94</td>
-    </tr>
-    <tr>
-      <th>90</th>
-      <td>ROSALYN</td>
-      <td>KAPLAN</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[100 PIEDMONT C]</td>
-      <td>[DELRAY BEACH]</td>
-      <td>FL</td>
-      <td>33484</td>
-      <td>2822</td>
-      <td>17,671.74</td>
-      <td>6.26</td>
-    </tr>
-    <tr>
-      <th>91</th>
-      <td>CYNTHIA</td>
-      <td>DOMINIK</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[1699 N DOWNING STREET 305, 1699 NORTH DOWNING...</td>
-      <td>[DENVER]</td>
-      <td>CO</td>
-      <td>80218</td>
-      <td>2727</td>
-      <td>9,765.83</td>
-      <td>3.58</td>
-    </tr>
-    <tr>
-      <th>92</th>
-      <td>JOHN</td>
-      <td>MOORHOUSE</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[6250 ALFRED HARRELL HWY ]</td>
-      <td>[BAKERSFIELD]</td>
-      <td>CA</td>
-      <td>93308</td>
-      <td>2719</td>
-      <td>23,200.65</td>
-      <td>8.53</td>
-    </tr>
-    <tr>
-      <th>93</th>
-      <td>NIEVES</td>
-      <td>POUSADA</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[18 ORCHARD ST ]</td>
-      <td>[MONTROSE]</td>
-      <td>NY</td>
-      <td>10548</td>
-      <td>2703</td>
-      <td>8,410.94</td>
-      <td>3.11</td>
-    </tr>
-    <tr>
-      <th>94</th>
-      <td>EDWARD</td>
-      <td>MOCKFORD</td>
-      <td>[NOT EMPLOYED, RETIRED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[505 BOWLES ST, 505 BOWLES ST ]</td>
-      <td>[NORMAL]</td>
-      <td>IL</td>
-      <td>61761</td>
-      <td>2702</td>
-      <td>29,530.02</td>
-      <td>10.93</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>STEPHEN</td>
-      <td>SWITZER</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[2529 MORNINGSTAR RD, 2529 MORNINGSTAR ROAD]</td>
-      <td>[MANASQUAN]</td>
-      <td>NJ</td>
-      <td>08736</td>
-      <td>2700</td>
-      <td>14,054.25</td>
-      <td>5.21</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>CATHERINE</td>
-      <td>BOYAN</td>
-      <td>[NOT EMPLOYED]</td>
-      <td>[NONE, NOT EMPLOYED]</td>
-      <td>[4 S COVE RD]</td>
-      <td>[BURLINGTON]</td>
-      <td>VT</td>
-      <td>05401</td>
-      <td>2664</td>
-      <td>56,162.46</td>
-      <td>21.08</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>BETH</td>
-      <td>PEWTHER</td>
-      <td>[ARTIST]</td>
-      <td>[SELF]</td>
-      <td>[80 BRONTE ST ]</td>
-      <td>[SAN FRANCISCO]</td>
-      <td>CA</td>
-      <td>94110</td>
-      <td>2659</td>
-      <td>6,883.65</td>
-      <td>2.59</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>JOHN</td>
-      <td>MINKLER</td>
-      <td>[NONE]</td>
-      <td>[NONE]</td>
-      <td>[155 CURRANT LANE]</td>
-      <td>[VACAVILLE]</td>
-      <td>CA</td>
-      <td>95687</td>
-      <td>2657</td>
-      <td>26,448.80</td>
-      <td>9.95</td>
-    </tr>
-    <tr>
-      <th>99</th>
       <td>JOYCE</td>
       <td>THIBODEAUX</td>
       <td>[NOT EMPLOYED]</td>
@@ -22592,9 +22354,247 @@ dtype: float64</pre>
       <td>[HOUMA]</td>
       <td>LA</td>
       <td>70360</td>
-      <td>2649</td>
+      <td>1478</td>
       <td>91,449.25</td>
-      <td>34.52</td>
+      <td>61.87</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>JOYCE</td>
+      <td>ABRAMS</td>
+      <td>[RANCHER/WRITER]</td>
+      <td>[SELF]</td>
+      <td>[5489 TAKILMA ROAD CAVE JUNCTION]</td>
+      <td>[CAVE JUNCTION]</td>
+      <td>OR</td>
+      <td>97523</td>
+      <td>1473</td>
+      <td>17,767.18</td>
+      <td>12.06</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>ROTRAUD</td>
+      <td>COFFEY</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[3304 OAKELLAR AVE, 3304 W OAKELLAR AVE]</td>
+      <td>[TAMPA]</td>
+      <td>FL</td>
+      <td>33611</td>
+      <td>1469</td>
+      <td>6,202.65</td>
+      <td>4.22</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>EILEEN</td>
+      <td>LAWRENCE</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[44-30 DOUGLASTON PKWY, 4430 DOUGLASTON PKWY]</td>
+      <td>[LITTLE NECK]</td>
+      <td>NY</td>
+      <td>11363</td>
+      <td>1454</td>
+      <td>21,409.36</td>
+      <td>14.72</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>MIRIAM</td>
+      <td>CASTELLANOS</td>
+      <td>[RDA]</td>
+      <td>[GROSSMAN AND MCKAY DENTAL]</td>
+      <td>[2875 GRACELAND WAY]</td>
+      <td>[GLENDALE]</td>
+      <td>CA</td>
+      <td>91206</td>
+      <td>1444</td>
+      <td>9,354.60</td>
+      <td>6.48</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>CHRISTINA</td>
+      <td>EINSTEIN</td>
+      <td>[NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, NOT EMPLOYED]</td>
+      <td>[3401 CHRIS LANE]</td>
+      <td>[SAN MATEO]</td>
+      <td>CA</td>
+      <td>94403</td>
+      <td>1440</td>
+      <td>18,057.56</td>
+      <td>12.54</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>HERMAN</td>
+      <td>WHITERABBIT</td>
+      <td>[FINISHER]</td>
+      <td>[BOB'S COPY SHOP]</td>
+      <td>[481 MARIGOLD DRIVE]</td>
+      <td>[MADISON]</td>
+      <td>WI</td>
+      <td>53713</td>
+      <td>1437</td>
+      <td>4,540.05</td>
+      <td>3.16</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>PATRICIA</td>
+      <td>GOUGHAN</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[951 14TH STREET]</td>
+      <td>[PACIFIC GROVE]</td>
+      <td>CA</td>
+      <td>93950</td>
+      <td>1433</td>
+      <td>57,988.47</td>
+      <td>40.47</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>SUZIE</td>
+      <td>RHEA HAUGHN</td>
+      <td>[NONE, RETIRED]</td>
+      <td>[NONE, RETIRED]</td>
+      <td>[1725PO, 1725 SUN CITY AZ 85372, PO 1725]</td>
+      <td>[SUN CITY]</td>
+      <td>AZ</td>
+      <td>85372</td>
+      <td>1422</td>
+      <td>13,194.66</td>
+      <td>9.28</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>CHARLES W</td>
+      <td>BAUMANN</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NONE]</td>
+      <td>[949 S BATAVIA AVE]</td>
+      <td>[GENEVA]</td>
+      <td>IL</td>
+      <td>60134</td>
+      <td>1410</td>
+      <td>10,657.70</td>
+      <td>7.56</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>JANET</td>
+      <td>BULLOCK</td>
+      <td>[CEO, PRESIDENT]</td>
+      <td>[INNOVATIVE LEARNING CONCEPTS, INNOVATIVE LEAR...</td>
+      <td>[9 ALTA VISTA ROAD, 9ALTA VISTA ROAD]</td>
+      <td>[COLORADO SPRINGS]</td>
+      <td>CO</td>
+      <td>80906</td>
+      <td>1409</td>
+      <td>81,360.44</td>
+      <td>57.74</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>LEE JAMES</td>
+      <td>SHARP</td>
+      <td>[RETIRED]</td>
+      <td>[NONE]</td>
+      <td>[644 MAINSAIL PLACE]</td>
+      <td>[NAPLES]</td>
+      <td>FL</td>
+      <td>34110</td>
+      <td>1390</td>
+      <td>12,068.30</td>
+      <td>8.68</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>PRISCILLA</td>
+      <td>GILMAN</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[4537 DEER RUN, 4537DEER RUN]</td>
+      <td>[EVANS]</td>
+      <td>GA</td>
+      <td>30809</td>
+      <td>1390</td>
+      <td>51,678.85</td>
+      <td>37.18</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>TIMOTHY</td>
+      <td>TOMASIK</td>
+      <td>[LIBRARIAN]</td>
+      <td>[SACRAMENTO PUBLIC LIBRARY AUTHORITY]</td>
+      <td>[9128 DUPONT WAY]</td>
+      <td>[SACRAMENTO]</td>
+      <td>CA</td>
+      <td>95826</td>
+      <td>1384</td>
+      <td>9,163.86</td>
+      <td>6.62</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>WILLIAM</td>
+      <td>BONDINELL</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[NONE, NOT EMPLOYED, RETIRED]</td>
+      <td>[1512 FRANKLIN LANE, 1512FRANKLIN LANE, 1522 F...</td>
+      <td>[CHESTERBROOK, WAYNE]</td>
+      <td>PA</td>
+      <td>19087</td>
+      <td>1376</td>
+      <td>36,079.80</td>
+      <td>26.22</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>JAMES</td>
+      <td>AMORY</td>
+      <td>[NONE]</td>
+      <td>[NONE]</td>
+      <td>[228 SQUIRES AVE R1]</td>
+      <td>[ENDICOTT]</td>
+      <td>NY</td>
+      <td>13760</td>
+      <td>1376</td>
+      <td>15,154.42</td>
+      <td>11.01</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>JANET</td>
+      <td>FAIRCHILD</td>
+      <td>[ATTORNEY, NONE]</td>
+      <td>[NONE, SELF]</td>
+      <td>[10329 SAN PABLO AVE, 2432 - 10TH ST, 2432 10T...</td>
+      <td>[BERKELEY, EL CERRITO]</td>
+      <td>CA</td>
+      <td>94710</td>
+      <td>1368</td>
+      <td>12,722.34</td>
+      <td>9.30</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>HILDA</td>
+      <td>BROWN</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[NOT EMPLOYED]</td>
+      <td>[1032 N HORSEPOUND ROAD, 1032 N HOSEPOUND ROAD...</td>
+      <td>[CARMEL, CARMEL HAMLET]</td>
+      <td>NY</td>
+      <td>10512</td>
+      <td>1365</td>
+      <td>12,201.85</td>
+      <td>8.94</td>
     </tr>
   </tbody>
 </table>
@@ -23322,7 +23322,7 @@ jupyter nbconvert analysis.ipynb
 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>[NbConvertApp] Converting notebook analysis.ipynb to html
-[NbConvertApp] Writing 668942 bytes to analysis.html
+[NbConvertApp] Writing 642449 bytes to analysis.html
 </pre>
 </div>
 </div>
