@@ -13720,6 +13720,46 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="What-proportion-is-the-increase-in-unitemized-contribs-for-Democrats?">What proportion is the increase in unitemized contribs for Democrats?<a class="anchor-link" href="#What-proportion-is-the-increase-in-unitemized-contribs-for-Democrats?">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">candidate_unitemized_by_party_18</span><span class="p">[</span><span class="n">candidate_unitemized_by_party_18</span><span class="p">[</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Democrat&#39;</span><span class="p">][</span><span class="s1">&#39;unitemized&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">candidate_unitemized_by_party_14</span><span class="p">[</span><span class="n">candidate_unitemized_by_party_14</span><span class="p">[</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Democrat&#39;</span><span class="p">][</span><span class="s1">&#39;unitemized&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[97]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>3.4075562150351177</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Which-ActBlue-reports-do-we-have?">Which ActBlue reports do we have?<a class="anchor-link" href="#Which-ActBlue-reports-do-we-have?">&#182;</a></h3><p>Jan. 1, 2013 — Sept. 30, 2018</p>
 
 </div>
@@ -23891,7 +23931,7 @@ Name: contribution_amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
@@ -23913,7 +23953,7 @@ jupyter nbconvert analysis.ipynb
 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>[NbConvertApp] Converting notebook analysis.ipynb to html
-[NbConvertApp] Writing 682916 bytes to analysis.html
+[NbConvertApp] Writing 686379 bytes to analysis.html
 </pre>
 </div>
 </div>
