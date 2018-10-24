@@ -27,5 +27,6 @@ python -m ipykernel install --user --name=actblue-analysis
 jupyter lab
 ```
 
-To connect to a PostgreSQL database with campaign finance records, copy config.json.example to config.json, then update the values in [config.json](config.json) to the correct hostname and password.
+Query results are persisted to [Pickle](https://docs.python.org/3/library/pickle.html) files, so the notebook can be run without access to the database.
 
+If you do have access to a PostgreSQL database of campaign finance records in the correct schema and want to modify the queries, copy config.json.example to config.json, then update the values in [config.json](config.json) to the correct hostname and password.
