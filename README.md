@@ -6,7 +6,7 @@ This is an analysis from the Center for Public Integrity's data team in partners
 
 ## What's here?
 
-* [Analysis](analysis.ipynb) - An analysis of ActBlue and other FEC filings.
+* [Analysis](https://publici.github.io/actblue-analysis/analysis.html) - An analysis of ActBlue and other FEC filings.
 * [Data](data) - Spreadsheets produced by the analysis.
 
 ## Why did we do this?
